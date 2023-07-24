@@ -20,21 +20,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>ThreeJs：Chapter1 - E-Duck</title>
+  <title>OpenLayer：Vector - E-Duck</title>
 
   
-    <meta name="description" content="123">
+    <meta name="description" content="HeatMap-热力图Earthquakes-Heatmap简单实现OpenLayer热力图https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_36410795&#x2F;article&#x2F;details&#x2F;107466089  Earthquakes-Heatmaphttps:&#x2F;&#x2F;openlayers.org&#x2F;en&#x2F;latest&#x2F;examples&#x2F;heatmap-earthquakes.html    Clus">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Chapter1">
-<meta property="og:url" content="http://eletricduck.com/wiki/threejs/chapter_01.html">
+<meta property="og:title" content="Vector">
+<meta property="og:url" content="http://eletricduck.com/wiki/OpenLayer/index.html">
 <meta property="og:site_name" content="E-Duck">
-<meta property="og:description" content="123">
+<meta property="og:description" content="HeatMap-热力图Earthquakes-Heatmap简单实现OpenLayer热力图https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_36410795&#x2F;article&#x2F;details&#x2F;107466089  Earthquakes-Heatmaphttps:&#x2F;&#x2F;openlayers.org&#x2F;en&#x2F;latest&#x2F;examples&#x2F;heatmap-earthquakes.html    Clus">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-11T07:53:24.848Z">
-<meta property="article:modified_time" content="2023-05-11T07:53:24.848Z">
+<meta property="og:image" content="http://eletricduck.com/wiki/OpenLayer/img/Earthquakes-Heatmap.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/OpenLayer/img/Earthquake-Clusters.png">
+<meta property="article:published_time" content="2023-06-08T01:29:42.921Z">
+<meta property="article:modified_time" content="2023-06-08T01:29:42.921Z">
 <meta property="article:author" content="Electric Duck">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/OpenLayer/img/Earthquakes-Heatmap.png">
   
   
 
@@ -72,9 +75,9 @@
 
 
 
-<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/threejs/chapter_01.html"><div class="main" ff="title">ThreeJs</div></a></div></div>
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/OpenLayer/index.html"><div class="main" ff="title">OpenLayer</div><div class="sub cap">Learning OpenLayer</div></a></div></div>
 
-<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">Chapter1</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#123"><span class="toc-text">123</span></a></li></ol></div></div></div>
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Demo</span></div><div class="widget-body fs14"><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/OpenLayer/index.html#start"><span class="toc-text">Vector</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HeatMap-%E7%83%AD%E5%8A%9B%E5%9B%BE"><span class="toc-text">HeatMap-热力图</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Earthquakes-Heatmap"><span class="toc-text">Earthquakes-Heatmap</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cluster-%E7%82%B9%E9%9B%86"><span class="toc-text">Cluster-点集</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Earthquake-Clusters"><span class="toc-text">Earthquake Clusters</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/OpenLayer/Demo_Tile.html"><span class="toc-text">Tile</span></a></div></div></div>
 </div>
 
 
@@ -86,17 +89,27 @@
 
   
   
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/threejs/chapter_01.html">ThreeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-05-11T07:53:24.848Z">2023-05-11</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/OpenLayer/index.html">OpenLayer</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-06-08T01:29:42.921Z">2023-06-08</time></div></div>
 
   <article class='content md wiki'>
-  <h1 class="article-title"><span>Chapter1</span></h1>
-  <h1 id="123"><a href="#123" class="headerlink" title="123"></a>123</h1>
+  <h1 class="article-title"><span>Vector</span></h1>
+  <h1 id="HeatMap-热力图"><a href="#HeatMap-热力图" class="headerlink" title="HeatMap-热力图"></a>HeatMap-热力图</h1><h2 id="Earthquakes-Heatmap"><a href="#Earthquakes-Heatmap" class="headerlink" title="Earthquakes-Heatmap"></a>Earthquakes-Heatmap</h2><div class="tag-plugin link dis-select"><a class="link-card plain" title="简单实现OpenLayer热力图" href="https://blog.csdn.net/qq_36410795/article/details/107466089" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">简单实现OpenLayer热力图</span><span class="cap link fs12">https://blog.csdn.net/qq_36410795/article/details/107466089</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="Earthquakes-Heatmap" href="https://openlayers.org/en/latest/examples/heatmap-earthquakes.html" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">Earthquakes-Heatmap</span><span class="cap link fs12">https://openlayers.org/en/latest/examples/heatmap-earthquakes.html</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Earthquakes-Heatmap.png" fancybox="true"/></div></div>
+
+<h1 id="Cluster-点集"><a href="#Cluster-点集" class="headerlink" title="Cluster-点集"></a>Cluster-点集</h1><h2 id="Earthquake-Clusters"><a href="#Earthquake-Clusters" class="headerlink" title="Earthquake Clusters"></a>Earthquake Clusters</h2><div class="tag-plugin link dis-select"><a class="link-card plain" title="Example:Earthquake Clusters" href="https://openlayers.org/en/latest/examples/earthquake-clusters.html" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">Example:Earthquake Clusters</span><span class="cap link fs12">https://openlayers.org/en/latest/examples/earthquake-clusters.html</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Earthquake-Clusters.png" fancybox="true"/></div></div>
+
+
   
 
 
   </article>
   
-
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/OpenLayer/Demo_Tile.html">Tile</a></div></section></div>
 
   
 
