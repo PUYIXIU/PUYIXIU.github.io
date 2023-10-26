@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Python：Flask Project - E-Duck</title>
+
+  
+    <meta name="description" content="项目结构  blueprint&#x2F;views  存放各个路由映射模块 static 存放静态文件 templates 存放jinjia模板 config 存放配置文件信息 config.py app配置信息 db_config.py 数据库配置信息   app.py 入口文件 decorator.py 装饰器文件 exts.py 扩展文件 models.py ORM文件   功能简述 用户">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flask Project">
+<meta property="og:url" content="http://eletricduck.com/wiki/python/flask_3.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="项目结构  blueprint&#x2F;views  存放各个路由映射模块 static 存放静态文件 templates 存放jinjia模板 config 存放配置文件信息 config.py app配置信息 db_config.py 数据库配置信息   app.py 入口文件 decorator.py 装饰器文件 exts.py 扩展文件 models.py ORM文件   功能简述 用户">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/python/img/session.png">
+<meta property="article:published_time" content="2023-10-25T09:01:22.456Z">
+<meta property="article:modified_time" content="2023-10-25T09:01:22.456Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/python/img/session.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/python/index.html"><div class="main" ff="title">Python</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Python基础语法</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/index.html#start"><span class="toc-text">Python基础语法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/02_python%E6%A8%A1%E5%9D%97.html"><span class="toc-text">模块、I/O、异常、面向对象</span></a></div></div><div class="widget-header cap dis-select"><span class="name">flask框架</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_1.html"><span class="toc-text">Flask Start</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_2.html"><span class="toc-text">Flask DateBase</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/python/flask_3.html"><span class="toc-text">Flask Project</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">项目结构</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%AE%80%E8%BF%B0"><span class="toc-text">功能简述</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE"><span class="toc-text">数据库配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#exts-js"><span class="toc-text">exts.js</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ORM%E6%98%A0%E5%B0%84"><span class="toc-text">ORM映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blueprint%E8%A7%86%E5%9B%BE%E6%8B%86%E5%88%86"><span class="toc-text">Blueprint视图拆分</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#wtforms-%E8%A1%A8%E5%8D%95%E9%AA%8C%E8%AF%81"><span class="toc-text">wtforms 表单验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#werkzeug"><span class="toc-text">werkzeug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0"><span class="toc-text">钩子函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Decorator%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="toc-text">Decorator装饰器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#session"><span class="toc-text">session</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SMTP%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1"><span class="toc-text">SMTP邮件服务</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_4.html"><span class="toc-text">Easter egg</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/python/index.html">Python</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-10-25T09:01:22.456Z">2023-10-25</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Flask Project</span></h1>
+  <h1 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h1><blockquote>
+<ul>
+<li><strong>blueprint&#x2F;views</strong>  存放各个路由映射模块</li>
+<li><strong>static</strong> 存放静态文件</li>
+<li><strong>templates</strong> 存放jinjia模板</li>
+<li><strong>config</strong> 存放配置文件信息<ul>
+<li><em>config.py</em> app配置信息</li>
+<li><em>db_config.py</em> 数据库配置信息</li>
+</ul>
+</li>
+<li><em>app.py</em> 入口文件</li>
+<li><em>decorator.py</em> 装饰器文件</li>
+<li><em>exts.py</em> 扩展文件</li>
+<li><em>models.py</em> ORM文件</li>
+</ul>
+</blockquote>
+<h1 id="功能简述"><a href="#功能简述" class="headerlink" title="功能简述"></a>功能简述</h1><ul>
+<li>用户注册后生成账号</li>
+<li>登录账号</li>
+<li>参与心理测试</li>
+<li>心理测试结果发送到用户邮箱</li>
+</ul>
+<h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><h2 id="数据库配置"><a href="#数据库配置" class="headerlink" title="数据库配置"></a>数据库配置</h2><div class="tag-plugin note" ><div class="title"><strong>数据库配置</strong></div><div class="body"><p>将config信息单独提取到config文件下进行配置：</p><figure class="highlight python"><figcaption><span>config/config.py app配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SECRET_KEY = <span class="string">&#x27;oh its secrect key&#x27;</span> <span class="comment"># flask.session需要用到的密钥</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>config/db_config.py 数据库配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HOSTNAME = <span class="string">&quot;127.0.0.1&quot;</span></span><br><span class="line">PORT = <span class="number">3306</span></span><br><span class="line">USERNAME = <span class="string">&#x27;root&#x27;</span></span><br><span class="line">PASSWORD = <span class="string">&#x27;root123&#x27;</span></span><br><span class="line">DATABASE = <span class="string">&#x27;psychological_test&#x27;</span></span><br><span class="line">SQLALCHEMY_DATABASE_URL = <span class="string">f&quot;mysql+pymysql://<span class="subst">&#123;USERNAME&#125;</span>@<span class="subst">&#123;HOSTNAME&#125;</span>:<span class="subst">&#123;PORT&#125;</span>/<span class="subst">&#123;DATABASE&#125;</span>?charset=utf8mb4&quot;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>app.py 配置信息注入</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> db_config, config</span><br><span class="line">app.config.from_object(db_config)  <span class="comment"># 数据库配置</span></span><br><span class="line">app.config.from_object(config)  <span class="comment"># app配置</span></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="exts-js"><a href="#exts-js" class="headerlink" title="exts.js"></a>exts.js</h2><p>如果我们把db的创建放在app文件中，如下代码：</p>
+<figure class="highlight python"><figcaption><span>app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">db = SQLAlchemy()</span><br><span class="line">db.init_app(app)</span><br><span class="line">migrate = Migrate(app, db)</span><br></pre></td></tr></table></figure>
+<p>同时，如果想<strong>migrate</strong>在进行数据迁移时注意到ORM模型的更新，就必须要在<strong>app.py</strong>中引用模型类：</p>
+<figure class="highlight python"><figcaption><span>app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> models <span class="keyword">import</span> UserModel, EmailModel, TestModel, OptionModel, ResultModel</span><br></pre></td></tr></table></figure>
+<p>在models.py中，为了使ORM模型继承<strong>db.Model</strong>类，也必须将db引入：</p>
+<figure class="highlight python"><figcaption><span>app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app <span class="keyword">import</span> db</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserModel</span>(db.Model):</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>这时，<strong>引用循环</strong>的问题就出现了:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ImportError: cannot <span class="keyword">import</span> name <span class="string">&#x27;XXX&#x27;</span> <span class="keyword">from</span> partially initialized module <span class="string">&#x27;XXX&#x27;</span> (most likely due to a circular <span class="keyword">import</span>)</span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin note" ><div class="body"><p>db的更新与从models中引用来的模型相关，<br>而models中的模型又与db的Model类相关，<br>此处需要引入扩展文件<strong>exts.py</strong>，<br>专门用于创建一些app需要用到的扩展对象</p><figure class="highlight python"><figcaption><span>exts.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_sqlalchemy <span class="keyword">import</span> SQLAlchemy</span><br><span class="line">db = SQLAlchemy()</span><br></pre></td></tr></table></figure></div></div>
+
+
+
+<h1 id="ORM映射"><a href="#ORM映射" class="headerlink" title="ORM映射"></a>ORM映射</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>ORM</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_27""><ul class="nav-tabs"><li class="tab active"><a href="#tab_27-1">UserModel</a></li><li class="tab"><a href="#tab_27-2">TestModel</a></li><li class="tab"><a href="#tab_27-3">ResultModel</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_27-1"><p>EmailModel</p></div><div class="tab-pane" id="tab_27-2"><p>OptionModel</p></div><div class="tab-pane" id="tab_27-3"></div></div></div></div></div>
+
+<h1 id="Blueprint视图拆分"><a href="#Blueprint视图拆分" class="headerlink" title="Blueprint视图拆分"></a>Blueprint视图拆分</h1><div class="tag-plugin note" ><div class="title"><strong>Blueprint蓝图 color</strong></div><div class="body"><p>Blueprint可以为<strong>路由、视图、静态文件</strong>等需要url映射的功能提供便捷的模块拆分方法</p><p>在blueprint文件夹下创建视图模块文件：</p><figure class="highlight python"><figcaption><span>blueprint/index.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Blueprint</span><br><span class="line">index = Blueprint(<span class="string">&#x27;index&#x27;</span>, __name__, url_prefix=<span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="meta">@index.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">welcome</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure><p>blueprint文件下的蓝图对象需要在app中注册</p><figure class="highlight python"><figcaption><span>app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> blueprint.index <span class="keyword">import</span> index</span><br><span class="line">app.register_blueprint(index)</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="wtforms-表单验证"><a href="#wtforms-表单验证" class="headerlink" title="wtforms 表单验证"></a>wtforms 表单验证</h2><p><strong>wtforms</strong>主要用于验证前端提交的数据是否符合规范<br><strong>flask-wtf</strong>是flask对wtforms的封装</p>
+<div class="tag-plugin note" color="dark"><div class="body"><p>wtforms的使用步骤如下：</p><ul><li>定义表单<ul><li>注意表单项name字段要和验证类中的验证属性名对应</li></ul></li><li>定义验证类<ul><li>一定要继承自<strong>wtforms.Form</strong>类</li><li>验证属性</li><li>验证方法<ul><li>需要用<strong>validate_验证属性名</strong>的格式为方法命名</li><li>方法必须包含<em>self和field</em>两个参数，用field访问获取验证属性值，用self访问其他字段</li></ul></li></ul></li><li>使用验证类</li></ul><figure class="highlight html"><figcaption><span>表单定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">p</span>&gt;</span>LIAME<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;email&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">p</span>&gt;</span>EMAN<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;form-item&quot;</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">p</span>&gt;</span>NOITATNACNI<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;password&quot;</span> <span class="attr">name</span>=<span class="string">&quot;password&quot;</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;TCEJNI NOITATNACNI&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>wtforms类定义</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wtforms</span><br><span class="line"><span class="keyword">from</span> wtforms.validators <span class="keyword">import</span> Email, Length</span><br><span class="line"><span class="keyword">from</span> models <span class="keyword">import</span> UserModel</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RegisterForm</span>(wtforms.Form):</span><br><span class="line">    email = wtforms.StringField(validators=[Email(message=<span class="string">&#x27;strange, something seems going wrong&#x27;</span>)])</span><br><span class="line">    name = wtforms.StringField(validators=[Length(<span class="built_in">min</span>=<span class="number">1</span>,<span class="built_in">max</span>=<span class="number">20</span>,message=<span class="string">&#x27;strange, something seems going wrong&#x27;</span>)])</span><br><span class="line">    password = wtforms.StringField(validators=[Length(<span class="built_in">min</span>=<span class="number">4</span>,<span class="built_in">max</span>=<span class="number">20</span>,message=<span class="string">&#x27;strange, something seems going wrong&#x27;</span>)])</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">validate_emial</span>(<span class="params">self, field</span>):</span><br><span class="line">        email = field.data</span><br><span class="line">        user = UserModel.query.filter_by(email=email).first()</span><br><span class="line">        <span class="keyword">if</span> user:</span><br><span class="line">            <span class="keyword">raise</span> wtforms.ValidationError(message=<span class="string">&#x27;strange, something seems going wrong&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>使用验证类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> .forms <span class="keyword">import</span> RegisterForm</span><br><span class="line"><span class="meta">@index.route(<span class="params"><span class="string">&quot;/register&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;GET&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        form =  RegisterForm(request.form)</span><br><span class="line">        <span class="keyword">if</span> form.validate():</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">return</span> ...</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">print</span>(form.errors)</span><br><span class="line">            <span class="keyword">return</span> ...</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="werkzeug"><a href="#werkzeug" class="headerlink" title="werkzeug"></a>werkzeug</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>WSGL</strong></div><div class="body"><blockquote><p><strong>WSGL</strong> <em>Web Server Gateway Interface</em></p></blockquote><p>WSGL是Python Web应用程序和Web服务器之间的标准接口</p><p>Werkzeug是python提供的<strong>WSGL库</strong></p></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>使用werkzeug.security进行数据加密</strong></div><div class="body"><ul><li><em>generate_password_hash</em> 加密</li><li><em>check_password_hash</em> 比较加密数据和未加密数据是否包含相同信息</li></ul><figure class="highlight python"><figcaption><span>加密</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> werkzeug.security <span class="keyword">import</span> generate_password_hash, check_password_hash</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">register</span>():</span><br><span class="line">    ....</span><br><span class="line">    password = generate_password_hash(form.password.data)</span><br><span class="line">    user = UserMode(</span><br><span class="line">        name=form.name.data,</span><br><span class="line">        email=form.email.data,</span><br><span class="line">        password=password</span><br><span class="line">    )   </span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>比较</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@index.route(<span class="params"><span class="string">&quot;/login&quot;</span>, methods=[<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;GET&quot;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">login</span>():</span><br><span class="line">    ...</span><br><span class="line">    user = UserModel.query.filter_by(email=form[<span class="string">&#x27;email&#x27;</span>]).first()</span><br><span class="line">    <span class="keyword">if</span> user <span class="keyword">and</span> check_password_hash(user.password, form[<span class="string">&quot;password&quot;</span>]):</span><br><span class="line">        session[<span class="string">&quot;user_id&quot;</span>] = user.<span class="built_in">id</span></span><br><span class="line">        <span class="keyword">return</span> ...</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h2><p>Flask中的钩子函数使用<strong>装饰器</strong>的形式定义</p>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>一些常用的钩子函数</strong></div><div class="body"><ul><li><em>before_request</em> 请求之前、视图函数执行之前</li><li><em>after_request</em> 请求之后、响应发送给用户之前调用</li><li><em>teardown_request</em> 请求之后、响应发送给用户之后调用</li><li><em>before_first_request</em> 应用启动时&#x2F;处理第一个请求之前调用</li><li><em>after_request</em> 应用关闭时&#x2F;处理最后一个请求之后调用</li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>before_request使用</strong></div><div class="body"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 请求之前全局存入用户信息</span></span><br><span class="line"><span class="meta">@app.before_request</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">before_request</span>():</span><br><span class="line">    user_id = session.get(<span class="string">&#x27;user_id&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> user_id:</span><br><span class="line">        user = UserModel.query.filter_by(<span class="built_in">id</span>=user_id).first()</span><br><span class="line">        <span class="built_in">setattr</span>(g, <span class="string">&#x27;user&#x27;</span>, user)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">setattr</span>(g, <span class="string">&#x27;user&#x27;</span>, <span class="literal">None</span>)</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="Decorator装饰器"><a href="#Decorator装饰器" class="headerlink" title="Decorator装饰器"></a>Decorator装饰器</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>装饰器</strong></div><div class="body"><p>装饰器实际上是对函数的包装操作的语法糖，<br>装饰器函数接收一个函数参数，并返回一个新的函数作为输出，<br>接收的参数类似于<strong>callback回调函数</strong></p><div class="tag-plugin note" ><div class="body"><p>flask提供了一些常用的装饰器：如</p><blockquote><p>@app.errorhandler(error_code) <strong>定义错误处理的装饰器</strong></p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.errorhandler(<span class="params"><span class="number">404</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">page_not_found</span>(<span class="params">error</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Page Not Fount&#x27;</span>, <span class="number">404</span></span><br></pre></td></tr></table></figure><blockquote><p>@app.context_processor <strong>上下文处理器</strong></p></blockquote><p>存放在上下文处理器中的变量值能在所有模板中获取到</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.context_processor</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">my_context_processor</span>():</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&quot;user&quot;</span>:g.user&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>自定义装饰器</strong></div><div class="body"><figure class="highlight python"><figcaption><span>自定义装饰器方法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">my_decorator</span>(<span class="params">func</span>): <span class="comment"># func即被包装的函数</span></span><br><span class="line"><span class="meta">    @wraps(<span class="params">func</span>) </span><span class="comment"># 用来保留函数信息</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">inner</span>(): <span class="comment"># 对func进行包装</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">return</span> inner <span class="comment"># 最终调用实际是inner函数</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>进入路径映射函数之前对用户信息进行检测的装饰器</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="session"><a href="#session" class="headerlink" title="session"></a>session</h2><div class="tag-plugin note" color="dark"><div class="body"><p>session对象用于在<strong>Client</strong>和<strong>Server</strong>之前存储用户会话数据</p><blockquote><p>默认情况下，Flask使用签名的cookie来实现会话存储（浏览器端），<br>而不是存储在服务器端</p></blockquote><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/session.png" alt="浏览器端签过名的cookie数据" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">浏览器端签过名的cookie数据</span></div></div><p>为了进行cookie加密，需要配置会话密钥</p><figure class="highlight python"><figcaption><span>密钥配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.secret_key = <span class="string">&#x27;your_secret_key&#x27;</span></span><br></pre></td></tr></table></figure><div class="tag-plugin note" ><div class="title"><strong>session的常见操作</strong></div><div class="body"><blockquote><p>新增&#x2F;修改session值</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">session[<span class="string">&#x27;key&#x27;</span>] = value</span><br></pre></td></tr></table></figure><blockquote><p>获取session数据</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">temp = session.get(<span class="string">&#x27;key&#x27;</span>)</span><br></pre></td></tr></table></figure><blockquote><p>删除session数据</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">session.pop(<span class="string">&#x27;key&#x27;</span>, <span class="literal">None</span>) <span class="comment"># 删除键为key的会话数据</span></span><br><span class="line">session.clear() <span class="comment"># 清空所有会话数据</span></span><br></pre></td></tr></table></figure></div></div></div></div>
+
+
+<h1 id="SMTP邮件服务"><a href="#SMTP邮件服务" class="headerlink" title="SMTP邮件服务"></a>SMTP邮件服务</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>如何在flask项目中发送邮件给指定邮箱</strong></div><div class="body"><ol><li>获取POP3&#x2F;SMTP&#x2F;IMAP服务授权码<div class="tag-plugin link dis-select"><a class="link-card plain" title="如何获取授权码" href="https://help.mail.163.com/faq.do?m=list&categoryID=90" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">如何获取授权码</span><span class="cap link fs12">https://help.mail.163.com/faq.do?m=list&categoryID=90</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div></li><li>初始化邮箱连接对象</li><li>配置邮件服务参数</li><li>在入口文件app.py中注入邮件服务配置</li><li>发送邮件</li></ol><div class="tag-plugin note" ><div class="body"><div class="tag-plugin tabs"id="tab_28""><ul class="nav-tabs"><li class="tab active"><a href="#tab_28-1">初始化</a></li><li class="tab"><a href="#tab_28-2">参数配置</a></li><li class="tab"><a href="#tab_28-3">配置注入</a></li><li class="tab"><a href="#tab_28-4">发送</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_28-1"><p>和数据库连接对象一样，邮箱连接对象一般也放在扩展文件<strong>exts.py</strong>中，<br>需要使用到<strong>flask_mail</strong>扩展库</p><div class="tag-plugin note" color="green"><div class="title"><strong>Flask-Mail</strong></div><div class="body"><p>Flask-Mail支持在flask应用中方便的发送电子邮件，<br>包括如下功能：</p><ul><li>简单文本邮件发送</li><li>jinjia2模板发送html邮件</li><li>MIME附件（图片&#x2F;文档）</li><li>异步发送邮件</li></ul></div></div><figure class="highlight python"><figcaption><span>exts.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask_mail <span class="keyword">import</span> Mail</span><br><span class="line">mail = Mail()</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_28-2"><figure class="highlight python"><figcaption><span>mail_config.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 邮件服务的服务器地址</span></span><br><span class="line">MAIL_SERVER = <span class="string">&#x27;smtp.163.com&#x27;</span></span><br><span class="line"><span class="comment"># 使用SSL协议加密</span></span><br><span class="line">MAIL_USE_SSL = <span class="literal">True</span></span><br><span class="line"><span class="comment"># SSL端口号</span></span><br><span class="line">MAIL_PORT = <span class="number">465</span></span><br><span class="line"><span class="comment"># 邮箱账号</span></span><br><span class="line">MAIL_USERNAME = <span class="string">&quot;piuyixiu@163.com&quot;</span></span><br><span class="line"><span class="comment"># 开启SMTP服务时生成的授权码</span></span><br><span class="line">MAIL_PASSWORD = <span class="string">&quot;...&quot;</span></span><br><span class="line"><span class="comment"># 邮箱账号</span></span><br><span class="line">MAIL_DEFAULT_SENDER = <span class="string">&quot;piuyixiu@163.com&quot;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_28-3"><figure class="highlight python"><figcaption><span>app.py</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> config <span class="keyword">import</span> mail_config</span><br><span class="line"><span class="keyword">from</span> exts <span class="keyword">import</span> mail</span><br><span class="line"></span><br><span class="line">app.config.from_object(mail_config)</span><br><span class="line">mail.init_app(app)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_28-4"><p>发送时会使用到<strong>flask_mail.Message</strong>类</p><div class="tag-plugin note" color="green"><div class="title"><strong>Message邮件常用属性</strong></div><div class="body"><ul><li><em>sender</em> 发送者</li><li><em>recipients</em> 接收者</li><li><em>subject</em> 主题</li><li><em>body</em> 纯文本邮件内容</li><li><em>html</em> HTML邮件内容</li><li><em>attach</em> 添加附件</li></ul><p>添加附件时需注意，代码中读取附件文件的路径是<strong>相对于执行该应用程序的当前工作目录</strong>的，<br>即项目主入口app.py所在的文件路径</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;static/img/makima.png&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    data = f.read()</span><br><span class="line">    message.attach(<span class="string">&#x27;Makima.png&#x27;</span>, <span class="string">&#x27;image/png&#x27;</span>, data)</span><br><span class="line">    mail.send(message)</span><br></pre></td></tr></table></figure></div></div><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> exts <span class="keyword">import</span> mail</span><br><span class="line"><span class="keyword">from</span> flask_mail <span class="keyword">import</span> Message</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/send_to_email)</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">def send_to_email():</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">    email = request.args.get(&#x27;</span>email<span class="string">&#x27;)</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">    message = Message(</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">        subject=&#x27;</span>邮件主题<span class="string">&#x27;,</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">        recipients=[email],</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">        body=&#x27;</span>邮件内容<span class="string">&#x27;</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">    )</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">    mail.send(message)</span></span></span></span><br><span class="line"><span class="string"><span class="params"><span class="meta">    return jsonify(code=200, message=&#x27;</span>send success<span class="string">&#x27;, data=None)</span></span></span></span><br></pre></td></tr></table></figure></div></div></div></div></div></div></div>
+
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/python/flask_2.html">Flask DateBase</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/python/flask_4.html">Easter egg</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta name="generator" content="Hexo 6.3.0">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
   <meta charset="utf-8">
-  <meta name="robots" content="noindex,follow">
+  
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
@@ -20,16 +20,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>归档 - E-Duck</title>
+  <title>Notes：Flask - E-Duck</title>
 
   
-    <meta name="description" content="Please include by yourself">
+    <meta name="description" content="SQLAlchemyflush &amp;&amp; refresh一般将数据提交到数据库分2步：db.session.add(data)数据添加到缓冲区db.session.commit()提交事务，关闭会话但是如果希望将数据提交到数据库后，再立即将此条数据从数据库拽出来，可是使用flush的方式：12345678# 对象添加到数据库会话db.session.add(result)# 数据提交到">
 <meta property="og:type" content="website">
-<meta property="og:title" content="归档">
-<meta property="og:url" content="http://eletricduck.com/archives/2022/index.html">
+<meta property="og:title" content="Flask">
+<meta property="og:url" content="http://eletricduck.com/notes/Flask.html">
 <meta property="og:site_name" content="E-Duck">
-<meta property="og:description" content="Please include by yourself">
+<meta property="og:description" content="SQLAlchemyflush &amp;&amp; refresh一般将数据提交到数据库分2步：db.session.add(data)数据添加到缓冲区db.session.commit()提交事务，关闭会话但是如果希望将数据提交到数据库后，再立即将此条数据从数据库拽出来，可是使用flush的方式：12345678# 对象添加到数据库会话db.session.add(result)# 数据提交到">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-25T10:26:45.048Z">
+<meta property="article:modified_time" content="2023-10-25T10:26:45.048Z">
 <meta property="article:author" content="Electric Duck">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
@@ -59,207 +61,51 @@
   
 
 
+
+
   <div class='l_body' id='start'>
-    <aside class='l_left' layout=''>
+    <aside class='l_left' layout='wiki'>
     
 
   
 
 <header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
 
-<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item active" href="/notes/">笔记</a></nav>
 </header>
 
 
 <div class="widgets">
-<div class="widget-wrap" id="github-user"><div class="widget-body stellar-ghinfo-api" api="https://api.github.com/users/PUYIXIU"><div class="avatar" ><img no-lazy type="img" id="avatar_url" src="undefined" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><p class="username" ff="title" type="text" id="name">&nbsp;</p><p class="bio" type="text" id="bio">&nbsp;</p><div class="buttons"><a class="btn" target="_blank" rel="noopener" href="https://github.com/PUYIXIU?tab=followers"><span class="title" type="text" id="followers">0</span><span class="desc">followers</span></a><a class="btn" target="_blank" rel="noopener" href="https://github.com/PUYIXIU?tab=following"><span class="title" type="text" id="following">0</span><span class="desc">following</span></a><a class="btn" target="_blank" rel="noopener" href="https://github.com/PUYIXIU?tab=repositories"><span class="title" type="text" id="public_repos">0</span><span class="desc">repos</span></a></div><a class="follow" target="_blank" rel="noopener" href="https://github.com/PUYIXIU"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>Follow</a>
 
-<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
-</div></div>
-
-
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Flask</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/notes/Blog.html#start"><span class="toc-text">Blog</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/ops.html"><span class="toc-text">运维</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/index.html"><span class="toc-text">Vue</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Browser.html"><span class="toc-text">浏览器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/React.html"><span class="toc-text">React</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/dependency.html"><span class="toc-text">npm依赖</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/echarts.html"><span class="toc-text">Echarts</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/npm.html"><span class="toc-text">npm</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/package.html"><span class="toc-text">package包管理器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/web_network.html"><span class="toc-text">Web网络</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/VSCode.html"><span class="toc-text">VSCode</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/notes/Flask.html"><span class="toc-text">Flask</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SQLAlchemy"><span class="toc-text">SQLAlchemy</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#flush-amp-amp-refresh"><span class="toc-text">flush &amp;&amp; refresh</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/visual_chart.html"><span class="toc-text">Visual Chart</span></a></div></div></div>
 </div>
 
 
     </aside>
-    <div class='l_main list'>
+    <div class='l_main'>
       
-  
-
-<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div></header>
-
-
 
       
 
   
   
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/notes/">笔记</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/notes/Blog.html">Notes</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-10-25T10:26:45.048Z">2023-10-25</time></div></div>
 
-<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a class="active" href="/archives">归档</a></nav></div>
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Flask</span></h1>
+  <h1 id="SQLAlchemy"><a href="#SQLAlchemy" class="headerlink" title="SQLAlchemy"></a>SQLAlchemy</h1><h2 id="flush-amp-amp-refresh"><a href="#flush-amp-amp-refresh" class="headerlink" title="flush &amp;&amp; refresh"></a>flush &amp;&amp; refresh</h2><div class="tag-plugin note" color="dark"><div class="body"><p>一般将数据提交到数据库分2步：</p><ol><li>db.session.add(data)<br>数据添加到缓冲区</li><li>db.session.commit()<br>提交事务，关闭会话</li></ol><p>但是如果希望将数据提交到数据库后，<br>再立即将此条数据从数据库拽出来，<br>可是使用flush的方式：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 对象添加到数据库会话</span></span><br><span class="line">db.session.add(result)</span><br><span class="line"><span class="comment"># 数据提交到数据库但不关闭会话</span></span><br><span class="line">db.session.flush()</span><br><span class="line"><span class="comment"># 手动刷新对象</span></span><br><span class="line">db.session.refresh(result)</span><br><span class="line"><span class="comment"># 提交事务</span></span><br><span class="line">db.session.commit()</span><br></pre></td></tr></table></figure></div></div>
 
-  <div class='post-list'>
-  	
-  	
-  		
-  		
-  			
-  		
-  	
-  		
-  		
-  	
-  		
-  		
-  	
-  		
-  		
-  	
-  		
-  		
-  	
-  		
-  		
-  	
-  		
-  		
-  			
-  		
-  	
-  		
-  		
-  	
-  	
-  		<article class='' id='archive'>
-  			<div class='archive-header h4'>2023</div>
-  			
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/09/23/emoji-kitchen/">
-    					<time>09-23</time>
-    					<span>
-                
-      						Emoji Kitchen
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/08/14/2023%E5%B9%B48%E6%9C%88%E9%9D%A2%E8%AF%95%E8%AE%B0%E5%BD%95/">
-    					<time>08-14</time>
-    					<span>
-                
-      						前端工程师面试记录
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/07/27/React-Notes/">
-    					<time>07-27</time>
-    					<span>
-                
-      						React-Notes
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/04/18/GAMES101-%E7%8E%B0%E4%BB%A3%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6%E5%85%A5%E9%97%A8-%E9%97%AB%E4%BB%A4%E5%A5%87/">
-    					<time>04-18</time>
-    					<span>
-                
-      						GAMES101
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/04/11/pocker/">
-    					<time>04-11</time>
-    					<span>
-                
-      						pocker的由来与历史
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2023/03/08/nginx%E5%85%A5%E9%97%A8/">
-    					<time>03-08</time>
-    					<span>
-                
-      						nginx入门
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  		</article>
-  	
-  		<article class='' id='archive'>
-  			<div class='archive-header h4'>2022</div>
-  			
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				
-  		    
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2022/12/08/new-Hello/">
-    					<time>12-08</time>
-    					<span>
-                
-      						new-Hello
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  				<div class='archive-list'>
-            <a class='post fs14' href="/2022/11/24/hello-world/">
-    					<time>11-24</time>
-    					<span>
-                
-      						Hello World
-      					
-              </span>
-    				</a>
-          </div>
-  			
-  		</article>
-  	
-  </div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/notes/VSCode.html">VSCode</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/notes/visual_chart.html">Visual Chart</a></div></section></div>
+
+  
+
+
 
 
       
