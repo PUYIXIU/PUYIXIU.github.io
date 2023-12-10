@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>PicBoo - E-Duck</title>
+
+  
+    <meta name="description" content="PicBoo 一款能够快速读取页面全部图片以供下载浏览器插件！  插件开发有很多大名鼎鼎的插件，比如FeHelper、Convertio等等。平时在用浏览器插件时，也会好奇这些插件到底是如何开发的。大多数主流浏览器都提供了很好的插件开发环境，插件项目的结构与我们平时开发web项目也大同小异，但是需要注意的是manifest.json文件，manifest.json配置文件用于像浏览器介绍这款脚本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PicBoo">
+<meta property="og:url" content="http://eletricduck.com/2023/11/03/PicBoo/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="PicBoo 一款能够快速读取页面全部图片以供下载浏览器插件！  插件开发有很多大名鼎鼎的插件，比如FeHelper、Convertio等等。平时在用浏览器插件时，也会好奇这些插件到底是如何开发的。大多数主流浏览器都提供了很好的插件开发环境，插件项目的结构与我们平时开发web项目也大同小异，但是需要注意的是manifest.json文件，manifest.json配置文件用于像浏览器介绍这款脚本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/2023/11/03/PicBoo/%E7%B1%B3%E5%B1%B1%E8%88%9Eyyds.gif">
+<meta property="article:published_time" content="2023-11-03T02:26:48.000Z">
+<meta property="article:modified_time" content="2023-11-06T08:15:34.685Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/2023/11/03/PicBoo/%E7%B1%B3%E5%B1%B1%E8%88%9Eyyds.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">PicBoo</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%92%E4%BB%B6%E5%BC%80%E5%8F%91"><span class="toc-text">插件开发</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PicBoo%E5%BC%80%E5%8F%91%E8%BF%87%E7%A8%8B"><span class="toc-text">PicBoo开发过程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8EPicBoo"><span class="toc-text">关于PicBoo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF%E4%BB%8B%E7%BB%8D"><span class="toc-text">思路介绍</span></a></li></ol></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-11-03T02:26:48.000Z">2023-11-03</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>PicBoo</span></h1>
+<blockquote>
+<p>PicBoo 一款能够快速读取页面全部图片以供下载浏览器插件！</p>
+</blockquote>
+<h1 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h1><div class="tag-plugin note" color="dark"><div class="body"><p>有很多大名鼎鼎的插件，比如<strong>FeHelper</strong>、<strong>Convertio</strong>等等。<br>平时在用浏览器插件时，也会好奇这些插件到底是如何开发的。<br>大多数主流浏览器都提供了很好的插件开发环境，<br>插件项目的结构与我们平时开发web项目也大同小异，但是需要注意的是<strong>manifest.json</strong>文件，<br><strong>manifest.json</strong>配置文件用于像浏览器介绍这款脚本的一些基本信息。</p><div class="tag-plugin note" color="dark"><div class="title"><strong>插件开发教程</strong></div><div class="body"><ul><li><a target="_blank" rel="noopener" href='https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions'>Mozilla</a></li><li><a target="_blank" rel="noopener" href='https://developer.chrome.com/docs/extensions/'>Chrome for Developers</a></li></ul></div></div></div></div>
+
+<h1 id="PicBoo开发过程"><a href="#PicBoo开发过程" class="headerlink" title="PicBoo开发过程"></a>PicBoo开发过程</h1><h2 id="关于PicBoo"><a href="#关于PicBoo" class="headerlink" title="关于PicBoo"></a>关于PicBoo</h2><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="米山舞yyds.gif" alt="PicBoo演示" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">PicBoo演示</span></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>关于PicBoo</strong></div><div class="body"><p>某天我正在开发一个基于Flask的塔罗牌算命网站，<br>需要给每张卡牌提供一张图片，于是就开始网上冲浪寻找图片资源，<br>但是塔罗牌（大阿卡纳牌）有足足22张！<br>难不成我要重复右键→图片另存为→保存整整22次吗？<br>达咩，我这该死的叛逆心被成功激起，<br>于是就想干脆趁这个机会涉足插件开发的领域。</p></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>资源抓取插件</strong></div><div class="body"><p>当然我这个前端三脚猫一时兴起开发的小玩意没法跟很多应用商店里比较成熟的插件相比，<br>目前已经实现网站资源抓取的优秀插件也有很多：</p><ul><li><a target="_blank" rel="noopener" href='https://chrome.google.com/webstore/detail/image-downloader/cnpniohnfphhjihaiiggeabnkjhpaldj?utm_source=ext_sidebar&hl=zh-CN'>Image Downloader</a></li></ul><p>简单看了<strong>Image Downloader</strong>的源码，也比较简单，打算整理完自己开发的经验后好好看看别人的代码。</p></div></div>
+
+<h2 id="思路介绍"><a href="#思路介绍" class="headerlink" title="思路介绍"></a>思路介绍</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>项目结构</strong></div><div class="body"><ul><li>static&#x2F;js&#x2F;getImage.js 在ContentScripts中运行的脚本</li><li>manifest.json 插件配置文件</li><li>popup.html 插件调用时弹窗页面</li><li>popup.js 弹窗页面对应脚本</li></ul><div class="tag-plugin note" ><div class="body"><div class="tag-plugin tabs"id="tab_1""><ul class="nav-tabs"><li class="tab active"><a href="#tab_1-1">manifest.json</a></li><li class="tab"><a href="#tab_1-2">getImage.js</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_1-1"><ul><li>icons 不同分辨率下的icon图片</li><li>name 插件名称</li><li>version 版本</li><li>description 描述</li><li>manifest_version 使用menifest的版本</li><li>content_scripts 对导入content_script中的脚本的配置<ul><li>all_frames 是否在页面内所有content_scripts中都执行此脚本</li><li>matches 匹配到下列路径时执行</li><li>js 执行包括的js文件</li><li>run_at 指定注入脚本的执行时机，可以是如下值：<ul><li>document_start 文档开始加载时</li><li>document_end 文档已完全加载</li><li>document_idle 文档完完全加载并空闲</li><li>document_end 整个DOM树加载完成</li></ul></li></ul></li></ul><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;icons&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;128&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/128.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;16&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/16.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;32&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/32.png&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;48&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/48.png&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;PicBoo&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Pick images you want from website&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;manifest_version&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;content_scripts&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;all_frames&quot;</span><span class="punctuation">:</span><span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;matches&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span> <span class="string">&quot;http://*/*&quot;</span><span class="punctuation">,</span> <span class="string">&quot;https://*/*&quot;</span><span class="punctuation">,</span> <span class="string">&quot;file://*/*&quot;</span> <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;js&quot;</span><span class="punctuation">:</span><span class="punctuation">[</span><span class="string">&quot;lib/jquery-3.5.1.js&quot;</span><span class="punctuation">,</span><span class="string">&quot;static/js/getImage.js&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;run_at&quot;</span><span class="punctuation">:</span> <span class="string">&quot;document_idle&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_1-2"><p>getImage.js是要注入content-script的主运行脚本，<br>此外还引用了jquery库，用来做dom操作和ajax请求。</p><p>页面中暴露了一个黄色按钮，用于触发getImage中绑定的读取图片事件,<br>触发按钮点击事件之后，页面滚动条自动下沉直到页尾（这一步是为了将做了图片资源懒加载的页面图片加载出来），<br>获取页面image标签的src地址，在弹窗中展示图片信息，点击图片后通过src请求图片资源。</p></div></div></div></div></div></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>开发时碰到的问题</strong></div><div class="body"><p>因为PicBoo比较简陋，甚至可以说相当毛坯，<br>光是在开发的时候我就发现了各种各种未完待续的bug，比如：</p><ul><li>页面懒加载导致图片资源加载不全</li><li>只通过image的src标签获取图片资源，其他方式加载的图片统统获取不到（如css的background-image）</li></ul><p>但是<strong>STOP！！！</strong><br>PicBoo毕竟只是我对浏览器插件一次试探性的成果，光是在获取网页图片这一步上我就花费了不少功夫（菜）。</p></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>关于跨域请求资源</strong></div><div class="body"><p>因为不了解浏览器关于跨域请求资源的限制，我被卡了很久…很久…真的很久。<br>事情是这样的：<br>我查了些资料，知道了浏览器插件都有一个popup.html窗口文件，于是就开始在popup.html上搞装修，<br>和所有缺少想象力的平庸码农一样，我尝试用百度的logo做图片下载测试，<br>创建了一个a标签，给它加了href和download属性，并开始触发它：<br>《图片》<br>完美失败，网站没有下载图片，莫名其妙跳转到图片页面，<br>这就很奇怪，因为明明只要给a标签配置download属性就能表示下载，为什么还是会跳转？<br>我百思不得其解，卡了一段时间后我想：不能下载，我只让它显示总行了吧？<br>于是放弃使用a标签，开始动态创建image，结果：<br>完美失败*2，连图片资源都申请不到，更加迷惑。<br>再看报错，似乎是说不能跨域请求资源，烦死。<br>但是明明在html里直接写image标签，配置跨域src时就能请求到，怎么到了js这就区别对待？这谁规定的？<br>一查资料，哦，原来是浏览器规定的，那没事了。</p><blockquote><p>脚本文件的加载方式会受到浏览器的安全机制限制<br><strong>浏览器同源策略</strong>：<br>协议、域名、端口号都必须相同</p></blockquote><p>怎么解决跨域呢？我问ChatGPT:</p><blockquote><p>如何使用纯前端的方式解决跨域？</p></blockquote><p>GPT回答的那叫一个干净利落：”不存在纯前端的解决方式。“<br>好嘛，我可不要再开一个后台专门为了请求跨域资源，<br>跨域，跨域，烦死，干脆让这网页自己请求自己总不算跨域了吧？<br>果真有这个方式，那就是Content—Script，运行在网页内部，<br>于是只好在Content-Script里面请求图片资源，<br>好消息是请求成功啦！坏消息是下载不下来，<br>我动态创建的a标签p用没有，烦死，我问ChatGPT这特么怎么回事，<br>它回了一段代码，我一看这不跟我写得一模一样吗。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">simClick</span>(<span class="params">url</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    <span class="keyword">let</span> event = <span class="keyword">new</span> <span class="title class_">MouseEvent</span>(<span class="string">&#x27;click&#x27;</span>)</span><br><span class="line">    a.<span class="property">href</span> = url</span><br><span class="line">    a.<span class="property">download</span> = <span class="string">&#x27;download.png&#x27;</span></span><br><span class="line">    a.<span class="title function_">dispatchEvent</span>(event)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>不行啊！这么写没用啊！</p></blockquote><p>我的精神状态很接近赛博精神病，开始对着GPT发羊癫疯，<br>神奇的事情发生了，GPT竟然又回我了一段代码，说实话跟之前的差别不大：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">downloadImage</span>(<span class="params">url, filename</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line">    link.<span class="property">href</span> = url</span><br><span class="line">    link.<span class="property">download</span> = filename</span><br><span class="line">    <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(link)</span><br><span class="line">    link.<span class="title function_">click</span>()</span><br><span class="line">    link.<span class="title function_">remove</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>但事情就这样神奇的得到了解决，oh，how strange.</p></div></div>
+
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/11/21/Vue3-vite-pinia/">Vue3+vite+pinia</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/09/23/emoji-kitchen/">Emoji Kitchen</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
