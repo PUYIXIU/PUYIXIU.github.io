@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>ThreeJs：Realistic Scenes 真实场景 - E-Duck</title>
+
+  
+    <meta name="description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;6XvqaokjuYU&amp;list&#x3D;PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho&amp;index&#x3D;11  maxroz HDRIhttps:&#x2F;&#x2F;www.maxroz.com&#x2F;hdri  HDR&#x2F;Tone Mapping&#x2F;Gamma Correction&#x2F;sRGB Color S">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Realistic Scenes 真实场景">
+<meta property="og:url" content="http://eletricduck.com/wiki/threejs/c11_realistic_scenes.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;6XvqaokjuYU&amp;list&#x3D;PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho&amp;index&#x3D;11  maxroz HDRIhttps:&#x2F;&#x2F;www.maxroz.com&#x2F;hdri  HDR&#x2F;Tone Mapping&#x2F;Gamma Correction&#x2F;sRGB Color S">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/GammaCorrection.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/realisticScene.gif">
+<meta property="article:published_time" content="2023-12-31T11:14:55.269Z">
+<meta property="article:modified_time" content="2023-12-31T11:14:55.269Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/threejs/img/GammaCorrection.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/threejs/index.html"><div class="main" ff="title">ThreeJs</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Chapter One: Creating Your First 3D Scene with Three.js</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/index.html#start"><span class="toc-text">Requirements - 准备工作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/02_creating_first_3D_scene.html"><span class="toc-text">Start - 开始ThreeJs之旅</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/03_Basic_Components.html"><span class="toc-text">Basic Components - ThreeJs的基本元素</span></a></div></div><div class="widget-header cap dis-select"><span class="name">Wael Yasmina - Three.js Tutorials</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c1_threejs_for_beginners.html"><span class="toc-text">Three.js Tutorial for Absolute Beginners</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c2_SolarSystem.html"><span class="toc-text">Solar System 模拟太阳系</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c3_blender_to_three.html"><span class="toc-text">导入模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c4_shader_tutorial.html"><span class="toc-text">Shader Tutorial 着色器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c5_cannon_tutorial.html"><span class="toc-text">Cannon Tutorial 物理引擎</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c6_mouse_click_create_object.html"><span class="toc-text">How to Create Objects on MouseClick？鼠标点击创建物体</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c7_create_bouncing_ball_on_click.html"><span class="toc-text">How to Create Bouncing Ball on MouseClick？鼠标点击创建弹跳小球</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c8_subdivide_plane.html"><span class="toc-text">Subdivide Plane 选中网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c9_model_material.html"><span class="toc-text">How To Find The Materials Of A Loaded Model? 如何修改导入模型的材质</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c10_cloning_models.html"><span class="toc-text">Cloning And Animating Models Loaded From glTF Files. 克隆动画GLTF模型</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/threejs/c11_realistic_scenes.html"><span class="toc-text">Realistic Scenes 真实场景</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#HDR-x2F-Tone-Mapping-x2F-Gamma-Correction-x2F-sRGB-Color-Space"><span class="toc-text">HDR&#x2F;Tone Mapping&#x2F;Gamma Correction&#x2F;sRGB Color Space</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#HDR"><span class="toc-text">HDR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Tone-Mapping"><span class="toc-text">Tone Mapping</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gamma-Correction"><span class="toc-text">Gamma Correction</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sRGB-Color-Space"><span class="toc-text">sRGB Color Space</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E6%B8%B2%E6%9F%93"><span class="toc-text">场景渲染</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c12_import_sketchfab_model.html"><span class="toc-text">如何导入从Sketchfab上下载的模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c13_loading_screen.html"><span class="toc-text">如何显示资源加载进度</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c14_camera_move.html"><span class="toc-text">如何使用gsap控制相机运动</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c16_yuka.html"><span class="toc-text">使用yuka控制物体运动</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c17_%E4%BD%BF%E7%94%A8yuka%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BD%93%E8%BF%90%E5%8A%A82.html"><span class="toc-text">使用yuka控制实体运动（二）</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c18_orbit_controls.html"><span class="toc-text">Controls 控制器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c19_glass_material.html"><span class="toc-text">玻璃材质</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c20_effect_composer.html"><span class="toc-text">RenderPass && EffectComposer 渲染通道和特效组合</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c21_lock_constraint.html"><span class="toc-text">CANNON-Constraint 约束力</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c22_css_renderer.html"><span class="toc-text">CSS2DRenderer</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c23_instanced_mesh.html"><span class="toc-text">Instenced Mesh 实例化网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c25_object_occlusion.html"><span class="toc-text">colorWrite && renderOrder</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c26_LOD.html"><span class="toc-text">LOD</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c27_Gimbal_Lock.html"><span class="toc-text">Gimbal Lock</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c28_Layer.html"><span class="toc-text">Layer 图层</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/threejs/index.html">ThreeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-31T11:14:55.269Z">2023-12-31</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Realistic Scenes 真实场景</span></h1>
+  <div class="tag-plugin link dis-select"><a class="link-card plain" title="原项目视频" href="https://www.youtube.com/watch?v=6XvqaokjuYU&list=PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho&index=11" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">原项目视频</span><span class="cap link fs12">https://www.youtube.com/watch?v=6XvqaokjuYU&list=PLjcjAqAnHd1EIxV4FSZIiJZvsdrBc1Xho&index=11</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="maxroz HDRI" href="https://www.maxroz.com/hdri" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">maxroz HDRI</span><span class="cap link fs12">https://www.maxroz.com/hdri</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<h1 id="HDR-x2F-Tone-Mapping-x2F-Gamma-Correction-x2F-sRGB-Color-Space"><a href="#HDR-x2F-Tone-Mapping-x2F-Gamma-Correction-x2F-sRGB-Color-Space" class="headerlink" title="HDR&#x2F;Tone Mapping&#x2F;Gamma Correction&#x2F;sRGB Color Space"></a>HDR&#x2F;Tone Mapping&#x2F;Gamma Correction&#x2F;sRGB Color Space</h1><h2 id="HDR"><a href="#HDR" class="headerlink" title="HDR"></a>HDR</h2><div class="tag-plugin note" ><div class="title"><strong>什么是DR？</strong></div><div class="body"><p>DR全称<strong>Dynamic Range</strong>，<br>表示传感器或显示屏能够捕捉图片中最亮和最暗点之间的差异，<br>设备能能够捕捉的DR值越高，<br>图片显示的细节程度就越高。</p><p>HDR全称<strong>High Dynamic Range</strong>，<br>要制作一张HDR图片（即光影分辨率较高的图片），<br>摄影师需要先拍一张中间调的图片，<br>然后拍几张亮度不同的图片，<br>通过像Adobe Lightroom这样的软件合成在一起。</p></div></div>
+
+<h2 id="Tone-Mapping"><a href="#Tone-Mapping" class="headerlink" title="Tone Mapping"></a>Tone Mapping</h2><div class="tag-plugin note" ><div class="body"><p>HDR和EXR格式的图片文件包含的数据量更大，<br>因此选用16&#x2F;32bit编码，<br>但是大多数显示屏都是8bit&#x2F;10bit的，因此在显示这些图片时会丢失很多细节。</p><p>想要解决这个问题：</p><ul><li>可以用Photoshop等专业图像处理软件</li><li>也可以使用Tone Map映射算法</li></ul><p><strong>Tone Map</strong>映射方法能够解决这个问题，<br>它可以使用算法映射的方式，<br>使8bit编码中能够蕴含16&#x2F;32bit编码的信息</p></div></div>
+
+<h2 id="Gamma-Correction"><a href="#Gamma-Correction" class="headerlink" title="Gamma Correction"></a>Gamma Correction</h2><div class="tag-plugin note" ><div class="body"><p>随着实际亮度的增高，人眼对亮度的感受往往更弱，<br>这是因为人眼对黑暗的反应比对光的反应更加敏感。</p><p>与人眼相反，显示屏显示出的亮度往往要高于实际亮度</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/GammaCorrection.png" fancybox="true"/></div></div><p>Gamma Correction就是对这种差异进行校正的方法：<br>在要显示的图片亮度上使用人眼反曲线调整，这样最终显示出来的亮度会被校正到线性关系上</p><p>Gamma Correction的方法在jpeg&#x2F;png等格式的图片内部完成，<br>因此这些格式的图片数据使用反曲线格式保存，要更亮一些。</p><p>而HDR、EXR类型的文件使用的仍然是线性格式保存，<br>因为大部分CGI、游戏渲染器都需要线性工作流程，<br>因此使用线性格式图片进行开发。</p></div></div>
+
+<h2 id="sRGB-Color-Space"><a href="#sRGB-Color-Space" class="headerlink" title="sRGB Color Space"></a>sRGB Color Space</h2><div class="tag-plugin note" ><div class="body"><p>ThreeJs中渲染HDR图像，<br>需要通过图像的原始颜色（sRGB）计算出像素颜色，<br>再根据编码算法进行Gamma Correction</p><p>sRGB指的是最纯正的RGB颜色</p></div></div>
+
+<h1 id="场景渲染"><a href="#场景渲染" class="headerlink" title="场景渲染"></a>场景渲染</h1><div class="tag-plugin note" ><div class="title"><strong>环境加载</strong></div><div class="body"><p>为scene添加360°HDR背景图，需要注意以下操作：</p><ul><li>使用 <strong>RGBELoader</strong> 加载图片</li><li>材质的映射方式应为 <strong>EquirectangularReflectionMapping</strong></li><li>需要将渲染器加载图片的编码格式配置成 <strong>sRGBEncoding</strong><ul><li>0.152.0版本的threejs默认是sRGBEncoding格式的</li><li>在这之前的版本中默认值都是LinearEncoding编码格式</li></ul></li><li>将ToneMapping算法配置成<strong>ACESFilmicToneMapping</strong></li><li>适当调整ToneMapping曝光率属性</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">RGBELoader</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;three/examples/jsm/loaders/RGBELoader&#x27;</span></span><br><span class="line"></span><br><span class="line">renderer.<span class="property">outputEncoding</span> = <span class="variable constant_">THREE</span>.<span class="property">sRGBEncoding</span></span><br><span class="line">renderer.<span class="property">toneMapping</span> = <span class="variable constant_">THREE</span>.<span class="property">ACESFilmicToneMapping</span></span><br><span class="line">renderer.<span class="property">toneMappingExposure</span> = <span class="number">1.8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> backgroundUrl = <span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&#x27;../asserts/kitchen.hdr&#x27;</span>,<span class="keyword">import</span>.<span class="property">meta</span>.<span class="property">url</span>)</span><br><span class="line"><span class="keyword">const</span> rgbeLoader = <span class="keyword">new</span> <span class="title class_">RGBELoader</span>()</span><br><span class="line">rgbeLoader.<span class="title function_">load</span>(backgroundUrl.<span class="property">href</span>, <span class="function"><span class="params">texture</span> =&gt;</span> &#123;</span><br><span class="line">    texture.<span class="property">mapping</span> = <span class="variable constant_">THREE</span>.<span class="property">EquirectangularReflectionMapping</span></span><br><span class="line">    scene.<span class="property">background</span> = texture</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>环境加载</strong></div><div class="body"><p>环境贴图可以将物体放置在指定的环境光下渲染，<br>无需外加光源，<br>可以使用全局环境配置的方式：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scene.<span class="property">environment</span> = texture</span><br></pre></td></tr></table></figure><p>也可以单独对物体进行环境光贴图：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sphere = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(</span><br><span class="line">  <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">SphereGeometry</span>(<span class="number">3</span>,<span class="number">50</span>,<span class="number">50</span>),</span><br><span class="line">  <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshStandardMaterial</span>(&#123;</span><br><span class="line">    <span class="attr">roughness</span>: <span class="number">0</span>,</span><br><span class="line">    <span class="attr">metalness</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">envMap</span>:texture <span class="comment">// 贴图属性</span></span><br><span class="line">  &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/realisticScene.gif" fancybox="true"/></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/threejs/c10_cloning_models.html">Cloning And Animating Models Loaded From glTF Files. 克隆动画GLTF模型</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/threejs/c12_import_sketchfab_model.html">如何导入从Sketchfab上下载的模型</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

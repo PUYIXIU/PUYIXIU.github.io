@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>ThreeJs：如何使用gsap控制相机运动 - E-Duck</title>
+
+  
+    <meta name="description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;O2ouLOL6C4c  GSAPhttps:&#x2F;&#x2F;gsap.com&#x2F;https:&#x2F;&#x2F;gsap.com&#x2F;动画就是物体随着时间的变化运动轨迹的变化，相当于一系列点位，GSAP就是能计算出运动点位的动画库，使用GSAP对THREE的基本元素进行动画控制非常简单，只需要指定需要变化的属性、属性目标值、持续时间等等基本参数即可,gsa">
+<meta property="og:type" content="website">
+<meta property="og:title" content="如何使用gsap控制相机运动">
+<meta property="og:url" content="http://eletricduck.com/wiki/threejs/c14_camera_move.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;O2ouLOL6C4c  GSAPhttps:&#x2F;&#x2F;gsap.com&#x2F;https:&#x2F;&#x2F;gsap.com&#x2F;动画就是物体随着时间的变化运动轨迹的变化，相当于一系列点位，GSAP就是能计算出运动点位的动画库，使用GSAP对THREE的基本元素进行动画控制非常简单，只需要指定需要变化的属性、属性目标值、持续时间等等基本参数即可,gsa">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/cameraMove.gif">
+<meta property="og:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=WaelYasmina&repo=kingshall&theme=dark&show_owner=true">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/gsap.gif">
+<meta property="article:published_time" content="2024-01-04T12:20:24.372Z">
+<meta property="article:modified_time" content="2024-01-04T12:20:24.372Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/threejs/img/cameraMove.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/threejs/index.html"><div class="main" ff="title">ThreeJs</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Chapter One: Creating Your First 3D Scene with Three.js</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/index.html#start"><span class="toc-text">Requirements - 准备工作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/02_creating_first_3D_scene.html"><span class="toc-text">Start - 开始ThreeJs之旅</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/03_Basic_Components.html"><span class="toc-text">Basic Components - ThreeJs的基本元素</span></a></div></div><div class="widget-header cap dis-select"><span class="name">Wael Yasmina - Three.js Tutorials</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c1_threejs_for_beginners.html"><span class="toc-text">Three.js Tutorial for Absolute Beginners</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c2_SolarSystem.html"><span class="toc-text">Solar System 模拟太阳系</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c3_blender_to_three.html"><span class="toc-text">导入模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c4_shader_tutorial.html"><span class="toc-text">Shader Tutorial 着色器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c5_cannon_tutorial.html"><span class="toc-text">Cannon Tutorial 物理引擎</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c6_mouse_click_create_object.html"><span class="toc-text">How to Create Objects on MouseClick？鼠标点击创建物体</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c7_create_bouncing_ball_on_click.html"><span class="toc-text">How to Create Bouncing Ball on MouseClick？鼠标点击创建弹跳小球</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c8_subdivide_plane.html"><span class="toc-text">Subdivide Plane 选中网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c9_model_material.html"><span class="toc-text">How To Find The Materials Of A Loaded Model? 如何修改导入模型的材质</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c10_cloning_models.html"><span class="toc-text">Cloning And Animating Models Loaded From glTF Files. 克隆动画GLTF模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c11_realistic_scenes.html"><span class="toc-text">Realistic Scenes 真实场景</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c12_import_sketchfab_model.html"><span class="toc-text">如何导入从Sketchfab上下载的模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c13_loading_screen.html"><span class="toc-text">如何显示资源加载进度</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/threejs/c14_camera_move.html"><span class="toc-text">如何使用gsap控制相机运动</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GSAP"><span class="toc-text">GSAP</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FirstPersonControls-%E7%AC%AC%E4%B8%80%E4%BA%BA%E7%A7%B0%E7%9B%B8%E6%9C%BA%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-text">FirstPersonControls 第一人称相机控制器</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c16_yuka.html"><span class="toc-text">使用yuka控制物体运动</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c17_%E4%BD%BF%E7%94%A8yuka%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BD%93%E8%BF%90%E5%8A%A82.html"><span class="toc-text">使用yuka控制实体运动（二）</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c18_orbit_controls.html"><span class="toc-text">Controls 控制器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c19_glass_material.html"><span class="toc-text">玻璃材质</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c20_effect_composer.html"><span class="toc-text">RenderPass && EffectComposer 渲染通道和特效组合</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c21_lock_constraint.html"><span class="toc-text">CANNON-Constraint 约束力</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c22_css_renderer.html"><span class="toc-text">CSS2DRenderer</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c23_instanced_mesh.html"><span class="toc-text">Instenced Mesh 实例化网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c25_object_occlusion.html"><span class="toc-text">colorWrite && renderOrder</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c26_LOD.html"><span class="toc-text">LOD</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c27_Gimbal_Lock.html"><span class="toc-text">Gimbal Lock</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c28_Layer.html"><span class="toc-text">Layer 图层</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/threejs/index.html">ThreeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-01-04T12:20:24.372Z">2024-01-04</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>如何使用gsap控制相机运动</span></h1>
+  <div class="tag-plugin link dis-select"><a class="link-card plain" title="原项目视频" href="https://www.youtube.com/watch?v=O2ouLOL6C4c" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">原项目视频</span><span class="cap link fs12">https://www.youtube.com/watch?v=O2ouLOL6C4c</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<h1 id="GSAP"><a href="#GSAP" class="headerlink" title="GSAP"></a>GSAP</h1><div class="tag-plugin note" ><div class="body"><div class="tag-plugin link dis-select"><a class="link-card plain" title="" href="https://gsap.com/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="title,icon"><div class="left"><span class="title">https://gsap.com/</span><span class="cap link fs12">https://gsap.com/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div><p>动画就是物体随着时间的变化运动轨迹的变化，<br>相当于一系列点位，<br>GSAP就是能计算出运动点位的动画库，<br>使用GSAP对THREE的基本元素进行动画控制非常简单，<br>只需要指定需要变化的属性、属性目标值、持续时间等等基本参数即可,<br>gsap中的timeline类型链式添加动画更加方便</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> tl = gsap.<span class="title function_">timeline</span>()</span><br><span class="line"><span class="keyword">const</span> duration = <span class="number">6</span></span><br><span class="line"><span class="keyword">const</span> ease = <span class="string">&#x27;ease&#x27;</span></span><br><span class="line">    tl.<span class="title function_">to</span>(camera.<span class="property">position</span>,&#123;</span><br><span class="line">        <span class="attr">x</span>:<span class="number">0</span>,</span><br><span class="line">        <span class="attr">y</span>:<span class="number">0</span>,</span><br><span class="line">        <span class="attr">z</span>:<span class="number">19.5</span>,</span><br><span class="line">        duration,</span><br><span class="line">        ease,</span><br><span class="line">        <span class="attr">onUpdate</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            camera.<span class="title function_">lookAt</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).<span class="title function_">to</span>(camera.<span class="property">position</span>,&#123;</span><br><span class="line">        <span class="attr">x</span>:-<span class="number">15</span>,</span><br><span class="line">        <span class="attr">y</span>:<span class="number">24</span>,</span><br><span class="line">        <span class="attr">z</span>:<span class="number">0</span>,</span><br><span class="line">        duration,</span><br><span class="line">        ease,</span><br><span class="line">        <span class="attr">onUpdate</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            camera.<span class="title function_">lookAt</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;).<span class="title function_">to</span>(camera.<span class="property">position</span>,&#123;</span><br><span class="line">        <span class="attr">x</span>:<span class="number">6</span>,</span><br><span class="line">        <span class="attr">y</span>:-<span class="number">10</span>,</span><br><span class="line">        <span class="attr">z</span>:<span class="number">0</span>,</span><br><span class="line">        duration,</span><br><span class="line">        ease,</span><br><span class="line">        <span class="attr">onUpdate</span>:<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">            camera.<span class="title function_">lookAt</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,<span class="string">&#x27;&gt;-2&#x27;</span>)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/cameraMove.gif" fancybox="true"/></div></div>
+
+<h1 id="FirstPersonControls-第一人称相机控制器"><a href="#FirstPersonControls-第一人称相机控制器" class="headerlink" title="FirstPersonControls 第一人称相机控制器"></a>FirstPersonControls 第一人称相机控制器</h1><div class="tag-plugin ghcard"><a class="ghcard" rel="external nofollow noopener noreferrer noopener" target="_blank" href="https://github.com/WaelYasmina/kingshall"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-readme-stats.xaoxuu.com/api/pin/?username=WaelYasmina&repo=kingshall&theme=dark&show_owner=true"/></a></div>
+
+<div class="tag-plugin note" ><div class="body"><p>gsap可以控制相机做各种视角运动（运镜），<br>但是要想得到不错的效果，需要抓住相机拍摄的关键角度和坐标，<br>这些关键点的参数如何获取？<br>可以使用<strong>FirstPersonControls</strong>，第一人称相机控制器，<br>模拟相机运动，相当于踩点，<br>记录下几个关键的点位。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">FirstPersonControls</span>&#125; <span class="keyword">from</span> <span class="string">&quot;three/examples/jsm/controls/FirstPersonControls.js&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> controls = <span class="keyword">new</span> <span class="title class_">FirstPersonControls</span>(camera, renderer.<span class="property">domElement</span>)</span><br><span class="line">controls.<span class="property">movementSpeed</span> = <span class="number">8</span></span><br><span class="line">controls.<span class="property">lookSpeed</span> = <span class="number">0.08</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onmouseup</span> = <span class="function"><span class="params">e</span> =&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// 参数打印</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(camera.<span class="property">position</span>, camera.<span class="property">rotation</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> clock = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Clock</span>()</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>) &#123;</span><br><span class="line">    controls.<span class="title function_">update</span>(clock.<span class="title function_">getDelta</span>())</span><br><span class="line">    renderer.<span class="title function_">render</span>(scene, camera);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>然后使用gsap在这些点位之间做连贯运动：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> progress = <span class="number">0</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onmousedown</span> = <span class="function"><span class="params">e</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="keyword">switch</span> (progress%<span class="number">9</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:<span class="number">1.64</span>, y :<span class="number">0.79</span>, <span class="attr">z</span>:-<span class="number">0.16</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">0.83</span>, y :-<span class="number">1.17</span>, <span class="attr">z</span>:<span class="number">0.79</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:<span class="number">1.35</span>, y :<span class="number">0.83</span>, <span class="attr">z</span>:-<span class="number">5.6</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">0.43</span>, y :<span class="number">0.13</span>, <span class="attr">z</span>:-<span class="number">0.06</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:<span class="number">3.04</span>, y :-<span class="number">0.17</span>, <span class="attr">z</span>:-<span class="number">6.33</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">3</span>, y :-<span class="number">0.9</span>, <span class="attr">z</span>:<span class="number">3.03</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">4</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:<span class="number">2.13</span>, y :<span class="number">0.89</span>, <span class="attr">z</span>:<span class="number">2.04</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">2.85</span>, y :-<span class="number">0.99</span>, <span class="attr">z</span>:<span class="number">2.89</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">5</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:-<span class="number">0.42</span>, y :-<span class="number">0.13</span>, <span class="attr">z</span>:<span class="number">2.11</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">2.88</span>, y :-<span class="number">0.09</span>, <span class="attr">z</span>:<span class="number">3.11</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">6</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:-<span class="number">1.04</span>, y :<span class="number">0.36</span>, <span class="attr">z</span>:<span class="number">0.18</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">2.41</span>, y :<span class="number">1.4</span>, <span class="attr">z</span>:-<span class="number">2.42</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">7</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:-<span class="number">0.84</span>, y :<span class="number">0.58</span>, <span class="attr">z</span>:-<span class="number">4.4</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">0.11</span>, y :<span class="number">0.83</span>, <span class="attr">z</span>:-<span class="number">0.08</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">8</span>:</span><br><span class="line">            <span class="title function_">cameraMovement</span>(&#123;<span class="attr">x</span>:-<span class="number">0.38</span>, y :<span class="number">0.03</span>, <span class="attr">z</span>:-<span class="number">1.57</span>&#125;)</span><br><span class="line">            <span class="title function_">cameraRotation</span>(&#123;<span class="attr">x</span>:<span class="number">1.57</span>, y :<span class="number">0.08</span>, <span class="attr">z</span>:-<span class="number">1.62</span>&#125;)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    progress++</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/gsap.gif" fancybox="true"/></div></div>
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/threejs/c13_loading_screen.html">如何显示资源加载进度</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/threejs/c16_yuka.html">使用yuka控制物体运动</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
