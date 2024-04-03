@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>WebGL：可视范围 - E-Duck</title>
+
+  
+    <meta name="description" content="可视范围（visible range）在 LookAtTrianglesWithKeys 程序中，三角形的一角被残忍地咬掉了。三角形界的灵异照片这是因为没有设置 可视范围，WebGL只显示可视范围内的区域。  可视范围（正射类型）不绘制可视范围外的对象，是基本的降低程序开销的手段。  为什么要设置可视范围？因为大型网游earth Online最初就是这么设计的（大雾）！earth Online设计">
+<meta property="og:type" content="website">
+<meta property="og:title" content="可视范围">
+<meta property="og:url" content="http://eletricduck.com/wiki/webgl/chapter_19.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="可视范围（visible range）在 LookAtTrianglesWithKeys 程序中，三角形的一角被残忍地咬掉了。三角形界的灵异照片这是因为没有设置 可视范围，WebGL只显示可视范围内的区域。  可视范围（正射类型）不绘制可视范围外的对象，是基本的降低程序开销的手段。  为什么要设置可视范围？因为大型网游earth Online最初就是这么设计的（大雾）！earth Online设计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/%E7%BC%BA%E4%BA%86%E4%B8%80%E8%A7%92%E7%9A%84%E4%B8%89%E8%A7%92%E5%BD%A2.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/%E4%BA%BA%E7%B1%BB%E5%8F%AF%E8%A7%86%E8%8C%83%E5%9B%B4.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/%E7%9B%92%E7%8A%B6%E5%8F%AF%E8%A7%86%E7%A9%BA%E9%97%B4.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/setOrtho.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/OrthoView%E7%9B%92%E7%8A%B6%E5%8F%AF%E8%A7%86%E7%A9%BA%E9%97%B4.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/OrthoView.gif">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/OrthoView2.gif">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/Ortho_1.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/Ortho_2.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/Ortho_3.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/%E7%BC%BA%E4%BA%86%E4%B8%80%E8%A7%92%E7%9A%84%E4%B8%89%E8%A7%92%E5%BD%A2.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/LookAtTrianglesWithKeys_ViewVolume.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/Ortho_4.png">
+<meta property="og:image" content="http://eletricduck.com/assets/image/WebGL/Ortho_5.png">
+<meta property="article:published_time" content="2023-12-13T09:48:44.921Z">
+<meta property="article:modified_time" content="2023-12-13T09:48:44.921Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/assets/image/WebGL/%E7%BC%BA%E4%BA%86%E4%B8%80%E8%A7%92%E7%9A%84%E4%B8%89%E8%A7%92%E5%BD%A2.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/webgl/index.html"><div class="main" ff="title">WebGL</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">第1章 WebGL概述</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/index.html#start"><span class="toc-text">WebGL概述</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第2章 WebGL入门</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_2.html"><span class="toc-text">WebGL入门</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_3.html"><span class="toc-text">绘制一个点</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_4.html"><span class="toc-text">鼠标绘点</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_5.html"><span class="toc-text">改变点的颜色</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第3章 绘制和变换三角形</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_6.html"><span class="toc-text">绘制多个点</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_7.html"><span class="toc-text">绘制多边形</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_8.html"><span class="toc-text">移动、旋转</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_9.html"><span class="toc-text">变换矩阵</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第4章 高级变换与动画基础</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_10.html"><span class="toc-text">复合变换</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_11.html"><span class="toc-text">动画</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第5章 颜色与纹理</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_12.html"><span class="toc-text">颜色与纹理</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_13.html"><span class="toc-text">逐片元操作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_14.html"><span class="toc-text">纹理</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第6章 GLSL ES</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_15.html"><span class="toc-text">GLSL ES语法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_16.html"><span class="toc-text">程序流程控制</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_17.html"><span class="toc-text">特殊声明</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第7章 进入三维世界</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_18.html"><span class="toc-text">进入三维世界</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/webgl/chapter_19.html"><span class="toc-text">可视范围</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E8%8C%83%E5%9B%B4%EF%BC%88%E6%AD%A3%E5%B0%84%E7%B1%BB%E5%9E%8B%EF%BC%89"><span class="toc-text">可视范围（正射类型）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OrthoView"><span class="toc-text">OrthoView</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A1%A5%E4%B8%8A%E4%B8%89%E8%A7%92%E5%BD%A2%E7%BC%BA%E6%8E%89%E7%9A%84%E8%A7%92"><span class="toc-text">补上三角形缺掉的角</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E7%A9%BA%E9%97%B4%E4%B8%8Ecanvas%E7%9A%84%E6%AF%94%E4%BE%8B%E5%86%B2%E7%AA%81"><span class="toc-text">可视空间与canvas的比例冲突</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_20.html"><span class="toc-text">可视空间（透视投影）</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_21.html"><span class="toc-text">深度</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_22.html"><span class="toc-text">立方体</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第8章 光照</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_23.html"><span class="toc-text">光照原理</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_24.html"><span class="toc-text">光照实现</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第9章 层次模型</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_25.html"><span class="toc-text">层次模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_26.html"><span class="toc-text">initShaders函数</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第10章 高级技术</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_27.html"><span class="toc-text">鼠标交互</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_28.html"><span class="toc-text">HUD</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_29.html"><span class="toc-text">雾化/圆点</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_30.html"><span class="toc-text">α混合</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_31.html"><span class="toc-text">切换着色器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_32.html"><span class="toc-text">实时渲染</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_33.html"><span class="toc-text">阴影</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_34.html"><span class="toc-text">三维模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_35.html"><span class="toc-text">响应上下文丢失</span></a></div></div><div class="widget-header cap dis-select"><span class="name">附录</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_36.html"><span class="toc-text">附录A：WebGL中无需交换缓冲区</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_37.html"><span class="toc-text">附录B：GLES ES 1.0内置函数</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_38.html"><span class="toc-text">附录C：投影矩阵</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_39.html"><span class="toc-text">附录D：左手还是右手坐标系</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_40.html"><span class="toc-text">附录E：逆转置矩阵</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_41.html"><span class="toc-text">附录F：从文件中加载着色器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_42.html"><span class="toc-text">附录G：世界坐标系和本地坐标系</span></a></div></div><div class="widget-header cap dis-select"><span class="name">彩蛋</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/webgl/chapter_43_%E5%BD%A9%E8%9B%8B1.html"><span class="toc-text">粒子效果</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/webgl/index.html">WebGL</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-13T09:48:44.921Z">2023-12-13</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>可视范围</span></h1>
+  <div class="tag-plugin note" color="yellow"><div class="title"><strong>可视范围（visible range）</strong></div><div class="body"><p>在 <strong>LookAtTrianglesWithKeys</strong> 程序中，三角形的一角被残忍地咬掉了。</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/缺了一角的三角形.png" alt="三角形界的灵异照片" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">三角形界的灵异照片</span></div></div><p>这是因为没有设置 <strong>可视范围</strong>，<br>WebGL只显示可视范围内的区域。</p></div></div>
+
+<h1 id="可视范围（正射类型）"><a href="#可视范围（正射类型）" class="headerlink" title="可视范围（正射类型）"></a>可视范围（正射类型）</h1><div class="tag-plugin note" color="blue"><div class="body"><p>不绘制可视范围外的对象，是基本的降低程序开销的手段。</p></div></div>
+
+<details class="tag-plugin folding" color="purple"><summary><span>为什么要设置可视范围？</span></summary><div class="body"><p><del>因为大型网游earth Online最初就是这么设计的（大雾）！</del><br><del>earth Online设计者考虑到这一点，给了你视线范围，要不让你随便朝天上扫一眼，就能看到月球上跳舞的小人吗？</del></p><div class="tag-plugin note" color="blue"><div class="title"><strong>心外无物，心外无事，心外无理</strong></div><div class="body"><p>虽然earth Online中的哲学分支可谓复杂纷纭，<br>但是要理解WebGL世界中的可视距离机制，<strong>主观唯心主义</strong>观点可能会对你有所启发：</p><blockquote><p>存在即被感知 ——【英】贝克莱</p></blockquote></div></div><p>人类本身也只能看到眼前的东西，水平视角大约200度左右。</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/人类可视范围.png" fancybox="true"/></div></div></div></details>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>可视空间（view volume）</strong></div><div class="body"><p>有两类常用的可视空间：</p><div class="tag-plugin split" bg="card"><div class="cell" index="0"><div class="tag-plugin note" color="blue"><div class="title"><strong>正射投影</strong></div><div class="body"><p>orthographic projection  </p><ul><li>长方形可视（盒状）空间</li><li>物体看上去大小与其所在位置没有关系</li><li>可以方便地比较场景中物体大小</li><li>常用于平面绘图等技术</li></ul></div></div></div><div class="cell" index="1"><div class="tag-plugin note" color="blue"><div class="title"><strong>透视投影</strong></div><div class="body"><p>perspective projection</p><ul><li>四棱锥（金字塔）可视空间</li><li>使三维场景看上去更有深度感，更自然</li><li>真实世界也是透视投影</li></ul></div></div></div></div></div></div>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>盒状可视空间</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/盒状可视空间.png" fancybox="true"/></div></div><p><strong>近裁剪面</strong> 与 <strong>远裁剪面</strong> 之间的空间就是 <strong>盒状可视空间</strong>。<br>只有在此空间内的物体会被显示出来。  </p><details class="tag-plugin folding" color="purple"><summary><span>如果裁剪面和canvas画布的宽高比不同会怎么样？</span></summary><div class="body"><p><strong>答：</strong> 会按照canvas的宽高对画面进行压缩，物体会被扭曲。  </p></div></details></div></div>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>定义盒状可视空间 Matrix4.setOrtho()</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/setOrtho.png" fancybox="true"/></div></div><p>设置投影的矩阵被称为 <strong>正射投影矩阵（orthographic projection matrix）</strong>。</p></div></div>
+
+<h1 id="OrthoView"><a href="#OrthoView" class="headerlink" title="OrthoView"></a>OrthoView</h1><div class="tag-plugin note" color="blue"><div class="body"><p>该案例支持键盘控制可视空间深度大小。</p></div></div>
+
+<div class="tag-plugin note" color="yellow" child="tabs"><div class="title"><strong>OrthoView Code</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/OrthoView盒状可视空间.png" fancybox="true"/></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/OrthoView.gif" alt="偏转视点观察OrthoView运行效果" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">偏转视点观察OrthoView运行效果</span></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/OrthoView2.gif" alt="观察三角形消失顺序与盒空间厚度的关系" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">观察三角形消失顺序与盒空间厚度的关系</span></div></div><div class="tag-plugin tabs"id="tab_57""><ul class="nav-tabs"><li class="tab active"><a href="#tab_57-1">OrthoView.html</a></li><li class="tab"><a href="#tab_57-2">OrthoView.js</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_57-1"><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;X-UA-Compatible&quot;</span> <span class="attr">content</span>=<span class="string">&quot;IE=edge&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../examples/lib/cuon-matrix.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../examples/lib/cuon-utils.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../examples/lib/webgl-debug.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../examples/lib/webgl-utils.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;./OrthoView.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onload</span>=<span class="string">&quot;main()&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;webgl&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;400&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">id</span>=<span class="string">&quot;nearFar&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_57-2"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable constant_">VSHADER_SOURCE</span> = <span class="string">`</span></span><br><span class="line"><span class="string">  attribute vec4 a_Position;</span></span><br><span class="line"><span class="string">  attribute vec4 a_Color;</span></span><br><span class="line"><span class="string">  uniform mat4 u_ProjMatrix;</span></span><br><span class="line"><span class="string">  varying vec4 v_Color;</span></span><br><span class="line"><span class="string">  void main()&#123;</span></span><br><span class="line"><span class="string">    gl_Position = u_ProjMatrix * a_Position;</span></span><br><span class="line"><span class="string">    v_Color = a_Color;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="variable constant_">FSHADER_SOURCE</span> = <span class="string">`</span></span><br><span class="line"><span class="string">  #ifdef GL_ES</span></span><br><span class="line"><span class="string">    precision mediump float;</span></span><br><span class="line"><span class="string">  #endif</span></span><br><span class="line"><span class="string">  varying vec4 v_Color;</span></span><br><span class="line"><span class="string">  void main()&#123;</span></span><br><span class="line"><span class="string">    gl_FragColor = v_Color;</span></span><br><span class="line"><span class="string">  &#125;</span></span><br><span class="line"><span class="string">`</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">main</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> canvas = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;webgl&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> nf = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;nearFar&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> gl = <span class="title function_">getWebGLContext</span>(canvas);</span><br><span class="line">  <span class="keyword">if</span> (!gl) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;failed to get context&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="title function_">initShaders</span>(gl, <span class="variable constant_">VSHADER_SOURCE</span>, <span class="variable constant_">FSHADER_SOURCE</span>)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;failed to init shaders&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">let</span> n = <span class="title function_">initVertexBuffers</span>(gl);</span><br><span class="line">  <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;failed to init vertex buffers&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  gl.<span class="title function_">clearColor</span>(<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> u_ProjMatrix = gl.<span class="title function_">getUniformLocation</span>(gl.<span class="property">program</span>, <span class="string">&#x27;u_ProjMatrix&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> projMatrix = <span class="keyword">new</span> <span class="title class_">Matrix4</span>();</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">onkeydown</span> = <span class="keyword">function</span> (<span class="params">ev</span>) &#123;</span><br><span class="line">    <span class="title function_">keydown</span>(ev, gl, n, u_ProjMatrix, projMatrix, nf);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">draw</span>(gl, n, u_ProjMatrix, projMatrix, nf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> g_nf = [<span class="number">0.0</span>, <span class="number">0.5</span>];</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">keydown</span>(<span class="params">ev,gl,n,u_ProjMatrix,projMatrix,nf</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (ev.<span class="property">keyCode</span>) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="number">39</span>: g_nf[<span class="number">0</span>] += <span class="number">0.01</span>; <span class="keyword">break</span>;<span class="comment">//右键</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">37</span>: g_nf[<span class="number">0</span>] -= <span class="number">0.01</span>; <span class="keyword">break</span>;<span class="comment">//左键</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">38</span>: g_nf[<span class="number">1</span>] += <span class="number">0.01</span>; <span class="keyword">break</span>;<span class="comment">//上键</span></span><br><span class="line">    <span class="keyword">case</span> <span class="number">40</span>: g_nf[<span class="number">1</span>] -= <span class="number">0.01</span>; <span class="keyword">break</span>;<span class="comment">//下键</span></span><br><span class="line">    <span class="attr">default</span>: <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">draw</span>(gl, n, u_ProjMatrix, projMatrix, nf);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">draw</span>(<span class="params">gl,n,u_ProjMatrix,projMatrix,nf</span>) &#123;</span><br><span class="line">  projMatrix.<span class="title function_">setOrtho</span>(-<span class="number">1</span>, <span class="number">1</span>, -<span class="number">1</span>, <span class="number">1</span>, g_nf[<span class="number">0</span>], g_nf[<span class="number">1</span>]);</span><br><span class="line">  gl.<span class="title function_">uniformMatrix4fv</span>(u_ProjMatrix, <span class="literal">false</span>, projMatrix.<span class="property">elements</span>);</span><br><span class="line">  gl.<span class="title function_">clear</span>(gl.<span class="property">COLOR_BUFFER_BIT</span>);</span><br><span class="line">  <span class="comment">// nf.innerHTML = &#x27;near:&#x27; + Math.round(g_nf[0] * 100) / 100 +</span></span><br><span class="line">  <span class="comment">//   &#x27;,far:&#x27; + Math.round(g_nf[1] * 100) / 100;</span></span><br><span class="line">  nf.<span class="property">innerHTML</span> = <span class="string">&#x27;near:&#x27;</span> + g_nf[<span class="number">0</span>].<span class="title function_">toFixed</span>(<span class="number">2</span>) + <span class="string">&#x27;,far:&#x27;</span> + g_nf[<span class="number">1</span>].<span class="title function_">toFixed</span>(<span class="number">2</span>);</span><br><span class="line">  gl.<span class="title function_">drawArrays</span>(gl.<span class="property">TRIANGLES</span>, <span class="number">0</span>, n);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">initVertexBuffers</span>(<span class="params">gl</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> verticesColor = <span class="keyword">new</span> <span class="title class_">Float32Array</span>([</span><br><span class="line">    <span class="comment">// 红色三角形</span></span><br><span class="line">    <span class="number">0.0</span>, <span class="number">0.5</span>, -<span class="number">0.4</span>, <span class="number">1.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>,</span><br><span class="line">    -<span class="number">0.5</span>, -<span class="number">0.5</span>, -<span class="number">0.4</span>, <span class="number">1.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>,</span><br><span class="line">    <span class="number">0.5</span>, -<span class="number">0.5</span>, -<span class="number">0.4</span>, <span class="number">0.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>,</span><br><span class="line">    <span class="comment">// 绿色三角形</span></span><br><span class="line">    -<span class="number">0.4</span>, <span class="number">0.4</span>, -<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">1.0</span>, <span class="number">0.4</span>,</span><br><span class="line">    <span class="number">0.4</span>, <span class="number">0.4</span>, -<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">1.0</span>, <span class="number">0.4</span>,</span><br><span class="line">    <span class="number">0.0</span>, -<span class="number">0.6</span>, -<span class="number">0.2</span>, <span class="number">0.4</span>, <span class="number">0.0</span>, <span class="number">0.4</span>,</span><br><span class="line">    <span class="comment">// 蓝色三角形</span></span><br><span class="line">    <span class="number">0.0</span>, <span class="number">0.5</span>, <span class="number">0.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">1.0</span>,</span><br><span class="line">    -<span class="number">0.5</span>, -<span class="number">0.5</span>, -<span class="number">0.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">1.0</span>,</span><br><span class="line">    <span class="number">0.5</span>, -<span class="number">0.5</span>, -<span class="number">0.0</span>, <span class="number">0.4</span>, <span class="number">0.4</span>, <span class="number">0.0</span></span><br><span class="line">  ]);</span><br><span class="line">  <span class="keyword">let</span> n = <span class="number">9</span>;</span><br><span class="line">  <span class="keyword">let</span> <span class="variable constant_">FSIZE</span> = verticesColor.<span class="property">BYTES_PER_ELEMENT</span>;</span><br><span class="line">  <span class="keyword">let</span> a_Position = gl.<span class="title function_">getAttribLocation</span>(gl.<span class="property">program</span>, <span class="string">&#x27;a_Position&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> a_Color = gl.<span class="title function_">getAttribLocation</span>(gl.<span class="property">program</span>, <span class="string">&#x27;a_Color&#x27;</span>);</span><br><span class="line">  <span class="keyword">let</span> vertexColorBuffer = gl.<span class="title function_">createBuffer</span>();</span><br><span class="line">  gl.<span class="title function_">bindBuffer</span>(gl.<span class="property">ARRAY_BUFFER</span>, vertexColorBuffer);</span><br><span class="line">  gl.<span class="title function_">bufferData</span>(gl.<span class="property">ARRAY_BUFFER</span>, verticesColor, gl.<span class="property">STATIC_DRAW</span>);</span><br><span class="line">  gl.<span class="title function_">vertexAttribPointer</span>(a_Position, <span class="number">3</span>, gl.<span class="property">FLOAT</span>, <span class="literal">false</span>, <span class="number">6</span> * <span class="variable constant_">FSIZE</span>, <span class="number">0</span>);</span><br><span class="line">  gl.<span class="title function_">enableVertexAttribArray</span>(a_Position);</span><br><span class="line">  gl.<span class="title function_">vertexAttribPointer</span>(a_Color, <span class="number">3</span>, gl.<span class="property">FLOAT</span>, <span class="literal">false</span>, <span class="number">6</span> * <span class="variable constant_">FSIZE</span>, <span class="number">3</span>*<span class="variable constant_">FSIZE</span>);</span><br><span class="line">  gl.<span class="title function_">enableVertexAttribArray</span>(a_Color);</span><br><span class="line">  <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>near、far与三角形消失的关系</strong></div><div class="body"><details class="tag-plugin folding" color="purple"><summary><span>Js中对固定位小数特殊的处理方式</span></summary><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法1:Math.round</span></span><br><span class="line"><span class="keyword">let</span> digit = <span class="title class_">Math</span>.<span class="title function_">pow</span>( <span class="number">100</span>, <span class="number">2</span>);</span><br><span class="line"><span class="keyword">let</span> result = <span class="title class_">Math</span>.<span class="title function_">round</span>(num * digit)/digit;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 方法2 toFix</span></span><br><span class="line"><span class="keyword">let</span> digit = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">let</span> result = num.<span class="title function_">toFixed</span>(digit);</span><br></pre></td></tr></table></figure></div></details><div class="tag-plugin note" color="blue" child="codeblock"><div class="body"><table><thead><tr><th align="center">Shape</th><th align="center">Z Vaule</th><th align="center">Show Condition</th></tr></thead><tbody><tr><td align="center"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/Ortho_1.png" fancybox="true"/></div></div></td><td align="center">0.0</td><td align="center">near&lt;&#x3D;0.00 &amp;&amp; far&gt;&#x3D;0.00</td></tr><tr><td align="center"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/Ortho_2.png" fancybox="true"/></div></div></td><td align="center">-0.2</td><td align="center">near&lt;&#x3D;0.20 &amp;&amp; far&gt;&#x3D;0.20</td></tr><tr><td align="center"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/Ortho_3.png" fancybox="true"/></div></div></td><td align="center">-0.4</td><td align="center">near&lt;&#x3D;0.40 &amp;&amp; far&gt;&#x3D;0.40</td></tr></tbody></table></div></div></div></div>
+
+<h1 id="补上三角形缺掉的角"><a href="#补上三角形缺掉的角" class="headerlink" title="补上三角形缺掉的角"></a>补上三角形缺掉的角</h1><div class="tag-plugin note" color="blue"><div class="body"><p>简述：即推远远裁剪面，本例主要介绍视图矩阵与正射投影矩阵的混合使用</p></div></div>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>正射矩阵和视图投影矩阵的使用顺序</strong></div><div class="body"><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gl_Position = ProjMatrix * ViewMatrix * a_Position;</span><br></pre></td></tr></table></figure><ol><li>得到顶点在视图坐标系下的坐标</li><li>使用正射投影矩阵计算可视范围</li></ol></div></div>
+
+<div class="tag-plugin note" color="yellow"><div class="title"><strong>LookAtTrianglesWithKeys_ViewVolume</strong></div><div class="body"><div class="tag-plugin split" bg="card"><div class="cell" index="0"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/缺了一角的三角形.png" alt="三角形整形前" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">三角形整形前</span></div></div></div><div class="cell" index="1"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/LookAtTrianglesWithKeys_ViewVolume.png" alt="三角形整型后" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">三角形整型后</span></div></div></div></div></div></div>
+
+<h1 id="可视空间与canvas的比例冲突"><a href="#可视空间与canvas的比例冲突" class="headerlink" title="可视空间与canvas的比例冲突"></a>可视空间与canvas的比例冲突</h1><div class="tag-plugin note" color="blue"><div class="title"><strong>比例冲突会导致压缩变形</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>画布大小不变，可视空间横截面缩减一半</strong></div><div class="body"><p><strong>运行效果：</strong> 图形变为原来大小的两倍，超出可视空间部分被裁剪。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">projMatrix.<span class="title function_">setOrtho</span>(-<span class="number">0.5</span>,<span class="number">0.5</span>,-<span class="number">0.5</span>,<span class="number">0.5</span>,<span class="number">0.0</span>,<span class="number">1.0</span>)</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/Ortho_4.png" fancybox="true"/></div></div></div></div><div class="tag-plugin note" color="yellow"><div class="title"><strong>画布大小不变，可视空间比例改变</strong></div><div class="body"><p><strong>运行效果：</strong> 图形在宽度上被拉伸导致变形，超出可视空间部分被裁剪。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">projMatrix.<span class="title function_">setOrtho</span>(-<span class="number">0.3</span>,<span class="number">0.3</span>,-<span class="number">1.0</span>,<span class="number">1.0</span>,<span class="number">0.0</span>,<span class="number">1.0</span>)</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="../../assets/image/WebGL/Ortho_5.png" fancybox="true"/></div></div></div></div></div></div>
+
+
+
+
+
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/webgl/chapter_18.html">进入三维世界</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/webgl/chapter_20.html">可视空间（透视投影）</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

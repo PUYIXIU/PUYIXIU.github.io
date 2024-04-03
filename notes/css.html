@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Notes：css/sass/scss - E-Duck</title>
+
+  
+    <meta name="description" content="Css光标 caretcaret-color 光标颜色caret-color可以用来修改光标颜色1caret-color: red;  背景backdrop-filter 毛玻璃效果参考博客： CSS简易毛玻璃效果backdrop-filter用于给背景添加滤镜效果1backdrop-filter: blur(5px);            TEXT       文字文字末端添加省略号参考：CS">
+<meta property="og:type" content="website">
+<meta property="og:title" content="css&#x2F;sass&#x2F;scss">
+<meta property="og:url" content="http://eletricduck.com/notes/css.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="Css光标 caretcaret-color 光标颜色caret-color可以用来修改光标颜色1caret-color: red;  背景backdrop-filter 毛玻璃效果参考博客： CSS简易毛玻璃效果backdrop-filter用于给背景添加滤镜效果1backdrop-filter: blur(5px);            TEXT       文字文字末端添加省略号参考：CS">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-25T09:45:47.559Z">
+<meta property="article:modified_time" content="2024-03-25T09:45:47.559Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item active" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">css/sass/scss</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/notes/tools.html#start"><span class="toc-text">Tools</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/index.html"><span class="toc-text">Vue</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Browser.html"><span class="toc-text">浏览器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Vite.html"><span class="toc-text">Vite</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/echarts.html"><span class="toc-text">Echarts</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/dependency.html"><span class="toc-text">npm依赖</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/web_network.html"><span class="toc-text">Web网络</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/VSCode.html"><span class="toc-text">VSCode</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Flask.html"><span class="toc-text">Flask</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/threejs.html"><span class="toc-text">ThreeJs</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Html.html"><span class="toc-text">html</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/node.html"><span class="toc-text">Node</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/app.html"><span class="toc-text">小程序开发</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/github.html"><span class="toc-text">Github</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/notes/css.html"><span class="toc-text">css/sass/scss</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Css"><span class="toc-text">Css</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E6%A0%87-caret"><span class="toc-text">光标 caret</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E5%AD%97"><span class="toc-text">文字</span></a></li></ol></li></ol></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/notes/">笔记</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/notes/tools.html">Notes</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-03-25T09:45:47.559Z">2024-03-25</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>css/sass/scss</span></h1>
+  <h1 id="Css"><a href="#Css" class="headerlink" title="Css"></a>Css</h1><h2 id="光标-caret"><a href="#光标-caret" class="headerlink" title="光标 caret"></a>光标 caret</h2><div class="tag-plugin note" ><div class="title"><strong>caret-color 光标颜色</strong></div><div class="body"><p>caret-color可以用来修改光标颜色</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">caret-color</span>: red;</span><br></pre></td></tr></table></figure><p><input value="try input something" style="    caret-color:red;    color:#00ffff;    border:1px solid yellow;    padding:10px;"/></p></div></div>
+
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><div class="tag-plugin note" ><div class="title"><strong>backdrop-filter 毛玻璃效果</strong></div><div class="body"><p>参考博客： <a target="_blank" rel="noopener" href="https://juejin.cn/post/6979471820575473671">CSS简易毛玻璃效果</a></p><p>backdrop-filter用于给背景添加滤镜效果</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">backdrop-<span class="attribute">filter</span>: <span class="built_in">blur</span>(<span class="number">5px</span>);</span><br></pre></td></tr></table></figure><div style="    background-image: url(../assets/image/banner/moon.jpg);    background-size: contain;    background-repeat: no-repeat;    background-position: center;    width: 300px;    height: 300px;    display: flex;    justify-content:center;">    <div style="        align-self: center;        width: 240px;        height: 85px;        background: #ffffff01;        color: #ffffff;        font-weight: bold;        font-size: 30px;        display: flex;        place-content: center;        place-items: center;        border-radius: 15px;        backdrop-filter: blur(2px);        border: 3px solid #fff;    ">        TEXT    </div></div> </div></div>
+
+<h2 id="文字"><a href="#文字" class="headerlink" title="文字"></a>文字</h2><div class="tag-plugin note" ><div class="title"><strong>文字末端添加省略号</strong></div><div class="body"><p>参考：<a target="_blank" rel="noopener" href="https://geek-docs.com/css/css-ask-answer/424_css_css_ellipsis_on_second_line.html#:~:text=CSS%20%E5%A4%9A%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9C%81%E7%95%A5%E5%8F%B7%201%201.%20%E5%8D%95%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9C%81%E7%95%A5%E5%8F%B7%20%E9%A6%96%E5%85%88%EF%BC%8C%E6%88%91%E4%BB%AC%E6%9D%A5%E7%9C%8B%E4%B8%80%E4%B8%8B%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CSS%E5%AE%9E%E7%8E%B0%E5%8D%95%E8%A1%8C%E6%96%87%E6%9C%AC%E7%9A%84%E7%9C%81%E7%95%A5%E5%8F%B7%E6%95%88%E6%9E%9C%E3%80%82%20%E5%BD%93%E6%96%87%E6%9C%AC%E8%B6%85%E5%87%BA%E5%AE%B9%E5%99%A8%E5%AE%BD%E5%BA%A6%E6%97%B6%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%20text-overflow,3.%20%E6%96%87%E5%AD%97%E5%9C%A8%E7%AC%AC%E4%BA%8C%E8%A1%8C%E5%87%BA%E7%8E%B0%E7%9C%81%E7%95%A5%E5%8F%B7%20%E6%9C%89%E6%97%B6%E5%80%99%EF%BC%8C%E6%88%91%E4%BB%AC%E9%9C%80%E8%A6%81%E5%9C%A8%E6%96%87%E5%AD%97%E7%9A%84%E7%AC%AC%E4%BA%8C%E8%A1%8C%E5%87%BA%E7%8E%B0%E7%9C%81%E7%95%A5%E5%8F%B7%E3%80%82%20%E8%A6%81%E5%AE%9E%E7%8E%B0%E8%BF%99%E4%B8%AA%E6%95%88%E6%9E%9C%EF%BC%8C%E6%88%91%E4%BB%AC%E5%8F%AF%E4%BB%A5%E5%80%9F%E5%8A%A9%E4%BC%AA%E5%85%83%E7%B4%A0%20%3A%3Abefore%20%E6%9D%A5%E7%94%9F%E6%88%90%E4%B8%80%E4%B8%AA%E7%9C%8B%E4%BC%BC%E6%98%AF%E7%AC%AC%E4%BA%8C%E8%A1%8C%E7%9A%84%E7%A9%BA%E7%99%BD%E5%85%83%E7%B4%A0%EF%BC%8C%E5%B9%B6%E8%AE%BE%E7%BD%AE%E5%AE%BD%E5%BA%A6%E5%92%8C%E9%AB%98%E5%BA%A6%E6%BB%A1%E8%B6%B3%E6%96%87%E6%9C%AC%E7%9A%84%E7%AC%AC%E4%BA%8C%E8%A1%8C%E8%A6%81%E6%B1%82%E3%80%82%20%E5%85%B7%E4%BD%93%E4%BB%A3%E7%A0%81%E5%A6%82%E4%B8%8B%EF%BC%9A">CSS多行文本省略号</a></p><div class="tag-plugin note" color="dark"><div class="title"><strong>单行末端添加省略号</strong></div><div class="body"><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span>&#123;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">200px</span>; <span class="comment">/* 设置宽度 */</span></span><br><span class="line">    <span class="attribute">white-space</span>: nowrap; <span class="comment">/* 禁止换行 */</span></span><br><span class="line">    <span class="attribute">overflow</span>: hidden; <span class="comment">/* 超出隐藏 */</span></span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis; <span class="comment">/* 设置省略号 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div style="    width:200px;    white-space: nowrap;    overflow: hidden;    text-overflow: ellipsis;">    此处文字后添加省略号此处文字后添加省略号此处文字后添加省略号</div></div></div><div class="tag-plugin note" color="dark"><div class="title"><strong>多行末端添加省略号</strong></div><div class="body"><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>: -webkit-box; <span class="comment">/* 设置webkit流体布局 */</span></span><br><span class="line">    -webkit-line-clamp: <span class="number">2</span>; <span class="comment">/* 希望展示的行数 */</span></span><br><span class="line">    -webkit-box-orient: vertical; <span class="comment">/* 垂直排列的效果 */</span></span><br><span class="line">    <span class="attribute">overflow</span>: hidden;</span><br><span class="line">    <span class="attribute">text-overflow</span>: ellipsis; <span class="comment">/* 设置省略号 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div style="    width:200px;    display: -webkit-box;     -webkit-line-clamp: 2;     -webkit-box-orient: vertical;    overflow: hidden;    text-overflow: ellipsis; ">    此处文字后添加省略号此处文字后添加省略号此处文字后添加省略号</div></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/notes/github.html">Github</a></div><div class="item" id="next"></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

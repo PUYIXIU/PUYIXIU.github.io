@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>ThreeJs：Cannon Tutorial 物理引擎 - E-Duck</title>
+
+  
+    <meta name="description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;xZM8UJqN1eY&amp;t&#x3D;907s  cannon.js引入cannon dochttps:&#x2F;&#x2F;schteppe.github.io&#x2F;cannon.js&#x2F;  1npm install cannon-es  模块引入： 1import * as CANNON from &amp;#x27;cannon-es&amp;#x27;  World">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cannon Tutorial 物理引擎">
+<meta property="og:url" content="http://eletricduck.com/wiki/threejs/c5_cannon_tutorial.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="原项目视频https:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;xZM8UJqN1eY&amp;t&#x3D;907s  cannon.js引入cannon dochttps:&#x2F;&#x2F;schteppe.github.io&#x2F;cannon.js&#x2F;  1npm install cannon-es  模块引入： 1import * as CANNON from &amp;#x27;cannon-es&amp;#x27;  World">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/Fall.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/collapse.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/collapse2.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/collapse3.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/contact.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/gltf_cannon_1.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/threejs/img/gltf_cannon_2.gif">
+<meta property="article:published_time" content="2024-02-28T03:43:16.101Z">
+<meta property="article:modified_time" content="2024-02-28T03:43:16.101Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/threejs/img/Fall.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/threejs/index.html"><div class="main" ff="title">ThreeJs</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Chapter One: Creating Your First 3D Scene with Three.js</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/index.html#start"><span class="toc-text">Requirements - 准备工作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/02_creating_first_3D_scene.html"><span class="toc-text">Start - 开始ThreeJs之旅</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/03_Basic_Components.html"><span class="toc-text">Basic Components - ThreeJs的基本元素</span></a></div></div><div class="widget-header cap dis-select"><span class="name">Wael Yasmina - Three.js Tutorials</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c1_threejs_for_beginners.html"><span class="toc-text">Three.js Tutorial for Absolute Beginners</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c2_SolarSystem.html"><span class="toc-text">Solar System 模拟太阳系</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c3_blender_to_three.html"><span class="toc-text">导入模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c4_shader_tutorial.html"><span class="toc-text">Shader Tutorial 着色器</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/threejs/c5_cannon_tutorial.html"><span class="toc-text">Cannon Tutorial 物理引擎</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#cannon-js%E5%BC%95%E5%85%A5"><span class="toc-text">cannon.js引入</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#World%E5%AE%B9%E5%99%A8%E4%B8%8EBody%E5%AE%9E%E4%BD%93"><span class="toc-text">World容器与Body实体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%A9%E4%BD%93%E7%A2%B0%E6%92%9E"><span class="toc-text">物体碰撞</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%9D%90%E8%B4%A8"><span class="toc-text">物理材质</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GLTF%E6%A8%A1%E5%9E%8B%E7%9A%84%E7%A2%B0%E6%92%9E"><span class="toc-text">GLTF模型的碰撞</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c6_mouse_click_create_object.html"><span class="toc-text">How to Create Objects on MouseClick？鼠标点击创建物体</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c7_create_bouncing_ball_on_click.html"><span class="toc-text">How to Create Bouncing Ball on MouseClick？鼠标点击创建弹跳小球</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c8_subdivide_plane.html"><span class="toc-text">Subdivide Plane 选中网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c9_model_material.html"><span class="toc-text">GLTF Material 与 Skeleton</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c10_cloning_models.html"><span class="toc-text">Cloning And Animating Models Loaded From glTF Files. 克隆动画GLTF模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c11_realistic_scenes.html"><span class="toc-text">Realistic Scenes 真实场景</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c12_import_sketchfab_model.html"><span class="toc-text">如何导入从Sketchfab上下载的模型</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c13_loading_screen.html"><span class="toc-text">如何显示资源加载进度</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c14_camera_move.html"><span class="toc-text">如何使用gsap控制相机运动</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c16_yuka.html"><span class="toc-text">使用yuka控制物体运动</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c17_%E4%BD%BF%E7%94%A8yuka%E6%8E%A7%E5%88%B6%E5%AE%9E%E4%BD%93%E8%BF%90%E5%8A%A82.html"><span class="toc-text">使用yuka控制实体运动（二）</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c18_orbit_controls.html"><span class="toc-text">Controls 控制器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c19_glass_material.html"><span class="toc-text">玻璃材质</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c20_effect_composer.html"><span class="toc-text">RenderPass && EffectComposer 渲染通道和特效组合</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c21_lock_constraint.html"><span class="toc-text">CANNON-Constraint 约束力</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c22_css_renderer.html"><span class="toc-text">CSS2DRenderer</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c23_instanced_mesh.html"><span class="toc-text">Instenced Mesh 实例化网格</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c25_object_occlusion.html"><span class="toc-text">colorWrite && renderOrder</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c26_LOD.html"><span class="toc-text">LOD</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c27_Gimbal_Lock.html"><span class="toc-text">Gimbal Lock</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c28_Layer.html"><span class="toc-text">Layer 图层</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c29_map.html"><span class="toc-text">Map 地图</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/threejs/c30_follow_path.html"><span class="toc-text">Object Follow Path 物体跟随路径</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/threejs/index.html">ThreeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-02-28T03:43:16.101Z">2024-02-28</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Cannon Tutorial 物理引擎</span></h1>
+  <div class="tag-plugin link dis-select"><a class="link-card plain" title="原项目视频" href="https://www.youtube.com/watch?v=xZM8UJqN1eY&t=907s" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">原项目视频</span><span class="cap link fs12">https://www.youtube.com/watch?v=xZM8UJqN1eY&t=907s</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<h1 id="cannon-js引入"><a href="#cannon-js引入" class="headerlink" title="cannon.js引入"></a>cannon.js引入</h1><div class="tag-plugin link dis-select"><a class="link-card plain" title="cannon doc" href="https://schteppe.github.io/cannon.js/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">cannon doc</span><span class="cap link fs12">https://schteppe.github.io/cannon.js/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install cannon-es</span><br></pre></td></tr></table></figure>
+
+<p>模块引入：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="variable constant_">CANNON</span> <span class="keyword">from</span> <span class="string">&#x27;cannon-es&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="World容器与Body实体"><a href="#World容器与Body实体" class="headerlink" title="World容器与Body实体"></a>World容器与Body实体</h1><div class="tag-plugin note" ><div class="title"><strong>CANNON.World</strong></div><div class="body"><p>cannon.js必须要创建一个World实例，<br>相当于ThreeJs中必须存在一个Scene实例一样，<br>World实例用于管理所有物体、约束、碰撞等物理元素</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> world = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">World</span>(&#123;</span><br><span class="line">    <span class="comment">// 重力</span></span><br><span class="line">    <span class="attr">gravity</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">0</span>,-<span class="number">9.89</span>,<span class="number">0</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>CANNON.Body</strong></div><div class="body"><p>CANNON.Body表示某个物体所对应的物理属性，<br>CANNON.Body和Three.Mesh组合在一起，构成一个具有物理属性的物体</p><ul><li>CANNON 里 </li><li>Mesh 表</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planeBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">mass</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">shape</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Plane</span>()</span><br><span class="line">&#125;)</span><br><span class="line">world.<span class="title function_">addBody</span>(planeBody)</span><br></pre></td></tr></table></figure><p>将Body添加到world中之后，<br>需要根据body每帧计算的值更新对应mesh的属性值：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> stepTime = <span class="number">1</span>/<span class="number">60</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>)&#123;</span><br><span class="line">    world.<span class="title function_">step</span>(stepTime) <span class="comment">// 推进wolrd</span></span><br><span class="line">    planeMesh.<span class="property">position</span>.<span class="title function_">copy</span>(planeBody.<span class="property">position</span>)</span><br><span class="line">    planeMesh.<span class="property">quaternion</span>.<span class="title function_">copy</span>(planeBody.<span class="property">quaternion</span>)</span><br><span class="line">    renderer.<span class="title function_">render</span>(scene, camera)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>根据这段代码，plane是一个质量为1的无限延长的平面，<br>在向下的重力作用下，plane将会下坠：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Fall.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="物体碰撞"><a href="#物体碰撞" class="headerlink" title="物体碰撞"></a>物体碰撞</h1><div class="tag-plugin note" ><div class="title"><strong>水平平面</strong></div><div class="body"><p>我们将平面水平放置（沿x轴旋转90度），作为静态物体，<br>并且将平面的尺寸设置为30*30：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planeBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Box</span>(<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">15</span>,<span class="number">15</span>,<span class="number">0.5</span>)),</span><br><span class="line">    <span class="attr">type</span>:<span class="variable constant_">CANNON</span>.<span class="property">BODY_TYPES</span>.<span class="property">STATIC</span></span><br><span class="line">&#125;)</span><br><span class="line">groundBody.<span class="property">quaternion</span>.<span class="title function_">setFromEuler</span>(-<span class="title class_">Math</span>.<span class="property">PI</span>/<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="body"><p>创建一个方形物体：<br>（注意创建方形物体时，vec3的属性表示距物体中心点的位置）</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> boxGeo = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">BoxGeometry</span>(<span class="number">3</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> boxMat = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;</span><br><span class="line">    <span class="attr">color</span>:<span class="number">0x00ff00</span>,</span><br><span class="line">    <span class="attr">wireframe</span>:<span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> boxMesh = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(boxGeo, boxMat)</span><br><span class="line">scene.<span class="title function_">add</span>(boxMesh)</span><br><span class="line"><span class="comment">///////////</span></span><br><span class="line"><span class="keyword">const</span> boxBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Box</span>(<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">1.5</span>, <span class="number">1.5</span>, <span class="number">1</span>, <span class="number">5</span>)),</span><br><span class="line">    <span class="attr">mass</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">position</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">1</span>,<span class="number">20</span>,<span class="number">0</span>)</span><br><span class="line">&#125;)</span><br><span class="line">world.<span class="title function_">addBody</span>(boxBody)</span><br><span class="line"><span class="comment">/////////</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    boxMesh.<span class="property">position</span>.<span class="title function_">copy</span>(boxBody.<span class="property">position</span>)</span><br><span class="line">    boxMesh.<span class="property">quaternion</span>.<span class="title function_">copy</span>(boxBody.<span class="property">quaternion</span>)</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>再创建一个球体：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sphereGeo = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">SphereGeometry</span>(<span class="number">3</span>)</span><br><span class="line"><span class="keyword">const</span> sphereMat = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;</span><br><span class="line">    <span class="attr">color</span>: <span class="number">0xff00ff</span>,</span><br><span class="line">    <span class="attr">wireframe</span>:<span class="literal">true</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> sphereMesh = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(sphereGeo, sphereMat)</span><br><span class="line">scene.<span class="title function_">add</span>(sphereMesh)</span><br><span class="line"><span class="comment">////////////</span></span><br><span class="line"><span class="keyword">const</span> sphereBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Sphere</span>(<span class="number">3</span>),</span><br><span class="line">    <span class="attr">mass</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">position</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">0</span>,<span class="number">15</span>,<span class="number">0</span>)</span><br><span class="line">&#125;)</span><br><span class="line">world.<span class="title function_">addBody</span>(sphereBody)</span><br><span class="line"><span class="comment">///////////</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    sphereMesh.<span class="property">position</span>.<span class="title function_">copy</span>(sphereBody.<span class="property">position</span>)</span><br><span class="line">    sphereMesh.<span class="property">quaternion</span>.<span class="title function_">copy</span>(sphereBody.<span class="property">quaternion</span>)</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/collapse.gif" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>运动属性</strong></div><div class="body"><p>线性阻尼值的范围在0-1之间，<br>值越大代表摩擦力越大：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sphereBody.<span class="property">linearDamping</span> = <span class="number">0.3</span></span><br></pre></td></tr></table></figure><p>自旋角速度，自旋阻尼：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">boxBody.<span class="property">angularVelocity</span>.<span class="title function_">set</span>(<span class="number">10</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">boxBody.<span class="property">angularDamping</span> = <span class="number">0.3</span></span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/collapse2.gif" fancybox="true"/></div></div><p>顺便一提，自旋角整得太大，方块会被创飞</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/collapse3.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="物理材质"><a href="#物理材质" class="headerlink" title="物理材质"></a>物理材质</h1><div class="tag-plugin note" ><div class="title"><strong>材质</strong></div><div class="body"><p>不同物理材质的物体接触时也会有不同的运动轨迹，<br>也就是给每种物理材质赋予独有的一组运动属性,<br>下面分别定义了平面、立方体、球体的材质</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planePhysMat = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Material</span>()</span><br><span class="line"><span class="keyword">const</span> boxPhysMat = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Material</span>()</span><br><span class="line"><span class="keyword">const</span> spherePhysMat = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Material</span>()</span><br></pre></td></tr></table></figure><p>将材质和对应的Body联系在一起：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planeBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Box</span>(<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">15</span>,<span class="number">15</span>,<span class="number">0.5</span>)),</span><br><span class="line">    <span class="attr">type</span>: <span class="variable constant_">CANNON</span>.<span class="property">BODY_TYPES</span>.<span class="property">STATIC</span>,</span><br><span class="line">    <span class="attr">material</span>:planePhysMat</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> boxBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Box</span>(<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">1.5</span>, <span class="number">1.5</span>, <span class="number">1</span>, <span class="number">5</span>)),</span><br><span class="line">    <span class="attr">mass</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">position</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">1</span>, <span class="number">20</span>, <span class="number">0</span>),</span><br><span class="line">    <span class="attr">material</span>:boxPhysMat</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> sphereBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Sphere</span>(<span class="number">3</span>),</span><br><span class="line">    <span class="attr">mass</span>: <span class="number">1</span>,</span><br><span class="line">    <span class="attr">position</span>: <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">0</span>, <span class="number">15</span>, <span class="number">0</span>),</span><br><span class="line">    <span class="attr">material</span>:spherePhysMat</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>相互作用</strong></div><div class="body"><p>不同材质间相互作用，才能赋予运动以独特的物理属性，<br>因此需要将不同的材质联系起来,<br>下面的代码将立方体与平面的摩擦力设置为0，<br>将球体与平面的弹跳系数设置为0.9</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planeBoxContactMat = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">ContactMaterial</span>(</span><br><span class="line">    planePhysMat,</span><br><span class="line">    boxPhysMat,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">friction</span>:<span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">const</span> planeSphereContactMat = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">ContactMaterial</span>(</span><br><span class="line">    planePhysMat,</span><br><span class="line">    spherePhysMat,</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="attr">restitution</span>:<span class="number">0.9</span> <span class="comment">// 回弹系数</span></span><br><span class="line">    &#125;</span><br><span class="line">)</span><br><span class="line">world.<span class="title function_">addContactMaterial</span>(planeBoxContactMat)</span><br><span class="line">world.<span class="title function_">addContactMaterial</span>(planeSphereContactMat)</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/contact.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="GLTF模型的碰撞"><a href="#GLTF模型的碰撞" class="headerlink" title="GLTF模型的碰撞"></a>GLTF模型的碰撞</h1><div class="tag-plugin note" color="red"><div class="body"><p>这个部分踩坑无数，bug叠bug，难绷</p></div></div>
+
+<div class="tag-plugin note" ><div class="body"><p>要使物体间产生碰撞效果，首先要为碰撞物创建碰撞网格（Body），<br>如何对GLTF模型创建碰撞网格，<br>需要用到 <strong>CANNON.Trimesh</strong></p><p>我想要实现的效果是：<em>一把钥匙模型从半空掉落到地板上</em></p><p>使用CANNON.Trimesh，需要用到vertex和index两个数组，<br>这两个数据源从gltf模型上都能取到：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">loader.<span class="title function_">load</span>(<span class="string">&#x27;assets/key.glb&#x27;</span>,<span class="function"><span class="params">gltf</span>=&gt;</span>&#123;</span><br><span class="line">    key = gltf.<span class="property">scene</span>.<span class="title function_">getObjectByName</span>(<span class="string">&#x27;Object_2&#x27;</span>) <span class="comment">// 获取物体</span></span><br><span class="line">    key.<span class="property">scale</span>.<span class="title function_">set</span>(<span class="number">0.005</span>,<span class="number">0.005</span>,<span class="number">0.005</span>) <span class="comment">// 物体原模型过大，需要缩小</span></span><br><span class="line">    scene.<span class="title function_">add</span>(key) </span><br><span class="line">    <span class="keyword">const</span> geo = key.<span class="property">geometry</span></span><br><span class="line">    <span class="keyword">const</span> keyShape = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Trimesh</span>(</span><br><span class="line">        geo.<span class="property">attributes</span>.<span class="property">position</span>.<span class="property">array</span>, <span class="comment">// vertex</span></span><br><span class="line">        geo.<span class="property">index</span>.<span class="property">array</span> <span class="comment">// index</span></span><br><span class="line">    )</span><br><span class="line">    keyBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">        <span class="attr">mass</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="attr">position</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>),</span><br><span class="line">        <span class="attr">shape</span>:keyShape <span class="comment">// 加载shape</span></span><br><span class="line">    &#125;)</span><br><span class="line">    keyBody.<span class="property">quaternion</span>.<span class="title function_">setFromEuler</span>(<span class="title class_">Math</span>.<span class="property">PI</span>/<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">    world.<span class="title function_">addBody</span>(keyBody)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>上面的代码里，将position和index数据直接取了出来，<br>放入Trimesh中构建实体，<br>但是还是不行，钥匙直接穿过平面掉落。</p><p>chatGPT告诉我，之所以会出这个问题，<br>是由于使用<strong>scale</strong>对模型进行缩小，<br>但物体实际的<strong>position坐标依旧没有改变</strong>，<br>我用Trimesh返回的顶点坐标信息创建了一个网格物体，<br>发现它说的没错，顶点坐标依旧保持gltf模型刚被引入的尺寸:</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/gltf_cannon_1.png" fancybox="true"/></div></div><p><strong>因此需要对原本的vertex进行手动缩放</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">loader.<span class="title function_">load</span>(<span class="string">&#x27;assets/key.glb&#x27;</span>,<span class="function"><span class="params">gltf</span>=&gt;</span>&#123;</span><br><span class="line">    gltf.<span class="property">scene</span>.<span class="title function_">traverse</span>(<span class="function"><span class="params">obj</span>=&gt;</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(obj.<span class="property">isMesh</span>)&#123;</span><br><span class="line">            obj.<span class="property">castShadow</span> = <span class="literal">true</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    key = gltf.<span class="property">scene</span>.<span class="title function_">getObjectByName</span>(<span class="string">&#x27;Object_2&#x27;</span>)</span><br><span class="line">    <span class="comment">// scale缩放 也可以在计算好scaledVertices之后，</span></span><br><span class="line">    <span class="comment">// 使用setAttribute对物体顶点进行更新</span></span><br><span class="line">    key.<span class="property">scale</span>.<span class="title function_">set</span>(<span class="number">0.005</span>,<span class="number">0.005</span>,<span class="number">0.005</span>) </span><br><span class="line">    scene.<span class="title function_">add</span>(key)</span><br><span class="line">    <span class="keyword">const</span> geo = key.<span class="property">geometry</span></span><br><span class="line">    <span class="keyword">let</span> vertices = geo.<span class="property">attributes</span>.<span class="property">position</span>.<span class="property">array</span></span><br><span class="line">    <span class="comment">// 手动缩放</span></span><br><span class="line">    <span class="comment">// for (let i = 0; i &lt; vertices.length; i += 3) &#123;</span></span><br><span class="line">    <span class="comment">//     scaledVertices.push(</span></span><br><span class="line">    <span class="comment">//         vertices[i] * 0.005,</span></span><br><span class="line">    <span class="comment">//         vertices[i+1] * 0.005,</span></span><br><span class="line">    <span class="comment">//         vertices[i+2] * 0.005,</span></span><br><span class="line">    <span class="comment">//     )</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="keyword">let</span> scaledVertices = vertices.<span class="title function_">map</span>(<span class="function"><span class="params">i</span>=&gt;</span>i*<span class="number">0.005</span>)</span><br><span class="line">    <span class="keyword">const</span> keyShape = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Trimesh</span>(scaledVertices, geo.<span class="property">index</span>.<span class="property">array</span>)</span><br><span class="line">    keyBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">        <span class="attr">mass</span>:<span class="number">1</span>,</span><br><span class="line">        <span class="attr">position</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Vec3</span>(<span class="number">0</span>,<span class="number">3</span>,<span class="number">0</span>),</span><br><span class="line">        <span class="attr">shape</span>:keyShape</span><br><span class="line">    &#125;)</span><br><span class="line">    keyBody.<span class="property">quaternion</span>.<span class="title function_">setFromEuler</span>(<span class="title class_">Math</span>.<span class="property">PI</span>/<span class="number">2</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">    world.<span class="title function_">addBody</span>(keyBody)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>手动缩放后，Shape和物体原本网格应该保持一致，<br>试了一下，模型还是无限向下掉<del>（shiiiiiiiit）</del><br>这时我隐约觉得可能不是我用于构建TriMesh的数据有问题，<br>于是我引用了一个普通盒子模型的vertex和index，<br>发现Trimesh果然还是往下掉，和顶点、索引数据无关。<br>上网搜了一下，<strong>发现原来这是CANNON.Trimesh的一个官方bug</strong>：</p><blockquote><p>CANNON.Trimesh构建的不规则Shape只能和<strong>Plane&#x2F;Sphere类型</strong>的Shape进行碰撞</p></blockquote><p>好吧……于是我把碰撞平面的Shape类型从Box改成了Plane，<br>终于成功嘞</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> planeGeo = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PlaneGeometry</span>(<span class="number">12</span>,<span class="number">12</span>)</span><br><span class="line"><span class="keyword">const</span> planeMat = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshPhysicalMaterial</span>(&#123;</span><br><span class="line">    <span class="attr">color</span>:<span class="number">0xffffff</span>,</span><br><span class="line">    <span class="attr">roughness</span>:<span class="number">0</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> planeMesh = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(planeGeo, planeMat)</span><br><span class="line">planeMesh.<span class="property">rotation</span>.<span class="property">x</span> = <span class="title class_">Math</span>.<span class="property">PI</span>/<span class="number">2</span></span><br><span class="line">planeMesh.<span class="property">receiveShadow</span> = <span class="literal">true</span></span><br><span class="line">scene.<span class="title function_">add</span>(planeMesh)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> planeBody = <span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Body</span>(&#123;</span><br><span class="line">    <span class="attr">shape</span>:<span class="keyword">new</span> <span class="variable constant_">CANNON</span>.<span class="title class_">Plane</span>(),</span><br><span class="line">    <span class="attr">type</span>:<span class="variable constant_">CANNON</span>.<span class="property">BODY_SLEEP_STATES</span></span><br><span class="line">&#125;)</span><br><span class="line">planeBody.<span class="property">quaternion</span>.<span class="title function_">setFromEuler</span>(-<span class="title class_">Math</span>.<span class="property">PI</span>/<span class="number">2</span>, <span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">world.<span class="title function_">addBody</span>(planeBody)</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/gltf_cannon_2.gif" fancybox="true"/></div></div></div></div>
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/threejs/c4_shader_tutorial.html">Shader Tutorial 着色器</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/threejs/c6_mouse_click_create_object.html">How to Create Objects on MouseClick？鼠标点击创建物体</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Web Video使用时遇到的一些问题 - E-Duck</title>
+
+  
+    <meta name="description" content="问题背景最近在做一个web大屏项目，其中有很多视频需要同时播放，每个页面包括8个实时监控视频，再加上1个背景视频，再加上页面上繁重的dom渲染和css动画，运行起来巨卡，好不容易优化了之后，dom没这么卡了，但视频还是卡的出奇，于是就特地研究了下这块。  同源策略监控视频怎么就加载不出来呢？视频加载慢和视频格式有关吗视频加载为什么会慢？硬件问题：检查一下浏览器运行网页时的任务管理器资源占用值，CP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web Video使用时遇到的一些问题">
+<meta property="og:url" content="http://eletricduck.com/2024/04/01/blob-video-url/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="问题背景最近在做一个web大屏项目，其中有很多视频需要同时播放，每个页面包括8个实时监控视频，再加上1个背景视频，再加上页面上繁重的dom渲染和css动画，运行起来巨卡，好不容易优化了之后，dom没这么卡了，但视频还是卡的出奇，于是就特地研究了下这块。  同源策略监控视频怎么就加载不出来呢？视频加载慢和视频格式有关吗视频加载为什么会慢？硬件问题：检查一下浏览器运行网页时的任务管理器资源占用值，CP">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/2024/04/01/blob-video-url/%E8%A7%86%E9%A2%91%E6%B5%81%E6%A0%BC%E5%BC%8F.png">
+<meta property="og:image" content="http://eletricduck.com/2024/04/01/blob-video-url/%E6%8C%82%E8%B5%B7.png">
+<meta property="article:published_time" content="2024-04-01T09:05:40.000Z">
+<meta property="article:modified_time" content="2024-04-02T09:05:01.972Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/2024/04/01/blob-video-url/%E8%A7%86%E9%A2%91%E6%B5%81%E6%A0%BC%E5%BC%8F.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+<div class="widget-wrap" id="tagcloud"><div class="widget-header cap theme dis-select"><span class="name">标签云</span></div><div class="widget-body fs14"><a href="/tags/web/" style="font-size: 12px;" class="tag -0">web</a></div></div>
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">Web Video使用时遇到的一些问题</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF"><span class="toc-text">问题背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5"><span class="toc-text">同源策略</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Blob-Url"><span class="toc-text">Blob Url</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-04-01T09:05:40.000Z">2024-04-01</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>Web Video使用时遇到的一些问题</span></h1>
+<h1 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h1><div class="tag-plugin note" ><div class="body"><p>最近在做一个web大屏项目，其中有很多视频需要同时播放，<br>每个页面包括8个实时监控视频，再加上1个背景视频，<br>再加上页面上繁重的dom渲染和css动画，<br>运行起来巨卡，<br>好不容易优化了之后，dom没这么卡了，<br>但视频还是卡的出奇，于是就特地研究了下这块。</p></div></div>
+
+<h1 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h1><div class="tag-plugin note" ><div class="title"><strong>监控视频怎么就加载不出来呢？</strong></div><div class="body"><div class="tag-plugin note" color="dark"><div class="title"><strong>视频加载慢和视频格式有关吗</strong></div><div class="body"><p>视频加载为什么会慢？</p><ul><li>硬件问题：<ul><li>检查一下浏览器运行网页时的任务管理器资源占用值，CPU都飚到七八十的，电脑是真的*</li><li>GPU烂的就把浏览器的硬件加速关了吧，CPU更烂的当我没说</li></ul></li><li>渲染策略问题：<ul><li>不该渲染的元素去掉，少加动画</li></ul></li></ul><p>本地视频，不考虑网络问题，<br>空白页面，不考虑渲染问题，<br>为什么视频加载会这么慢呢，难道和编码相关吗？</p><p>实时视频是以FMP4流的格式传输来的,<br>后端还提供了其它一些格式的视频流：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="视频流格式.png" fancybox="true"/></div></div><p>关于视频格式问题，实际上到现在也没有弄清楚：</p><blockquote><p><strong>几个搜索关键字：</strong></p><p><mark class="tag-plugin mark" color="red">WebRTC-Streamer</mark> <mark class="tag-plugin mark" color="yellow">RTSP</mark> <mark class="tag-plugin mark" color="blue">Fetch</mark></p></blockquote><ul><li>流媒体播放策略<ul><li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/650789171">历时数月钻研推流&#x2F;对比各种流媒体服务程序&#x2F;PK总结</a></li><li><a target="_blank" rel="noopener" href="https://blog.csdn.net/jinlong0603/article/details/89424684">监控实时直播的四分屏的前端展示</a></li></ul></li><li>webrtc<ul><li><a target="_blank" rel="noopener" href="https://www.rqsay.com/article/p-6421180318899065.html">VUE3+TS+VITE+webrtc-streamer实现实时视频播放</a></li><li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/551809790">在web中播放rtsp视频方案对比</a></li><li><a target="_blank" rel="noopener" href="https://hpdell.github.io/%E7%BC%96%E7%A8%8B/html5-rtsp/index.html">HTML5 播放 RTSP 视频</a></li></ul></li><li>fetch+Blob<ul><li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000021367378">从 Fetch 到 Streams —— 以流的角度处理网络请求</a></li><li><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2020/12/fetch-tutorial.html">Fetch API 教程</a></li></ul></li></ul></div></div><p>但实际上，8个视频从来都没有一齐被加载出来过，<br>从来都是加载出6个，后面就没音了，<br>查看控制台，发现8个请求中总是有2个请求没法出去，被挂起了：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="挂起.png" fancybox="true"/></div></div><p>然后我才知道同源策略有个路数限制，<br>就是最多只能同时对一个协议+ip+端口请求6次，<br>这里实时视频以FMP4流格式进行传输，接口需要一直保持连接，</p><p>所以后面再发起的请求就分不到这6个名额了，</p><p><a target="_blank" rel="noopener" href="https://github.com/bilibili/flv.js/issues/341">参考Issues</a></p><div class="tag-plugin note" ><div class="title"><strong>解决方法</strong></div><div class="body"><ul><li>HTTP升级到2.0<ul><li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/77803705#:~:text=%E8%A6%81%E8%A7%A3%E5%86%B3%E8%BF%99%E4%B8%AA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B8%B8%E8%A7%81%E7%9A%84%E6%96%B9%E6%B3%95%E6%9C%89%EF%BC%9A%201.%E5%9F%9F%E5%90%8D%E5%88%86%E7%89%87%EF%BC%88Domain%20Sharding%EF%BC%89%EF%BC%8C%E5%90%8E%E7%AB%AF%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9C%89%E5%8F%AF%E8%83%BD%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA%E6%9C%8D%E5%8A%A1%E5%99%A8%E3%80%82,2.%E4%BD%BF%E7%94%A8WebSocket%E5%8D%8F%E8%AE%AE%EF%BC%8C%E4%B8%BB%E6%B5%81%E7%9A%84%E6%B5%8F%E8%A7%88%E5%99%A8%E5%AF%B9WebSocket%E8%BF%9E%E6%8E%A5%E5%B9%B6%E5%8F%91%E6%95%B0%E9%87%8F%E7%9A%84%E9%99%90%E5%88%B6%E9%83%BD%E8%BF%9C%E8%B6%856%E4%B8%AA%E3%80%82%203.%E4%BD%BF%E7%94%A8%20HTTP%2F2.0%20%EF%BC%8C%E7%90%86%E8%AE%BA%E4%B8%8AHTTP%2F2.0%E5%8D%8F%E8%AE%AE%E6%94%AF%E6%8C%81%E5%9C%A8%E5%90%8C%E4%B8%80%E4%B8%AATCP%E8%BF%9E%E6%8E%A5%E4%B8%8A%E5%8F%91%E9%80%81%E6%97%A0%E9%99%90%E4%B8%AAHTTP%E8%AF%B7%E6%B1%82%EF%BC%8C%E4%B8%94%E8%BF%99%E4%BA%9B%E8%AF%B7%E6%B1%82%E7%9A%84%E7%94%9F%E5%91%BD%E6%9C%9F%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%8F%A0%E3%80%82">使用HTTP&#x2F;2.0解决浏览器限制同源HTTP&#x2F;1.x连接并发个数的问题</a></li><li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/29609078">怎样把网站升级到http&#x2F;2</a></li></ul></li><li>websocket + flv<ul><li><a target="_blank" rel="noopener" href="https://blog.csdn.net/u014552102/article/details/116418790?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-116418790-blog-118379672.235%5Ev43%5Epc_blog_bottom_relevance_base6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-2-116418790-blog-118379672.235%5Ev43%5Epc_blog_bottom_relevance_base6&utm_relevant_index=5">浏览器只能播放6路http-flv流的解决方法</a></li></ul></li><li>nginx代理<ul><li><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38238552/article/details/118379672">解决网页视频最大只能播放6路的问题</a></li></ul></li></ul></div></div></div></div>
+
+<h1 id="Blob-Url"><a href="#Blob-Url" class="headerlink" title="Blob Url"></a>Blob Url</h1><div class="tag-plugin note" ><div class="body"><blockquote><p>搜索关键字： Video Fetch Blob Url</p></blockquote><p>比较奇特的一点就是，这8个实时视频一番折腾后终于请求过来了，<br>但实时视频要比本地视频流畅的多。</p><p>为什么本地视频会这么卡呢？</p><p>一开始我以为是视频编码的原因，<br>于是将MP4类型的视频转换为webm类型的视频，<br>结果不知道为什么webm视频一跳转就卡住。</p><p>其实视频也不是一直很卡，而是和网页视频缓存条一样，时好时坏，<br>直到我看到这篇博客：<br><a target="_blank" rel="noopener" href="https://blog.51cto.com/likely/5480461">html5 video 视频页面内缓存 - 全量加载方法</a></p><p>重点是，对普通视频，浏览器会播放一会缓冲一会，即局部下载，<br>我的视频很短，但是会有很多跳转操作，<br>如果能在一开始就把视频全量加载，就不怕后面局部加载时出现卡顿的情况了，</p><p>实现视频全量加载而不是跟挤牙膏一样的方法就是fetch+blob</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(url).<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!res.<span class="property">ok</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;network response was not ok&#x27;</span>)</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">blob</span>()</span><br><span class="line">&#125;).<span class="title function_">then</span>(<span class="function"><span class="params">blob</span>=&gt;</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> url = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob)</span><br><span class="line">  <span class="keyword">const</span> sourceDom = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;source&#x27;</span>)</span><br><span class="line">  video.<span class="property">src</span> = url</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>需要注意的是，我这里使用的是videoJs播放器，<br>使用blob url加载视频，需要将创建player的option中的type配置成视频对应的编码</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> options = &#123;</span><br><span class="line">  <span class="attr">autoPlay</span>:<span class="literal">true</span>,</span><br><span class="line">  <span class="attr">muted</span>:<span class="literal">true</span>,</span><br><span class="line">  <span class="attr">loop</span>:<span class="literal">true</span>,</span><br><span class="line">  <span class="attr">preload</span>:<span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">  <span class="attr">type</span>:<span class="string">&quot;video/mp4&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/03/30/electron/">electron</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

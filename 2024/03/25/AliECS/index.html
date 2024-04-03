@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>云服务器使用和服务部署（阿里云ECS+域名注册） - E-Duck</title>
+
+  
+    <meta name="description" content="第一次申请阿里云服务器——3个月额度的免费版，用nginx部署了几个纯前端的服务，之后又在阿里云买了个域名">
+<meta property="og:type" content="article">
+<meta property="og:title" content="云服务器使用和服务部署（阿里云ECS+域名注册）">
+<meta property="og:url" content="http://eletricduck.com/2024/03/25/AliECS/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="第一次申请阿里云服务器——3个月额度的免费版，用nginx部署了几个纯前端的服务，之后又在阿里云买了个域名">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/2024/03/25/AliECS/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81.png">
+<meta property="og:image" content="http://eletricduck.com/2024/03/25/AliECS/%E5%A4%87%E6%A1%88.png">
+<meta property="og:image" content="http://eletricduck.com/2024/03/25/AliECS/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90.png">
+<meta property="article:published_time" content="2024-03-25T07:11:29.000Z">
+<meta property="article:modified_time" content="2024-04-03T02:54:37.107Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://eletricduck.com/2024/03/25/AliECS/%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+<div class="widget-wrap" id="tagcloud"><div class="widget-header cap theme dis-select"><span class="name">标签云</span></div><div class="widget-body fs14"><a href="/tags/web/" style="font-size: 12px;" class="tag -0">web</a></div></div>
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">云服务器使用和服务部署（阿里云ECS+域名注册）</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B4%AD%E4%B9%B0"><span class="toc-text">云服务器购买</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E7%94%B3%E8%AF%B7"><span class="toc-text">域名申请</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx"><span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-text">端口配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tomcat"><span class="toc-text">Tomcat</span></a></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-03-25T07:11:29.000Z">2024-03-25</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>云服务器使用和服务部署（阿里云ECS+域名注册）</span></h1>
+<h1 id="云服务器购买"><a href="#云服务器购买" class="headerlink" title="云服务器购买"></a>云服务器购买</h1><div class="tag-plugin note" ><div class="title"><strong>云服务器购买</strong></div><div class="body"><p>这部分参考博客： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/156810964">记录第一次Vue项目部署到阿里云Linux服务器上线的艰难历程</a></p><p>借此文章记录一下自己的踩坑问题。</p></div></div>
+
+<h1 id="域名申请"><a href="#域名申请" class="headerlink" title="域名申请"></a>域名申请</h1><div class="tag-plugin note" ><div class="title"><strong>域名申请</strong></div><div class="body"><p>参考博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/majinggogogo/article/details/103222074">如何申请域名、购买证书并在Nginx服务器上实现HTTPS？</a></p><p>域名在阿里上买的，xyz后缀域名，首年6块钱（挺便宜）<br>之后需要走实名认证，很快，<br>但比较坑的是阿里实名认证完还得入库<strong>工信部系统</strong>，这得花2-3天的时间，<br>如果工信部系统没有入库域名，域名网站就无法备案，</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./实名认证.png" fancybox="true"/></div></div><p>没有备案的网站在网上挂一段时间就会被限制：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./备案.png" fancybox="true"/></div></div>有了域名之后就可以将域名和解析记录联系在一起，通过域名直接访问到指定ip地址：<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./域名解析.png" fancybox="true"/></div></div></div></div>
+
+<h1 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h1><div class="tag-plugin note" ><div class="title"><strong>nginx配置</strong></div><div class="body"><p>配置Nginx大多数时候都是以下2个步骤：</p><ul><li><p><strong>配置nginx.conf文档</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/nginx/nginx.conf</span><br></pre></td></tr></table></figure></li><li><p><strong>重启nginx</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart nginx</span><br></pre></td></tr></table></figure></li></ul><p>其他命令用的比较多的也就是下面这些：</p><ul><li><p><strong>启动nginx</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx</span><br></pre></td></tr></table></figure></li><li><p><strong>结束nginx</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl end nginx</span><br></pre></td></tr></table></figure></li><li><p><strong>查看所有开启的nginx服务进程</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | gref nginx</span><br></pre></td></tr></table></figure></li><li><p><strong>杀死所有nginx进程</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall nginx</span><br></pre></td></tr></table></figure></li><li><p><strong>检查nginx.conf配置文件是否有语法错误</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nginx -t</span><br></pre></td></tr></table></figure></li></ul><div class="tag-plugin note" ><div class="title"><strong>配置文件 nginx.conf</strong></div><div class="body"><p>这里我在80&#x2F;8091&#x2F;8092三个端口上配了服务：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Home</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    listen       [::]:80;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/home/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page 404 /404.html;</span><br><span class="line">    location = /404.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    error_page 500 502 503 504 /50x.html;</span><br><span class="line">    location = /50x.html &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">ThreeJs</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       8091;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line"></span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/three/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Lottery</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       8092;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line"></span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/lottery/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>就是非常普通的配置，但是实际上，一开始我觉得后面的端口号不好看，<br>想用路由映射的方式映射到不同的服务上，<br>似乎用<em>proxy_pass</em>或者<em>alias</em>都能实现，</p><details class="tag-plugin folding" ><summary><span>proxy_pass配置</span></summary><div class="body"><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/home/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    location /lottery/&#123;</span><br><span class="line">      proxy_pass: www.e-duck.xyz:8091;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">server &#123;</span><br><span class="line">    listen       8091;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line"></span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/three/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details><details class="tag-plugin folding" ><summary><span>alias配置</span></summary><div class="body"><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  www.e-duck.xyz;</span><br><span class="line">    location /&#123;</span><br><span class="line">            root /var/myapp/home/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    location /lottery/&#123;</span><br><span class="line">            root /var/myapp/three/dist/;</span><br><span class="line">            index index.html;</span><br><span class="line">            try_files $uri $uri/ /index.html;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details><p>但是实际这样配置的时候却发现，静态文件无法加载出来，<br>打开网页控制台报错：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Failed to load module script: Expected a JavaScript module script but the server responded with a MIME type of &quot;text/html&quot;. Strict MIME type checking is enforced for module scripts per HTML spec.</span><br></pre></td></tr></table></figure><p>这个问题我找了很久的解决方案，反正现在还是没有解决，<br>所以干脆就恢复了端口的写法。</p></div></div></div></div>
+
+<h1 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h1><div class="tag-plugin note" ><div class="title"><strong>端口配置</strong></div><div class="body"><p>参考博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/crazestone0614/article/details/126923555">阿里云服务器开放端口的正确方式</a></p><p>需要外界访问的端口服务需要再云服务器中进行开放，<br>这个可以在阿里云服务器上配置，<br>也可以通过命令行配置：</p><ul><li><p>开放指定端口</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br></pre></td></tr></table></figure></li><li><p>重启防火墙</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart firewalld.service</span><br></pre></td></tr></table></figure></li></ul></div></div>
+
+<h1 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h1><div class="tag-plugin note" ><div class="title"><strong>浅配一下</strong></div><div class="body"><ul><li><strong>操作系统</strong> <em>CentOS 7.9 64位</em></li><li><strong>Java</strong> <em>1.7.0</em></li><li><strong>tomcat</strong> <em>8.5.99</em></li></ul><div class="tag-plugin note" ><div class="title"><strong>配置Java</strong></div><div class="body"><p>参考博客： <a target="_blank" rel="noopener" href="https://blog.csdn.net/Jietewang/article/details/109276216">CentOS 7 安装和配置java环境</a> | <a target="_blank" rel="noopener" href="https://blog.csdn.net/dyt443733328/article/details/102587168">tomcat启动“成功”，但是浏览器无法访问</a></p><p>需要注意的是<strong>TomCat的版本和Java的版本一定要匹配</strong>，<br>否则tomcat运行不起来，<br>我是报缺包错误：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exception in thread &quot;main&quot; java.lang.UnsupportedClassVersionError: org/apache/catalina/startup/Bootstrap </span><br></pre></td></tr></table></figure><p><strong>检测Tomcat是否开启的方式：</strong></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep tomcat</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/03/28/electron-egg/">electron-egg + vue3 + vite 实现桌面应用</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/12/13/nginx%E5%85%A5%E9%97%A8/">nginx入门</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Python：Flask Start - E-Duck</title>
+
+  
+    <meta name="description" content="Flask中文文档https:&#x2F;&#x2F;dormousehole.readthedocs.io&#x2F;en&#x2F;latest&#x2F;#api  此教程内容涉及内容很浅，仅为快速上手Flask提供关键注意要点  项目配置（针对Pycharm）开启debug 热更新模式 edit configurations &gt; FLASK_DEBUG &#x3D; on修改flask项目运行的host edit configura">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Flask Start">
+<meta property="og:url" content="http://eletricduck.com/wiki/python/flask_1.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="Flask中文文档https:&#x2F;&#x2F;dormousehole.readthedocs.io&#x2F;en&#x2F;latest&#x2F;#api  此教程内容涉及内容很浅，仅为快速上手Flask提供关键注意要点  项目配置（针对Pycharm）开启debug 热更新模式 edit configurations &gt; FLASK_DEBUG &#x3D; on修改flask项目运行的host edit configura">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/python/img/jinjia%E8%BF%87%E6%BB%A4%E5%99%A8.png">
+<meta property="article:published_time" content="2023-12-13T09:48:44.700Z">
+<meta property="article:modified_time" content="2023-12-13T09:48:44.700Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/python/img/jinjia%E8%BF%87%E6%BB%A4%E5%99%A8.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/python/index.html"><div class="main" ff="title">Python</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Python基础语法</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/index.html#start"><span class="toc-text">Python基础语法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/02_python%E6%A8%A1%E5%9D%97.html"><span class="toc-text">模块、I/O、异常、面向对象</span></a></div></div><div class="widget-header cap dis-select"><span class="name">flask框架</span></div><div class="widget-body fs14"><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/python/flask_1.html"><span class="toc-text">Flask Start</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#URL%E4%B8%8E%E8%A7%86%E5%9B%BE%E7%9A%84%E6%98%A0%E5%B0%84"><span class="toc-text">URL与视图的映射</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#route-template%E5%AE%9E%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="toc-text">route+template实例演示</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_2.html"><span class="toc-text">Flask DateBase</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_3.html"><span class="toc-text">Flask Project</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/python/flask_4.html"><span class="toc-text">Easter egg</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/python/index.html">Python</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-13T09:48:44.700Z">2023-12-13</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Flask Start</span></h1>
+  <div class="tag-plugin link dis-select"><a class="link-card plain" title="Flask中文文档" href="https://dormousehole.readthedocs.io/en/latest/#api" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">Flask中文文档</span><span class="cap link fs12">https://dormousehole.readthedocs.io/en/latest/#api</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin note" color="yellow"><div class="body"><p>此教程内容涉及内容很浅，仅为快速上手Flask提供关键注意要点</p></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>项目配置（针对Pycharm）</strong></div><div class="body"><ol><li><p>开启debug 热更新模式</p><blockquote><p> edit configurations &gt; FLASK_DEBUG &#x3D; on</p></blockquote></li><li><p>修改flask项目运行的host</p><blockquote><p> edit configurations &gt; Additional options &#x3D; –host&#x3D;0.0.0.0</p></blockquote></li><li><p>修改flask项目运行的port</p><blockquote><p> edit configurations &gt; Additional options &#x3D; –host&#x3D;0.0.0.0 –port&#x3D;8060</p></blockquote></li></ol><div class="tag-plugin note" color="dark"><div class="title"><strong>关于flask：debug模式的开启</strong></div><div class="body"><ul><li><strong>方式一</strong> <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.run(debug=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure></li><li><strong>方式二</strong> <ul><li>配置系统环境变量为<strong>flask开发模式</strong></li><li>配置系统换环境变量，打开flask调试模式<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line">os.environ[<span class="string">&quot;FLASK_ENV&quot;</span>] = <span class="string">&#x27;development&#x27;</span></span><br><span class="line">os.environ[<span class="string">&quot;FLASK_DEBUG&quot;</span>] = <span class="string">&#x27;1&#x27;</span></span><br></pre></td></tr></table></figure></li></ul></li></ul></div></div></div></div>
+
+<h1 id="URL与视图的映射"><a href="#URL与视图的映射" class="headerlink" title="URL与视图的映射"></a>URL与视图的映射</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>url的组成</strong></div><div class="body"><blockquote><p><a target="_blank" rel="noopener" href="http://127.0.0.1:5000/abc/">http://127.0.0.1:5000/abc/</a></p></blockquote><p>url一般由三部分组成：</p><ul><li><strong>协议</strong> <ul><li>如<em>http(80)&#x2F;https(443)</em></li><li>访问域名时，下面两种方式的含义相同：<ul><li><blockquote><p>127.0.0.1:80</p></blockquote></li><li><blockquote><p><a target="_blank" rel="noopener" href="http://127.0.0.1/">http://127.0.0.1</a></p></blockquote></li></ul></li></ul></li><li><strong>ip&#x2F;域名</strong></li><li><strong>路由</strong></li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>初始化文件</strong></div><div class="body"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, render_template</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"><span class="comment"># __name__表示当前模块名 app为中心调用对象</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">hello_world</span>():</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;hello&#x27;</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 排除引用触发运行的情况</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    app.run()    </span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>路由映射配置</strong></div><div class="body"><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/path&#x27;</span></span>)  </span><span class="comment"># 路由配置</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">path_mapping</span>():  <span class="comment"># 映射函数</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;render content&#x27;</span>  <span class="comment"># 返回渲染内容</span></span><br></pre></td></tr></table></figure><p>在访问装饰器配置的路由时，会执行下方的函数，函数返回值就是渲染内容</p></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>template</strong></div><div class="body"><p>flask的template引入是通过<mark class="tag-plugin mark" color="red">Jinjia</mark>模板引擎的</p><div class="tag-plugin link dis-select"><a class="link-card plain" title="Jinjia官方文档" href="https://jinja.palletsprojects.com/en/3.1.x/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">Jinjia官方文档</span><span class="cap link fs12">https://jinja.palletsprojects.com/en/3.1.x/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div><p>仅需要在flask项目下的 <strong>&#x2F;templates</strong> 文件夹中加入对应html模板，<br>然后在路由映射函数的返回值中使用<strong>flask.render_template(‘指定模板.html’)</strong></p></div></div>
+
+<h1 id="route-template实例演示"><a href="#route-template实例演示" class="headerlink" title="route+template实例演示"></a>route+template实例演示</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>路由传参</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_30""><ul class="nav-tabs"><li class="tab active"><a href="#tab_30-1">带参数url</a></li><li class="tab"><a href="#tab_30-2">限定参数类型</a></li><li class="tab"><a href="#tab_30-3">默认参数类型</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_30-1"><p>定义时使用 <strong>&lt;&gt;</strong> 包裹变量名称，<br>在映射函数的参数中加入对应变量名称，<br>在映射函数被调用时，传入变量值，参数会通过url传入</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/user/&lt;id&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">user</span>(<span class="params"><span class="built_in">id</span></span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;Welcome, user <span class="subst">&#123;<span class="built_in">id</span>&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_30-2"><blockquote><p>&lt;参数类型:参数名称&gt;</p></blockquote><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/page/&lt;int:page_num&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">page</span>(<span class="params">page_num</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;page <span class="subst">&#123;page_num&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_30-3"><p>通过 <strong>&#x2F;path?key1&#x3D;value1?key2&#x3D;value2</strong> 的格式传递的参数都存储在 <strong>request.args</strong> 中<br><strong>request</strong> 需要从 <strong>flask</strong> 内引入</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/list/&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">list</span>():</span><br><span class="line">    page = request.args.get(<span class="string">&#x27;page&#x27;</span>, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;list page： <span class="subst">&#123;page&#125;</span>&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>模板</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_31""><ul class="nav-tabs"><li class="tab active"><a href="#tab_31-1">渲染模板</a></li><li class="tab"><a href="#tab_31-2">渲染+传参</a></li><li class="tab"><a href="#tab_31-3">传入可变类型参数</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_31-1"><p>需要从flask中引入<strong>render_template</strong>方法</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!--template/index.html--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Jinjia2 template<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/path&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_path_template</span>():</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_31-2"><blockquote><p>render_template(url[,**args])</p></blockquote><figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123;title&#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123;content&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>路由配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/path/&lt;title&gt;/&lt;content&gt;&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">path_render</span>(<span class="params">title, content</span>):</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>, title=title, content=content)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_31-3"><figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    &#123;&#123; user.name &#125;&#125; / &#123;&#123; user.email &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>路由配置</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 类定义</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, **args</span>):</span><br><span class="line">        self.name = args[<span class="string">&quot;name&quot;</span>]</span><br><span class="line">        self.email = args[<span class="string">&quot;email&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&quot;/path&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">path_render</span>():</span><br><span class="line">    user = User(</span><br><span class="line">        name=request.args.get(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;default name&quot;</span>),</span><br><span class="line">        email=request.args.get(<span class="string">&quot;email&quot;</span>, <span class="string">&quot;123456@default.com&quot;</span>)</span><br><span class="line">    )</span><br><span class="line">    <span class="comment"># 可变参数也通过关键字指定方式传参</span></span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>, user=user)</span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>jinjia语法</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_32""><ul class="nav-tabs"><li class="tab active"><a href="#tab_32-1">自定义过滤器</a></li><li class="tab"><a href="#tab_32-2">控制语句</a></li><li class="tab"><a href="#tab_32-3">模板继承</a></li><li class="tab"><a href="#tab_32-4">加载静态资源</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_32-1"><figure class="highlight html"><figcaption><span>过滤器语法</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; 变量名|指定过滤器 &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br></pre></td></tr></table></figure><div class="tag-plugin link dis-select"><a class="link-card plain" title="jinjia过滤器部分文档" href="https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">jinjia过滤器部分文档</span><span class="cap link fs12">https://jinja.palletsprojects.com/en/3.1.x/templates/#list-of-builtin-filters</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div><p>jinjia提供了如下这些过滤器：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/jinjia过滤器.png" alt="jinjia提供的过滤器" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">jinjia提供的过滤器</span></div></div><p>自定义过滤器需要用到<strong>add_template_filter</strong>方法</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># filter_fun 过滤器方法，入参为被过滤的值，返回过滤后值</span></span><br><span class="line"><span class="comment"># filter_name 过滤器名称</span></span><br><span class="line">app.add_template_filter(filter_fun, filter_name)</span><br></pre></td></tr></table></figure><p>下面提供的是一个对datetime类型数据进行格式化的自定义过滤器：</p><figure class="highlight html"><figcaption><span>index.html</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    &#123;&#123; mytime|dformat &#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight python"><figcaption><span>路径映射</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1 定义过滤器</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">data_format</span>(<span class="params">time, <span class="built_in">format</span>=<span class="string">&quot;%Y-%m-%d&quot;</span><span class="string">&quot;):</span></span></span><br><span class="line"><span class="string"><span class="params">    return time.strftime(format)</span></span></span><br><span class="line"><span class="string"><span class="params"># 2 绑定过滤器到app</span></span></span><br><span class="line"><span class="string"><span class="params">app.add_template_filter(data_format, &#x27;dformat&#x27;)</span></span></span><br><span class="line"><span class="string"><span class="params"># 3 路由映射中使用</span></span></span><br><span class="line"><span class="string"><span class="params">@app.route(&#x27;/path&#x27;)</span></span></span><br><span class="line"><span class="string"><span class="params">def path_render():</span></span></span><br><span class="line"><span class="string"><span class="params">    mytime = datatime.now()</span></span></span><br><span class="line"><span class="string"><span class="params">    return render_template(&#x27;index.html&#x27;, mytime=mytime)</span></span></span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_32-2"><p>jinjia模板中提供两种基本的流程控制语句：</p><ul><li><p>if-else</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if exp_A %&#125;</span><br><span class="line">  ...</span><br><span class="line">&#123;% elif exp_B %&#125;</span><br><span class="line">  ...</span><br><span class="line">&#123;% else exp_C %&#125;</span><br><span class="line">  ...</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure></li><li><p>for-in</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% for i in arr %&#125;</span><br><span class="line">...</span><br><span class="line">&#123;% endfor %&#125;</span><br></pre></td></tr></table></figure></li></ul></div><div class="tab-pane" id="tab_32-3"><p>用法类似于<strong>slot插槽</strong><br>父模块里加入命名插槽：</p><figure class="highlight html"><figcaption><span>父模块中定义插槽</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% block 插槽名 %&#125;&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure><p>子模块中使用插槽名定位插槽插入</p><figure class="highlight html"><figcaption><span>子模块中接入插槽</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% extends &#x27;父模块.html&#x27; %&#125;</span><br><span class="line">&#123;% block 插槽名 %&#125;...&#123;% endblock %&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_32-4"><p>需要用到<strong>url_for</strong>方法<br>jinjia模板通过url_for获取静态文件的默认地址在<strong>template</strong>同级目录下的<strong>static</strong>文件夹中<br>有如下目录结构：</p><blockquote><ul><li>static<ul><li>css<ul><li>index.css</li></ul></li><li>img<ul><li>toby_dog.jpg</li></ul></li><li>js<ul><li>main.js</li></ul></li></ul></li><li>templates<ul><li>static.html</li></ul></li></ul></blockquote><p><strong>url_for方法</strong>的作用是：根据视图函数的名称生成url</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  &quot;static&quot;表示路径static</span></span><br><span class="line"><span class="comment">#  filename表示文件路径</span></span><br><span class="line">url_for(<span class="string">&quot;static&quot;</span>, filename)</span><br></pre></td></tr></table></figure><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Title<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;&#123;&#123;url_for(&quot;</span><span class="attr">static</span>&quot;, <span class="attr">filename</span>=<span class="string">&quot;css/index.css&quot;</span>)&#125;&#125;&quot;&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;url_for(&quot;</span><span class="attr">static</span>&quot;, <span class="attr">filename</span>=<span class="string">&quot;js/main.js&quot;</span>)&#125;&#125;&quot;&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;&#123;&#123;url_for(&quot;</span><span class="attr">static</span>&quot;, <span class="attr">filename</span>=<span class="string">&quot;img/toby_dog.jpg&quot;</span>)&#125;&#125;&quot; <span class="attr">alt</span>=<span class="string">&quot;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/python/02_python%E6%A8%A1%E5%9D%97.html">模块、I/O、异常、面向对象</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/python/flask_2.html">Flask DateBase</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

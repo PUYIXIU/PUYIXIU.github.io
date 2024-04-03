@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>electron-egg + vue3 + vite 实现桌面应用 - E-Duck</title>
+
+  
+    <meta name="description" content="使用electron-egg跨平台打包的桌面应用 Vite + Vue3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="electron-egg + vue3 + vite 实现桌面应用">
+<meta property="og:url" content="http://eletricduck.com/2024/03/28/electron-egg/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="使用electron-egg跨平台打包的桌面应用 Vite + Vue3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=dromara&repo=electron-egg&theme=dark&show_owner=true">
+<meta property="og:image" content="http://eletricduck.com/2024/03/28/electron-egg/%E6%A1%86%E6%9E%B6%E7%9B%AE%E5%BD%95.png">
+<meta property="og:image" content="http://eletricduck.com/2024/03/28/electron-egg/frontend.png">
+<meta property="og:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=akabekobeko&repo=npm-icon-gen&theme=dark&show_owner=true">
+<meta property="og:image" content="http://eletricduck.com/2024/03/28/electron-egg/icons.png">
+<meta property="article:published_time" content="2024-03-28T03:32:46.000Z">
+<meta property="article:modified_time" content="2024-04-03T03:19:13.628Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=dromara&repo=electron-egg&theme=dark&show_owner=true">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+<div class="widget-wrap" id="tagcloud"><div class="widget-header cap theme dis-select"><span class="name">标签云</span></div><div class="widget-body fs14"><a href="/tags/web/" style="font-size: 12px;" class="tag -0">web</a></div></div>
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">electron-egg + vue3 + vite 实现桌面应用</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Electron-egg"><span class="toc-text">Electron-egg</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B"><span class="toc-text">实现过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95"><span class="toc-text">踩坑记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%99%BD%E5%B1%8F"><span class="toc-text">运行白屏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E6%A0%87%E6%97%A0%E6%B3%95%E6%9B%B4%E6%8D%A2"><span class="toc-text">图标无法更换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E7%94%A8%E5%88%B0%E7%9A%84icon%E7%94%9F%E6%88%90"><span class="toc-text">打包用到的icon生成</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AA%97%E5%8F%A3zoom%E4%B8%8D%E7%94%9F%E6%95%88"><span class="toc-text">窗口zoom不生效</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#electron%E5%AE%89%E8%A3%85%E5%A4%B1%E8%B4%A5"><span class="toc-text">electron安装失败</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#windows%E6%89%93%E5%8C%85%E5%8D%A1%E9%A1%BF"><span class="toc-text">windows打包卡顿</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#electron%E5%92%8Cchrome%E7%89%88%E6%9C%AC%E5%AF%B9%E5%BA%94"><span class="toc-text">electron和chrome版本对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ssl%E8%AF%81%E4%B9%A6%E9%94%99%E8%AF%AF"><span class="toc-text">ssl证书错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%8C%85%E6%88%90exe%E5%90%8E%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E9%94%99%E8%AF%AF"><span class="toc-text">打包成exe后网络请求错误</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#electron%E6%89%93%E5%8C%85%E5%90%8E%E5%BA%94%E7%94%A8%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF%E5%A4%A7"><span class="toc-text">electron打包后应用文件体积大</span></a></li></ol></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-03-28T03:32:46.000Z">2024-03-28</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>electron-egg + vue3 + vite 实现桌面应用</span></h1>
+<h1 id="Electron-egg"><a href="#Electron-egg" class="headerlink" title="Electron-egg"></a>Electron-egg</h1><div class="tag-plugin note" ><div class="title"><strong>Electron-egg</strong></div><div class="body"><ul><li><a target="_blank" rel="noopener" href="https://www.kaka996.com/">官网地址</a></li><li><a target="_blank" rel="noopener" href="https://www.electronjs.org/zh/">Electron中文文档</a></li></ul><div class="tag-plugin ghcard"><a class="ghcard" rel="external nofollow noopener noreferrer noopener" target="_blank" href="https://github.com/dromara/electron-egg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-readme-stats.xaoxuu.com/api/pin/?username=dromara&repo=electron-egg&theme=dark&show_owner=true"/></a></div><p>Electron-egg是对electron的二次包装，</p><p>其中使用到的大部分API都和electron非常类似，</p><p>使用起来最大的亮点就是 <strong>跨平台性好</strong></p><p><del>因为我也没用electron打过包就不过多胡诌了</del></p></div></div>
+
+<h1 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h1><div class="tag-plugin note" ><div class="title"><strong>STEP 1: 拉取electron-egg框架</strong></div><div class="body"><p>按照官网的介绍，拉取electron-egg框架：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/dromara/electron-egg.git</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./框架目录.png" alt="拉取下来的文件目录" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">拉取下来的文件目录</span></div></div><div class="tag-plugin note" color="dark"><div class="title"><strong>目录介绍</strong></div><div class="body"><p>这里只介绍我本次项目用到的文件：</p><ul><li>build 打包用到的资源和脚本<ul><li>icons 后面打包成应用程序会用的图标</li></ul></li><li>data 内置数据库文件（没用到）</li><li>electron 主进程服务<ul><li>addon 插件目录</li><li>config 配置文件<ul><li>bin.js 开发环境配置</li><li><strong>config.default.js 默认配置</strong> </li><li><strong>config.local.js dev环境加载</strong></li><li><strong>config.prod.js 生产环境加载</strong></li><li>encrypt.js 加密配置文件</li><li><strong>builder.json 打包配置</strong></li></ul></li><li>controller 控制器</li><li>service 业务层</li><li>preload 预加载</li><li>jobs 任务</li><li><strong>index.js 主进程生命周期</strong></li></ul></li><li><strong>frontend 前端目录</strong></li><li>logs 日志</li><li>out 打包可执行文件目录</li><li>public 资源目录<ul><li><strong>dist 前端打包放在这</strong></li><li>html 模版</li><li>electron js加密文件</li><li>images 一些图片</li></ul></li><li><strong>main.js 入口文件</strong></li></ul></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>STEP 2: frontend包壳</strong></div><div class="body"><p>使用electron-egg框架，<br>前端开发实际的文件都是放在frontend目录下的，<br>因此除了一些不必要的文件，我就直接把原先的vue+vite目录下的文件挪到frontend下了，</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./frontend.png" alt="frontend目录下的文件" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">frontend目录下的文件</span></div></div><p>转到根目录下，安装electron-egg框架依赖包：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run install</span></span><br></pre></td></tr></table></figure><p>转到frontend目录下，安装前端项目使用到的依赖包：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">cd</span> frontend</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run install</span></span><br></pre></td></tr></table></figure><p>运行前端页面：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run dev-frontend</span></span><br></pre></td></tr></table></figure><p>运行应用程序：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run dev</span></span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>STEP 3: 打包</strong></div><div class="body"><p>打包前端程序：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run dev-frontend</span></span><br></pre></td></tr></table></figure><p>打包成可执行程序之前，<br>需要先把打包好的前端程序移动到根目录下&#x2F;public文件夹中，<br>用打包的&#x2F;dist替换原本的public&#x2F;dist。<br>这里框架也提供了命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run rd</span></span><br></pre></td></tr></table></figure><p>打包成可执行文件exe：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">npm run build-w-64</span></span><br></pre></td></tr></table></figure></div></div>
+
+<h1 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h1><h2 id="运行白屏"><a href="#运行白屏" class="headerlink" title="运行白屏"></a>运行白屏</h2><div class="tag-plugin note" ><div class="title"><strong>运行白屏</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>用npm run dev启动项目，<br>electron弹出，一直停在loading的界面。</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"><p>官方整理的问题中也提到了这个问题，<br>页面一直loading或白屏，就说明没有请求到对应的前端资源，<br>官方提到可能是前端路由模式错误，不能是history，必须改成hash</p><details class="tag-plugin folding" ><summary><span>hash和history的区别</span></summary><div class="body"></div></details><blockquote><p>解决方法1：检查端口号配置</p></blockquote><p>确保下面两个端口位置一致：</p><ul><li>vite.config.js server.port</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server:&#123;</span><br><span class="line">    port:8090, // 指定端口</span><br><span class="line">    host:true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>electron&#x2F;config&#x2F;bin.js dev.frontend.port</li></ul><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">dev: &#123;</span><br><span class="line">  frontend: &#123;</span><br><span class="line">    directory: &#x27;./frontend&#x27;,</span><br><span class="line">    cmd: &#x27;npm&#x27;,</span><br><span class="line">    args: [&#x27;run&#x27;, &#x27;dev&#x27;],</span><br><span class="line">    protocol: &#x27;http://&#x27;,</span><br><span class="line">    hostname: &#x27;localhost&#x27;,</span><br><span class="line">    port: 8090, // 指定端口</span><br><span class="line">    indexPath: &#x27;index.html&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure><p>并且确保此端口没有被其它服务占用</p><blockquote><p>解决方法2：检查vite.config.js中的base路由设置</p></blockquote><p>vite.config.js中，base基础路由必须是’.&#x2F;‘</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">base:&#x27;./&#x27;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="图标无法更换"><a href="#图标无法更换" class="headerlink" title="图标无法更换"></a>图标无法更换</h2><div class="tag-plugin note" ><div class="title"><strong>图标无法更换</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>electron&#x2F;config&#x2F;builder.json中能够配置exe打包图标的样式，<br>build&#x2F;icons中存放着图标资源，<br>但是更换图标后依旧无效</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>问题解决</strong></div><div class="body"><p>因为windows缓存应用图标，<br><a href=“https://answers.microsoft.com/zh-hans/windows/forum/all/%E6%9C%89%E4%B8%80%E4%B8%AAexe%E6%96%87%E4%BB%B6/90109034-94cd-4663-b5ee-2c5dfc401041”>清理图标缓存的方法</a></p><p>cmd控制台输入：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">taskkill /im explorer.exe /f</span><br><span class="line">cd /d %userprofile%\appdata\local</span><br><span class="line">del iconcache.db /a</span><br><span class="line">start explorer.exe</span><br><span class="line">exit</span><br></pre></td></tr></table></figure><p>图标缓存的位置在：C:\Users\Administrator\AppData\Local\Microsoft\Windows\Explorer<br>explorer.exe： 资源管理器<br>iconcache.db 图标缓存文件</p></div></div></div></div>
+
+<h2 id="打包用到的icon生成"><a href="#打包用到的icon生成" class="headerlink" title="打包用到的icon生成"></a>打包用到的icon生成</h2><div class="tag-plugin note" ><div class="title"><strong>打包用到的icon生成</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>因为上面提到的windows图标缓存的原因，<br>改了很多次icon都没用，<br>以为是icon的问题，于是试了很多生成icon的方法，<br>都很艰难</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方法</strong></div><div class="body"><p>egg-electron官网也提供了2个图标生成工具，<br>其中有个叫做icon-gen的npm包，能用命令一键生成尺寸不同的icon（大喜），<br>而且作者甚至还贴心的把icon-gen的命令集成进去了（虽然我调用发现没用）</p><p>拉取icon-gen库：</p><div class="tag-plugin ghcard"><a class="ghcard" rel="external nofollow noopener noreferrer noopener" target="_blank" href="https://github.com/akabekobeko/npm-icon-gen"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-readme-stats.xaoxuu.com/api/pin/?username=akabekobeko&repo=npm-icon-gen&theme=dark&show_owner=true"/></a></div><p>icon-gen命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">icon-gen -i sample.png -o ./dist --ico --ico-sizes 16 # 16x16</span><br><span class="line">icon-gen -i sample.svg -o ./dist --ico  # 转ico</span><br></pre></td></tr></table></figure><p>根据官方文档介绍，打包图标需要下面这些，而且名称不能修改：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="icons.png" fancybox="true"/></div></div></div></div></div></div>
+
+<h2 id="窗口zoom不生效"><a href="#窗口zoom不生效" class="headerlink" title="窗口zoom不生效"></a>窗口zoom不生效</h2><div class="tag-plugin note" ><div class="title"><strong>窗口zoom不生效</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>一个蠢问题导致了另一个蠢问题……</p><p>用户屏幕分辨率是3840x2160的，开发用屏幕是1920x1080的，<br>因为正好是我的两倍，所以我就把浏览器的放大倍数缩小到50%，<br>然后把图切完了…… 这就等于没做屏幕适配，<br>在浏览器可以通过ctrl+滚轮放大缩小倍数，<br>但是桌面应用不行，但是在windowsOption中有个zoomFactor配置，<br>可以配置放大倍数，<br>我想让这个zoomFactor能够根据用户的屏幕进行适配，<br>但别说适配了，这个值生效都难，<br>就第一次配置生效了，之后接连修改好几次都没反应。<br>气麻了。</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>问题解决</strong></div><div class="body"><p>缓存，缓存，是因为有缓存！（麻了）<br><a target="_blank" rel="noopener" href="https://github.com/electron/electron/issues/10572">Previous zoomFactor is getting cached, unless you manually reset browserWindow’s zoom</a><br>缓存地址：C:\Users\Administrator\AppData\Roaming<br>删掉就行了。</p><p>至于根据屏幕分辨率设置zoomFactor这事，<br>我一手准备好electron提供的screen.getPrimaryDisplay().size，<br>获取主屏幕尺寸，<br>一手准备好win.setZoomFactor设置缩放率。<br>组合在一起，无事发生。</p><p>至于为什么没有实现我想要的效果，到现在我都没弄明白。</p><p>所以最后我还是乖乖的把px全都转换成了rem做页面适配……</p></div></div></div></div>
+
+<h2 id="electron安装失败"><a href="#electron安装失败" class="headerlink" title="electron安装失败"></a>electron安装失败</h2><div class="tag-plugin note" ><div class="title"><strong>electron安装失败</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install electron -g</span><br></pre></td></tr></table></figure><p>报错：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RequestError: unable to verify the first certificate</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/562217675">参考博客</a></p><p>cnpm安装：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install cnpm -g</span><br><span class="line">cnpm install electron -g</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="windows打包卡顿"><a href="#windows打包卡顿" class="headerlink" title="windows打包卡顿"></a>windows打包卡顿</h2><div class="tag-plugin note" ><div class="title"><strong>windows打包卡顿</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>使用electron-egg提供的win打包命令（首次），<br>一直卡在包的下载上：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">downloading url=https://github.com/electron/electron/releases/download/v11.2.1/electron-v11.2.1-win32-ia32.zip size=74 MB parts=8</span><br></pre></td></tr></table></figure><p>还不只卡在这个包上，后面还有好几个包。</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方法</strong></div><div class="body"><ul><li><a target="_blank" rel="noopener" href="https://blog.csdn.net/wm9028/article/details/114583011">参考博客</a></li><li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/ced115ccab75">镜像资源</a></li></ul><p>直接网上手动下载卡住的包，放在C:\Users\Administrator\AppData\Local\electron\Cache目录下</p></div></div></div></div>
+
+<h2 id="electron和chrome版本对应"><a href="#electron和chrome版本对应" class="headerlink" title="electron和chrome版本对应"></a>electron和chrome版本对应</h2><div class="tag-plugin note" ><div class="title"><strong>electron和chrome版本对应</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>打开electron项目，发现像background-clip、text-wrap等css样式失效，<br>大概和electron对应的chrome版本较低有关。</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"><p>根绝electorn-egg提供的这份版本对应表进行更新：</p><p><a target="_blank" rel="noopener" href="https://www.kaka996.com/pages/39b969/">版本关系</a></p></div></div></div></div>
+
+<h2 id="ssl证书错误"><a href="#ssl证书错误" class="headerlink" title="ssl证书错误"></a>ssl证书错误</h2><div class="tag-plugin note" ><div class="title"><strong>ssl证书错误</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>electron应用无法访问不安全地址</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"><p>在index.js中的ready回调函数中忽略证书验证：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> ready () &#123;</span><br><span class="line"><span class="comment">//  ssl证书错误</span></span><br><span class="line">app.<span class="property">commandLine</span>.<span class="title function_">appendSwitch</span>(<span class="string">&#x27;ignore-certificate-errors&#x27;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+
+<h2 id="打包成exe后网络请求错误"><a href="#打包成exe后网络请求错误" class="headerlink" title="打包成exe后网络请求错误"></a>打包成exe后网络请求错误</h2><div class="tag-plugin note" ><div class="title"><strong>打包成exe后网络请求错误</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>打开election打包成的exe程序，<br>发现网络请求路径全都变成了file:&#x2F;&#x2F;开头的请求</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"><ul><li>1、将axios发送请求时替换成全路径<ul><li>打包后算桌面程序，没有http服务器支持，加载的是静态页面</li></ul></li><li>2、 electron开启允许跨域模式 webSecurity:false<ul><li>全路径请求会出现跨域问题，因此要设置忽略安全策略</li></ul></li></ul><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36316660/article/details/130398712">参考博客</a></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getData</span> = params =&gt; <span class="title function_">axios</span>(&#123;</span><br><span class="line">  <span class="attr">method</span>:<span class="string">&#x27;get&#x27;</span>,</span><br><span class="line">  <span class="comment">// 全路径</span></span><br><span class="line">  <span class="attr">url</span>:<span class="string">&#x27;https:192.168.0.1:8090/123/abc&#x27;</span>,</span><br><span class="line">  params</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">webPreferences: &#123;</span><br><span class="line">  webSecurity: false // 禁用同源策略</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+
+<h2 id="electron打包后应用文件体积大"><a href="#electron打包后应用文件体积大" class="headerlink" title="electron打包后应用文件体积大"></a>electron打包后应用文件体积大</h2><div class="tag-plugin note" ><div class="title"><strong>electron打包后应用文件体积大</strong></div><div class="body"><div class="tag-plugin note" color="yellow"><div class="title"><strong>问题描述</strong></div><div class="body"><p>暂且还不知道这个如何解决，<br>但包壳前比包壳后多了250MB左右，<br>其中还包含Chromium内核。</p></div></div><div class="tag-plugin note" color="green"><div class="title"><strong>解决方式</strong></div><div class="body"></div></div></div></div>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/03/30/electron/">electron</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/03/25/AliECS/">云服务器使用和服务部署（阿里云ECS+域名注册）</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

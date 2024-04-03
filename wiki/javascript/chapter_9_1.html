@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>JavaScript：9.1 代理基础 - E-Duck</title>
+
+  
+    <meta name="description" content="代理简单来说就是指给目标对象定义一个代理对象，然后把它当做抽象的目标对象使用因此它能够用作目标对象的替身，又完全独立于目标对象。 代理需要平台支持代理是一种新的基础性语言能力，转义程序不能直接将其转换为ES6之前的代码，因此代理和反射需要在百分百支持它们的平台上使用。  9.1.1 创建空代理Proxy函数功能： 创建代理参数：param 1： 目标对象param 2： 处理程序对象区分代理和目标">
+<meta property="og:type" content="website">
+<meta property="og:title" content="9.1 代理基础">
+<meta property="og:url" content="http://eletricduck.com/wiki/javascript/chapter_9_1.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="代理简单来说就是指给目标对象定义一个代理对象，然后把它当做抽象的目标对象使用因此它能够用作目标对象的替身，又完全独立于目标对象。 代理需要平台支持代理是一种新的基础性语言能力，转义程序不能直接将其转换为ES6之前的代码，因此代理和反射需要在百分百支持它们的平台上使用。  9.1.1 创建空代理Proxy函数功能： 创建代理参数：param 1： 目标对象param 2： 处理程序对象区分代理和目标">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-13T09:48:44.627Z">
+<meta property="article:modified_time" content="2023-12-13T09:48:44.627Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/javascript/index.html"><div class="main" ff="title">JavaScript</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">第1章</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/index.html#start"><span class="toc-text">什么是JavaScript</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第8章</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_8.html"><span class="toc-text">对象、类与面向对象编程</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第9章 代理与反射</span></div><div class="widget-body fs14"><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/javascript/chapter_9_1.html"><span class="toc-text">9.1 代理基础</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-1-%E5%88%9B%E5%BB%BA%E7%A9%BA%E4%BB%A3%E7%90%86"><span class="toc-text">9.1.1 创建空代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-2-%E5%AE%9A%E4%B9%89%E6%8D%95%E8%8E%B7%E5%99%A8"><span class="toc-text">9.1.2 定义捕获器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-3-%E6%8D%95%E8%8E%B7%E5%99%A8%E5%8F%82%E6%95%B0%E5%92%8C%E5%8F%8D%E5%B0%84API"><span class="toc-text">9.1.3 捕获器参数和反射API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-4-%E6%8D%95%E8%8E%B7%E5%99%A8%E4%B8%8D%E5%8F%98%E5%BC%8F"><span class="toc-text">9.1.4 捕获器不变式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-5-%E5%8F%AF%E6%92%A4%E9%94%80%E4%BB%A3%E7%90%86"><span class="toc-text">9.1.5 可撤销代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-6-%E5%AE%9E%E7%94%A8%E5%8F%8D%E5%B0%84API"><span class="toc-text">9.1.6 实用反射API</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-7-%E4%BB%A3%E7%90%86%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BB%A3%E7%90%86"><span class="toc-text">9.1.7 代理另一个代理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-1-8-%E4%BB%A3%E7%90%86%E7%9A%84%E9%97%AE%E9%A2%98%E4%B8%8E%E4%B8%8D%E8%B6%B3"><span class="toc-text">9.1.8 代理的问题与不足</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_9_2.html"><span class="toc-text">9.2 代理捕获器与反射方法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_9_3.html"><span class="toc-text">9.3 代理模式</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第10章 函数</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_1.html"><span class="toc-text">10.1 函数语法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_2.html"><span class="toc-text">10.2 函数参数</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_3.html"><span class="toc-text">10.3 函数特性</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_4.html"><span class="toc-text">10.4 函数调用技巧</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第11章 期约与异步函数</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_1.html"><span class="toc-text">11.1 异步编程</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_2.html"><span class="toc-text">11.2 期约</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_3.html"><span class="toc-text">11.3 异步函数</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第12章 BOM</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_1.html"><span class="toc-text">window对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_2.html"><span class="toc-text">location对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_3.html"><span class="toc-text">navigator对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_4.html"><span class="toc-text">screen对象/history对象</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/javascript/index.html">JavaScript</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-13T09:48:44.627Z">2023-12-13</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>9.1 代理基础</span></h1>
+  <div class="tag-plugin note" color="dark"><div class="title"><strong>代理简单来说</strong></div><div class="body"><p>就是指给目标对象定义一个代理对象，然后把它当做抽象的目标对象使用<br>因此它能够用作目标对象的替身，又完全独立于目标对象。</p></div></div>
+<div class="tag-plugin note" color="light"><div class="title"><strong>代理需要平台支持</strong></div><div class="body"><p>代理是一种新的基础性语言能力，转义程序不能直接将其转换为ES6之前的代码，<br>因此代理和反射需要在百分百支持它们的平台上使用。</p></div></div>
+
+<h1 id="9-1-1-创建空代理"><a href="#9-1-1-创建空代理" class="headerlink" title="9.1.1 创建空代理"></a>9.1.1 创建空代理</h1><div class="tag-plugin note" color="blue"><div class="title"><strong>Proxy函数</strong></div><div class="body"><ul><li><strong>功能：</strong> 创建代理</li><li><strong>参数：</strong><ul><li><em>param 1：</em> 目标对象</li><li><em>param 2：</em> 处理程序对象</li></ul></li><li><strong>区分代理和目标：</strong><ul><li>可以使用严格相等（&#x3D;&#x3D;&#x3D;）来区分</li><li>不能使用</li></ul></li></ul></div></div>instanceof Proxy，因为Proxy.prototype是undefined
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">id</span>: <span class="string">&#x27;target&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">id</span>); <span class="comment">//target</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">id</span>); <span class="comment">//target</span></span><br><span class="line"></span><br><span class="line">target.<span class="property">id</span> = <span class="string">`foo`</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">id</span>); <span class="comment">//foo</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">id</span>); <span class="comment">//foo</span></span><br><span class="line"></span><br><span class="line">proxy.<span class="property">id</span> = <span class="string">`bar`</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">id</span>); <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">id</span>); <span class="comment">//bar</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;id&#x27;</span>)); <span class="comment">//true</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;id&#x27;</span>)); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy === target); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// TypeError: Function has non-object </span></span><br><span class="line"><span class="comment">// prototype &#x27;undefined&#x27; in instanceof check</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target <span class="keyword">instanceof</span> <span class="title class_">Proxy</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy <span class="keyword">instanceof</span> <span class="title class_">Proxy</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="9-1-2-定义捕获器"><a href="#9-1-2-定义捕获器" class="headerlink" title="9.1.2 定义捕获器"></a>9.1.2 定义捕获器</h1><p>使用代理的主要目的就是可以定义捕获器（trap）。<br>代理能在操作传播到目标对象之前先调用捕获器函数，从而拦截并修改相应的行为。  </p>
+<div class="tag-plugin note" color="warning"><div class="title"><strong>注意</strong></div><div class="body"><p>只有在代理对象上执行这些操作才会触发捕获器。</p></div></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;handler override&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">foo</span>); <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>); <span class="comment">//handler override</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target[<span class="string">&#x27;foo&#x27;</span>]) <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy[<span class="string">&#x27;foo&#x27;</span>]) <span class="comment">//handler override</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">create</span>(target)[<span class="string">&#x27;foo&#x27;</span>]); <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">create</span>(proxy)[<span class="string">&#x27;foo&#x27;</span>]); <span class="comment">//handler override</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="9-1-3-捕获器参数和反射API"><a href="#9-1-3-捕获器参数和反射API" class="headerlink" title="9.1.3 捕获器参数和反射API"></a>9.1.3 捕获器参数和反射API</h1><div class="tag-plugin note" color="blue"><div class="title"><strong>get()参数</strong></div><div class="body"><ul><li><em>trapTarget:</em> 目标对象</li><li><em>property:</em> 要查询的属性</li><li><em>receiver:</em> 代理对象</li></ul></div></div>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>:<span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">trapTarget, property, receiver</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(trapTarget === target);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(property);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(receiver === proxy);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"><span class="comment">// true</span></span><br><span class="line"><span class="comment">// foo</span></span><br><span class="line"><span class="comment">// true</span></span><br><span class="line">proxy.<span class="property">foo</span>;</span><br></pre></td></tr></table></figure>
+<p>通过这些参数就可以重建目标对象的原始行为了：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>:<span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">trapTarget, property, receiver</span>) &#123; </span><br><span class="line">    <span class="keyword">return</span> trapTarget[property];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>); <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">foo</span>); <span class="comment">//bar</span></span><br></pre></td></tr></table></figure>
+
+<div class="tag-plugin note" color="cyan"><div class="title"><strong>全局对象Reflect</strong></div><div class="body"><p>通过全局对象Reflect的同名方法也可以轻松实现重建。</p><div class="tag-plugin note" color="blue"><div class="title"><strong>简洁一点...</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="purple"><div class="title"><strong>再简洁一点...</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">    <span class="attr">get</span>:<span class="title class_">Reflect</span>.<span class="property">get</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="orange"><div class="title"><strong>更简洁点...（直接捕获所有方法）</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, <span class="title class_">Reflect</span>);</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="yellow"><div class="title"><strong>使用反射API的样板代码</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">  <span class="attr">baz</span>: <span class="string">&#x27;qux&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">trapTarget, property, receiver</span>) &#123; </span><br><span class="line">    <span class="keyword">let</span> decoration = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">if</span> (property === <span class="string">&#x27;foo&#x27;</span>) &#123; </span><br><span class="line">      decoration = <span class="string">&#x27;!!!&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(...<span class="variable language_">arguments</span>) + decoration;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>);  <span class="comment">//foo!!!</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">foo</span>); <span class="comment">//foo</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">baz</span>);  <span class="comment">//qux</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">baz</span>); <span class="comment">//qux</span></span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h1 id="9-1-4-捕获器不变式"><a href="#9-1-4-捕获器不变式" class="headerlink" title="9.1.4 捕获器不变式"></a>9.1.4 捕获器不变式</h1><p>当捕获器定义出现过于反常的行为时（如get和writable的定义出现冲突时）<br>捕获器不变式会进行报错。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(target, <span class="string">&#x27;foo&#x27;</span>, &#123;</span><br><span class="line">  <span class="attr">configurable</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">writable</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">value</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;qux&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, handler);</span><br><span class="line"><span class="comment">// &#x27;get&#x27; on proxy: property &#x27;foo&#x27; is a read-only </span></span><br><span class="line"><span class="comment">// and non - configurable data property on the proxy </span></span><br><span class="line"><span class="comment">// target but the proxy did not return its </span></span><br><span class="line"><span class="comment">// actual value(expected &#x27;bar&#x27; but got &#x27;qux&#x27;)</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>);</span><br></pre></td></tr></table></figure>
+
+<h1 id="9-1-5-可撤销代理"><a href="#9-1-5-可撤销代理" class="headerlink" title="9.1.5 可撤销代理"></a>9.1.5 可撤销代理</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>Proxy.revocable</strong></div><div class="body"><p>这个方法支持撤销代理对象与目标对象的关联。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>:<span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123; </span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;interecpted&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; proxy, revoke &#125; = <span class="title class_">Proxy</span>.<span class="title function_">revocable</span>(target, handler);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>); <span class="comment">//bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(target.<span class="property">foo</span>); <span class="comment">//bar</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">revoke</span>();</span><br><span class="line"><span class="comment">// TypeError:</span></span><br><span class="line"><span class="comment">// Cannot perform &#x27;get&#x27; on a proxy that has been revoked</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy.<span class="property">foo</span>);</span><br></pre></td></tr></table></figure></div></div>
+<h1 id="9-1-6-实用反射API"><a href="#9-1-6-实用反射API" class="headerlink" title="9.1.6 实用反射API"></a>9.1.6 实用反射API</h1><details class="tag-plugin folding" color="green"><summary><span>1. 反射API与对象API</span></summary><div class="body"><ol><li>反射API并不限于捕获处理程序</li><li>大多数反射API方法在Object类型上有对应的方法<ul><li>Object上的方法适用于通用程序</li><li>反射方法适用于细粒度的对象控制与操作</li></ul></li></ol></div></details>
+
+<details class="tag-plugin folding" color="cyan"><summary><span>2. 状态标记</span></summary><div class="body"><ul><li><strong>数据类型：</strong> 布尔值</li><li><strong>表示：</strong> 意图执行的操作是否成功</li></ul><div class="tag-plugin note" color="blue"><div class="title"><strong>重构前</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;&#125;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(o, <span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;success&#x27;</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123; </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;failure&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="purple"><div class="title"><strong>重构后（操作失败时不会报错）</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> o = &#123;&#125;;</span><br><span class="line"><span class="keyword">if</span> (<span class="title class_">Reflect</span>.<span class="title function_">defineProperty</span>(o, <span class="string">&#x27;foo&#x27;</span>, &#123; <span class="attr">value</span>: <span class="string">&#x27;bar&#x27;</span> &#125;)) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;success&#x27;</span>); <span class="comment">//success</span></span><br><span class="line">&#125; <span class="keyword">else</span> &#123; </span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;failure&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="yellow"><div class="title"><strong>提供状态标记的反射方法</strong></div><div class="body"><ul><li><em>Reflect.defineProperty()</em></li><li><em>Reflect.preventExtensions()</em></li><li><em>Reflect.setPrototypeof()</em></li><li><em>Reflect.set()</em></li><li><em>Reflect.deleteProperty()</em></li></ul></div></div></div></details> 
+<details class="tag-plugin folding" color="orange"><summary><span>3. 用一等函数替代操作符</span></summary><div class="body"><ul><li><em>Reflect.get():</em> 代替对象属性访问操作符</li><li><em>Reflect.set():</em> 代替&#x3D;赋值操作符</li><li><em>Reflect.has():</em> 代替in操作符或with()</li><li><em>Reflect.deleteProperty():</em> 代替delete操作符</li><li><em>Reflect.construct():</em> 代替new操作符</li></ul></div></details>
+<details class="tag-plugin folding" color="purple"><summary><span>4. 安全地应用函数</span></summary><div class="body"><p>主要针对apply方法的调用:</p><div class="tag-plugin note" color="yellow"><div class="title"><strong>apply调用反面教材</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Function</span>.<span class="property">prototye</span>.<span class="property">apply</span>.<span class="title function_">call</span>(myFunc, thisVal, argumentList);</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" color="orange"><div class="title"><strong>使用Reflect来避免</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Reflect</span>.<span class="title function_">apply</span>(myFunc, thisVal, argumentsList);</span><br></pre></td></tr></table></figure></div></div></div></details>
+
+<h1 id="9-1-7-代理另一个代理"><a href="#9-1-7-代理另一个代理" class="headerlink" title="9.1.7 代理另一个代理"></a>9.1.7 代理另一个代理</h1><div class="tag-plugin note" color="cyan"><div class="title"><strong>多层拦截网</strong></div><div class="body"><p>代理完全可以代理另一个代理，因此可以在一个目标对象之上构建多层拦截网。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;</span><br><span class="line">  <span class="attr">foo</span>:<span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> firstProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;first proxy&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">const</span> secondProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(firstProxy, &#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;second Proxy&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// second Proxy</span></span><br><span class="line"><span class="comment">// first Proxy</span></span><br><span class="line"><span class="comment">// bar</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(secondProxy.<span class="property">foo</span>);</span><br></pre></td></tr></table></figure></div></div>
+<h1 id="9-1-8-代理的问题与不足"><a href="#9-1-8-代理的问题与不足" class="headerlink" title="9.1.8 代理的问题与不足"></a>9.1.8 代理的问题与不足</h1><div class="tag-plugin note" color="orange"><div class="title"><strong>1. 代理中的this</strong></div><div class="body"><p>直觉上讲，this通常指向调用这个方法的对象。<br>即调用代理上的任何方法，如proxy.outerMethod(),<br>proxy.outerMethod()调用this.innerMethod(),<br>实际上会调用proxy.innerMethod()</p><div class="tag-plugin note" color="red"><div class="title"><strong>当目标对象依赖于对象标识时会存在问题</strong></div><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> wm = <span class="keyword">new</span> <span class="title class_">WeakMap</span>();</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">User</span> &#123; </span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">userId</span>) &#123; </span><br><span class="line">    wm.<span class="title function_">set</span>(<span class="variable language_">this</span>, userId);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">set</span> <span class="title function_">id</span>(<span class="params">userId</span>) &#123;</span><br><span class="line">    wm.<span class="title function_">set</span>(<span class="variable language_">this</span>, userId);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">id</span>() &#123; </span><br><span class="line">    <span class="keyword">return</span> wm.<span class="title function_">get</span>(<span class="variable language_">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">new</span> <span class="title class_">User</span>(<span class="number">123</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(user.<span class="property">id</span>); <span class="comment">//123</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInstanceProxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(user, &#123;&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userInstanceProxy.<span class="property">id</span>); <span class="comment">//undefined</span></span><br></pre></td></tr></table></figure><p>这是因为User实例一开始使用目标对象作为WeakMao的键，<br>代理对象却尝试从自身取得这个实例。  </p><div class="tag-plugin note" color="purple"><div class="title"><strong>解决方案</strong></div><div class="body"><p>把代理User实例改为代理User类本身，<br>再创建代理的实例。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">UserClassProxy</span> = <span class="keyword">new</span> <span class="title class_">Proxy</span>(<span class="title class_">User</span>, &#123;&#125;);</span><br><span class="line"><span class="keyword">const</span> proxyUser = <span class="keyword">new</span> <span class="title class_">UserClassProxy</span>(<span class="number">456</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxyUser.<span class="property">id</span>); <span class="comment">//456</span></span><br></pre></td></tr></table></figure></div></div></div></div></div></div>
+
+<div class="tag-plugin note" color="green"><div class="title"><strong>2. 代理与内部槽位</strong></div><div class="body"><p>有些ECMAScript内置类型可能会依赖代理无法控制的机制，<br>原因是这些内置类型方法的执行依赖this值上的内部槽位，<br>但是代理对象上不存在这个内部槽位。  </p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> target = <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(target, &#123;&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(proxy <span class="keyword">instanceof</span> <span class="title class_">Date</span>); <span class="comment">//true</span></span><br><span class="line">proxy.<span class="title function_">getDate</span>(); <span class="comment">//TypeError: &#x27;this&#x27; is not a Date object</span></span><br></pre></td></tr></table></figure></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/javascript/chapter_8.html">对象、类与面向对象编程</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/javascript/chapter_9_2.html">9.2 代理捕获器与反射方法</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

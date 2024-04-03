@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Notes：ThreeJs - E-Duck</title>
+
+  
+    <meta name="description" content="controls滚轮滚动导致无法渲染问题描述OrbitControls引入后，鼠标拖动事件正常，使用滚轮进行缩放操作时，整个画面无法重绘。检查了camera的剪裁面配置，也没有问题。  解决方法threejs版本问题，使用0.160.0版本的threejs会有这个问题，改成更低版本0.133.0就解决了。  Controls没有任何反应问题描述配置了Orbitcontrols但没有任何反应，能进c">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ThreeJs">
+<meta property="og:url" content="http://eletricduck.com/notes/threejs.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="controls滚轮滚动导致无法渲染问题描述OrbitControls引入后，鼠标拖动事件正常，使用滚轮进行缩放操作时，整个画面无法重绘。检查了camera的剪裁面配置，也没有问题。  解决方法threejs版本问题，使用0.160.0版本的threejs会有这个问题，改成更低版本0.133.0就解决了。  Controls没有任何反应问题描述配置了Orbitcontrols但没有任何反应，能进c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/notes/assets/image/unrealBloomPass_transparent.png">
+<meta property="og:image" content="http://eletricduck.com/notes/assets/image/%E9%80%8F%E6%98%8E%E9%80%9A%E9%81%93Bloom.gif">
+<meta property="article:published_time" content="2024-03-26T01:54:45.172Z">
+<meta property="article:modified_time" content="2024-03-26T01:54:45.172Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/notes/assets/image/unrealBloomPass_transparent.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item active" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">ThreeJs</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/notes/tools.html#start"><span class="toc-text">Tools</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/index.html"><span class="toc-text">Vue</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Browser.html"><span class="toc-text">浏览器</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Vite.html"><span class="toc-text">Vite</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/echarts.html"><span class="toc-text">Echarts</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/dependency.html"><span class="toc-text">npm依赖</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/web_network.html"><span class="toc-text">Web网络</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/VSCode.html"><span class="toc-text">VSCode</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Flask.html"><span class="toc-text">Flask</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/notes/threejs.html"><span class="toc-text">ThreeJs</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#controls"><span class="toc-text">controls</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%BB%9A%E8%BD%AE%E6%BB%9A%E5%8A%A8%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E6%B8%B2%E6%9F%93"><span class="toc-text">滚轮滚动导致无法渲染</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controls%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E5%8F%8D%E5%BA%94"><span class="toc-text">Controls没有任何反应</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A7%BB%E5%8A%A8%E7%AB%AF"><span class="toc-text">移动端</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#uniapp%E4%B8%AD%E4%BD%BF%E7%94%A8threejs"><span class="toc-text">uniapp中使用threejs</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Postprocessing"><span class="toc-text">Postprocessing</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UnrealBloomPass%E6%97%A0%E6%B3%95%E6%B8%B2%E6%9F%93%E9%80%8F%E6%98%8E%E9%80%9A%E9%81%93"><span class="toc-text">UnrealBloomPass无法渲染透明通道</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/Html.html"><span class="toc-text">html</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/node.html"><span class="toc-text">Node</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/app.html"><span class="toc-text">小程序开发</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/github.html"><span class="toc-text">Github</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/notes/css.html"><span class="toc-text">css/sass/scss</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/notes/">笔记</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/notes/tools.html">Notes</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-03-26T01:54:45.172Z">2024-03-26</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>ThreeJs</span></h1>
+  <h1 id="controls"><a href="#controls" class="headerlink" title="controls"></a>controls</h1><h2 id="滚轮滚动导致无法渲染"><a href="#滚轮滚动导致无法渲染" class="headerlink" title="滚轮滚动导致无法渲染"></a>滚轮滚动导致无法渲染</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>问题描述</strong></div><div class="body"><p>OrbitControls引入后，<br>鼠标拖动事件正常，使用滚轮进行缩放操作时，整个画面无法重绘。<br>检查了camera的剪裁面配置，也没有问题。</p></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>解决方法</strong></div><div class="body"><p>threejs版本问题，使用0.160.0版本的threejs会有这个问题，<br>改成更低版本0.133.0就解决了。</p></div></div>
+
+<h2 id="Controls没有任何反应"><a href="#Controls没有任何反应" class="headerlink" title="Controls没有任何反应"></a>Controls没有任何反应</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>问题描述</strong></div><div class="body"><p>配置了Orbitcontrols但没有任何反应，<br>能进controls添加的鼠标事件的断点，<br>但就是毫无反应。</p></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>解决方法</strong></div><div class="body"><p>调试了大概一个小时，终于搞清楚了，<br>因为我把相机和OrbitControls.target都放在了原点位置：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera.<span class="property">position</span>.<span class="title function_">set</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">controls.<span class="property">target</span>.<span class="title function_">set</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure><p>这会导致OrbitControls的旋转矩阵计算出现问题，<br>需要移动相机或者controls.target的位置：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">camera.<span class="property">position</span>.<span class="title function_">set</span>(-<span class="number">0.001</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure><p>这样就解决了</p></div></div>
+
+<h1 id="移动端"><a href="#移动端" class="headerlink" title="移动端"></a>移动端</h1><h2 id="uniapp中使用threejs"><a href="#uniapp中使用threejs" class="headerlink" title="uniapp中使用threejs"></a>uniapp中使用threejs</h2><div class="tag-plugin note" ><div class="title"><strong>问题描述</strong></div><div class="body"><p>想在用uniapp搭建的app端写一个用到threejs的项目，<br>但是在第一步就卡壳了，<br>先是真机测试，啥都渲染不出来，连个报错都没有，<br>浏览器控制台也看不到，只有HBuilder的控制台上面，<br>时不时的给我报出来一个错，大概意思是说获取不到render.domElement需要被append上去的那个dom元素。</p></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>解决方法</strong></div><div class="body"><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_66579387/article/details/134228338?spm=1001.2101.3001.6650.2&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-2-134228338-blog-111551734.235%5Ev39%5Epc_relevant_3m_sort_dl_base2&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7EPosition-2-134228338-blog-111551734.235%5Ev39%5Epc_relevant_3m_sort_dl_base2&utm_relevant_index=5">PC端调试Android手机的方法</a><div class="tag-plugin copy"><input class="copy-area" readonly id="copy_1" value="chrome://inspect/#devices"><button class="copy-btn" onclick="util.copy(&quot;copy_1&quot;,&quot;Copied!&quot;)"><svg class="icon copy-btn" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"></path></svg></button></div><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6974552469917401125">参考文章</a></p><p>文章作者的总结非常简单易懂：</p><blockquote><p>vue本身不支持直接通过原生JS操作DOM，于是在uniapp里，可以通过renderjs来实现逻辑层(vue的template或者说虚拟dom)与视图层(原生dom)之间的通讯，或者说操作。</p></blockquote><p>在内联render中写需要操控dom的代码，问题顺利解决：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  <span class="language-xml"><span class="tag">&lt;<span class="name">view</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;renderjs&quot;</span> <span class="attr">id</span>=<span class="string">&quot;renderjs-view&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span></span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">module</span>=<span class="string">&quot;render&quot;</span> <span class="attr">lang</span>=<span class="string">&quot;renderjs&quot;</span>&gt;</span><span class="language-javascript"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">import</span> * <span class="keyword">as</span> <span class="variable constant_">THREE</span> <span class="keyword">from</span> <span class="string">&#x27;three&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">import</span> &#123;<span class="title class_">OrbitControls</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;three/examples/jsm/controls/OrbitControls&#x27;</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      <span class="title function_">mounted</span>(<span class="params"></span>) &#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> view = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;renderjs-view&#x27;</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> renderer = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">WebGLRenderer</span>()</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        renderer.<span class="title function_">setSize</span>(<span class="variable language_">window</span>.<span class="property">innerWidth</span>, <span class="variable language_">window</span>.<span class="property">innerHeight</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        view.<span class="title function_">appendChild</span>(renderer.<span class="property">domElement</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> scene = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Scene</span>()</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> camera = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">PerspectiveCamera</span>(</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="number">75</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="variable language_">window</span>.<span class="property">innerWidth</span>/<span class="variable language_">window</span>.<span class="property">innerHeight</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="number">0.01</span>,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="number">10000</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        )</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        scene.<span class="title function_">add</span>(camera)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        camera.<span class="property">position</span>.<span class="title function_">set</span>(<span class="number">30</span>,<span class="number">30</span>,<span class="number">30</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        camera.<span class="title function_">lookAt</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> controls = <span class="keyword">new</span> <span class="title class_">OrbitControls</span>(camera, renderer.<span class="property">domElement</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        controls.<span class="title function_">update</span>()</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> axesHelper = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">AxesHelper</span>(<span class="number">5</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        scene.<span class="title function_">add</span>(axesHelper)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> boxGeometry = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">BoxGeometry</span>(<span class="number">3</span>,<span class="number">3</span>,<span class="number">3</span>)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> boxMetarial = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">MeshBasicMaterial</span>(&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          <span class="attr">color</span>:<span class="number">0x00ff00</span></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">const</span> box = <span class="keyword">new</span> <span class="variable constant_">THREE</span>.<span class="title class_">Mesh</span>(boxGeometry, boxMetarial)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        scene.<span class="title function_">add</span>(box)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        renderer.<span class="title function_">setAnimationLoop</span>(animate)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        </span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        <span class="keyword">function</span> <span class="title function_">animate</span>(<span class="params"></span>)&#123;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">          renderer.<span class="title function_">render</span>(scene,camera)</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">        &#125;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">      &#125;,</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml">    &#125;;</span></span></span><br><span class="line"><span class="language-javascript"><span class="language-xml"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></div></div>
+
+<h1 id="Postprocessing"><a href="#Postprocessing" class="headerlink" title="Postprocessing"></a>Postprocessing</h1><h2 id="UnrealBloomPass无法渲染透明通道"><a href="#UnrealBloomPass无法渲染透明通道" class="headerlink" title="UnrealBloomPass无法渲染透明通道"></a>UnrealBloomPass无法渲染透明通道</h2><div class="tag-plugin note" ><div class="title"><strong>问题描述</strong></div><div class="body"><p>大屏项目中有个模块，需要绘制背景透明的3D场景，里面还有泛光效果，<br>因此我使用setOpacity+UnrealBloomPass的方式来实现，<br>但是实际渲染出来发现场景背景始终是黑色的，<br>关闭UnrealBloomPass发现透明背景恢复正常。<br>看来问题出在UnrealBloomPass上</p></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>解决方法</strong></div><div class="body"><p>参考：</p><ul><li><a target="_blank" rel="noopener" href="https://discourse.threejs.org/t/unrealbloompass-makes-background-black/38994">UnrealBloomPass makes background black</a></li><li><a target="_blank" rel="noopener" href="https://github.com/mrdoob/three.js/issues/14104#issuecomment-1088395025">Unreal Bloom and Renderer Transparency issue</a></li></ul><p>当前版本的three中，UnrealBloomPass确实不支持透明通道渲染，<br>但是这个老哥改了几行UnrealBloomPass.js里的代码：<a target="_blank" rel="noopener" href="https://github.com/Mugen87/three.js/commit/551e7b5640b76e0e966b40e1cf9b2a1cb7122e95">改动详情</a></p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./assets/image/unrealBloomPass_transparent.png" fancybox="true"/></div></div><p>实际上就是把材质的transparent打开，<br>计算纹理的时候加入alpha通道的数值，</p><p>但是这老哥也在底下说了：</p><blockquote><p>unrealBloomPass的泛光效果和html元素无法很好的融合在一起，不建议使用。</p></blockquote><p>这个issues底下还有个解决方案，用到的是shaderPass的方式：<a target="_blank" rel="noopener" href="https://threejs.org/examples/?q=bloo#webgl_postprocessing_unreal_bloom_selective">selective bloom example</a></p><p>我一开始也想到用这个方法，即unrealBloomPass只渲染到指定图层部位，看来是可行的</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./assets/image/透明通道Bloom.gif" fancybox="true"/></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/notes/VSCode.html">VSCode</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/notes/Html.html">html</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

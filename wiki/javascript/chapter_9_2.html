@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>JavaScript：9.2 代理捕获器与反射方法 - E-Duck</title>
+
+  
+    <meta name="description" content="代理可以捕获13种不同的基本操作。这些操作各自有不同的反射API方法、参数、关联ECMAScript操作和不变式。 9.2.1 get()12345678const myTarget &#x3D; &amp;#123;&amp;#125;;const proxy &#x3D; new Proxy(myTarget,&amp;#123;  get(target, property, receiver) &amp;#123;     console.l">
+<meta property="og:type" content="website">
+<meta property="og:title" content="9.2 代理捕获器与反射方法">
+<meta property="og:url" content="http://eletricduck.com/wiki/javascript/chapter_9_2.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="代理可以捕获13种不同的基本操作。这些操作各自有不同的反射API方法、参数、关联ECMAScript操作和不变式。 9.2.1 get()12345678const myTarget &#x3D; &amp;#123;&amp;#125;;const proxy &#x3D; new Proxy(myTarget,&amp;#123;  get(target, property, receiver) &amp;#123;     console.l">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-13T09:48:44.627Z">
+<meta property="article:modified_time" content="2023-12-13T09:48:44.627Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/javascript/index.html"><div class="main" ff="title">JavaScript</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">第1章</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/index.html#start"><span class="toc-text">什么是JavaScript</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第8章</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_8.html"><span class="toc-text">对象、类与面向对象编程</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第9章 代理与反射</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_9_1.html"><span class="toc-text">9.1 代理基础</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/javascript/chapter_9_2.html"><span class="toc-text">9.2 代理捕获器与反射方法</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-1-get"><span class="toc-text">9.2.1 get()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-2-set"><span class="toc-text">9.2.2 set()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-3-has"><span class="toc-text">9.2.3 has()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-4-defineProperty"><span class="toc-text">9.2.4 defineProperty()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-5-getOwnPropertyDescriptor"><span class="toc-text">9.2.5 getOwnPropertyDescriptor()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-6-deleteProperty"><span class="toc-text">9.2.6 deleteProperty()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-7-ownKeys"><span class="toc-text">9.2.7 ownKeys()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-8-getPrototypeOf"><span class="toc-text">9.2.8 getPrototypeOf()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-9-setPrototypeOf"><span class="toc-text">9.2.9 setPrototypeOf()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-10-isExtensible"><span class="toc-text">9.2.10 isExtensible()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-11-preventExtensions"><span class="toc-text">9.2.11 preventExtensions()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-12-apply"><span class="toc-text">9.2.12 apply()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#9-2-13-construct"><span class="toc-text">9.2.13 construct()</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_9_3.html"><span class="toc-text">9.3 代理模式</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第10章 函数</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_1.html"><span class="toc-text">10.1 函数语法</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_2.html"><span class="toc-text">10.2 函数参数</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_3.html"><span class="toc-text">10.3 函数特性</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_10_4.html"><span class="toc-text">10.4 函数调用技巧</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第11章 期约与异步函数</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_1.html"><span class="toc-text">11.1 异步编程</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_2.html"><span class="toc-text">11.2 期约</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_11_3.html"><span class="toc-text">11.3 异步函数</span></a></div></div><div class="widget-header cap dis-select"><span class="name">第12章 BOM</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_1.html"><span class="toc-text">window对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_2.html"><span class="toc-text">location对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_3.html"><span class="toc-text">navigator对象</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/javascript/chapter_12_4.html"><span class="toc-text">screen对象/history对象</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/javascript/index.html">JavaScript</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-13T09:48:44.627Z">2023-12-13</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>9.2 代理捕获器与反射方法</span></h1>
+  <p>代理可以捕获13种不同的基本操作。<br>这些操作各自有不同的反射API方法、参数、关联ECMAScript操作和不变式。</p>
+<h1 id="9-2-1-get"><a href="#9-2-1-get" class="headerlink" title="9.2.1 get()"></a>9.2.1 get()</h1><div class="tag-plugin note" color="red"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget,&#123;</span><br><span class="line">  <span class="title function_">get</span>(<span class="params">target, property, receiver</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;get&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">get</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.<span class="property">foo</span>; <span class="comment">//getS</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 获取属性值的操作</li>
+<li><strong>反射API：</strong> <em>Reflect.get()</em></li>
+<li><strong>返回值：</strong> 无返回值</li>
+<li><strong>拦截的操作：</strong> <ul>
+<li><em>proxy.property</em></li>
+<li><em>proxy[property]</em></li>
+<li><em>Object.create(proxy)[property]</em></li>
+<li><em>Reflect.get(proxy, property, receiver)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target:</em> 目标对象</li>
+<li><em>property:</em> 字符串键属性</li>
+<li><em>receiver:</em> 代理对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong><ul>
+<li>target.property不可写且不可配置，get返回值必须匹配target.property</li>
+<li>target.property不可配置且[[Get]]&#x3D;undefined，get返回值也必须是undefined</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-2-set"><a href="#9-2-2-set" class="headerlink" title="9.2.2 set()"></a>9.2.2 set()</h1><div class="tag-plugin note" color="orange"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">set</span>(<span class="params">target, property, value, reciever</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;set&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">set</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line">proxy.<span class="property">foo</span> = <span class="string">&#x27;bar&#x27;</span>; <span class="comment">//set</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在设置属性值的操作中被调用</li>
+<li><strong>反射API：</strong> <em>Reflect.set()</em></li>
+<li><strong>返回值：</strong> <ul>
+<li><em>true</em> 设置成功 </li>
+<li><em>false</em> 设置失败，strict模式下会抛出TypeError</li>
+</ul>
+</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>proxy.property &#x3D; value</em></li>
+<li><em>proxy[property] &#x3D; value</em></li>
+<li><em>Object.create(proxy)[property] &#x3D; value</em></li>
+<li><em>Reflect.set(proxy, property, value, receiver)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>property</em> 键属性</li>
+<li><em>value</em> 属性值</li>
+<li><em>receiver</em> 接收赋值的对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong><ul>
+<li>target.property不可写且不可配置，不能修改目标属性值</li>
+<li>target.property不可配置且[[Set]] &#x3D; undefined，不能修改目标属性值</li>
+<li>strict模式下，return false会抛出TypeError</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-3-has"><a href="#9-2-3-has" class="headerlink" title="9.2.3 has()"></a>9.2.3 has()</h1><div class="tag-plugin note" color="yellow"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">has</span>(<span class="params">target, property</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;has&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">has</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="string">&#x27;foo&#x27;</span> <span class="keyword">in</span> proxy; <span class="comment">//has </span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在in操作符中被调用</li>
+<li><strong>反射API：</strong> <em>Reflect.has()</em></li>
+<li><strong>返回值：</strong> 必须为Boolean，表示属性是否存在</li>
+<li><strong>拦截的操作：</strong> <ul>
+<li><em>property in proxy</em></li>
+<li><em>property in Obejct.create(proxy)</em></li>
+<li><em>with(proxy) {(property);}</em></li>
+<li><em>Reflect.has(proxy, property)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>property</em> 键属性</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong><ul>
+<li>target.property存在且不可配置，return true</li>
+<li>target.property存在且目标对象不可扩展，return true</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-4-defineProperty"><a href="#9-2-4-defineProperty" class="headerlink" title="9.2.4 defineProperty()"></a>9.2.4 defineProperty()</h1><div class="tag-plugin note" color="green"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">defineProperty</span>(<span class="params">target, property, descriptor</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;defineProperty&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">defineProperty</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// defineProperty</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(proxy, <span class="string">&#x27;foo&#x27;</span>, &#123; <span class="attr">value</span>: <span class="string">&#x27;bar&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在 <em>Obejct.defineProperty</em> 中被调用</li>
+<li><strong>反射API：</strong> <em>Reflect.defineProperty()</em></li>
+<li><strong>返回值：</strong> Boolean，表示属性是否成功定义</li>
+<li><strong>拦截的操作：</strong> <ul>
+<li><em>Object.defineProperty(proxy, property, descriptor)</em></li>
+<li><em>Reflect.defineProperty(proxy, property, descriptor)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>property</em> 键属性</li>
+<li><em>descriptor</em> 一个包含可选的 <em>enumerable、configurable、writable、value、get、set</em> 的对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong><ul>
+<li>target.property[[Configurable]] &#x3D; false，无法定义属性</li>
+<li>target.property[[Configurable]] &#x3D; true，不能添加不可配置的同名属性</li>
+<li>target.property[[Configurable]] &#x3D; false，不能添加可配置同名属性</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-5-getOwnPropertyDescriptor"><a href="#9-2-5-getOwnPropertyDescriptor" class="headerlink" title="9.2.5 getOwnPropertyDescriptor()"></a>9.2.5 getOwnPropertyDescriptor()</h1><div class="tag-plugin note" color="cyan"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">getOwnPropertyDescriptor</span>(<span class="params">target, property</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;getOwnPropertyDescriptor&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">getOwnPropertyDescriptor</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// getOwnPropertyDescriptor</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptor</span>(proxy, <span class="string">&#x27;foo&#x27;</span>);</span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在 <em>Object.getOwnPropertyDescriptor()</em> 中被调用</li>
+<li><strong>反射API：</strong> <em>Reflect.getOwnPropertyDescriptor()</em></li>
+<li><strong>返回值：</strong> 必须返回Object，属性不存在时返回undefined</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.getOwnPropertyDescriptor(proxy, property)</em></li>
+<li><em>Reflect.getOwnPropertyDescriptor(proxy, property)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>property</em> 键属性</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong><ul>
+<li>target.property存在<ul>
+<li>target.property可配置，返回表示该属性可配置的对象</li>
+<li>target.property不可配置，返回表示该属性存在的对象</li>
+<li>target可扩展，返回一个该属性存在的对象</li>
+<li>target不可扩展，返回undefined表示该属性不存在</li>
+</ul>
+</li>
+<li>target.property不存在，不能返回表示该属性可配置的对象</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-6-deleteProperty"><a href="#9-2-6-deleteProperty" class="headerlink" title="9.2.6 deleteProperty()"></a>9.2.6 deleteProperty()</h1><div class="tag-plugin note" color="blue"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">deleteProperty</span>(<span class="params">target,property</span>) &#123; </span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;delete&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">deleteProperty</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">delete</span> proxy.<span class="property">foo</span>; <span class="comment">//delete</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在delete操作符中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.deleteProperty()</em></li>
+<li><strong>返回值：</strong> <em>Boolean</em> 表示删除是否成功</li>
+<li><strong>拦截的操作：</strong> <ul>
+<li><em>delete proxy.property</em></li>
+<li><em>delete proxy[property]</em></li>
+<li><em>Reflect.deleteProperty(proxy, property)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>property</em> 键属性</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> target.property存在且不可配置则不能删除</li>
+</ul>
+<h1 id="9-2-7-ownKeys"><a href="#9-2-7-ownKeys" class="headerlink" title="9.2.7 ownKeys()"></a>9.2.7 ownKeys()</h1><div class="tag-plugin note" color="red"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">ownKeys</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;ownKeys&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">ownKeys</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(proxy); <span class="comment">//ownKeys</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在Object.keys及类似方法中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.ownKeys()</em></li>
+<li><strong>返回值：</strong> <em>String&#x2F;Symbol</em> 可枚举对象</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.getOwnPropertyNames(proxy)</em></li>
+<li><em>Object.getOwnPropertySymbols(proxy)</em></li>
+<li><em>Object.keys(proxy)</em></li>
+<li><em>Reflect.ownKeys(proxy)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> <ul>
+<li>返回的可枚举对象必须包含target所有不可配置的自有property</li>
+<li>如果target不可扩展，返回的可枚举对象必须准确包含自有属性键</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-8-getPrototypeOf"><a href="#9-2-8-getPrototypeOf" class="headerlink" title="9.2.8 getPrototypeOf()"></a>9.2.8 getPrototypeOf()</h1><div class="tag-plugin note" color="purple"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">getPrototypeOf</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;getPrototypeOf&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">getPrototypeOf</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// getPrototypeOf</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(proxy);</span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在<em>Object.getPropertyOf</em>中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.getPropertyOf()</em></li>
+<li><strong>返回值：</strong> <em>Object&#x2F;null</em> </li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.getPrototypeOf(proxy)</em></li>
+<li><em>Reflect.getPrototypeOf(proxy)</em></li>
+<li><em>proxy.__proto__</em></li>
+<li><em>Object.prototype.isPrototypeOf(proxy)</em></li>
+<li><em>proxy instanceof Object</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> 若target不可扩展，proxy和target的getPrototypeOf值相等</li>
+</ul>
+<h1 id="9-2-9-setPrototypeOf"><a href="#9-2-9-setPrototypeOf" class="headerlink" title="9.2.9 setPrototypeOf()"></a>9.2.9 setPrototypeOf()</h1><div class="tag-plugin note" color="orange"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">setPrototypeOf</span>(<span class="params">target, prototype</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;setPrototypeOf&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">setPrototypeOf</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// setPrototypeOf</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(proxy, <span class="title class_">Object</span>);</span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在<em>Object.setPrototypeOf</em>中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.setPropertyOf()</em></li>
+<li><strong>返回值：</strong> <em>Boolean</em> 表示原型赋值是否成功</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.setPrototypeOf(proxy)</em></li>
+<li><em>Reflect.setPrototypeOf(proxy)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>prototype</em> 代替原型，顶级原型则为null</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> 若target不可扩展，唯一有效的prototype参数就是Object.getPrototypeOf(target)返回值</li>
+</ul>
+<h1 id="9-2-10-isExtensible"><a href="#9-2-10-isExtensible" class="headerlink" title="9.2.10 isExtensible()"></a>9.2.10 isExtensible()</h1><div class="tag-plugin note" color="yellow"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">isExtensible</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;isExtensible&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">isExtensible</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">isExtensible</span>(proxy); <span class="comment">//isExtensible</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在<em>Object.isExtensible</em>中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.isExtensible()</em></li>
+<li><strong>返回值：</strong> <em>Boolean</em> 表示target是否可扩展</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.isExtensible(proxy)</em></li>
+<li><em>Reflect.isExtensible(proxy)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> <ul>
+<li>target可扩展，return true</li>
+<li>target不可扩展，return false</li>
+</ul>
+</li>
+</ul>
+<h1 id="9-2-11-preventExtensions"><a href="#9-2-11-preventExtensions" class="headerlink" title="9.2.11 preventExtensions()"></a>9.2.11 preventExtensions()</h1><div class="tag-plugin note" color="green"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">preventExtensions</span>(<span class="params">target</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;preventExtensions&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">preventExtensions</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//preventExtensions</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">preventExtensions</span>(proxy);</span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在<em>Object.preventExtensions</em>中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.preventExtensions()</em></li>
+<li><strong>返回值：</strong> <em>Boolean</em> 表示target是否不可扩展</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>Object.preventExtensions(proxy)</em></li>
+<li><em>Reflect.preventExtensions(proxy)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> 必须返回 !Object.isExtensible(proxy)</li>
+</ul>
+<h1 id="9-2-12-apply"><a href="#9-2-12-apply" class="headerlink" title="9.2.12 apply()"></a>9.2.12 apply()</h1><div class="tag-plugin note" color="cyan"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">myTarget</span> = (<span class="params"></span>) =&gt; &#123; &#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">apply</span>(<span class="params">target, thisArg, ...argumentsList</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;apply&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">apply</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="title function_">proxy</span>(); <span class="comment">//apply</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在调用函数时被调用</li>
+<li><strong>反射API：</strong> <em>Reflect.apply()</em></li>
+<li><strong>返回值：</strong> 无限制</li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>proxy(…argumentsList)</em></li>
+<li><em>Function.prototype.apply(thisArg, argumentsList)</em></li>
+<li><em>Function.prototype.call(thisArg, …argumentsList)</em></li>
+<li><em>Reflect.apply(target, thisArgument, argumentsList)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>thisArg</em> 调用函数时this参数</li>
+<li><em>argumentsList</em> 调用函数时参数列表</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> target必须是函数对象</li>
+</ul>
+<h1 id="9-2-13-construct"><a href="#9-2-13-construct" class="headerlink" title="9.2.13 construct()"></a>9.2.13 construct()</h1><div class="tag-plugin note" color="blue"><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> myTarget = <span class="keyword">function</span> (<span class="params"></span>) &#123; &#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="title class_">Proxy</span>(myTarget, &#123;</span><br><span class="line">  <span class="title function_">construct</span>(<span class="params">target, argumentsList, newTarget</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;construct&#x27;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Reflect</span>.<span class="title function_">construct</span>(...<span class="variable language_">arguments</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">new</span> proxy; <span class="comment">//construct</span></span><br></pre></td></tr></table></figure></div></div>
+<ul>
+<li><strong>调用场景：</strong> 在new操作符中调用</li>
+<li><strong>反射API：</strong> <em>Reflect.construct()</em></li>
+<li><strong>返回值：</strong> <em>Object</em></li>
+<li><strong>拦截的操作：</strong><ul>
+<li><em>new proxy(…argumentsList)</em></li>
+<li><em>Reflect.construct(target, argumentsList, newTarget)</em></li>
+</ul>
+</li>
+<li><strong>捕获器处理程序参数：</strong><ul>
+<li><em>target</em> 目标对象</li>
+<li><em>argumentsList</em> 传给目标构造函数的参数列表</li>
+<li><em>newTarget</em> 最初被调用的构造函数</li>
+</ul>
+</li>
+<li><strong>捕获器不变式：</strong> target必须可以用做构造函数</li>
+</ul>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/javascript/chapter_9_1.html">9.1 代理基础</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/javascript/chapter_9_3.html">9.3 代理模式</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

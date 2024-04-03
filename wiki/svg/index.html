@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>svg：svg学习 - E-Duck</title>
+
+  
+    <meta name="description" content="24个示例 Hunor Márton Borbély 原视频地址 b站搬运地址  在html5之后，html中可以直接书写svg，无需再将svg标签单独拉出。 svg和html不能混用标签 svg标签属性width&#x2F;height 外部尺寸viewBox( sx, sy, w, h) 内部尺寸sx&#x2F;sy 左上角起始坐标w&#x2F;h 宽度高度坐标系 左上角开始（0, 0）右下角">
+<meta property="og:type" content="website">
+<meta property="og:title" content="svg学习">
+<meta property="og:url" content="http://eletricduck.com/wiki/svg/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="24个示例 Hunor Márton Borbély 原视频地址 b站搬运地址  在html5之后，html中可以直接书写svg，无需再将svg标签单独拉出。 svg和html不能混用标签 svg标签属性width&#x2F;height 外部尺寸viewBox( sx, sy, w, h) 内部尺寸sx&#x2F;sy 左上角起始坐标w&#x2F;h 宽度高度坐标系 左上角开始（0, 0）右下角">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-25T01:20:39.598Z">
+<meta property="article:modified_time" content="2023-12-25T01:20:39.598Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/svg/index.html"><div class="main" ff="title">svg</div><div class="sub cap">Learning svg</div></a></div></div>
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">svg</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#24%E4%B8%AA%E7%A4%BA%E4%BE%8B-Hunor-Marton-Borbely"><span class="toc-text">24个示例 Hunor Márton Borbély</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A3%E8%AF%9E%E7%90%83"><span class="toc-text">圣诞球</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A3%E8%AF%9E%E6%A0%91"><span class="toc-text">圣诞树</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%9C%E9%A5%BC%E4%BA%BA"><span class="toc-text">姜饼人</span></a></li></ol></li></ol></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/svg/index.html">svg</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-25T01:20:39.598Z">2023-12-25</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>svg学习</span></h1>
+  <h1 id="24个示例-Hunor-Marton-Borbely"><a href="#24个示例-Hunor-Marton-Borbely" class="headerlink" title="24个示例 Hunor Márton Borbély"></a>24个示例 Hunor Márton Borbély</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=kBT90nwUb_o">原视频地址</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Q34y1H7kN/?spm_id_from=333.788.recommend_more_video.6&vd_source=f55c755ba9aae4a4382a0f9d56858d01">b站搬运地址</a></li>
+</ul>
+<p>在html5之后，html中可以直接书写svg，<br>无需再将svg标签单独拉出。</p>
+<p>svg和html不能混用标签</p>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>svg标签属性</strong></div><div class="body"><ul><li><strong>width&#x2F;height</strong> 外部尺寸</li><li><strong>viewBox( sx, sy, w, h)</strong> 内部尺寸<ul><li><strong>sx&#x2F;sy</strong> 左上角起始坐标</li><li><strong>w&#x2F;h</strong> 宽度高度</li></ul></li><li><strong>坐标系</strong> <ul><li>左上角开始（0, 0）</li><li>右下角结束（100, 100）</li></ul></li></ul><div class="tag-plugin note" ><div class="title"><strong>宽50px，高50px，绘制（0,0）-（100,100）的图像</strong></div><div class="body"><div style="width: 50px;height:50px;background: #000;margin:auto"><svg width='50' height='50' viewBox='0 0 100 100'>    <circle cx="50" cy="50" r="25" fill="#00ff00"></circle></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&#x27;50&#x27;</span> <span class="attr">height</span>=<span class="string">&#x27;50&#x27;</span> <span class="attr">viewBox</span>=<span class="string">&#x27;0 0 100 100&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;50&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;25&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#00ff00&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>宽100px，高100px，绘制（0,0）-（100,100）的图像</strong></div><div class="body"><div style="width: 100px;height:100px;background: #000;margin:auto"><svg width='100' height='100' viewBox='0 0 100 100'>    <circle cx="50" cy="50" r="25" fill="#00ff00"></circle></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">height</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">viewBox</span>=<span class="string">&#x27;0 0 100 100&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;50&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;25&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#00ff00&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>宽100px，高100px，绘制（0,0）-（50,50）的图像</strong></div><div class="body"><div style="width: 100px;height:100px;background: #000;margin:auto"><svg width='100' height='100' viewBox='0 0 50 50'>    <circle cx="50" cy="50" r="25" fill="#00ff00"></circle></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">height</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">viewBox</span>=<span class="string">&#x27;0 0 50 50&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;50&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;25&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#00ff00&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>宽100px，高100px，绘制（-50,-50）-（50,50）的图像</strong></div><div class="body"><div style="width: 100px;height:100px;background: #000;margin:auto"><svg width='100' height='100' viewBox='-50 -50 100 100'>    <circle cx="50" cy="50" r="25" fill="#00ff00"></circle></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span> <span class="attr">width</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">height</span>=<span class="string">&#x27;100&#x27;</span> <span class="attr">viewBox</span>=<span class="string">&#x27;-50 -50 100 100&#x27;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span> <span class="attr">cx</span>=<span class="string">&quot;50&quot;</span> <span class="attr">cy</span>=<span class="string">&quot;50&quot;</span> <span class="attr">r</span>=<span class="string">&quot;25&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#00ff00&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="圣诞球"><a href="#圣诞球" class="headerlink" title="圣诞球"></a>圣诞球</h2><style>
+ .ball{ animation: changeHue infinite 750ms; }
+ @keyframes changeHue { 0%{ filter:hue-rotate(0deg) brightness(1.5); } 100%{ filter:hue-rotate(360deg)  brightness(1.5); } }
+</style>
+<div class="ball" style="min-width: 500px; display: flex; background: repeating-linear-gradient(90deg, #000000 0px, #423434 10px); border-width: 10px; border-style: dotted; border-color: #ff666675 #1c841c7d; box-shadow: inset #ff1fe821 0px 20px 20px 0px, inset #8461ff45 0px 40px 40px 0px, inset #7eff1f45 0px 80px 80px 0px; justify-content: space-around;">
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#79C9C9" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+    <svg width="200" height="200" viewBox="-100 -100 200 200" ><circle cx="0" cy="20" r="70" fill="#d1495b" ></circle><circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle><rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg>
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#F08E90" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+    <svg width="200" height="200" viewBox="-100 -100 200 200" ><circle cx="0" cy="20" r="70" fill="#2F6A51" ></circle><circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle><rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg>
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#7981C9" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+    <svg width="200" height="200" viewBox="-100 -100 200 200" ><circle cx="0" cy="20" r="70" fill="#d1495b" ></circle><circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle><rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg>
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#F08E90" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+    <svg width="200" height="200" viewBox="-100 -100 200 200" ><circle cx="0" cy="20" r="70" fill="#2F6A51" ></circle><circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle><rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg>
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#7981C9" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+    <svg width="200" height="200" viewBox="-100 -100 200 200" ><circle cx="0" cy="20" r="70" fill="#d1495b" ></circle><circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle><rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg>
+    <svg width="100" height="100" viewBox="-50 -50 100 100" ><circle cx="0" cy="10" r="35" fill="#79C9C9" ></circle><circle cx="0" cy="-35.5" r="6" stroke="#f79257" stroke-width="2.5" fill="none" ></circle><rect x="-8.25" y="-32.5" width="17.5" height="10" fill="#f79257" ></rect></svg>
+</div>
+
+<div class="tag-plugin note" color="dark"><div class="body"><div style="width:200px;height:200px;background: #eee;margin:auto"><svg width="200" height="200" viewBox="-100 -100 200 200" >    <circle cx="0" cy="20" r="70" fill="#d1495b" ></circle>    <circle cx="0" cy="-75" r="12" stroke="#f79257" stroke-width="5" fill="none" ></circle>    <rect x="-17.5" y="-65" width="35" height="20" fill="#f79257" ></rect></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span></span></span><br><span class="line"><span class="tag"><span class="attr">xmlns</span>=<span class="string">&quot;http://www.w3.org/2000/svg&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">width</span>=<span class="string">&quot;200&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">height</span>=<span class="string">&quot;200&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">viewBox</span>=<span class="string">&quot;-100 -100 200 200&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span></span></span><br><span class="line"><span class="tag">            <span class="attr">cx</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">cy</span>=<span class="string">&quot;20&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">r</span>=<span class="string">&quot;70&quot;</span></span></span><br><span class="line"><span class="tag">            <span class="attr">fill</span>=<span class="string">&quot;#d1495b&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">circle</span></span></span><br><span class="line"><span class="tag">        <span class="attr">cx</span>=<span class="string">&quot;0&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">cy</span>=<span class="string">&quot;-75&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">r</span>=<span class="string">&quot;12&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">stroke</span>=<span class="string">&quot;#f79257&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">stroke-width</span>=<span class="string">&quot;5&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">fill</span>=<span class="string">&quot;none&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">circle</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rect</span></span></span><br><span class="line"><span class="tag">        <span class="attr">x</span>=<span class="string">&quot;-17.5&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">y</span>=<span class="string">&quot;-65&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">width</span>=<span class="string">&quot;35&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">height</span>=<span class="string">&quot;20&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">fill</span>=<span class="string">&quot;#f79257&quot;</span></span></span><br><span class="line"><span class="tag">    &gt;</span><span class="tag">&lt;/<span class="name">rect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="圣诞树"><a href="#圣诞树" class="headerlink" title="圣诞树"></a>圣诞树</h2><div style="height:100px;overflow:hidden;min-width: 500px;display: flex;background: #53c2d4;justify-content: center;align-items: center;border: 10px solid #948d3e;">
+    <div style="transform: scale(1.5,1.5)"><svg width="200" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(1,1)"><svg width="160" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.7,0.7)"><svg width="120" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.5,0.5)"><svg width="100" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.4,0.4)"><svg width="80" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.4,0.4)"><svg width="80" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.5,0.5)"><svg width="100" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(0.7,0.7)"><svg width="120" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(1,1)"><svg width="160" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+    <div style="transform: scale(1.5,1.5)"><svg width="200" height="230" viewBox="-100 -100 200 230"><polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon><polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon><polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon><rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div>
+</div>
+
+<div class="tag-plugin note" color="dark"><div class="body"><div style="width:200px;height:230px;margin:auto;background: #eee"><svg width="200" height="230" viewBox="-100 -100 200 230" >    <polygon points="0,-20 80,100 -80,100" fill="#234236"></polygon>    <polygon points="0,-60 60,40 -60,40" fill="#0C5C4C"></polygon>    <polygon points="0,-100 40,-20 -40,-20" fill="#38755b"></polygon>    <rect x="-20" y="100" width="40" height="30" fill="brown"></rect></svg></div><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span></span></span><br><span class="line"><span class="tag"><span class="attr">width</span>=<span class="string">&quot;200&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">height</span>=<span class="string">&quot;230&quot;</span></span></span><br><span class="line"><span class="tag"><span class="attr">viewBox</span>=<span class="string">&quot;-100 -100 200 230&quot;</span></span></span><br><span class="line"><span class="tag">&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">&quot;0,-20 80,100 -80,100&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#234236&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">polygon</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">&quot;0,-60 60,40 -60,40&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#0C5C4C&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">polygon</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">polygon</span> <span class="attr">points</span>=<span class="string">&quot;0,-100 40,-20 -40,-20&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;#38755b&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">polygon</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">rect</span> <span class="attr">x</span>=<span class="string">&quot;-20&quot;</span> <span class="attr">y</span>=<span class="string">&quot;100&quot;</span> <span class="attr">width</span>=<span class="string">&quot;40&quot;</span> <span class="attr">height</span>=<span class="string">&quot;30&quot;</span> <span class="attr">fill</span>=<span class="string">&quot;brown&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">rect</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="姜饼人"><a href="#姜饼人" class="headerlink" title="姜饼人"></a>姜饼人</h2>
+  
+
+
+  </article>
+  
+
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
