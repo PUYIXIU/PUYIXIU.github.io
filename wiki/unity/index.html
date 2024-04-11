@@ -35,9 +35,10 @@
 <meta property="og:image" content="http://eletricduck.com/wiki/unity/img/addAnimation.gif">
 <meta property="og:image" content="http://eletricduck.com/wiki/unity/img/coinAnimation.gif">
 <meta property="og:image" content="http://eletricduck.com/wiki/unity/img/coin-colider-box.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/pixelsPerUnit.png">
 <meta property="og:image" content="http://eletricduck.com/wiki/unity/img/TileMap.png">
-<meta property="article:published_time" content="2024-04-01T04:04:59.957Z">
-<meta property="article:modified_time" content="2024-04-01T04:04:59.957Z">
+<meta property="article:published_time" content="2024-04-11T05:31:22.999Z">
+<meta property="article:modified_time" content="2024-04-11T05:31:22.999Z">
 <meta property="article:author" content="Electric Duck">
 <meta property="article:tag" content="blog">
 <meta name="twitter:card" content="summary">
@@ -93,7 +94,7 @@
 
   
   
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/unity/index.html">Unity</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-04-01T04:04:59.957Z">2024-04-01</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/unity/index.html">Unity</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-04-11T05:31:22.999Z">2024-04-11</time></div></div>
 
   <article class='content md wiki'>
   <h1 class="article-title"><span>make a 2D Games</span></h1>
@@ -108,7 +109,7 @@
 
 <div class="tag-plugin note" ><div class="title"><strong>添加物理效果</strong></div><div class="body"><p>如何实现一个硬币掉落在草坪上的动画？</p><ul><li>1、给硬币和草坪添加碰撞体积 <strong>Box Collider 2D</strong></li><li>2、给硬币添加刚体效果 <strong>RigidBody 2D</strong></li><li>3、调整硬币的图层：<ul><li>硬币和草坪因为同样属于foreground图层的元素，因此这里调整的是Order in Layer属性</li></ul></li></ul><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="img/coin-colider-box.gif" fancybox="true"/></div></div></div></div>
 
-<div class="tag-plugin note" ><div class="title"><strong>Tile Pallete 瓦片调色板</strong></div><div class="body"><p>要使用Tile Pallete，首先要创建瓦片地图：</p><blockquote><p>右键Hierachy - 2D Object - TileMap - Rectangular</p></blockquote><p>创建出一个Grid目录下有一个Tilemap对象。</p><p>Grid对象的Cell尺寸是可以修改的：</p><blockquote><p>Grid &gt; Cell Size</p></blockquote><p>打开调色板界面：</p><blockquote><p>Windows &gt; 2D &gt; Tile Pallete</p></blockquote><p>以下两个步骤新建的东西都要存放到对应文件中去</p><ul><li>新建调色板</li><li>拖入Tile瓦片</li></ul><p>接下来就可以用刷子选中瓦片愉快绘制地图。</p><p>这里使用的是256*256的Tile，<br>Tile的尺寸和Grid的尺寸不一致，因此需要修改每个单位包含的像素值：<br>Pixels Per Unit</p><p>Grid的Size是2*2，<br>Tile的尺寸是256 * 256<br>单位的大小就应该为：256&#x2F;2 &#x3D; 128</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/TileMap.png" fancybox="true"/></div></div></div></div>
+<div class="tag-plugin note" ><div class="title"><strong>Tile Pallete 瓦片调色板</strong></div><div class="body"><p>要使用Tile Pallete，首先要创建瓦片地图：</p><blockquote><p>右键Hierachy - 2D Object - TileMap - Rectangular</p></blockquote><p>创建出一个Grid目录下有一个Tilemap对象。</p><p>Grid对象的Cell尺寸是可以修改的：</p><blockquote><p>Grid &gt; Cell Size</p></blockquote><p>打开调色板界面：</p><blockquote><p>Windows &gt; 2D &gt; Tile Pallete</p></blockquote><p>以下两个步骤新建的东西都要存放到对应文件中去</p><ul><li>新建调色板</li><li>拖入Tile瓦片</li></ul><p>接下来就可以用刷子选中瓦片愉快绘制地图。</p><p>这里使用的是256*256的Tile，<br>Tile的尺寸和Grid的尺寸不一致，因此需要修改每个单位包含的像素值：<br>Pixels Per Unit</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/pixelsPerUnit.png" fancybox="true"/></div></div><p>Grid的Size是2*2，<br>Tile的尺寸是256 * 256<br>单位的大小就应该为：256&#x2F;2 &#x3D; 128</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/TileMap.png" fancybox="true"/></div></div></div></div>
 
   
 
