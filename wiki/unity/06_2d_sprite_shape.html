@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Unity：Sprite Shape - E-Duck</title>
+
+  
+    <meta name="description" content="Sprite ShapeSprite Shape官方文档Unity中两种创建地图的方式：Tile Map 通过在grid上铺满瓦片的方式创建地图，灵活度低Sprite Shape 能够对Sprite图做拉伸、平铺等操作，更加灵活使用Sprite Shape，首先要安装它：Window&#x2F;Package Manager&#x2F;Packages:Unity Registry&#x2F;2D">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Sprite Shape">
+<meta property="og:url" content="http://eletricduck.com/wiki/unity/06_2d_sprite_shape.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="Sprite ShapeSprite Shape官方文档Unity中两种创建地图的方式：Tile Map 通过在grid上铺满瓦片的方式创建地图，灵活度低Sprite Shape 能够对Sprite图做拉伸、平铺等操作，更加灵活使用Sprite Shape，首先要安装它：Window&#x2F;Package Manager&#x2F;Packages:Unity Registry&#x2F;2D">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/SpriteAssets.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/CloseSpriteShapeProfile.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/OpenSpriteShape.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/SpriteEdit.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/OpenSpriteShape_SpriteEdit.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/EdgeCollider.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/edgeCollider.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/SpriteAngle.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/Corners.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/CloseSpriteShape.gif">
+<meta property="article:published_time" content="2024-04-25T02:24:45.433Z">
+<meta property="article:modified_time" content="2024-04-25T02:24:45.433Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/unity/img/SpriteShape/SpriteAssets.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/unity/index.html"><div class="main" ff="title">Unity</div><div class="sub cap">Learning Unity</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Brackeys Learning</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/index.html#start"><span class="toc-text">make a 2D Games</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/02_2d_movement.html"><span class="toc-text">2D Movement in Unity</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/03_2d_animation.html"><span class="toc-text">2D Animation</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/04_2d_camera.html"><span class="toc-text">2D Camera</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/05_2d_Shooting.html"><span class="toc-text">2D Shooting</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/unity/06_2d_sprite_shape.html"><span class="toc-text">Sprite Shape</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Sprite-Shape"><span class="toc-text">Sprite Shape</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Open-Sprite-Shape"><span class="toc-text">Open Sprite Shape</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Close-Sprite-Shape"><span class="toc-text">Close Sprite Shape</span></a></li></ol></li></ol></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/unity/index.html">Unity</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-04-25T02:24:45.433Z">2024-04-25</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>Sprite Shape</span></h1>
+  <h1 id="Sprite-Shape"><a href="#Sprite-Shape" class="headerlink" title="Sprite Shape"></a>Sprite Shape</h1><div class="tag-plugin note" ><div class="title"><strong>Sprite Shape</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://docs.unity3d.com/Packages/com.unity.2d.spriteshape@9.0/manual/SSProfile.html">官方文档</a></p><p>Unity中两种创建地图的方式：</p><ul><li>Tile Map 通过在grid上铺满瓦片的方式创建地图，灵活度低</li><li>Sprite Shape 能够对Sprite图做拉伸、平铺等操作，更加灵活</li></ul><p>使用Sprite Shape，首先要安装它：<br>Window&#x2F;Package Manager&#x2F;Packages:Unity Registry&#x2F;2D SpriteShape&#x2F;Install</p><p>准备的Sprite精灵图需要进行一些配置：</p><ul><li>Pixels Per Unit : 16</li><li>Filter Mode : Point</li><li>Compression : None</li></ul><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/SpriteAssets.png" fancybox="true"/></div></div></div></div>
+
+
+<h2 id="Open-Sprite-Shape"><a href="#Open-Sprite-Shape" class="headerlink" title="Open Sprite Shape"></a>Open Sprite Shape</h2><div class="tag-plugin note" ><div class="body"><p>open sprite shape比较适合用来做平面</p><div class="tag-plugin note" ><div class="title"><strong>创建 Sprite Shape Profile</strong></div><div class="body"><p>Project菜单&#x2F;Create&#x2F;2D&#x2F;Sprite Shape Profile</p><p>将平面图作为-180°到180°的Sprite图填入，</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/CloseSpriteShapeProfile.png" fancybox="true"/></div></div><p>在Hierarchy树下创建Open Sprite Shape：<br>2D Object&#x2F;Sprite Shape&#x2F;Open Sprite Shape</p><p>将Sprite Shape Controller的Profile设置为刚才创建的Sprite Shape Profile，<br>Edit Spline：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/OpenSpriteShape.gif" fancybox="true"/></div></div><p>这里由于没有对Sprite拉伸的部分进行处理，所以会出现一段一段的情况，<br>需要对Sprite进行Border调整：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/SpriteEdit.png" fancybox="true"/></div></div><p>这样Sprite Shape拉伸部分就会根据调整的部分进行拼接：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/OpenSpriteShape_SpriteEdit.gif" fancybox="true"/></div></div></div></div><div class="tag-plugin note" ><div class="title"><strong>Sprite Shape Collider</strong></div><div class="body"><p>Sprite Shape的Collider使用Edge Collider 2D，</p><p>加入后，需要调整Sprite Shape Controller中的2个属性：</p><ul><li>Update Collider 为true</li><li>调整Offset，不然Collider判定在Edge的中间</li></ul><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/EdgeCollider.png" fancybox="true"/></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/edgeCollider.gif" fancybox="true"/></div></div></div></div></div></div>
+
+<h2 id="Close-Sprite-Shape"><a href="#Close-Sprite-Shape" class="headerlink" title="Close Sprite Shape"></a>Close Sprite Shape</h2><div class="tag-plugin note" ><div class="body"><p>在Close Sprite Shape中，旋转角度不同的Sprite可以选择不同的贴图，</p><p>只需要规定好起始角度，和在这个角度范围内展示的贴图即可：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/SpriteAngle.gif" fancybox="true"/></div></div><p>注意：闭合的Sprite Shape使用Angle Ranges配置四周的贴图，<br>中心贴图需要对Fill Texture进行配置，<br>中心贴图绘制的模式在选择填入的Sprite贴图Inspector中，<br>有一个Weap Mode属性，可以选择Repeat重复。</p><p>Coners设置拐角贴图：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/Corners.png" fancybox="true"/></div></div><p>创建Close Sprite Shape，<br>赋值Profile，最终可以获取到一个可编辑的Close Sprite Shape：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/SpriteShape/CloseSpriteShape.gif" fancybox="true"/></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/unity/05_2d_Shooting.html">2D Shooting</a></div><div class="item" id="next"></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

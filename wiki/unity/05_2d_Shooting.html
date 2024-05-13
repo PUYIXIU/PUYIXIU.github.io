@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Unity：2D Shooting - E-Duck</title>
+
+  
+    <meta name="description" content="子弹 &amp;&amp; 射线实现Shooting的两种方式预制件 prefabs创建Bullet Prefabs，每次射击都创建一个新的子弹实例子弹本体控制射出等动作、伤害、效果等属性射线 raycasts由射击点射出一条射线，检测是否存在碰撞物  开火点 FirePointFirePoint在Player层级下创建空对象FirePoint，用于对开火点坐标进行标注。需要注意的是，在控制角色移">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2D Shooting">
+<meta property="og:url" content="http://eletricduck.com/wiki/unity/05_2d_Shooting.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="子弹 &amp;&amp; 射线实现Shooting的两种方式预制件 prefabs创建Bullet Prefabs，每次射击都创建一个新的子弹实例子弹本体控制射出等动作、伤害、效果等属性射线 raycasts由射击点射出一条射线，检测是否存在碰撞物  开火点 FirePointFirePoint在Player层级下创建空对象FirePoint，用于对开火点坐标进行标注。需要注意的是，在控制角色移">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/FirePointFlip.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/BulletPrefab.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/InstantiateBullet.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/buttonMove.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/BulletCollider.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/raycastCollider.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/LineOption.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/raycastLine.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/Shooting/raycastShooting.gif">
+<meta property="article:published_time" content="2024-04-25T02:24:45.423Z">
+<meta property="article:modified_time" content="2024-04-25T02:24:45.423Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/unity/img/Shooting/FirePointFlip.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/unity/index.html"><div class="main" ff="title">Unity</div><div class="sub cap">Learning Unity</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Brackeys Learning</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/index.html#start"><span class="toc-text">make a 2D Games</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/02_2d_movement.html"><span class="toc-text">2D Movement in Unity</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/03_2d_animation.html"><span class="toc-text">2D Animation</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/04_2d_camera.html"><span class="toc-text">2D Camera</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/unity/05_2d_Shooting.html"><span class="toc-text">2D Shooting</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%90%E5%BC%B9-%E5%B0%84%E7%BA%BF"><span class="toc-text">子弹 &amp;&amp; 射线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BC%80%E7%81%AB%E7%82%B9-FirePoint"><span class="toc-text">开火点 FirePoint</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prefab%E5%B0%84%E5%87%BB"><span class="toc-text">Prefab射击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%AD%90%E5%BC%B9"><span class="toc-text">创建子弹</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%BC%B9%E7%A7%BB%E5%8A%A8"><span class="toc-text">子弹移动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%90%E5%BC%B9%E4%BC%A4%E5%AE%B3"><span class="toc-text">子弹伤害</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Raycast%E5%B0%84%E5%87%BB"><span class="toc-text">Raycast射击</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#raycast%E5%B0%84%E7%BA%BF%E6%A3%80%E6%B5%8B"><span class="toc-text">raycast射线检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%84%E7%BA%BF%E7%BB%98%E5%88%B6"><span class="toc-text">射线绘制</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/06_2d_sprite_shape.html"><span class="toc-text">Sprite Shape</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/unity/index.html">Unity</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-04-25T02:24:45.423Z">2024-04-25</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>2D Shooting</span></h1>
+  <h1 id="子弹-射线"><a href="#子弹-射线" class="headerlink" title="子弹 &amp;&amp; 射线"></a>子弹 &amp;&amp; 射线</h1><div class="tag-plugin note" ><div class="title"><strong>实现Shooting的两种方式</strong></div><div class="body"><ul><li>预制件 prefabs<ul><li>创建Bullet Prefabs，每次射击都创建一个新的子弹实例</li><li>子弹本体控制射出等动作、伤害、效果等属性</li></ul></li><li>射线 raycasts<ul><li>由射击点射出一条射线，检测是否存在碰撞物</li></ul></li></ul></div></div>
+
+<h1 id="开火点-FirePoint"><a href="#开火点-FirePoint" class="headerlink" title="开火点 FirePoint"></a>开火点 FirePoint</h1><div class="tag-plugin note" ><div class="title"><strong>FirePoint</strong></div><div class="body"><p>在Player层级下创建空对象FirePoint，<br>用于对开火点坐标进行标注。</p><p>需要注意的是，在控制角色移动的脚本CharacterController2D中，<br>实现角色水平移动时翻转的函数是这样的：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Flip</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	m_FacingRight = !m_FacingRight; </span><br><span class="line"></span><br><span class="line">	<span class="comment">// Multiply the player&#x27;s x local scale by -1.</span></span><br><span class="line">	Vector3 theScale = transform.localScale; </span><br><span class="line">	theScale.x *= <span class="number">-1</span>; <span class="comment">// 反转x轴缩放</span></span><br><span class="line">	transform.localScale = theScale;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>通过反转Player在x轴方向的缩放值进行翻转。<br>这种方式能够在不影响Player坐标系的情况下对它的贴图进行翻转。<br>但是Player下的FirePoint的坐标系是动态的，<br>在Player进行翻转时，FirePoint坐标系也需要跟随翻转，<br>这样才能保证子弹一直朝Player面向的方向进行射击，<br>通过将Player沿y轴方向旋转180°的方式能够实现这一点：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Flip</span>()</span>&#123;</span><br><span class="line">    m_FacingRight = !m_FacingRight;</span><br><span class="line">    transform.Rotate(<span class="number">0f</span>, <span class="number">180f</span>, <span class="number">0f</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/FirePointFlip.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="Prefab射击"><a href="#Prefab射击" class="headerlink" title="Prefab射击"></a>Prefab射击</h1><div class="tag-plugin note" ><div class="title"><strong>Bullet</strong></div><div class="body"><p>使用prefab方式，就要做bullet的prefab：</p><p>BulletPrefab脚本：</p><ul><li>Bullet 为子弹自定义行为的脚本</li><li>Circle Collider 2D 碰撞体积<ul><li>isTrigger &#x3D; true 仅用于触发</li></ul></li><li>Rigidbody 2D<ul><li>Graivity Scale &#x3D; 0 无重力</li><li>Collision Detection &#x3D; Continuous 持续检测</li><li>Freeze Rotation Z &#x3D; true 无z轴旋转</li></ul></li></ul><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/BulletPrefab.png" fancybox="true"/></div></div><p>将做好的BulletPrefab拖动到Assets目录下，即作为预制件使用。</p></div></div>
+
+<h2 id="创建子弹"><a href="#创建子弹" class="headerlink" title="创建子弹"></a>创建子弹</h2><div class="tag-plugin note" ><div class="title"><strong>射击创建BulletPrefab</strong></div><div class="body"><p>子弹已经做好，那么只要在Player射击的时候创建出子弹即可，<br>因此需要为Player创建新的Weapon脚本，<br>Weapon脚本要实现在用户射击时创建BulletPrefab的功能：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Collections;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> UnityEngine;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Weapon</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Transform firePoint; <span class="comment">// 火点 此处赋值Player下的FirePoint</span></span><br><span class="line">    <span class="keyword">public</span> GameObject bulletPrefab; <span class="comment">// 子弹预制件 此处赋值Bullet预制件</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Fire1&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            Shoot();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 射击</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Shoot</span>()</span> &#123;</span><br><span class="line">        <span class="comment">// 创建预制件</span></span><br><span class="line">        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>创建实例的方法：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建对象 位置 旋转</span></span><br><span class="line">Instantiate(GameObject. position, rotation)</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/InstantiateBullet.gif" fancybox="true"/></div></div></div></div>
+
+<h2 id="子弹移动"><a href="#子弹移动" class="headerlink" title="子弹移动"></a>子弹移动</h2><div class="tag-plugin note" ><div class="title"><strong>子弹移动</strong></div><div class="body"><p>通过为Bullet添加初始速度来时其保持移动，<br>这要通过子弹的Rigidbody2D.velocity属性来控制：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bullet</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> speed = <span class="number">30f</span>;  <span class="comment">// 速度</span></span><br><span class="line">    <span class="keyword">public</span> Rigidbody2D rd;  <span class="comment">// 使用Rigidbody2D.velocity属性，为物体提供初始速度</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;   <span class="comment">// 速度 = 移动方向 * 移动速度</span></span><br><span class="line">        rd.velocity = transform.right * speed;    </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/buttonMove.gif" fancybox="true"/></div></div></div></div>
+
+<h2 id="子弹伤害"><a href="#子弹伤害" class="headerlink" title="子弹伤害"></a>子弹伤害</h2><div class="tag-plugin note" ><div class="title"><strong>子弹伤害</strong></div><div class="body"><p>现在子弹已经能射出，接下来要实现的：</p><ul><li>检测子弹是否碰撞到物体<ul><li>检测到碰撞，产生子弹冲击效果，子弹消失</li><li>碰撞物是否是敌人<ul><li>使敌人，造成伤害</li></ul></li></ul></li><li>敌人脚本要实现的动作<ul><li>收到伤害<ul><li>生命值为0时，死亡</li></ul></li><li>死亡<ul><li>敌人消失</li><li>出现消失特效</li></ul></li></ul></li></ul><div class="tag-plugin note" ><div class="title"><strong>Enemy脚本</strong></div><div class="body"><p>为敌人添加的Enemy脚本如下：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Enemy</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> health = <span class="number">100</span>; <span class="comment">// 生命值</span></span><br><span class="line">    <span class="keyword">public</span> GameObject DeathEffect; <span class="comment">// 死亡效果</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">TakeDamage</span>(<span class="params"><span class="built_in">int</span> damage</span>)</span> &#123;</span><br><span class="line">        health -= damage;</span><br><span class="line">        <span class="keyword">if</span> (health &lt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            Death();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Death</span>()</span> &#123;</span><br><span class="line">        <span class="comment">// Quaternion.identity代表无旋转</span></span><br><span class="line">        Instantiate(DeathEffect, transform.position, Quaternion.identity); </span><br><span class="line">        Destroy(gameObject);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中的TakeDamage方法的调用时机是：当子弹碰撞到Enemy时，<br>这一步在Bullet预制件脚本中进行，<br>因此需要用public暴露出来。</p></div></div><div class="tag-plugin note" ><div class="title"><strong>子弹碰撞检测</strong></div><div class="body"><p>之前已经打开了Bullet预制件Collider2D的isTrigger选项，<br>因此当子弹碰撞到物体时，会触发Unity提供的OnTriggerEnter2D函数，<br>这个函数提供一个Collider2D类的参数，表示碰撞物信息。</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bullet</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> damage = <span class="number">40</span>; <span class="comment">// 伤害</span></span><br><span class="line">    <span class="keyword">public</span> GameObject impactEffect; <span class="comment">// 子弹冲击效果预制件</span></span><br><span class="line">    <span class="comment">// Trigger回调函数</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">OnTriggerEnter2D</span>(<span class="params">Collider2D hitInfo</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 判断碰撞物是否是Enemy</span></span><br><span class="line">        Enemy enemy = hitInfo.GetComponent&lt;Enemy&gt;();</span><br><span class="line">        <span class="keyword">if</span>(enemy != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            enemy.TakeDamage(damage);</span><br><span class="line">        &#125;</span><br><span class="line">        Instantiate(impactEffect, transform.position, transform.rotation); <span class="comment">// 冲击效果</span></span><br><span class="line">        Destroy(gameObject); <span class="comment">// 销毁子弹</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/BulletCollider.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="Raycast射击"><a href="#Raycast射击" class="headerlink" title="Raycast射击"></a>Raycast射击</h1><h2 id="raycast射线检测"><a href="#raycast射线检测" class="headerlink" title="raycast射线检测"></a>raycast射线检测</h2><div class="tag-plugin note" ><div class="title"><strong>raycast</strong></div><div class="body"><p>raycast和prefab不同的地方是：</p><ul><li>prefab碰撞的逻辑需要再子弹上实现</li><li>raycast碰撞的逻辑在Player上就能实现</li></ul><p>为Player添加WeaponRaycast脚本：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeaponRaycast</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> Transform firePoint;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> damage = <span class="number">30</span>;</span><br><span class="line">    <span class="keyword">public</span> GameObject ImpactEffect;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Fire1&quot;</span>)) &#123;</span><br><span class="line">            Shoot();    </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Shoot</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);</span><br><span class="line">        <span class="keyword">if</span> (hitInfo)</span><br><span class="line">        &#123;</span><br><span class="line">            Enemy enemy = hitInfo.transform.GetComponent&lt;Enemy&gt;();</span><br><span class="line">            <span class="keyword">if</span>(enemy != <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                enemy.TakeDamage(damage);</span><br><span class="line">            &#125;</span><br><span class="line">            Instantiate(ImpactEffect,hitInfo.point,Quaternion.identity);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>创建raycast并返回射线探测物：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RaycastHit2D hitInfo = Physics2D.Raycast(firePoint.position, firePoint.right);</span><br></pre></td></tr></table></figure><p>原本在Prefab方法里，会在OnTriggerEnter2D方法中提供一个Collider2D类型的参数，<br>这里对应RaycastHit2D中的参数为：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Enemy enemy = hitInfo.transform.GetComponent&lt;Enemy&gt;();</span><br></pre></td></tr></table></figure><p>而碰撞点的坐标值则从hitInfo.point里取得</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/raycastCollider.gif" fancybox="true"/></div></div></div></div>
+
+<h2 id="射线绘制"><a href="#射线绘制" class="headerlink" title="射线绘制"></a>射线绘制</h2><div class="tag-plugin note" ><div class="title"><strong>Line</strong></div><div class="body"><p>使用Line（Effect&#x2F;Line）来作为射线效果，<br>在Player下创建Line实例，</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/LineOption.png" fancybox="true"/></div></div><p>开启Line的Use World Space属性</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/raycastLine.gif" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>Coroutine射线效果</strong></div><div class="body"><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeaponRaycast</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Start</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        lineRenderer.enabled = <span class="literal">false</span>; <span class="comment">// 开始时关闭射线可见</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Fire1&quot;</span>)) &#123;</span><br><span class="line">            StartCoroutine(Shoot());  <span class="comment">// StartCoroutine调用Shoot</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">IEnumerator <span class="title">Shoot</span>() <span class="comment">// IEnumerator声明</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...碰撞检测略</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 实现射线短暂显示的效果</span></span><br><span class="line">        lineRenderer.enabled = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 实现短暂延时</span></span><br><span class="line">        <span class="function"><span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">new</span> <span class="title">WaitForSeconds</span>(<span class="params"><span class="number">0.01f</span></span>)</span>;</span><br><span class="line"></span><br><span class="line">        lineRenderer.enabled = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/Shooting/raycastShooting.gif" fancybox="true"/></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/unity/04_2d_camera.html">2D Camera</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/unity/06_2d_sprite_shape.html">Sprite Shape</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
