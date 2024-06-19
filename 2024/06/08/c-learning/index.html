@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>c#基础学习 - E-Duck</title>
+
+  
+    <meta name="description" content="基于Unity开发的C#基础">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c#基础学习">
+<meta property="og:url" content="http://eletricduck.com/2024/06/08/c-learning/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="基于Unity开发的C#基础">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/visual-novel.gif">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/wpf.gif">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/solution-project.jpg">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/HelloConsoleApp.jpg">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/HelloWinFormsApp.jpg">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/wpf.gif">
+<meta property="og:image" content="http://eletricduck.com/2024/06/08/c-learning/time-box.gif">
+<meta property="article:published_time" content="2024-06-08T14:12:25.000Z">
+<meta property="article:modified_time" content="2024-06-17T02:35:23.195Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://eletricduck.com/2024/06/08/c-learning/visual-novel.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+<div class="widget-wrap" id="tagcloud"><div class="widget-header cap theme dis-select"><span class="name">标签云</span></div><div class="widget-body fs14"><a href="/tags/web/" style="font-size: 12px;" class="tag -0">web</a></div></div>
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">c#基础学习</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#C-%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%88Brackeys%EF%BC%89"><span class="toc-text">C#编程入门（Brackeys）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#NET-VSCode"><span class="toc-text">.NET &amp;&amp; VSCode</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-Program-in-C"><span class="toc-text">How to Program in C#</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E3%80%8AC-%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E8%AF%A6%E8%A7%A3%E3%80%8B%E2%80%94%E2%80%94%E5%88%98%E9%93%81%E7%8C%9B"><span class="toc-text">《C#语言入门详解》——刘铁猛</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-C-%E8%AF%AD%E8%A8%80%E4%BB%8B%E7%BB%8D"><span class="toc-text">1. C#语言介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-C-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E4%BB%8B%E7%BB%8D"><span class="toc-text">2. C#应用程序介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%B1%BB%E4%B8%8E%E5%90%8D%E7%A7%B0%E7%A9%BA%E9%97%B4"><span class="toc-text">3. 类与名称空间</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E7%B1%BB%E3%80%81%E5%AF%B9%E8%B1%A1%E3%80%81%E7%B1%BB%E6%88%90%E5%91%98%E7%AE%80%E4%BB%8B"><span class="toc-text">4. 类、对象、类成员简介</span></a></li></ol></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-06-08T14:12:25.000Z">2024-06-08</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>c#基础学习</span></h1>
+<h1 id="C-编程入门（Brackeys）"><a href="#C-编程入门（Brackeys）" class="headerlink" title="C#编程入门（Brackeys）"></a>C#编程入门（Brackeys）</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1rF411z7tf/?spm_id_from=333.337.top_right_bar_window_history.content.click&vd_source=f55c755ba9aae4a4382a0f9d56858d01">b站搬运翻译版</a></p>
+<h2 id="NET-VSCode"><a href="#NET-VSCode" class="headerlink" title=".NET &amp;&amp; VSCode"></a>.NET &amp;&amp; VSCode</h2><div class="tag-plugin note" ><div class="title"><strong>安装</strong></div><div class="body"><ul><li>安装.NET框架</li><li>安装VSCode<ul><li>VSCode安装C#插件</li></ul></li></ul><p>控制台输入创建新项目命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnot new</span><br></pre></td></tr></table></figure><p>启动项目命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dotnet run</span><br></pre></td></tr></table></figure><p>自定义项目启动控制台：</p><ul><li>Ctrl+Shift+P打开VSCode控制台</li><li>选择.NET:Generate Assets For Build and Debug</li><li>VSCode自动生成launch.json配制文件<ul><li>修改control属性为externalTerminal</li></ul></li></ul><figure class="highlight c#"><figcaption><span>入口程序Program.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;Hello, World!&quot;</span>);</span><br><span class="line">Console.ReadKey();</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="How-to-Program-in-C"><a href="#How-to-Program-in-C" class="headerlink" title="How to Program in C#"></a>How to Program in C#</h2><div class="tag-plugin note" ><div class="body"><p>在Program.cs中，体验一下C#语法的手感：</p><ul><li>Console.ForegroundColor 设置输出颜色</li><li>Console.Title 设置窗口标题</li><li>Console.WriteLine 输出</li><li>Console.ReadLine 读取用户输入</li><li>Console.ReadKey 读取用户按键</li></ul><details class="tag-plugin folding" color="dark"><summary><span>一篇只用Console的Visual Novel</span></summary><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./visual-novel.gif" fancybox="true"/></div></div><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// See https://aka.ms/new-console-template for more information</span></span><br><span class="line"></span><br><span class="line">Console.Title = <span class="string">&quot;俄罗斯轮盘&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 旁白</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BackVoice</span>(<span class="params"><span class="built_in">string</span> mes</span>)</span>&#123;</span><br><span class="line">Console.ForegroundColor = ConsoleColor.Green;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;旁白：&quot;</span>+ mes +<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 恶魔</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DemonVoice</span>(<span class="params"><span class="built_in">string</span> mes, Boolean stop = <span class="literal">true</span></span>)</span>&#123;</span><br><span class="line">Console.ForegroundColor = ConsoleColor.Red;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;恶魔：&quot;</span>+ mes +<span class="string">&quot;\n&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(stop)&#123;</span><br><span class="line">Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 玩家的声音</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PlayerVoice</span>(<span class="params"><span class="built_in">string</span> mes</span>)</span>&#123;</span><br><span class="line">Console.ForegroundColor = ConsoleColor.Blue;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;你：&quot;</span>+ mes +<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">Console.ReadKey();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 玩家的回答</span></span><br><span class="line"><span class="function"><span class="built_in">string</span> <span class="title">PlayerRes</span>()</span>&#123;</span><br><span class="line">Console.ForegroundColor = ConsoleColor.Yellow;</span><br><span class="line"><span class="built_in">string</span> res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">Console.Write(<span class="string">&quot;你：&quot;</span>);</span><br><span class="line"><span class="keyword">while</span>(res.Trim()==<span class="string">&quot;&quot;</span>)&#123;</span><br><span class="line">res = Console.ReadLine();</span><br><span class="line">&#125;</span><br><span class="line">Console.WriteLine(<span class="string">&quot;&quot;</span>);</span><br><span class="line"><span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BackVoice(<span class="string">&quot;你盯着面前的左轮手枪&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;冷汗直流&quot;</span>);</span><br><span class="line"></span><br><span class="line">DemonVoice(<span class="string">&quot;接下来，该你了，宝贝&quot;</span>);</span><br><span class="line"></span><br><span class="line">BackVoice(<span class="string">&quot;你的眼神在左轮手枪和它之间反复徘徊&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;有一瞬间，你想直接用手枪崩烂它的笑脸&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;但那样做有失风度&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;你擦了把头上的汗，骂道：&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> dirtyWord =  PlayerRes();</span><br><span class="line"></span><br><span class="line">DemonVoice(<span class="string">&quot;嘿嘿嘿......&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;很不错的气势&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;魔鬼阴沉的发笑&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;你攥紧这把沉甸甸的手枪&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;手心湿漉漉的，有些打滑&quot;</span>);</span><br><span class="line"></span><br><span class="line">PlayerVoice(<span class="string">&quot;离远点欣赏，小心血喷你一身&quot;</span>);</span><br><span class="line"></span><br><span class="line">BackVoice(<span class="string">&quot;它用漆黑的目光注视着你，仿佛要将你看穿&quot;</span>);</span><br><span class="line">PlayerVoice(<span class="string">&quot;哼&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;你用眼神蔑着它垂涎欲滴的蠢样&quot;</span>);</span><br><span class="line">PlayerVoice(<span class="string">&quot;反正我都会活下来就是了&quot;</span>);</span><br><span class="line"></span><br><span class="line">DemonVoice(<span class="string">&quot;我很欣赏你的自负...&quot;</span>, <span class="literal">false</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;咔哒......碰！&quot;</span>);</span><br><span class="line">PlayerVoice(<span class="string">&quot;!!!&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;!!!&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;未等它说完，你就叩响了扳机&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;......&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;没有子弹，你还活着，空枪&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;你吐出一口气&quot;</span>);</span><br><span class="line">PlayerVoice(<span class="string">&quot;那么现在，履行诺言的时候到了&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;你将微微颤抖的手放下&quot;</span>);</span><br><span class="line">PlayerVoice(<span class="string">&quot;我要你去杀一个人&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;哼，看来你很清楚怎么和恶魔打交道。&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;告诉我那个人的名字。&quot;</span>);</span><br><span class="line"></span><br><span class="line">BackVoice(<span class="string">&quot;你紧握着手中的枪&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;居于黑暗中的双眼冷静的凝视着远处昏暗的灯光&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;缓缓张口，说出了那个人的名字......&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">string</span> name = PlayerRes();</span><br><span class="line">DemonVoice(<span class="string">&quot;......&quot;</span> + name + <span class="string">&quot;?&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;嘿嘿......&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;你的眼光很不错&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;挑了个折磨起来很有趣的灵魂&quot;</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">BackVoice(<span class="string">&quot;魔鬼的脸上露出阴险的笑容&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;它站起身，缓缓后退&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;三天后，一切如你所愿&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;它丑陋的身影渐渐与身后的黑暗消融在一起&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;嘿嘿嘿......&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;它那古怪而低沉的笑声，也随之变得模糊&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;可怜的羔羊......&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;也许有一天你会后悔这笔交易&quot;</span>);</span><br><span class="line">DemonVoice(<span class="string">&quot;但至少，你现在根本不知道自己都做了些什么。&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;它的身影彻底消失在黑暗之中&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;只留下你一人&quot;</span>);</span><br><span class="line">BackVoice(<span class="string">&quot;还有那回荡在黑暗之中的笑声&quot;</span>);</span><br><span class="line"></span><br><span class="line">Console.ReadKey();</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></details></div></div>
+
+
+<h1 id="《C-语言入门详解》——刘铁猛"><a href="#《C-语言入门详解》——刘铁猛" class="headerlink" title="《C#语言入门详解》——刘铁猛"></a>《C#语言入门详解》——刘铁猛</h1><h2 id="1-C-语言介绍"><a href="#1-C-语言介绍" class="headerlink" title="1. C#语言介绍"></a>1. C#语言介绍</h2><div class="tag-plugin note" ><div class="body"><blockquote><p>编程学习路径：<br>纵向： 语言 → 类库 → 框架<br>横向： 命令行 → 桌面程序 → 设备（平板&#x2F;手机）程序 → Web程序 → 游戏 → …</p></blockquote><p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/visualstudio/ide/not-in-toc/welcome-to-visual-studio-docs?view=vs-2022&f1url=%3FappId%3DDev17IDEF1%26l%3DZH-CN%26k%3Dk(vs.ViewHelp)%26rd%3Dtrue">Visual Studio文档</a><br><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/dotnet/csharp/">C#文档</a></p><div class="tag-plugin note" color="dark"><div class="title"><strong>WPF程序初体验</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./wpf.gif" fancybox="true"/></div></div><p>主窗口代码：</p><figure class="highlight xml"><figcaption><span>title:MainWindow.xaml</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Window</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">Grid</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Grid.ColumnDefinitions</span>&gt;</span><span class="tag">&lt;/<span class="name">Grid.ColumnDefinitions</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Grid.Background</span>&gt;</span><span class="tag">&lt;/<span class="name">Grid.Background</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">TextBox</span> <span class="attr">x:Name</span>=<span class="string">&quot;textBox&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">TextBox</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Button</span> <span class="attr">Click</span>=<span class="string">&quot;Button_Click&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">Button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">Grid</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">Window</span>&gt;</span></span><br></pre></td></tr></table></figure><p>对Button的Click事件进行监听：</p><figure class="highlight c#"><figcaption><span>title:MainWidnow.xaml.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">HelloWPF</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MainWindow</span> : <span class="title">Window</span></span><br><span class="line">  &#123;</span><br><span class="line">        <span class="comment">// 主窗口程序</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">          InitializeComponent();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 文本框输入框文本变化事件</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">TextBox_TextChanged</span>(<span class="params"><span class="built_in">object</span> sender, TextChangedEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 按钮点击事件</span></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Button_Click</span>(<span class="params"><span class="built_in">object</span> sender, RoutedEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">this</span>.textBox1.Text = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="2-C-应用程序介绍"><a href="#2-C-应用程序介绍" class="headerlink" title="2. C#应用程序介绍"></a>2. C#应用程序介绍</h2><div class="tag-plugin note" ><div class="title"><strong>Solution和Project</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./solution-project.jpg" fancybox="true"/></div></div><ul><li>Solution：针对客户需求的解决方案<ul><li>用户需要制作一个管理系统</li></ul></li><li>Project： 解决具体问题采取的方案<ul><li>数据存储？数据库项目</li><li>数据读取&#x2F;表单处理？服务器项目</li><li>网站操作？客户浏览器应用项目</li><li>手机操作？手机端应用项目</li><li>平板操作？平板应用项目</li><li>…</li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>各类C#编写的应用程序</strong></div><div class="body"><details class="tag-plugin folding" color="dark"><summary><span>Console</span></summary><div class="body"><p><strong>Console App</strong> <em>控制台程序</em></p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Console.WriteLine(<span class="string">&quot;Hello World&quot;</span>);</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./HelloConsoleApp.jpg" fancybox="true"/></div></div></div></details><details class="tag-plugin folding" color="green"><summary><span>Windows Forms(Old)</span></summary><div class="body"><p><strong>WinFormsApp</strong> <em>旧版本桌面应用程序</em></p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">HelloWinFormsApp</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">Form1</span> : <span class="title">Form</span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Form1</span>()</span>&#123;</span><br><span class="line">            InitializeComponent();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">HelloButton_Click</span>(<span class="params"><span class="built_in">object</span> sender, EventArgs e</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.HelloTextBox.Text = <span class="string">&quot;Hello World&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./HelloWinFormsApp.jpg" alt="color:dark" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">color:dark</span></div></div></div></details><details class="tag-plugin folding" ><summary><span>WPF（Windows Presentation Foundation）</span></summary><div class="body"><p><strong>WPF</strong> <em>新版桌面应用程序</em></p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./wpf.gif" fancybox="true"/></div></div> </div></details><ul><li>ASP.NET Web Forms(Old) 网站应用</li><li>ASP.NET MVC(Model-View-Controller) 网站应用</li><li>Windows Store Application 平板应用</li><li>Windows Phone Application 手机应用</li><li>Cloud（Windows Azure） 云计算平台</li><li>WF（Workflow Foundation）工作流</li><li>WCF 纯网络服务</li></ul></div></div>
+
+<h2 id="3-类与名称空间"><a href="#3-类与名称空间" class="headerlink" title="3. 类与名称空间"></a>3. 类与名称空间</h2><div class="tag-plugin note" ><div class="title"><strong>class && namespace</strong></div><div class="body"><ul><li>c#中，程序作为类实现，因此需要将入口函数包在类中</li><li>命名空间<ul><li>方便实现类间的依赖关系</li><li>防止命名冲突</li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>类库引用</strong></div><div class="body"><ul><li>DLL（Dynamic Link Library 动态链接库&#x2F;类库）引用<ul><li>黑盒引用，无源代码   </li><li>NuGet，自动化维护类依赖关系</li></ul></li><li>项目引用<ul><li>白盒引用，有源代码</li></ul></li></ul><div class="tag-plugin note" color="dark"><div class="title"><strong>项目引用</strong></div><div class="body"><p>下面是一个类库（.NET Framework）的主代码</p><figure class="highlight c#"><figcaption><span>title:Calculator类</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Text;</span><br><span class="line"><span class="keyword">using</span> System.Threading.Tasks;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">Tools</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Calculator</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 加法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Add</span>(<span class="params"><span class="built_in">double</span> a, <span class="built_in">double</span> b</span>)</span> &#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line">        <span class="comment">// 减法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Sub</span>(<span class="params"><span class="built_in">double</span> a, <span class="built_in">double</span> b</span>)</span> &#123; <span class="keyword">return</span> a - b; &#125;</span><br><span class="line">        <span class="comment">// 乘法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Mul</span>(<span class="params"><span class="built_in">double</span> a, <span class="built_in">double</span> b</span>)</span> &#123; <span class="keyword">return</span> a * b; &#125;</span><br><span class="line">        <span class="comment">// 除法</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">double</span> <span class="title">Div</span>(<span class="params"><span class="built_in">double</span> a, <span class="built_in">double</span> b</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (b == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> Double.PositiveInfinity;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> a / b;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>在需要引用该类的主项目所在的Solution中，将类库项目添加进去，引入类库依赖，<br>之后再主项目中使用该类：</p><figure class="highlight c#"><figcaption><span>title:Program.cs</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Tools;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">ConsoleApp</span>&#123;</span><br><span class="line">    <span class="keyword">internal</span> <span class="keyword">class</span> <span class="title">Program</span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">double</span> result = Calculator.Add(<span class="number">1.14</span>, <span class="number">4.15</span>);</span><br><span class="line">            Console.WriteLine(result);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="4-类、对象、类成员简介"><a href="#4-类、对象、类成员简介" class="headerlink" title="4. 类、对象、类成员简介"></a>4. 类、对象、类成员简介</h2><div class="tag-plugin note" ><div class="title"><strong>实例和对象</strong></div><div class="body"><p>两者的区别主要在语境上：</p><ul><li>在讨论类在现实世界中的对应时，一般称为对象</li><li>在讨论类在程序中的对应时，一般称为实例</li></ul></div></div>
+
+<div class="tag-plugin note" ><div class="body"><p>C#中类的三要素：</p><ul><li>属性 Property</li><li>方法 Function</li><li>事件 Event</li></ul><p>Visual Studio中，将光标放在类上，点击F1，会自动跳转到类对应的MSDN文档上</p><div class="tag-plugin note" ><div class="title"><strong>使用Event实现桌面时钟</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./time-box.gif" fancybox="true"/></div></div><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System.Windows.Threading;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">partial</span> <span class="keyword">class</span> <span class="title">MainWindow</span> : <span class="title">Window</span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MainWindow</span>()</span>&#123;</span><br><span class="line">        InitializeComponent();</span><br><span class="line">        <span class="comment">// 创建定时器</span></span><br><span class="line">        DispatchTimer timer = <span class="keyword">new</span> DispatchTimer(); </span><br><span class="line">        <span class="comment">// 配置定时器间隔时间</span></span><br><span class="line">        timer.Interval = TimeSpan.FromSeconds(<span class="number">1</span>);</span><br><span class="line">        <span class="comment">// 定时事件</span></span><br><span class="line">        timer.Tick += Time_Tick;</span><br><span class="line">        <span class="comment">// 开启定时器</span></span><br><span class="line">        timer.Start();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 定时事件</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">Time_Tick</span>(<span class="params"><span class="built_in">object</span>? sender, EventArgs e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.TimeTextBox.Text = DateTime.Now.ToString()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>静态成员与实例成员</strong></div><div class="body"><ul><li>静态成员：类的成员</li><li>实例成员：对象的成员</li></ul></div></div>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/06/17/mongodb/">mongodb + mongoose</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/05/13/liquid-scatter/">企业可视化大屏：基于ECharts实现的水球气泡散点图</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
