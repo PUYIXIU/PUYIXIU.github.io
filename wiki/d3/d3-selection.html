@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>D3：d3-selection - E-Duck</title>
+
+  
+    <meta name="description" content="d3-selectionSelection elementsModifying elementsJoining dataHanding eventsControl flowLocal variablesNamespaces  Selection elements dom选择器d3.selection()选中根dom在原型链上添加自定义方法 d3.select(selector)选中第一个selec">
+<meta property="og:type" content="website">
+<meta property="og:title" content="d3-selection">
+<meta property="og:url" content="http://eletricduck.com/wiki/d3/d3-selection.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="d3-selectionSelection elementsModifying elementsJoining dataHanding eventsControl flowLocal variablesNamespaces  Selection elements dom选择器d3.selection()选中根dom在原型链上添加自定义方法 d3.select(selector)选中第一个selec">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-12-28T12:11:20.950Z">
+<meta property="article:modified_time" content="2023-12-28T12:11:20.950Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/d3/index.html"><div class="main" ff="title">D3</div><div class="sub cap">Learning d3</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Interaction</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/d3/index.html#start"><span class="toc-text">d3-zoom</span></a></div></div><div class="widget-header cap dis-select"><span class="name">Visualization</span></div><div class="widget-body fs14"><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/d3/d3-selection.html"><span class="toc-text">d3-selection</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Selection-elements-dom%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-text">Selection elements dom选择器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-selection"><span class="toc-text">d3.selection()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-select-selector"><span class="toc-text">d3.select(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-selectAll-selector"><span class="toc-text">d3.selectAll(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-select-selector"><span class="toc-text">selection.select(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-selectAll-selector"><span class="toc-text">selection.selectAll(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-filter-filter"><span class="toc-text">selection.filter(filter)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-selectChild-selector"><span class="toc-text">selection.selectChild(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-selectChildren-selector"><span class="toc-text">selection.selectChildren(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-selection"><span class="toc-text">selection.selection()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-matcher-selector"><span class="toc-text">d3.matcher(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-selector-selector"><span class="toc-text">d3.selector(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-selectorAll-selector"><span class="toc-text">d3.selectorAll(selector)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-window-node"><span class="toc-text">d3.window(node)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-style-node-name"><span class="toc-text">d3.style(node, name)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Modifying-elements-%E4%BF%AE%E6%94%B9%E5%85%83%E7%B4%A0"><span class="toc-text">Modifying elements 修改元素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-attr-name-value"><span class="toc-text">selection.attr(name, value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-classed-names-value"><span class="toc-text">selection.classed(names, value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-style-name-value-priority"><span class="toc-text">selection.style(name, value, priority)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-text-value"><span class="toc-text">selection.text(value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-html-value"><span class="toc-text">selection.html(value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-append-type"><span class="toc-text">selection.append(type)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-insert-type-before"><span class="toc-text">selection.insert(type, before)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-remove"><span class="toc-text">selection.remove()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-clone-deep"><span class="toc-text">selection.clone(deep)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-sort-compare"><span class="toc-text">selection.sort(compare)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-order"><span class="toc-text">selection.order()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-raise"><span class="toc-text">selection.raise()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-lower"><span class="toc-text">selection.lower()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#create-name"><span class="toc-text">create(name)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#creator-name"><span class="toc-text">creator(name)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Joining-data-%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-text">Joining data 数据绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-data-data-key"><span class="toc-text">selection.data(data, key)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-join-enter-update-exit"><span class="toc-text">selection.join(enter, update, exit)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-enter-x2F-update-x2F-exit"><span class="toc-text">selection.enter&#x2F;update&#x2F;exit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-datum-value"><span class="toc-text">selection.datum(value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-merge-other"><span class="toc-text">selection.merge(other)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Handling-events-%E4%BA%8B%E4%BB%B6%E7%9B%91%E5%90%AC"><span class="toc-text">Handling events 事件监听</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-on-typenames-listener-options"><span class="toc-text">selection.on(typenames, listener, options)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-dispatch-type-parameters"><span class="toc-text">selection.dispatch(type, parameters)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-pointer-event-target"><span class="toc-text">d3.pointer(event, target)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-pointers-event-target"><span class="toc-text">d3.pointers(event, target)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Control-flow-%E6%B5%81%E5%90%91%E6%8E%A7%E5%88%B6"><span class="toc-text">Control flow 流向控制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-each-function"><span class="toc-text">selection.each(function)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-call-function-%E2%80%A6arguments"><span class="toc-text">selection.call(function, …arguments)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-empty"><span class="toc-text">selection.empty()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-nodes"><span class="toc-text">selection.nodes()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-node"><span class="toc-text">selection.node()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#selection-size"><span class="toc-text">selection.size()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Local-variables-%E6%9C%AC%E5%9C%B0%E6%A0%87%E8%AF%86"><span class="toc-text">Local variables 本地标识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-local"><span class="toc-text">d3.local()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-local-set-node-value"><span class="toc-text">d3.local.set(node, value)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-local-get-node"><span class="toc-text">d3.local.get(node)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#d3-local-remove-node"><span class="toc-text">d3.local.remove(node)</span></a></li></ol></li></ol></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/d3/index.html">D3</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-12-28T12:11:20.950Z">2023-12-28</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>d3-selection</span></h1>
+  <div class="tag-plugin note" ><div class="title"><strong>d3-selection</strong></div><div class="body"><ul><li>Selection elements</li><li>Modifying elements</li><li>Joining data</li><li>Handing events</li><li>Control flow</li><li>Local variables</li><li>Namespaces</li></ul></div></div>
+
+<h1 id="Selection-elements-dom选择器"><a href="#Selection-elements-dom选择器" class="headerlink" title="Selection elements dom选择器"></a>Selection elements dom选择器</h1><h2 id="d3-selection"><a href="#d3-selection" class="headerlink" title="d3.selection()"></a>d3.selection()</h2><p>选中根dom<br>在原型链上添加自定义方法</p>
+<h2 id="d3-select-selector"><a href="#d3-select-selector" class="headerlink" title="d3.select(selector)"></a>d3.select(selector)</h2><p>选中第一个<br>selector可以是字符串，也可以是指定的dom元素</p>
+<h2 id="d3-selectAll-selector"><a href="#d3-selectAll-selector" class="headerlink" title="d3.selectAll(selector)"></a>d3.selectAll(selector)</h2><p>选中所有<br>selector可以使字符串，<br>也可是一个包含指定dom元素的可迭代对象</p>
+<h2 id="selection-select-selector"><a href="#selection-select-selector" class="headerlink" title="selection.select(selector)"></a>selection.select(selector)</h2><p>selector可以是字符串、dom、函数<br>函数类型必须返回domElement或null</p>
+<p>selection绑定的数据会向下传递到被选中的元素中</p>
+<h2 id="selection-selectAll-selector"><a href="#selection-selectAll-selector" class="headerlink" title="selection.selectAll(selector)"></a>selection.selectAll(selector)</h2><p>selector可以是字符串、dom、函数<br>函数类型必须返回domElement组成的可迭代对象或空数组</p>
+<p>selectionAll.selectionAll返回的元素会被自动分组</p>
+<h2 id="selection-filter-filter"><a href="#selection-filter-filter" class="headerlink" title="selection.filter(filter)"></a>selection.filter(filter)</h2><p>过滤器<br>filter可以是字符串或者函数</p>
+<h2 id="selection-selectChild-selector"><a href="#selection-selectChild-selector" class="headerlink" title="selection.selectChild(selector)"></a>selection.selectChild(selector)</h2><p>选中第一个selector匹配到的孩子，<br>selector可以是字符串、函数<br>没指定selector返回第一个孩子</p>
+<h2 id="selection-selectChildren-selector"><a href="#selection-selectChildren-selector" class="headerlink" title="selection.selectChildren(selector)"></a>selection.selectChildren(selector)</h2><p>选中每一个selector匹配到的孩子，<br>selector可以是字符串、函数<br>没指定selector返回所有孩子</p>
+<h2 id="selection-selection"><a href="#selection-selection" class="headerlink" title="selection.selection()"></a>selection.selection()</h2><p>返回对应选中元素</p>
+<h2 id="d3-matcher-selector"><a href="#d3-matcher-selector" class="headerlink" title="d3.matcher(selector)"></a>d3.matcher(selector)</h2><p>返回一个函数，函数指向的this如果满足selector返回true<br>是d3在selection.filter中用到的内部方法</p>
+<h2 id="d3-selector-selector"><a href="#d3-selector-selector" class="headerlink" title="d3.selector(selector)"></a>d3.selector(selector)</h2><p>返回一个函数，函数指向的this是第一个满足selector的元素<br>selection.select用到的内部方法</p>
+<h2 id="d3-selectorAll-selector"><a href="#d3-selectorAll-selector" class="headerlink" title="d3.selectorAll(selector)"></a>d3.selectorAll(selector)</h2><p>返回一个函数，函数指向的this是所有满足selector的元素<br>selection.selectAll用到的内部方法</p>
+<h2 id="d3-window-node"><a href="#d3-window-node" class="headerlink" title="d3.window(node)"></a>d3.window(node)</h2><ul>
+<li>node是dom节点，返回所在document的默认窗口</li>
+<li>node是document，返回所在的默认窗口</li>
+<li>其它，返回node</li>
+</ul>
+<h2 id="d3-style-node-name"><a href="#d3-style-node-name" class="headerlink" title="d3.style(node, name)"></a>d3.style(node, name)</h2><p>获取指定node元素的指定name样式属性值</p>
+<h1 id="Modifying-elements-修改元素"><a href="#Modifying-elements-修改元素" class="headerlink" title="Modifying elements 修改元素"></a>Modifying elements 修改元素</h1><h2 id="selection-attr-name-value"><a href="#selection-attr-name-value" class="headerlink" title="selection.attr(name, value)"></a>selection.attr(name, value)</h2><p>修改&#x2F;获取选区指定属性</p>
+<h2 id="selection-classed-names-value"><a href="#selection-classed-names-value" class="headerlink" title="selection.classed(names, value)"></a>selection.classed(names, value)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">selectiohn.<span class="title function_">classed</span>(<span class="string">&#x27;foo&#x27;</span>,<span class="literal">false</span>)</span><br><span class="line">    .<span class="title function_">classed</span>(<span class="string">&#x27;bar&#x27;</span>,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p>添加&#x2F;去除类名</p>
+<h2 id="selection-style-name-value-priority"><a href="#selection-style-name-value-priority" class="headerlink" title="selection.style(name, value, priority)"></a>selection.style(name, value, priority)</h2><p>修改&#x2F;获取样式属性</p>
+<h2 id="selection-text-value"><a href="#selection-text-value" class="headerlink" title="selection.text(value)"></a>selection.text(value)</h2><p>将selection下的所有内容替换成value文本<br>无参数时返回selection下第一个子元素的文本内容</p>
+<h2 id="selection-html-value"><a href="#selection-html-value" class="headerlink" title="selection.html(value)"></a>selection.html(value)</h2><p>修改&#x2F;获取selection的innerHTML，<br>对svg或其他不支持html的元素不适用</p>
+<h2 id="selection-append-type"><a href="#selection-append-type" class="headerlink" title="selection.append(type)"></a>selection.append(type)</h2><p>新增的元素从后面插入</p>
+<p>type可以是字符串或函数，<br>字符串可以带前缀</p>
+<h2 id="selection-insert-type-before"><a href="#selection-insert-type-before" class="headerlink" title="selection.insert(type, before)"></a>selection.insert(type, before)</h2><p>将type类型的元素插入到before之前</p>
+<h2 id="selection-remove"><a href="#selection-remove" class="headerlink" title="selection.remove()"></a>selection.remove()</h2><p>移除selection</p>
+<h2 id="selection-clone-deep"><a href="#selection-clone-deep" class="headerlink" title="selection.clone(deep)"></a>selection.clone(deep)</h2><p>在selection后插入一个复制元素，<br>deep为false时，不会复制子元素</p>
+<h2 id="selection-sort-compare"><a href="#selection-sort-compare" class="headerlink" title="selection.sort(compare)"></a>selection.sort(compare)</h2><p>选区数据排序，默认升序</p>
+<h2 id="selection-order"><a href="#selection-order" class="headerlink" title="selection.order()"></a>selection.order()</h2><p>如果selection绑定了data数据，<br>data数据的顺序重排后需要根据新顺序重新处理selection元素，<br>可以使用selection.order()</p>
+<h2 id="selection-raise"><a href="#selection-raise" class="headerlink" title="selection.raise()"></a>selection.raise()</h2><p>selection的每个子元素从队尾顺序推入</p>
+<h2 id="selection-lower"><a href="#selection-lower" class="headerlink" title="selection.lower()"></a>selection.lower()</h2><p>selection的每个子元素从队首顺序推入</p>
+<h2 id="create-name"><a href="#create-name" class="headerlink" title="create(name)"></a>create(name)</h2><p>创建一个name名称的元素</p>
+<h2 id="creator-name"><a href="#creator-name" class="headerlink" title="creator(name)"></a>creator(name)</h2><p>指定元素生成器，</p>
+<p>selection.append和selection.insert创建新元素的内部方法</p>
+<h1 id="Joining-data-数据绑定"><a href="#Joining-data-数据绑定" class="headerlink" title="Joining data 数据绑定"></a>Joining data 数据绑定</h1><blockquote>
+<p>By passing separate functions on enter, update and exit,<br>you have greater control over what happens.<br>And by specifying a key function to selection.data,<br>you can minimize changes to the DOM to optimize performance.</p>
+</blockquote>
+<p>在数据驱动变化的可视化图表中<br>通过控制selection.data的key值，<br>可以最小化dom变化的开销，<br>通过指定join的enter、update、exit，<br>可以对数据绘制的过程有更多的控制。</p>
+<h2 id="selection-data-data-key"><a href="#selection-data-data-key" class="headerlink" title="selection.data(data, key)"></a>selection.data(data, key)</h2><p>data是一个可迭代对象<br>key是data用于排序的凭据，<br>可以是函数类型</p>
+<h2 id="selection-join-enter-update-exit"><a href="#selection-join-enter-update-exit" class="headerlink" title="selection.join(enter, update, exit)"></a>selection.join(enter, update, exit)</h2><p>对绑定的数据进行处理<br>enter、update、exit是三个生命周期，<br>可以对数据进行不同的处理</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">svg.<span class="title function_">selectAll</span>(<span class="string">&quot;circle&quot;</span>)</span><br><span class="line">  .<span class="title function_">data</span>(data)</span><br><span class="line">  .<span class="title function_">join</span>(</span><br><span class="line">    <span class="function"><span class="params">enter</span> =&gt;</span> enter.<span class="title function_">append</span>(<span class="string">&quot;circle&quot;</span>),</span><br><span class="line">    <span class="function"><span class="params">update</span> =&gt;</span> update,</span><br><span class="line">    <span class="function"><span class="params">exit</span> =&gt;</span> exit.<span class="title function_">remove</span>()</span><br><span class="line">  )</span><br><span class="line">    .<span class="title function_">attr</span>(<span class="string">&quot;fill&quot;</span>, <span class="string">&quot;none&quot;</span>)</span><br><span class="line">    .<span class="title function_">attr</span>(<span class="string">&quot;stroke&quot;</span>, <span class="string">&quot;black&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="selection-enter-x2F-update-x2F-exit"><a href="#selection-enter-x2F-update-x2F-exit" class="headerlink" title="selection.enter&#x2F;update&#x2F;exit"></a>selection.enter&#x2F;update&#x2F;exit</h2><p>如果有这么一个data序列：[2,3,4,5,6]<br>把data与某一selection绑定，<br>那么在enter时，data就是[2,3,4,5,6]</p>
+<p>之后对data做一定的修改，data变成了[4,5,6,7,8,9]<br>那么enter、update、exit接收到的数据依次如下：</p>
+<ul>
+<li>enter：[7,8,9]</li>
+<li>update：[4,5,6]</li>
+<li>exit：[2,3]</li>
+</ul>
+<p>一般在这三个步骤中做一些动画过渡操作，<br>在enter中初始化元素，<br>在exit中remove对应元素</p>
+<h2 id="selection-datum-value"><a href="#selection-datum-value" class="headerlink" title="selection.datum(value)"></a>selection.datum(value)</h2><p>为选中的所有区域提供完全相同的value数据</p>
+<h2 id="selection-merge-other"><a href="#selection-merge-other" class="headerlink" title="selection.merge(other)"></a>selection.merge(other)</h2><p>合并selection与ohter selection，<br>selection.join中enter和update合并时使用的内部方法</p>
+<h1 id="Handling-events-事件监听"><a href="#Handling-events-事件监听" class="headerlink" title="Handling events 事件监听"></a>Handling events 事件监听</h1><h2 id="selection-on-typenames-listener-options"><a href="#selection-on-typenames-listener-options" class="headerlink" title="selection.on(typenames, listener, options)"></a>selection.on(typenames, listener, options)</h2><p>typenames不仅可以是单个事件名，<br>也可以是由空格分隔的多个事件名：”input change”<br>同时可以添加后缀：”click.foo click.bar”</p>
+<h2 id="selection-dispatch-type-parameters"><a href="#selection-dispatch-type-parameters" class="headerlink" title="selection.dispatch(type, parameters)"></a>selection.dispatch(type, parameters)</h2><p>调用selection绑定的type事件，<br>parameters可以配置的项有：</p>
+<ul>
+<li>bubbles：允许向上冒泡</li>
+<li>cancelable：允许event.preventDefault</li>
+<li>detail：event参数和自定义数据关联</li>
+</ul>
+<h2 id="d3-pointer-event-target"><a href="#d3-pointer-event-target" class="headerlink" title="d3.pointer(event, target)"></a>d3.pointer(event, target)</h2><p>获事件event触发时，相对target元素的坐标位置</p>
+<p>event可以是MouseEvent、PointerEvent、Touch或者其他涉及到坐标位置的操作</p>
+<ul>
+<li>event 事件类型</li>
+<li>target 目标点</li>
+</ul>
+<h2 id="d3-pointers-event-target"><a href="#d3-pointers-event-target" class="headerlink" title="d3.pointers(event, target)"></a>d3.pointers(event, target)</h2><p>涉及到多个点位触发的事件，比如Touch事件<br>返回的是由多个点位坐标组成的数组</p>
+<h1 id="Control-flow-流向控制"><a href="#Control-flow-流向控制" class="headerlink" title="Control flow 流向控制"></a>Control flow 流向控制</h1><h2 id="selection-each-function"><a href="#selection-each-function" class="headerlink" title="selection.each(function)"></a>selection.each(function)</h2><p>遍历一个可迭代的选中区域对象中的每一个选中区域。</p>
+<h2 id="selection-call-function-…arguments"><a href="#selection-call-function-…arguments" class="headerlink" title="selection.call(function, …arguments)"></a>selection.call(function, …arguments)</h2><p>一般用于对生成器函数进行封装后，可重复调用：<br>生成器函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">name</span>(<span class="params">selection, first, last</span>)&#123;</span><br><span class="line">    selection</span><br><span class="line">        .<span class="title function_">attr</span>(<span class="string">&quot;first-name&quot;</span>,first)</span><br><span class="line">        .<span class="title function_">attr</span>(<span class="string">&quot;last-name,last&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>之后可以批量调用该函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d3.<span class="title function_">selectAll</span>(<span class="string">&quot;div&quot;</span>).<span class="title function_">call</span>(name,<span class="string">&quot;John&quot;</span>,<span class="string">&quot;Snow&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">name</span>(d3.<span class="title function_">selectAll</span>(<span class="string">&#x27;div&#x27;</span>),<span class="string">&#x27;John&#x27;</span>,<span class="string">&#x27;Snow&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="selection-empty"><a href="#selection-empty" class="headerlink" title="selection.empty()"></a>selection.empty()</h2><p>用于判断selection是否为空</p>
+<h2 id="selection-nodes"><a href="#selection-nodes" class="headerlink" title="selection.nodes()"></a>selection.nodes()</h2><p>获取selection选中的一个数组</p>
+<h2 id="selection-node"><a href="#selection-node" class="headerlink" title="selection.node()"></a>selection.node()</h2><p>返回selection选中的元素</p>
+<h2 id="selection-size"><a href="#selection-size" class="headerlink" title="selection.size()"></a>selection.size()</h2><p>返回选中区包含元素的数量</p>
+<h1 id="Local-variables-本地标识"><a href="#Local-variables-本地标识" class="headerlink" title="Local variables 本地标识"></a>Local variables 本地标识</h1><h2 id="d3-local"><a href="#d3-local" class="headerlink" title="d3.local()"></a>d3.local()</h2><p>生成一个独一无二的变量名</p>
+<h2 id="d3-local-set-node-value"><a href="#d3-local-set-node-value" class="headerlink" title="d3.local.set(node, value)"></a>d3.local.set(node, value)</h2><p>一般d3.selection.each配合使用，<br>用于给每个节点赋予value标示值</p>
+<h2 id="d3-local-get-node"><a href="#d3-local-get-node" class="headerlink" title="d3.local.get(node)"></a>d3.local.get(node)</h2><p>获取节点的唯一标示值</p>
+<h2 id="d3-local-remove-node"><a href="#d3-local-remove-node" class="headerlink" title="d3.local.remove(node)"></a>d3.local.remove(node)</h2><p>删除节点存储的标示值</p>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/d3/index.html">d3-zoom</a></div><div class="item" id="next"></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

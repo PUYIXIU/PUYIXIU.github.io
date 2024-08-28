@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>NodeJs：第二章 模块机制 - E-Duck</title>
+
+  
+    <meta name="description" content="JavaScript的鸡汤时间JS酱の不受重视的童年JavaScript当初被仓促的创造出来，主要就是为了实现2个功能：表单校验网页特效JS酱の进化但随着B&#x2F;S应用的兴起，JavaScript也越来越收到重视，渐渐地就经历了一系列进化：工具（浏览器兼容）组件（功能模块）框架（功能模块组织）应用（业务模块组织）后端の新星JS酱但是JavaScript先天就缺乏模块功能，script标签引入">
+<meta property="og:type" content="website">
+<meta property="og:title" content="第二章 模块机制">
+<meta property="og:url" content="http://eletricduck.com/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B02.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="JavaScript的鸡汤时间JS酱の不受重视的童年JavaScript当初被仓促的创造出来，主要就是为了实现2个功能：表单校验网页特效JS酱の进化但随着B&#x2F;S应用的兴起，JavaScript也越来越收到重视，渐渐地就经历了一系列进化：工具（浏览器兼容）组件（功能模块）框架（功能模块组织）应用（业务模块组织）后端の新星JS酱但是JavaScript先天就缺乏模块功能，script标签引入">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/nodejs/img/JS%E7%9B%B8%E5%85%B3%E7%9A%84%E7%BB%84%E7%BB%87%E4%B8%8E%E6%A0%87%E5%87%86%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/nodejs/img/%E6%A8%A1%E5%9D%97%E8%B0%83%E7%94%A8%E6%A0%88.png">
+<meta property="article:published_time" content="2023-06-26T09:48:41.593Z">
+<meta property="article:modified_time" content="2023-06-26T09:48:41.593Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/nodejs/img/JS%E7%9B%B8%E5%85%B3%E7%9A%84%E7%BB%84%E7%BB%87%E4%B8%8E%E6%A0%87%E5%87%86%E5%85%B3%E7%B3%BB.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/nodejs/index.html"><div class="main" ff="title">NodeJs</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">NodeJs简介</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/index.html#start"><span class="toc-text">Hello NodeJs</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter2.html"><span class="toc-text">模块化</span></a></div></div><div class="widget-header cap dis-select"><span class="name">包简介</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter3.html"><span class="toc-text">包管理</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter4.html"><span class="toc-text">NPM</span></a></div></div><div class="widget-header cap dis-select"><span class="name">文件系统</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter5.html"><span class="toc-text">Buffer缓冲区</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter6.html"><span class="toc-text">文件写入</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter7.html"><span class="toc-text">文件读取</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter8.html"><span class="toc-text">fs其他方法</span></a></div></div><div class="widget-header cap dis-select"><span class="name">《深入浅出Node.js》</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B01.html"><span class="toc-text">第一章 Node简介</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B02.html"><span class="toc-text">第二章 模块机制</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonJS%E8%A7%84%E8%8C%83"><span class="toc-text">CommonJS规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS%E5%87%BA%E5%8F%91%E7%82%B9"><span class="toc-text">CommonJS出发点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CommonJS%E6%A8%A1%E5%9D%97%E8%A7%84%E8%8C%83"><span class="toc-text">CommonJS模块规范</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Node%E7%9A%84%E6%A8%A1%E5%9D%97%E5%AE%9E%E7%8E%B0"><span class="toc-text">Node的模块实现</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%8A%A0%E8%BD%BD%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-text">文件加载优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E5%BE%84%E5%88%86%E6%9E%90%E5%92%8C%E6%96%87%E4%BB%B6%E5%AE%9A%E4%BD%8D"><span class="toc-text">路径分析和文件定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%BC%96%E8%AF%91"><span class="toc-text">模块编译</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-text">核心模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JavaScript%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-text">JavaScript核心模块的编译过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-x2F-C-%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E7%9A%84%E7%BC%96%E8%AF%91%E8%BF%87%E7%A8%8B"><span class="toc-text">C&#x2F;C++核心模块的编译过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97%E7%9A%84%E5%BC%95%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-text">核心模块的引入流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E5%86%99%E6%A0%B8%E5%BF%83%E6%A8%A1%E5%9D%97"><span class="toc-text">编写核心模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#C-x2F-C-%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9D%97"><span class="toc-text">C&#x2F;C++扩展模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6"><span class="toc-text">前提条件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-x2F-C-%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9D%97%E7%9A%84%E7%BC%96%E5%86%99"><span class="toc-text">C&#x2F;C++扩展模块的编写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-x2F-C-%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9D%97%E7%9A%84%E7%BC%96%E8%AF%91"><span class="toc-text">C&#x2F;C++扩展模块的编译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-x2F-C-%E6%89%A9%E5%B1%95%E6%A8%A1%E5%9D%97%E7%9A%84%E5%8A%A0%E8%BD%BD"><span class="toc-text">C&#x2F;C++扩展模块的加载</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E8%B0%83%E7%94%A8%E6%A0%88"><span class="toc-text">模块调用栈</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8C%85%E4%B8%8ENPM"><span class="toc-text">包与NPM</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E7%BB%93%E6%9E%84"><span class="toc-text">包结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%85%E6%8F%8F%E8%BF%B0%E6%96%87%E4%BB%B6%E4%B8%8ENPM"><span class="toc-text">包描述文件与NPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B1%80%E5%9F%9FNPM"><span class="toc-text">局域NPM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%8E%E6%A0%B7%E8%AF%84%E4%BB%B7%E4%B8%80%E4%B8%AA%E5%8C%85%E7%9A%84%E8%B4%A8%E9%87%8F"><span class="toc-text">怎样评价一个包的质量</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B03.html"><span class="toc-text">第三章 异步I/O</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B04.html"><span class="toc-text">第四章 异步编程</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/nodejs/index.html">NodeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-06-26T09:48:41.593Z">2023-06-26</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>第二章 模块机制</span></h1>
+  <div class="tag-plugin note" color="dark"><div class="title"><strong>JavaScript的鸡汤时间</strong></div><div class="body"><div class="tag-plugin note" ><div class="title"><strong>JS酱の不受重视的童年</strong></div><div class="body"><p>JavaScript当初被仓促的创造出来，主要就是为了实现2个功能：</p><ul><li>表单校验</li><li>网页特效</li></ul></div></div><div class="tag-plugin note" ><div class="title"><strong>JS酱の进化</strong></div><div class="body"><p>但随着B&#x2F;S应用的兴起，JavaScript也越来越收到重视，<br>渐渐地就经历了一系列进化：</p><ul><li>工具（浏览器兼容）</li><li>组件（功能模块）</li><li>框架（功能模块组织）</li><li>应用（业务模块组织）</li></ul></div></div><div class="tag-plugin note" ><div class="title"><strong>后端の新星JS酱</strong></div><div class="body"><p>但是JavaScript先天就缺乏模块功能，script标签引入代码的方式毫无章法，非常蛋疼，<br>于是就出现了 <strong>命名空间</strong> 的人为规范来约束代码。<br><del>开发者：还能不开发了咋地，加入命名空间凑合着写吧</del></p><p>最终经历了十多年的发展，<strong>CommonJS规范</strong> 终于被提出，<br>JavaScript的模块化功能也得以完善，最终成功破壁，进入后端开发领域。</p></div></div></div></div>
+
+
+<h1 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h1><h2 id="CommonJS出发点"><a href="#CommonJS出发点" class="headerlink" title="CommonJS出发点"></a>CommonJS出发点</h2><div class="tag-plugin note" color="dark"><div class="body"><p>在CommonJS没有被提出之前，<br>JavaScript一直使用的是<strong>官方规范</strong> <em>ECMAScript</em>，<br>但是JavaScript在实际环境中，表现能力始终都取决于<strong>宿主环境对API的支持程度</strong><br>在缓慢の进化过程中的JS酱，常常因为这些原因被后端开发拒之门外：</p><ul><li>没有模块系统</li><li>标准库较少</li><li>没有标准接口</li><li>缺乏包管理系统</li></ul><p>但是在引入CommonJS之后，JS酱终于具备了<strong>跨宿主环境执行</strong>的能力。<br>于是除了客户端应用，JavaScript此后还能开发以下应用：</p><ul><li>服务器端JavaScript应用程序</li><li>命令行工具</li><li>桌面图形界面应用程序</li><li>混合应用</li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>Node、浏览器、W3C、CommonJS、ECMAScript之间的关系</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/JS相关的组织与标准关系.png" fancybox="true"/></div></div><ul><li><strong>浏览器：</strong> <em>HTML</em>、 <em>CSS</em> 、 <em>JavaScript</em> 的运行环境</li><li><strong>W3C：</strong> 对 <em>BOM</em> 和 <em>DOM</em> 进行规范化</li><li><strong>ECMAScript：</strong> 对 <em>JavaScript</em> 进行规范化</li><li><strong>CommonJS：</strong> 对 <em>JavaScript</em> 进行脱离宿主环境规范化</li><li><strong>Node：</strong> 同时兼容 <em>ECMAScript</em> 和 <em>CommonJS</em> 规范的js服务器端语言</li></ul></div></div>
+
+<h2 id="CommonJS模块规范"><a href="#CommonJS模块规范" class="headerlink" title="CommonJS模块规范"></a>CommonJS模块规范</h2><blockquote>
+<p>模块的意义在于将<strong>类聚的方法和变量</strong>等限定在<strong>私有的作用域</strong>中</p>
+</blockquote>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>模块定义的3个部分</strong></div><div class="body"><details class="tag-plugin folding" ><summary><span>模块引用</span></summary><div class="body"><p>使用 <strong>require()</strong> 方法</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myModule = <span class="built_in">require</span>(<span class="string">&#x27;myModule&#x27;</span>);</span><br></pre></td></tr></table></figure></div></details><details class="tag-plugin folding" ><summary><span>模块定义</span></summary><div class="body"><p>使用 <strong>module.exports</strong> 对象</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// math.js</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">add</span> = <span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> sum = <span class="number">0</span>,</span><br><span class="line">        i = <span class="number">0</span>,</span><br><span class="line">        args = <span class="variable language_">arguments</span>,</span><br><span class="line">        l = args.<span class="property">length</span>;</span><br><span class="line">    <span class="keyword">while</span>(i&lt;l)&#123;</span><br><span class="line">        sum+=args[i++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// program.js</span></span><br><span class="line"><span class="keyword">let</span> math = <span class="built_in">require</span>(<span class="string">&#x27;math&#x27;</span>);</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">increment</span> = <span class="keyword">function</span>(<span class="params">val</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> math.<span class="title function_">add</span>(val,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details><details class="tag-plugin folding" ><summary><span>模块标识</span></summary><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myModule = <span class="built_in">require</span>(<span class="string">&#x27;模块标识&#x27;</span>)</span><br></pre></td></tr></table></figure><p>模块标识就是 <strong>require()</strong> 方法接收的参数，<br>它可以遵从以下几种格式：</p><ul><li>符合<strong>小驼峰命名</strong>的字符串</li><li>以...开头的<strong>相对路径</strong></li><li><strong>绝对路径</strong></li></ul></div></details></div></div>
+
+<h1 id="Node的模块实现"><a href="#Node的模块实现" class="headerlink" title="Node的模块实现"></a>Node的模块实现</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>Node中引入模块主要有3个步骤：</strong></div><div class="body"><p>下面这行代码就好像叫你的下属 <em>Node酱</em> 给你找一份叫做 <em>myModule</em> 的东西出份材料：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myModule = <span class="built_in">require</span>(<span class="string">&#x27;myModule&#x27;</span>)</span><br></pre></td></tr></table></figure><p>和大多数被Boss搞蒙圈的社畜一样，<em>Node酱</em>一上来就是三个问题：</p><ol><li>路径分析<br>Node：我上哪去取这个东西呢？</li><li>文件定位<br>Node：你说的这个myModule，它是个什么东西？</li><li>编译执行<br> Node：我怎么用这个东西出材料呢？</li></ol></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>Node的两类模块</strong></div><div class="body"><ul><li><strong>核心模块</strong><ul><li>Node提供</li><li>静态内存加载</li><li>速度快</li></ul></li><li><strong>文件模块</strong><ul><li>用户编写</li><li>动态加载</li><li>速度慢</li></ul></li></ul></div></div>
+
+<h2 id="文件加载优先级"><a href="#文件加载优先级" class="headerlink" title="文件加载优先级"></a>文件加载优先级</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>Node的缓存策略</strong></div><div class="body"><blockquote><p>Node会对引入过的模块进行缓存，以减少二次引入时的开销</p></blockquote><p>浏览器缓存策略也差不多：</p><ul><li>浏览器：缓存文件</li><li>Node：缓存编译和执行之后的对象</li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>加载优先级</strong></div><div class="body"><p>优先级遵循两个顺序：</p><ul><li>缓存优先<ul><li><del>教科书式废话，要不然干嘛引入缓存策略</del></li></ul></li><li>核心模块优先于文件模块</li></ul><p>把这两个原则缝合一下就得出了完整的缓存优先级排序：</p><blockquote><p>缓存核心模块 &gt; 缓存文件模块 &gt; 核心模块 &gt; 文件模块</p></blockquote></div></div>
+
+<h2 id="路径分析和文件定位"><a href="#路径分析和文件定位" class="headerlink" title="路径分析和文件定位"></a>路径分析和文件定位</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>路径分析</strong></div><div class="body"><blockquote><p>Node:我上哪去取呢（挠头）？</p></blockquote><div class="tag-plugin tabs"id="tab_14""><ul class="nav-tabs"><li class="tab active"><a href="#tab_14-1">核心模块</a></li><li class="tab"><a href="#tab_14-2">路径形式文件模块</a></li><li class="tab"><a href="#tab_14-3">非路径非核心文件模块</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_14-1"><blockquote><p>如 <mark class="tag-plugin mark" color="yellow">http</mark>、<mark class="tag-plugin mark" color="yellow">fs</mark>、<mark class="tag-plugin mark" color="yellow">path</mark>等</p></blockquote><div class="tag-plugin note" color="green"><div class="title"><strong>特殊情况：自定义模块标识符=核心模块标识符</strong></div><div class="body"><p>如果是路径文件模块的话撞名还好说，<br>但自定义模块没有路径标识，什么都不处理<mark class="tag-plugin mark" color="blue">百分百会被核心模块覆盖</mark>，<br>所以还是考虑换个模块名吧或者换个路径吧。</p></div></div></div><div class="tab-pane" id="tab_14-2"><p>又划分为</p><ul><li><strong>相对路径</strong>形式：以 <strong>...</strong> 开头</li><li><strong>绝对路径</strong>形式：以 <strong>&#x2F;</strong> 开头</li></ul><p>路径首先会被转为 <strong>真实路径</strong>，<br>之后如果二次加载该模块，就直接用这个 <strong>真实了路径</strong> 作为索引到指定位置取就好了。</p><blockquote><p>编译成功的模块的文件路径作为索引缓存在 <strong>Module._cache</strong>对象上</p></blockquote><p>比如：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> myModule = <span class="built_in">require</span>(<span class="string">&#x27;./myModule&#x27;</span>)</span><br></pre></td></tr></table></figure><p>Node首先会 <strong>.&#x2F;myModule</strong> 转化为绝对路径 <strong>path</strong>：</p><blockquote><p>D:\CS_Demo\V_Demo\NodeJs_Demo\深入浅出NodeJS\day1_module\myModule.js</p></blockquote><p>然后将path作为索引，下一次我再用到myModule模块，就直接会找到path对应的文件</p></div><div class="tab-pane" id="tab_14-3"><p>也就是 <strong>自定义模块</strong>，<br>这类文件模块由于 <strong>文件路径一般比较深</strong>，<br>因此查找起来比较费时。</p></div></div></div></div></div>
+
+<details class="tag-plugin folding" color="green"><summary><span>模块路径</span></summary><div class="body"><blockquote><p>Node将文件定位策略涉及到的查找路径放在了一个数组中，<br>即 <strong>module.paths</strong></p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">module</span>.<span class="property">path</span>) <span class="comment">//输出路径数组</span></span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出结果</span></span><br><span class="line">[</span><br><span class="line">    <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\深入浅出NodeJS\\day1_module\\node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\深入浅出NodeJS\\node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D:\\CS_Demo\\node_modules&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;D:\\node_modules&#x27;</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure><blockquote><p>即从当前路径起，直到根目录\node_modules，依次向父级递归直到找到为止。</p></blockquote></div></details>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>文件定位</strong></div><div class="body"><div class="tag-plugin note" color="green"><div class="title"><strong>两个细节</strong></div><div class="body"><ul><li>文件扩展名分析<ul><li>Node：你让我找的模块是个什么文件？别一会儿给你找来了又说不是你要的</li></ul></li><li>目录和包的处理<ul><li>Node：你说的的那个模块我没找到，但我找到个同名目录，凑合着用吧</li></ul></li></ul></div></div><div class="tag-plugin tabs"id="tab_15""><ul class="nav-tabs"><li class="tab active"><a href="#tab_15-1">文件扩展名分析</a></li><li class="tab"><a href="#tab_15-2">目录分析和包</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_15-1"><p>你和Node说：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 帮我从食堂带份番茄炒鸡蛋</span></span><br><span class="line"><span class="keyword">let</span> dinner = <span class="built_in">require</span>(<span class="string">&#x27;./番茄炒鸡蛋&#x27;</span>)</span><br></pre></td></tr></table></figure><p>Node一共就知道食堂有三个窗口卖番茄炒鸡蛋：</p><ul><li>js窗口</li><li>json窗口</li><li>node窗口</li></ul><p>然后Node就开始一个窗口一个窗口的找，看还有没有卖番茄炒鸡蛋的。</p><p>这就是Node中文件扩展名分析的策略，当然也可以一开始就指定好你要的文件的类型，<br>注意这里Node跑窗口是要花时间的，<br>需要 <strong>调用fs模块同步阻塞式判断</strong> 文件是否存在，<br>所以指定json和node类型模块时，和Node一开始说清楚你要的模块会省去扩展名分析花费的时间。</p></div><div class="tab-pane" id="tab_15-2"><p>你叫Node帮你去一家叫做<strong>摩卡</strong>的咖啡店买杯<strong>摩卡</strong>：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> dinner = <span class="built_in">require</span>(<span class="string">&#x27;./Mocha&#x27;</span>)</span><br></pre></td></tr></table></figure><p>结果Node一去发现店里没有卖摩卡的，结果把整家店都给买下来了（不愧是你）<br>这里需要了解Node分析目录的一些规则：</p><blockquote><p>首先，在目录下寻找 <strong>package.json</strong> 文件</p><ul><li>Node找到咖啡厅的餐厅手册——<em>package.json</em></li><li>Node开始翻看起来——<em>JSON.parse()</em></li><li>Node在手册的<em>main</em>菜单查看是否有卖摩卡的</li></ul></blockquote><p><strong>package.json</strong>：CommonJS包规范定义的包描述文件<br>package.json被解析后，其中的 <strong>main属性</strong> 会被提取出来作为文件名进行定位，</p><blockquote><p>当main属性的路径错误或根本没指定时…（Node：你丫玩我是吧？白解析了）</p><ul><li>Node发现<em>main</em>菜单里没写卖摩卡</li><li>Node心想那就买杯<em>index</em>美式凑合一下吧</li></ul></blockquote><p>Node会把 <strong>index</strong> 作为默认文件名，挨个查找：</p><ul><li><em>index.js</em></li><li><em>index.node</em></li><li><em>index.json</em></li></ul><blockquote><p>如果还是没有找到的话…</p><ul><li>结果Node一问店员，什么？连<em>index</em>美式都没有？</li><li>Node震惊了，但是店员又和Node推荐了一家更大的<em>父级</em>咖啡厅，让它去那买</li></ul></blockquote><p>还记得 <strong>module.path</strong> 吗？<br>没错，顺着路径找到父级目录再重复一遍上面的操作。</p></div></div></div></div></div>
+
+<h2 id="模块编译"><a href="#模块编译" class="headerlink" title="模块编译"></a>模块编译</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>模块对象</strong></div><div class="body"><p>万物可对象，每个文件模块也是作为对象包装的：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Module</span>(<span class="params">id, parent</span>)&#123; </span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id</span> = id</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">exports</span> = &#123;&#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = parent</span><br><span class="line">    <span class="keyword">if</span> (parent &amp;&amp; parent.<span class="property">children</span>) &#123;</span><br><span class="line">        <span class="comment">// parent喜当爹</span></span><br><span class="line">        parent.<span class="property">children</span>.<span class="title function_">push</span>(<span class="variable language_">this</span>) </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">filename</span> = <span class="literal">null</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">loaded</span> = <span class="literal">false</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">children</span> = [] </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark" child="tabs"><div class="title"><strong>模块编译</strong></div><div class="body"><p>万物可对象<del>(这话好像刚才说过)</del>，连编译载入的方法也被作为对象包装在require中：</p><blockquote><p>不同文件的加载方式放在了 <strong>require.extensions</strong> 中</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="built_in">require</span>.<span class="property">extensions</span>);</span><br></pre></td></tr></table></figure><p>输出结果：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&#x27;.js&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">  <span class="string">&#x27;.json&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">  <span class="string">&#x27;.node&#x27;</span>: [<span class="title class_">Function</span> (anonymous)]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>也可以通过对 <strong>require.extensions</strong> 的扩展来实现自定义扩展名文件的加载：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>.<span class="property">extensions</span>[<span class="string">&#x27;.duck&#x27;</span>] = <span class="keyword">function</span>(<span class="params"><span class="variable language_">module</span>, filename</span>)&#123;</span><br><span class="line"> <span class="comment">// 加载.duck文件   </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin tabs"id="tab_16""><ul class="nav-tabs"><li class="tab active"><a href="#tab_16-1">.js文件</a></li><li class="tab"><a href="#tab_16-2">.node文件</a></li><li class="tab"><a href="#tab_16-3">.JSON文件</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_16-1"><p>通过<strong>fs模块</strong>同步读取文件后编译执行</p><blockquote><p>Step1 对js源代码进行头尾包装</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params"><span class="built_in">exports</span>, <span class="built_in">require</span>, <span class="variable language_">module</span>, __filename, __dirname</span>)&#123; <span class="comment">//包装头</span></span><br><span class="line">    <span class="keyword">let</span> math = <span class="built_in">require</span>(<span class="string">&#x27;math&#x27;</span>);</span><br><span class="line">    <span class="built_in">exports</span>.<span class="property">area</span> = <span class="keyword">function</span> (<span class="params">radius</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="title class_">Math</span>.<span class="property">PI</span> * radius * radius;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;); <span class="comment">// 包装尾</span></span><br></pre></td></tr></table></figure><p>这样就实现了 <strong>作用域隔离</strong></p><blockquote><p>Step2 使用包装后的代码创建一个具体的function对象</p></blockquote><p>使用的是vm原生模块的 <strong>runInThisContext()</strong><br>返回一个具体function对象</p><blockquote><p>Step3 传参执行</p></blockquote><p>Step1中包装成的函数参数主要如下：</p><ul><li><strong>exports</strong> 当前模块对象的exports</li><li><strong>require</strong> 引入方法</li><li><strong>module</strong> 当前模块对象自身</li><li><strong>__filename</strong> 文件定位的完整路径</li><li><strong>__dirname</strong> 文件目录</li></ul></div><div class="tab-pane" id="tab_16-2"><p>.node是用 <strong>C&#x2F;C++</strong> 编译后生成的模块文件，<br>加载和执行方法：<strong>process.dlopen()</strong></p><blockquote><p>总之就是在 <strong>dlopen()</strong> 中让exports和.node产生联系<br><del>（别问怎么产生的联系，问就是量子纠缠）</del></p></blockquote></div><div class="tab-pane" id="tab_16-3"><p>通过<strong>fs模块</strong>同步读取文件后编译执行<br>解析方法：<strong>JSON.parse()</strong><br>解析后直接赋给模块对象的exports</p></div></div></div></div></div>
+
+<h1 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>核心模块的两个部分</strong></div><div class="body"><ul><li>C&#x2F;C++文件<ul><li>放在<strong>src目录</strong>下</li></ul></li><li>JavaScript文件<ul><li>放在<strong>lib目录</strong>下（<em>lib&#x2F;*.js</em>）</li><li><strong>src目录</strong>下的<strong>node.js</strong>（<em>src&#x2F;node.js</em>）</li></ul></li></ul></div></div>
+
+<h2 id="JavaScript核心模块的编译过程"><a href="#JavaScript核心模块的编译过程" class="headerlink" title="JavaScript核心模块的编译过程"></a>JavaScript核心模块的编译过程</h2><div class="tag-plugin note" color="dark" child="tabs"><div class="body"><div class="tag-plugin tabs"id="tab_17""><ul class="nav-tabs"><li class="tab active"><a href="#tab_17-1">Step1：转存为C/C++代码</a></li><li class="tab"><a href="#tab_17-2">Step2：开始编译</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_17-1"><details class="tag-plugin folding" ><summary><span>怎么把核心代码中的js部分加载到内存中呢？</span></summary><div class="body"><p><strong>0分答案：</strong> 第一步，取出js代码，第二步：放入内存<br><del>你搁这搁这呢</del></p></div></details><p>实际上是需要将js转存为C&#x2F;C++，然后再加载到内存之中。</p><details class="tag-plugin folding" ><summary><span>问题又来了：如何将js转化为C/C++呢？</span></summary><div class="body"><p><strong>答：</strong> Node采用的是V8的 <strong>js2c.py</strong>。</p></div></details><blockquote><p>Step1 转换成C++数组</p></blockquote><p>这里需要把js代码以<strong>字符串</strong>形式存储在<strong>node命名空间</strong>中</p><blockquote><p>Step2 生成<strong>node_natives.h</strong>头文件</p></blockquote><p>存储在node命名空间中，无法直接执行</p><blockquote><p>Step3 加载进内存中</p></blockquote><p>在启动Node之后，js代码会被加载进内存中</p></div><div class="tab-pane" id="tab_17-2"><p>核心模块和文件模块的缓存位置不同：</p><ul><li><strong>核心模块</strong> <em>NativeModule._cache</em></li><li><strong>文件模块</strong> <em>Module._cache</em></li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">NativeModule</span>(<span class="params">id</span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">filenmae</span> = id + <span class="string">&#x27;.js&#x27;</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id</span> = id</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">exports</span> = &#123;&#125;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">loaded</span> = <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 取出源代码</span></span><br><span class="line"><span class="title class_">NativeModule</span>.<span class="property">_source</span> = process.<span class="title function_">binding</span>(<span class="string">&#x27;native&#x27;</span>)</span><br><span class="line"><span class="comment">// 缓存</span></span><br><span class="line"><span class="title class_">NativeModule</span>.<span class="property">_cache</span> = &#123;&#125;</span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<h2 id="C-x2F-C-核心模块的编译过程"><a href="#C-x2F-C-核心模块的编译过程" class="headerlink" title="C&#x2F;C++核心模块的编译过程"></a>C&#x2F;C++核心模块的编译过程</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>Node核心代码的两种形式</strong></div><div class="body"><ul><li>单一模式<ul><li>全部由C&#x2F;C++编写</li></ul></li><li>复合模式<ul><li>C++实现核心部分</li><li>JavaScript实现封装</li><li>Node提高性能的常用模式</li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>内建模块</strong></div><div class="body"><p>由 <strong>纯C&#x2F;C++</strong> 编写的部分又称为 <strong>内建模块</strong>，</p><div class="tag-plugin note" ><div class="title"><strong>内建模块组织形式</strong></div><div class="body"><details class="tag-plugin folding" color="green"><summary><span>1-内部结构</span></summary><div class="body"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">node_module_struct</span> &#123;</span><br><span class="line">    <span class="type">int</span> version;</span><br><span class="line">    <span class="type">void</span> *dso_handle;</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *filename;</span><br><span class="line">    <span class="comment">// 模块的具体初始化方法</span></span><br><span class="line">    <span class="built_in">void</span> (*register_func) (v8::Handle&lt;v8::Object&gt; target);</span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *modname;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details><details class="tag-plugin folding" color="green"><summary><span>2-定义</span></summary><div class="body"><p>模块被创建后就自然要被定义到 <strong>node命名空间</strong> 中，<br>需要通过 <strong>NODE_MODULE宏</strong></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> NODE_MODULE(modename, regfunc)</span></span><br><span class="line">    <span class="keyword">extern</span> <span class="string">&quot;C&quot;</span> &#123;</span><br><span class="line">        NODE_MODULE_EXPORT node::node_module_struct modname ## _module = </span><br><span class="line">        &#123;</span><br><span class="line">            NODE_STANDARD_MODULE_STUFF,</span><br><span class="line">            regfunc,</span><br><span class="line">            <span class="built_in">NODE_STRINGIFY</span>(modename)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></div></details><details class="tag-plugin folding" color="green"><summary><span>3-取出</span></summary><div class="body"><p>Node提供了 <strong>get_builtin_module()</strong> 从 <strong>node_module_list</strong> 数组取出这些模块 </p></div></details></div></div><div class="tag-plugin note" ><div class="title"><strong>内建模块导出</strong></div><div class="body"><p>Node使用 <strong>Binding()</strong> 方法实现内建模块的加载,<br>具体步骤如下：</p><div class="tag-plugin timeline"><div class="timenode" index="0"><div class="header"><p>step1-创建一个exports空对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exports = Object::<span class="built_in">New</span>();</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="1"><div class="header"><p>step2-取出内建模块对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modp = <span class="built_in">get_builtin_module</span>(*module_v);</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="2"><div class="header"><p>step3-填充exports对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">modp-&gt;<span class="built_in">register_func</span>(exports);</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="3"><div class="header"><p>step4-按模块名缓存exports对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">binding_cache-&gt;<span class="built_in">Set</span>(<span class="keyword">module</span>, exports);</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="4"><div class="header"><p>step5-核心模块编译内容的取出</p></div><div class="body fs14"><p>使用到Node提供的全局变量<strong>process</strong></p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">NativeModule</span>.<span class="property">_source</span> = process.<span class="title function_">binding</span>(<span class="string">&#x27;natives&#x27;</span>);</span><br></pre></td></tr></table></figure></div></div></div></div></div></div></div>
+
+<h2 id="核心模块的引入流程"><a href="#核心模块的引入流程" class="headerlink" title="核心模块的引入流程"></a>核心模块的引入流程</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>以os模块的引入为例</strong></div><div class="body"><div class="tag-plugin timeline"><div class="timenode" index="0"><div class="header"><p>Step1-用户请求模块</p></div><div class="body fs14"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&quot;os&quot;</span>)</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="1"><div class="header"><p>Step2-分析确定是核心模块的请求</p></div><div class="body fs14"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">NativeModule</span>.<span class="built_in">require</span>(<span class="string">&quot;os&quot;</span>)</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="2"><div class="header"><p>Step3-需要取出模块为字符串数组并转化为字符串</p></div><div class="body fs14"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">process.<span class="title function_">binding</span>(<span class="string">&quot;os&quot;</span>)</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="3"><div class="header"><p>Step4-需要取出模块对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">get_builtin_module</span>(<span class="string">&quot;node_os&quot;</span>)</span><br></pre></td></tr></table></figure></div></div><div class="timenode" index="4"><div class="header"><p>Step5-需要定义模块对象</p></div><div class="body fs14"><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NODE_MODULE</span>(node_os, reg_func)</span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<h2 id="编写核心模块"><a href="#编写核心模块" class="headerlink" title="编写核心模块"></a>编写核心模块</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>内建模块hello的实现</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_18""><ul class="nav-tabs"><li class="tab active"><a href="#tab_18-1">1-编写头文件</a></li><li class="tab"><a href="#tab_18-2">2-编写C/C++文件</a></li><li class="tab"><a href="#tab_18-3">3-添加进扩展数组中</a></li><li class="tab"><a href="#tab_18-4">4-编译进执行文件</a></li><li class="tab"><a href="#tab_18-5">5-运行核心模块</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_18-1"><p>头文件<em>node_hello.h</em>存放到<em>src</em>目录下</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> NODE_HELLO_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> NODE_HELLO_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;v8.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> node&#123;</span><br><span class="line">    <span class="comment">// 预定义方法</span></span><br><span class="line">    <span class="function">v8::Handle&lt;v8::Value&gt; <span class="title">SayHello</span><span class="params">(<span class="type">const</span> v8::Arguments&amp; args)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_18-2"><p>将用于实现预定义方法的 <em>node_hello.cc</em> 存储到 <em>src</em> 目录下</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;node.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;node_hello.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;v8.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> node&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">namespace</span> v8;</span><br><span class="line">    <span class="comment">// 实现预定义方法</span></span><br><span class="line">    <span class="function">Handle&lt;Value&gt; <span class="title">SayHello</span><span class="params">(<span class="type">const</span> Arguments&amp; args)</span></span>&#123;</span><br><span class="line">        HandleScope scope;</span><br><span class="line">        <span class="keyword">return</span> scope.<span class="built_in">Close</span>(String::<span class="built_in">New</span>(<span class="string">&quot;Hello world!&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 给传入的目标对象添加sayHello方法</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Init_Hello</span><span class="params">(Handle&lt;Object&gt; target)</span></span>&#123;</span><br><span class="line">        target-&gt;<span class="built_in">Set</span>(</span><br><span class="line">            String::<span class="built_in">NewSymbol</span>(<span class="string">&quot;sayHello&quot;</span>),</span><br><span class="line">            FunctionTemplate::<span class="built_in">New</span>(SayHello)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 注册方法到内存中</span></span><br><span class="line"><span class="built_in">NODE_MODULE</span>(node_hello, node::Init_Hello)</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_18-3"><p>需要修改 <em>src&#x2F;node_extensions.h</em> ，<br>将<em>node_hello</em>模块添加进<em>node_module_list</em>数组中</p></div><div class="tab-pane" id="tab_18-4"><p>修改Node项目生成文件 <strong>node.gyp</strong>，<br>然后编译整个Node项目</p></div><div class="tab-pane" id="tab_18-5"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> hello = process.<span class="title function_">binding</span>(<span class="string">&#x27;hello&#x27;</span>)</span><br><span class="line">hello.<span class="title function_">sayHello</span>() <span class="comment">// &#x27;Hello World!&#x27;</span></span><br></pre></td></tr></table></figure></div></div></div></div></div>
+
+<h1 id="C-x2F-C-扩展模块"><a href="#C-x2F-C-扩展模块" class="headerlink" title="C&#x2F;C++扩展模块"></a>C&#x2F;C++扩展模块</h1><details class="tag-plugin folding" color="green"><summary><span>C/C++模块引入的最佳场合是什么</span></summary><div class="body"><p><strong>答：</strong> 频繁出现 <strong>位运算</strong> 的场合,<br>如 <em>转码</em>、 <em>编码</em> 等过程。<br>这是因为JS酱的位运算很弱啦（傲娇）<br><del>C++：哎，拜托，弱哎，你很弱哎——</del><br>JavaScript只有 <strong>double类型</strong> 的数据类型，<br>位运算时需要转换为 <strong>int类型</strong>，<br>因此效率不高。</p></div></details>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>C/C++扩展模块的跨平台问题</strong></div><div class="body"><p>之前提到C&#x2F;C++扩展模块会预先编译为 <strong>.node</strong> 文件，<br>这就存在一个问题，就是这个 <strong>.node</strong> 后缀只是个包装，<br>包装之下的内容实际如下：</p><ul><li>windows系统下是 <strong>.dll</strong></li><li>*nix系统下是 <strong>.so</strong></li></ul><p><strong>dlopen</strong>方法实际上对两种文件分别进行处理。</p></div></div>
+
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><div class="tag-plugin note" color="dark" child="tabs"><div class="body"><div class="tag-plugin tabs"id="tab_19""><ul class="nav-tabs"><li class="tab active"><a href="#tab_19-1">GYP工具</a></li><li class="tab"><a href="#tab_19-2">V8引擎</a></li><li class="tab"><a href="#tab_19-3">libuv库</a></li><li class="tab"><a href="#tab_19-4">Node内部库</a></li><li class="tab"><a href="#tab_19-5">其他库</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_19-1"><p>全称 <strong>Generate Your Projects</strong>，<br>用于生成各个平台下的项目文件，<br><strong>node-gyp</strong>是为Node提供的专有扩展构建工具</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g node-gyp</span><br></pre></td></tr></table></figure></div><div class="tab-pane" id="tab_19-2"><p>V8引擎本身就是用 <strong>C++</strong> 写成的，<br>因此能够实现 <strong>JavaScript</strong> 和 <strong>C++</strong> 的相互调用</p></div><div class="tab-pane" id="tab_19-3"><p>Node能够实现<strong>跨平台</strong>的诀窍，<br>它支持Node调用底层操作（事件循环、文件操作等）</p></div><div class="tab-pane" id="tab_19-4"><p>Node自身提供的一些C++代码。</p></div><div class="tab-pane" id="tab_19-5"><p>存在 <strong>deps目录</strong> 下。</p></div></div></div></div></div>
+
+<h2 id="C-x2F-C-扩展模块的编写"><a href="#C-x2F-C-扩展模块的编写" class="headerlink" title="C&#x2F;C++扩展模块的编写"></a>C&#x2F;C++扩展模块的编写</h2><h2 id="C-x2F-C-扩展模块的编译"><a href="#C-x2F-C-扩展模块的编译" class="headerlink" title="C&#x2F;C++扩展模块的编译"></a>C&#x2F;C++扩展模块的编译</h2><h2 id="C-x2F-C-扩展模块的加载"><a href="#C-x2F-C-扩展模块的加载" class="headerlink" title="C&#x2F;C++扩展模块的加载"></a>C&#x2F;C++扩展模块的加载</h2><h1 id="模块调用栈"><a href="#模块调用栈" class="headerlink" title="模块调用栈"></a>模块调用栈</h1><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/模块调用栈.png" alt="模块之间的调用关系" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">模块之间的调用关系</span></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="body"><ul><li>核心模块<ul><li>C&#x2F;C++内建模块：最底层的模块</li><li>JavaScript模块：<ul><li>作为内建模块的 <strong>封装层和桥阶层</strong></li><li>供<strong>文件模块</strong>调用</li></ul></li></ul></li><li>文件模块<ul><li>C&#x2F;C++扩展模块</li><li>JavaScript模块：纯粹功能模块</li></ul></li></ul></div></div>
+
+<h1 id="包与NPM"><a href="#包与NPM" class="headerlink" title="包与NPM"></a>包与NPM</h1><div class="tag-plugin link dis-select"><a class="link-card plain" title="npm官网" href="https://www.npmjs.org/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">npm官网</span><span class="cap link fs12">https://www.npmjs.org/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="一个对npm包下载数量进行排名的网站" href="http://npmrank.net/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">一个对npm包下载数量进行排名的网站</span><span class="cap link fs12">http://npmrank.net/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin link dis-select"><a class="link-card plain" title="anvaka统计的19年之前安装次数前1000名npm包" href="https://gist.github.com/anvaka/8e8fa57c7ee1350e3491" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">anvaka统计的19年之前安装次数前1000名npm包</span><span class="cap link fs12">https://gist.github.com/anvaka/8e8fa57c7ee1350e3491</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>CommonJS的包规范</strong></div><div class="body"><blockquote><p>包和NPM就是<strong>将模块联系起来</strong>的一种机制，</p></blockquote><p><em>就像是将不同生物联系到一起的食物链</em></p><p>CommonJS包规范规定包由两个部分组成：</p><ul><li>包描述文件</li><li>包结构文件</li></ul></div></div>
+
+<h2 id="包结构"><a href="#包结构" class="headerlink" title="包结构"></a>包结构</h2><p><strong>包</strong>这个概念可能过于抽象，<br>具体些说，<strong>包</strong>实际就是一个<strong>存档文件（.zip&#x2F;tar.gz）</strong></p>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>完全符合CommonJS规范的包目录</strong></div><div class="body"><ul><li><em>package.json</em> 包描述文件</li><li><em>lib</em> 可执行二进制文件目录</li><li><em>bin</em> JavaScript文件目录</li><li><em>doc</em> 文档目录</li><li><em>test</em> 单元测试用例目录</li></ul></div></div>
+
+<h2 id="包描述文件与NPM"><a href="#包描述文件与NPM" class="headerlink" title="包描述文件与NPM"></a>包描述文件与NPM</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>package.json</strong></div><div class="body"><p>package.json位于包的<strong>根目录</strong>下，<br>CommonJS为其定义了一些描述字段：</p><details class="tag-plugin folding" color="green"><summary><span>必需字段</span></summary><div class="body"><ul><li><p><em>name</em> <strong>包名</strong></p><ul><li>包名不能出现空格，可以包含如下字符：<ul><li>小写字母</li><li>数字</li><li>.</li><li><ul><li></li></ul></li><li>_</li></ul></li><li><blockquote><p>“name”: “goodbye-world”</p></blockquote></li></ul></li><li><p><em>description</em> <strong>包简介</strong></p><ul><li><blockquote><p>“description”: “world:why everybody has to say hello to me?”</p></blockquote></li></ul></li><li><p><em>version</em> <strong>版本号</strong></p><ul><li><div class="tag-plugin link dis-select"><a class="link-card plain" title="语义化版本号的详细定义" href="https://semver.org/" target="_blank" rel="external nofollow noopener noreferrer" cardlink autofill="icon"><div class="left"><span class="title">语义化版本号的详细定义</span><span class="cap link fs12">https://semver.org/</span></div><div class="right"><div class="lazy img" data-bg="https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/link/8f277b4ee0ecd.svg"></div></div></a></div></li><li><blockquote><p>“version”: “1.0.0”</p></blockquote></li></ul></li><li><p><em>keywords</em> <strong>关键词数组</strong></p><ul><li>用于做分类搜索</li><li><blockquote><p>“keywords”: [“jeusttest”, “dontdownload”, “goaway”]</p></blockquote></li></ul></li><li><p><em>maintainers</em> <strong>包维护者列表</strong></p><ul><li>每个维护者包含<ul><li><em>name</em></li><li><em>email</em></li><li><em>web</em></li></ul></li><li><pre><code class="json">&quot;maintainers&quot;: [{&quot;name&quot;:&quot;God&quot;, &quot;email&quot;:&quot;highestgod@heaven.com&quot;,&quot;web&quot;:&quot;www.notwelcomemotals.com&quot;}]</code></pre></li></ul></li></ul></div></details><details class="tag-plugin folding" color="green"><summary><span>用于权限认证的字段</span></summary><div class="body"><ul><li><em>contributors</em> <strong>贡献者列表</strong></li><li><em>bugs</em> <strong>一个可以反馈bug的地址</strong></li><li><em>licenses</em> <strong>许可证列表</strong></li><li><em>repositories</em> <strong>托管源代码位置</strong></li><li><em>dependencies</em> <strong>依赖包列表</strong></li></ul></div></details><details class="tag-plugin folding" color="green"><summary><span>可选字段</span></summary><div class="body"><ul><li><em>hoempage</em> <strong>包的网站地址</strong></li><li><em>os</em> <strong>操作系统支持列表</strong><ul><li>包括 <em>aix、freebsd、linux、macos、solaris、vxworks、windows</em> 等</li></ul></li><li><em>cpu</em> <strong>CPU架构支持列表</strong><ul><li>包括 <em>arm、mips、ppc、sparc、x86、x86_64</em> 等</li></ul></li><li><em>engine</em> <strong>支持的JavaScript引擎列表</strong><ul><li>包括 <em>v8、ejs、flusspferd、gpsee、jsc、spidermonkey、narwhal</em> 等</li></ul></li><li><em>builtin</em> <strong>底层内建模块的标志</strong></li><li><em>directories</em> <strong>包目录说明</strong></li><li><em>implements</em> <strong>实现规范列表</strong></li><li><em>scripts</em> <strong>脚本说明对象</strong></li></ul></div></details><details class="tag-plugin folding" color="green"><summary><span>NPM实际需要的字段</span></summary><div class="body"><ul><li><em>author</em> <strong>包作者</strong></li><li><em>bin</em> 用于添加到执行路径在<strong>命令行工具</strong>中调用的脚本</li><li><em>main</em> <strong>指定模块入口</strong></li><li><em>DevDependencies</em> 只在<strong>开发时</strong>需要的依赖</li></ul></div></details></div></div>
+
+<p>NPM最初是由 <em>Isaac Z. Schlueter</em> 单独创建的，<br>但在<em>v0.6.3</em>版本时被集成进Node作为 <strong>默认包管理器</strong></p>
+<h2 id="局域NPM"><a href="#局域NPM" class="headerlink" title="局域NPM"></a>局域NPM</h2><p>考虑到<strong>模块保密性</strong>，企业一般搭建自己的NPM仓库。</p>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>如何搭建局域NPM仓库？</strong></div><div class="body"><p>与<strong>搭建镜像站</strong>方式几乎一样，<br>附录D待补充</p></div></div>
+
+<p>原文作者提到局域NPM仓库搭建的一个用处，很有趣：</p>
+<blockquote>
+<p>”不至于让各个小项目各自维护相同功能的模块，（重复劳动）<br>杜绝通过复制粘贴实现代码共享的行为。（无脑重复）“</p>
+</blockquote>
+<h2 id="怎样评价一个包的质量"><a href="#怎样评价一个包的质量" class="headerlink" title="怎样评价一个包的质量"></a>怎样评价一个包的质量</h2><p>NPM平台上有成千上万个包，对模块品质进行判断并不容易， 特别是：</p>
+<ul>
+<li><strong>包质量</strong></li>
+<li><strong>安全问题</strong></li>
+</ul>
+<p>因此开发采纳包很多时候也是根据 <strong>口碑效应</strong>。</p>
+<details class="tag-plugin folding" color="green"><summary><span>模块口碑参考方式</span></summary><div class="body"><ul><li>NPM模块首页依赖榜<ul><li><a target="_blank" rel="noopener" href="https://www.npmjs.com/">https://www.npmjs.com/</a></li></ul></li><li>GitHub<ul><li>观察者数量</li><li>流行度</li></ul></li><li>包结构<ul><li>测试用例</li><li>文档状况</li></ul></li></ul></div></details>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>包安全检查</strong></div><div class="body"><p>安全检查的难点主要在于 <strong>C&#x2F;C++扩展模块</strong>，</p><p>对于模块安全的检查，<em>Isaac Z. Schlueter</em> 提出了一个有趣的词：<mark class="tag-plugin mark" color="yellow">Kwalitee</mark></p><blockquote><p>“Kwalitee” is something that looks like quality, sounds like quality,<br>but is not quite quality.</p></blockquote><p>意思就是很多模块表面看上去很优质，但也不一定真正是高质量模块。</p><p>比较常用的考查点可以参考下面这些：</p><ul><li>覆盖率较高的测试模块</li><li>文档</li><li>编码规范</li></ul></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B01.html">第一章 Node简介</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B03.html">第三章 异步I/O</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

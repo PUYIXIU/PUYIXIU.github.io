@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>NodeJs：模块化 - E-Duck</title>
+
+  
+    <meta name="description" content="模块化简介Node中，一个js文件就是一个模块。   requirenode使用require引入外部模块，注意：如果要使用相对路径，必须以.或..开头require引入模块之后会返回一个对象，该对象表示的是引入的模块。    require引入运行命令node helloNode.js运行结果module Ahello nodehelloNode.js12require(&amp;#x27;.&#x2F;modu">
+<meta property="og:type" content="website">
+<meta property="og:title" content="模块化">
+<meta property="og:url" content="http://eletricduck.com/wiki/nodejs/chapter2.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="模块化简介Node中，一个js文件就是一个模块。   requirenode使用require引入外部模块，注意：如果要使用相对路径，必须以.或..开头require引入模块之后会返回一个对象，该对象表示的是引入的模块。    require引入运行命令node helloNode.js运行结果module Ahello nodehelloNode.js12require(&amp;#x27;.&#x2F;modu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-21T08:30:39.959Z">
+<meta property="article:modified_time" content="2023-03-21T08:30:39.959Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/nodejs/index.html"><div class="main" ff="title">NodeJs</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">NodeJs简介</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/index.html#start"><span class="toc-text">Hello NodeJs</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/nodejs/chapter2.html"><span class="toc-text">模块化</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E7%AE%80%E4%BB%8B"><span class="toc-text">模块化简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AF%A6%E8%A7%A3"><span class="toc-text">模块化详解</span></a></li></ol></div></div><div class="widget-header cap dis-select"><span class="name">包简介</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter3.html"><span class="toc-text">包管理</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter4.html"><span class="toc-text">NPM</span></a></div></div><div class="widget-header cap dis-select"><span class="name">文件系统</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter5.html"><span class="toc-text">Buffer缓冲区</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter6.html"><span class="toc-text">文件写入</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter7.html"><span class="toc-text">文件读取</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/chapter8.html"><span class="toc-text">fs其他方法</span></a></div></div><div class="widget-header cap dis-select"><span class="name">《深入浅出Node.js》</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B01.html"><span class="toc-text">第一章 Node简介</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B02.html"><span class="toc-text">第二章 模块机制</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B03.html"><span class="toc-text">第三章 异步I/O</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/nodejs/%E3%80%8A%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js%E3%80%8B04.html"><span class="toc-text">第四章 异步编程</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/nodejs/index.html">NodeJs</a></div><div id="post-meta">更新于&nbsp;<time datetime="2023-03-21T08:30:39.959Z">2023-03-21</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>模块化</span></h1>
+  <h1 id="模块化简介"><a href="#模块化简介" class="headerlink" title="模块化简介"></a>模块化简介</h1><p>Node中，一个js文件就是一个模块。  </p>
+<div class="tag-plugin note" color="dark"><div class="title"><strong>require</strong></div><div class="body"><p>node使用require引入外部模块，<br>注意：如果要使用相对路径，必须以.或..开头<br>require引入模块之后会返回一个对象，该对象表示的是引入的模块。  </p></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>require引入</strong></div><div class="body"><p>运行命令</p><blockquote><p>node helloNode.js</p></blockquote><p>运行结果</p><blockquote><p>module A<br>hello node</p></blockquote><blockquote><p>helloNode.js</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./module&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello node&quot;</span>);</span><br></pre></td></tr></table></figure></blockquote><blockquote><p>module.js</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;module A&quot;</span>);</span><br></pre></td></tr></table></figure></blockquote></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>exports暴露变量</strong></div><div class="body"><p>Node中，每个js文件中的js代码实际上都相当于运行在一个独立的函数之中。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 函数体</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure><p>可以通过exports来向外暴露变量。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">variableName</span></span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>exports案例</strong></div><div class="body"><blockquote><p>helloNode.js</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> module_prop =  <span class="built_in">require</span>(<span class="string">&#x27;./module&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(module_prop.<span class="property">a</span>,module_prop.<span class="property">b</span>);</span><br><span class="line">module_prop.<span class="title function_">fun</span>(<span class="number">10</span>,<span class="number">5</span>);</span><br></pre></td></tr></table></figure><blockquote><p>module.js</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">a</span> = <span class="number">123</span>;</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">b</span>= <span class="string">&quot;abc&quot;</span>;</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">fun</span> = <span class="keyword">function</span>(<span class="params">num1,num2</span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(num1+num2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>node helloNode.js<br>运行结果：<br>123 abc<br>15</p></blockquote></div></div>
+
+<h1 id="模块化详解"><a href="#模块化详解" class="headerlink" title="模块化详解"></a>模块化详解</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>模块标识</strong></div><div class="body"><p>使用require引入模块的时候，使用的就是模块标识，<br>模块标识能用来找到指定模块。<br>模块标识分为两大类：  </p><ul><li>核心模块<ul><li>由node引擎提供的模块</li><li>核心模块的表示就是模块名<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>)</span><br></pre></td></tr></table></figure></li></ul></li><li>文件模块<ul><li>由用户自己创建的模块</li><li>文件模块的标识就是文件的路径（绝对路径、相对路径）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> math = <span class="built_in">require</span>(<span class="string">&quot;./math&quot;</span>)</span><br></pre></td></tr></table></figure></li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>全局对象global</strong></div><div class="body"><p>node中有一个全局对象global，作用和window类似，<br>全局中创建的变量和函数都会作为global的方法和属性保存。<br>不使用let&#x2F;var定义的变量即全局变量：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">global_a = <span class="number">100</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">global</span>.<span class="property">a</span>); <span class="comment">//undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">global</span>.<span class="property">global_a</span>); <span class="comment">//100</span></span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>node对模块的函数化包装</strong></div><div class="body"><p>如何确定我们调用的js文件实际上是函数呢？<br>可以使用js中函数独有的arguments.callee属性，<br>这个属性描述的是正在调用的函数体</p><blockquote><p>执行代码</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">callee</span> + <span class="string">&quot;&quot;</span>);</span><br></pre></td></tr></table></figure></blockquote><blockquote><p>输出结果</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"><span class="built_in">exports</span>, <span class="built_in">require</span>, <span class="variable language_">module</span>, __filename, __dirname</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">arguments</span>.<span class="property">callee</span> + <span class="string">&quot;&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>node模块化正是对每个js模块文件中的执行代码进行函数包装操作：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(<span class="params"><span class="built_in">exports</span>, <span class="built_in">require</span>, <span class="variable language_">module</span>, __filename, __dirname</span>)&#123;</span><br><span class="line">    <span class="comment">// 我们自己的js代码像奥利奥夹心一样被夹在这里</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这同是也解释了我们之前使用的exports和require的来源，它们都是被包装的函数传进来的参数。</p><ul><li>exports<ul><li>用于将变量或函数暴露到外部</li></ul></li><li>require<ul><li>函数，用于引入外部模块</li><li><details class="tag-plugin folding" color="purple"><summary><span>require函数代码</span></summary><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[<span class="title class_">Function</span>: <span class="built_in">require</span>] &#123;</span><br><span class="line">    <span class="attr">resolve</span>: [<span class="title class_">Function</span>: resolve] &#123; <span class="attr">paths</span>: [<span class="title class_">Function</span>: paths] &#125;,</span><br><span class="line">    <span class="attr">main</span>: <span class="title class_">Module</span> &#123;</span><br><span class="line">        <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">        <span class="attr">path</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module&#x27;</span>,</span><br><span class="line">        <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">        <span class="attr">filename</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\main.js&#x27;</span>,</span><br><span class="line">        <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">children</span>: [],</span><br><span class="line">        <span class="attr">paths</span>: [</span><br><span class="line">            <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\node_modules&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\node_modules&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\node_modules&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;D:\\CS_Demo\\node_modules&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;D:\\node_modules&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">extensions</span>: [<span class="title class_">Object</span>: <span class="literal">null</span> prototype] &#123;</span><br><span class="line">        <span class="string">&#x27;.js&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">        <span class="string">&#x27;.json&#x27;</span>: [<span class="title class_">Function</span> (anonymous)],</span><br><span class="line">        <span class="string">&#x27;.node&#x27;</span>: [<span class="title class_">Function</span> (anonymous)]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">cache</span>: [<span class="title class_">Object</span>: <span class="literal">null</span> prototype] &#123;</span><br><span class="line">        <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\main.js&#x27;</span>: <span class="title class_">Module</span> &#123;</span><br><span class="line">            <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">            <span class="attr">path</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module&#x27;</span>,</span><br><span class="line">            <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">            <span class="attr">filename</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\main.js&#x27;</span>,</span><br><span class="line">            <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">            <span class="attr">children</span>: [],</span><br><span class="line">            <span class="attr">paths</span>: [<span class="title class_">Array</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details></li></ul></li><li>module<ul><li>代表当前模块自身</li><li>exports就是module的属性，用exports和module.exports本质上没有区别<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">is</span>(<span class="variable language_">module</span>.<span class="property">exports</span>,<span class="built_in">exports</span>)); <span class="comment">//true</span></span><br></pre></td></tr></table></figure></li><li><details class="tag-plugin folding" color="purple"><summary><span>module对象源码</span></summary><div class="body"><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Module</span> &#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="string">&#x27;.&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module&#x27;</span>,</span><br><span class="line">    <span class="attr">exports</span>: &#123;&#125;,</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\main.js&#x27;</span>,</span><br><span class="line">    <span class="attr">loaded</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">children</span>: [],</span><br><span class="line">    <span class="attr">paths</span>: [</span><br><span class="line">        <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\day2_module\\node_modules&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\NodeJs_Demo\\node_modules&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;D:\\CS_Demo\\V_Demo\\node_modules&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;D:\\CS_Demo\\node_modules&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;D:\\node_modules&#x27;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></details></li></ul></li><li>__filename<ul><li>当前模块的完整路径</li></ul></li><li>__dirname<ul><li>当前模块所在文件夹的完整路径</li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>module.exports和exports的区别</strong></div><div class="body"><p>对于暴露单个属性或方法，使用module.exports和exports都是一样的：</p><blockquote><p>math.js</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exports</span>.<span class="property">pi</span> = <span class="number">3.14</span>;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">sin90</span> = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">add</span> = <span class="keyword">function</span>(<span class="params">num1,num2</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> num1+num2;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">multiply</span> = <span class="keyword">function</span>(<span class="params">num1,num2</span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> num1*num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>main.js</p></blockquote><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> math = <span class="built_in">require</span>(<span class="string">&#x27;./math&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(math.<span class="property">pi</span>); <span class="comment">//3.14</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(math.<span class="property">sin90</span>); <span class="comment">//1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(math.<span class="title function_">add</span>(<span class="number">10</span>,<span class="number">5</span>)); <span class="comment">//15</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(math.<span class="title function_">multiply</span>(<span class="number">2</span>,<span class="number">4</span>)); <span class="comment">//8</span></span><br></pre></td></tr></table></figure><p>但是如果将需要将对象和方法包装成类暴露的话，<br>通过module.exports可以直接赋值，<br>而直接修改exports相当于修改exports的指向，切断了它和module之间的指向关系。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">    <span class="attr">pi</span>:<span class="number">3.14</span>,</span><br><span class="line">    <span class="attr">sin90</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">add</span>:<span class="keyword">function</span>(<span class="params">num1,num2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num1+num2;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">multiply</span>:<span class="keyword">function</span>(<span class="params">num1,num2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> num1*num2;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/nodejs/index.html">Hello NodeJs</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/nodejs/chapter3.html">包管理</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

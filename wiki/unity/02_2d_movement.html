@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Unity：2D Movement in Unity - E-Duck</title>
+
+  
+    <meta name="description" content="Character Controller原视频资源作者提供的脚本代码：将Character-Controller加入控制角色Player的脚本中：  地面检测地面检测的两个关键问题：什么是地面？What is Ground属性：除了Player自身以外的Everything检测到地面的条件是什么？Ground Check：脚部坐标点，用于检测和地面之间的碰撞Ceiling Check：头部坐标点，">
+<meta property="og:type" content="website">
+<meta property="og:title" content="2D Movement in Unity">
+<meta property="og:url" content="http://eletricduck.com/wiki/unity/02_2d_movement.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="Character Controller原视频资源作者提供的脚本代码：将Character-Controller加入控制角色Player的脚本中：  地面检测地面检测的两个关键问题：什么是地面？What is Ground属性：除了Player自身以外的Everything检测到地面的条件是什么？Ground Check：脚部坐标点，用于检测和地面之间的碰撞Ceiling Check：头部坐标点，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=Brackeys&repo=2D-Character-Controller&theme=dark&show_owner=true">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/character-controller.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/CeilingCheck.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/GroundCheck.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/ceiling_ground_check.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/playerRigidBody.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/constraintsZ.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/tilemapCollider.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/MultiCollider.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/horizontalMove.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/InputManager.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/playerJump.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/CrouchDisableCollider.png">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/playerCouch.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/OnLandingBug.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/unity/img/OnLanding.gif">
+<meta property="article:published_time" content="2024-04-10T15:12:24.649Z">
+<meta property="article:modified_time" content="2024-04-10T15:12:24.649Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github-readme-stats.xaoxuu.com/api/pin/?username=Brackeys&repo=2D-Character-Controller&theme=dark&show_owner=true">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/unity/index.html"><div class="main" ff="title">Unity</div><div class="sub cap">Learning Unity</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">Brackeys Learning</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/index.html#start"><span class="toc-text">make a 2D Games</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/unity/02_2d_movement.html"><span class="toc-text">2D Movement in Unity</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Character-Controller"><span class="toc-text">Character Controller</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Movement"><span class="toc-text">Movement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#onLanding%E9%97%AA%E7%94%B5%E8%A7%A6%E5%8F%91Bug"><span class="toc-text">onLanding闪电触发Bug</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/03_2d_animation.html"><span class="toc-text">2D Animation</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/04_2d_camera.html"><span class="toc-text">2D Camera</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/05_2d_Shooting.html"><span class="toc-text">2D Shooting</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/06_2d_sprite_shape.html"><span class="toc-text">2D Sprite Shape</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/07_2d_light.html"><span class="toc-text">2D Lighting</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/unity/08_melee_combat.html"><span class="toc-text">2D Melee Combat</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/unity/index.html">Unity</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-04-10T15:12:24.649Z">2024-04-10</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>2D Movement in Unity</span></h1>
+  <h1 id="Character-Controller"><a href="#Character-Controller" class="headerlink" title="Character Controller"></a>Character Controller</h1><div class="tag-plugin note" ><div class="body"><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=dwcT-Dch0bA&list=PLPV2KyIb3jR6TFcFuzI2bB7TMNIIBpKMQ&index=2">原视频资源</a></p><p>作者提供的脚本代码：</p><div class="tag-plugin ghcard"><a class="ghcard" rel="external nofollow noopener noreferrer noopener" target="_blank" href="https://github.com/Brackeys/2D-Character-Controller"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://github-readme-stats.xaoxuu.com/api/pin/?username=Brackeys&repo=2D-Character-Controller&theme=dark&show_owner=true"/></a></div><p>将Character-Controller加入控制角色Player的脚本中：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/character-controller.png" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>地面检测</strong></div><div class="body"><p>地面检测的两个关键问题：</p><ul><li>什么是地面？<ul><li>What is Ground属性：除了Player自身以外的Everything</li></ul></li><li>检测到地面的条件是什么？<ul><li>Ground Check：脚部坐标点，用于检测和地面之间的碰撞</li><li>Ceiling Check：头部坐标点，检测和头顶物体的碰撞</li></ul></li></ul><div class="tag-plugin split" ><div class="cell" index="0"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/CeilingCheck.png" alt="Ceiling Check" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">Ceiling Check</span></div></div></div><div class="cell" index="1"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/GroundCheck.png" alt="Ground Check" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">Ground Check</span></div></div></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/ceiling_ground_check.png" fancybox="true"/></div></div></div></div>
+
+
+<div class="tag-plugin note" ><div class="title"><strong>碰撞检测</strong></div><div class="body"><div class="tag-plugin note" color="dark"><div class="title"><strong>Rigidbody 2D</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/playerRigidBody.png" fancybox="true"/></div></div><p>2点需要注意：</p><ul><li>Mass比其他物体稍大，跳跃下落的效果更好</li><li>Collision Detection设置为Continuous，不然在玩家下落时会出现短暂的地面卡顿</li><li>Z旋转轴锁死，因为会出现下面的情况：<div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/constraintsZ.gif" fancybox="true"/></div></div></li></ul></div></div><div class="tag-plugin note" ><div class="title"><strong>Tilemap 碰撞检测</strong></div><div class="body"><p>Tilemap这里划分成3个模块：</p><ul><li>前景：不被遮挡无碰撞元素</li><li>后景：被遮挡的无碰撞元素</li><li>平台：碰撞元素</li></ul><p>这里为需要进行碰撞检测的Tilemap添加3个脚本：</p><ul><li>Rigidbody 2D：开启Static类型</li><li>Tilemap Collider 2D</li><li>Composite Collider 2D</li></ul><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/tilemapCollider.png" fancybox="true"/></div></div></div></div><div class="tag-plugin note" color="dark"><div class="title"><strong>Multi Collider 混合碰撞检测</strong></div><div class="body"><blockquote><p>Tips1: 在Edit Collider的时候，按住alt键可以进行对称编辑<br>Tips2: 鼠标拖动调整属性时，按住alt可以进行细调</p></blockquote><p>角色如果只用一个Box Collider或者Circle Collider进行碰撞检测，<br>效果都会有缺点，仅使用Box Collider的时候，斜坡地段会出现卡顿的情况<br>这里作者建议角色上半身用Box Collider，<br>下半身用Circle Collider：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/MultiCollider.png" fancybox="true"/></div></div></div></div></div></div>
+
+<h1 id="Movement"><a href="#Movement" class="headerlink" title="Movement"></a>Movement</h1><div class="tag-plugin note" ><div class="title"><strong>CharacterController2D</strong></div><div class="body"><p>Brackeys提供的CharacterController2D类，<br>其中提供移动的主要方法就是Move，<br>Move需要3个参数：</p><ul><li>float move：水平移动距离</li><li>bool crouch：是否下蹲</li><li>bool jump：是否跳跃</li></ul></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>Horizontal Movement 水平移动</strong></div><div class="body"><p>为Player添加一个新的脚本PlayerMovement：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerMovement</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> CharacterController2D controller2D; <span class="comment">// 关联的控制器</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">float</span> moveSpeed = <span class="number">50f</span>; <span class="comment">// 移动速度</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">float</span> horizontalMove = <span class="number">0f</span>; <span class="comment">// 水平移动距离</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// Update is called once per frame</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Input.GetAxisRow(&quot;Horizontal&quot;)  获取水平方向的移动 </span></span><br><span class="line">        <span class="comment">// 左移：A键 Input.GetAxisRow(&quot;Horizontal&quot;) = -1</span></span><br><span class="line">        <span class="comment">// 右移：D键 Input.GetAxisRow(&quot;Horizontal&quot;) = 1</span></span><br><span class="line">        horizontalMove = Input.GetAxisRaw(<span class="string">&quot;Horizontal&quot;</span>) * moveSpeed;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span> &#123;</span><br><span class="line">        <span class="comment">// Time.fixedDeltaTime 时间增量</span></span><br><span class="line">        controller2D.Move(horizontalMove * Time.fixedDeltaTime, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>并将之前为玩家添加的Character Controller 2D脚本与controller2D属性关联。</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/horizontalMove.gif" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>unity input setting</strong></div><div class="body"><p>Unity提供按键检测的方法：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input.GetButtonDown(<span class="string">&quot;Jump&quot;</span>); <span class="comment">// 检测按键按下</span></span><br><span class="line">Input.GetButtonUp(<span class="string">&quot;Crouch&quot;</span>); <span class="comment">// 检测按键松开</span></span><br></pre></td></tr></table></figure><p>这样只要我们按下W键，这个方法就会返回true，<br>W键-Jump的对应关系在Unity内可以修改：</p><blockquote><p>Edit - Project Settings - Input Manager</p></blockquote><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/InputManager.png" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>Jump 跳跃</strong></div><div class="body"><p>在PlayerMovement中添加进行跳跃检测的代码：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerMovement</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="built_in">bool</span> jump = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Jump&quot;</span>)) &#123;</span><br><span class="line">            jump = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span> &#123;</span><br><span class="line">        controller2D.Move(horizontalMove * Time.fixedDeltaTime, <span class="literal">false</span>, jump);</span><br><span class="line">        jump = <span class="literal">false</span>;  <span class="comment">// 跳跃后重置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这样做是可以进行跳跃，但是可能会出现角色卡在平台边缘的情况，<br>这是因为角色上半身的方形碰撞盒和平台碰撞盒之间存在摩擦力，</p><p>因此可以为角色的碰撞盒添加新的Physics Material：</p><ul><li>Fiction &#x3D; 0</li><li>Bounciness &#x3D; 0</li></ul><p>这样在平台边缘，角色就会因为缺少摩擦力自动滑下来</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/playerJump.gif" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>Crouch 下蹲</strong></div><div class="body"><p>在PlayerMovement中对下蹲进行检测：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PlayerMovement</span> : <span class="title">MonoBehaviour</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="built_in">bool</span> crouch = <span class="literal">false</span>; <span class="comment">// 下蹲检测</span></span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Update</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// 下蹲检测</span></span><br><span class="line">        <span class="keyword">if</span> (Input.GetButtonDown(<span class="string">&quot;Crouch&quot;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            crouch = <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (Input.GetButtonUp(<span class="string">&quot;Crouch&quot;</span>))</span><br><span class="line">        &#123;   </span><br><span class="line">            crouch = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span> &#123;</span><br><span class="line">        controller2D.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);</span><br><span class="line">        jump = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>在为Player添加碰撞体时，分别为上半身和下半身添加了一个碰撞体积，<br>下蹲实际实现的是使上半身的碰撞盒失效，<br>这一点需要在Character Controller 2D中对Crouch Disable Collider进行配置</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/CrouchDisableCollider.png" fancybox="true"/></div></div><p>在按下下蹲键时，上半身的碰撞盒就会失效：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/playerCouch.gif" fancybox="true"/></div></div></div></div>
+
+<h1 id="onLanding闪电触发Bug"><a href="#onLanding闪电触发Bug" class="headerlink" title="onLanding闪电触发Bug"></a>onLanding闪电触发Bug</h1><div class="tag-plugin note" ><div class="title"><strong>问题描述</strong></div><div class="body"><p>角色跳跃时，本应只在角色落地时触发，<br>但现在在角色跳起之前也被触发一次，<br>于是角色动画就因为跳起之前的这一次被关闭了：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/OnLandingBug.gif" fancybox="true"/></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>解决方式</strong></div><div class="body"><p>查看CharacterController2D代码，发现地面检测是在FixedUpdate函数中被调用的，<br>因此应当是因为跳跃之后的第一帧，角色还没有离地，CharacterController2D的FixedUpdate函数就被调用了，<br>于是就判定跳跃结束，<br>因此这里在FixedUpdate函数中使用Invoke进行延时调用：</p><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// 地面检测函数</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">CollideCheck</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">       <span class="built_in">bool</span> wasGrounded = m_Grounded;</span><br><span class="line">       m_Grounded = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">       Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);</span><br><span class="line">       <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; colliders.Length; i++)</span><br><span class="line">       &#123;</span><br><span class="line">           <span class="keyword">if</span> (colliders[i].gameObject != gameObject)</span><br><span class="line">           &#123;</span><br><span class="line">               m_Grounded = <span class="literal">true</span>;</span><br><span class="line">               <span class="keyword">if</span> (!wasGrounded)</span><br><span class="line">                   OnLandEvent.Invoke();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 延时调用0.01s</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">FixedUpdate</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	Invoke(<span class="string">&quot;CollideCheck&quot;</span>, <span class="number">0.01f</span>);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/OnLanding.gif" fancybox="true"/></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/unity/index.html">make a 2D Games</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/unity/03_2d_animation.html">2D Animation</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
