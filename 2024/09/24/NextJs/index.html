@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>NextJs - E-Duck</title>
+
+  
+    <meta name="description" content="NextJs开发学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NextJs">
+<meta property="og:url" content="http://eletricduck.com/2024/09/24/NextJs/index.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="NextJs开发学习">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/2024/09/24/NextJs/build_log.png">
+<meta property="og:image" content="http://eletricduck.com/2024/09/24/NextJs/build_folder.png">
+<meta property="og:image" content="http://eletricduck.com/2024/09/24/NextJs/prefetch.gif">
+<meta property="og:image" content="http://eletricduck.com/2024/09/24/NextJs/layout.png">
+<meta property="article:published_time" content="2024-09-24T02:23:48.000Z">
+<meta property="article:modified_time" content="2024-10-11T06:43:53.183Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://eletricduck.com/2024/09/24/NextJs/build_log.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title"><img no-lazy height="32px" src="/assets/image/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://fastly.jsdelivr.net/gh/cdn-x/placeholder@1.0.1/image/2659360.svg';"></div><div class="sub normal cap">Please tell me more jokes</div><div class="sub hover cap" style="opacity:0">Ha Ha Ha</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item" href="/">主页</a><a class="nav-item active" href="/posts/">文章</a><a class="nav-item" href="/wiki/">项目</a><a class="nav-item" href="/notes/">笔记</a></nav>
+</header>
+
+
+<div class="widgets">
+<div class="widget-wrap" id="tagcloud"><div class="widget-header cap theme dis-select"><span class="name">标签云</span></div><div class="widget-body fs14"><a href="/tags/APP/" style="font-size: 12px;" class="tag -0">APP</a> <a href="/tags/DevOps/" style="font-size: 18px;" class="tag -5">DevOps</a> <a href="/tags/Web/" style="font-size: 24px;" class="tag -10">Web</a> <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 12px;" class="tag -0">数据库</a> <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" style="font-size: 12px;" class="tag -0">编程语言</a></div></div>
+
+
+<div class="widget-wrap single" id="toc"><div class="widget-header cap dis-select"><span class="name">NextJs</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#B%E7%AB%99Up%EF%BC%9A%E5%85%A8%E6%A0%88%E7%A0%81%E5%8F%94"><span class="toc-text">B站Up：全栈码叔</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFNextJS"><span class="toc-text">什么是NextJS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NextJs%E6%A1%86%E6%9E%B6%E7%9B%AE%E5%BD%95"><span class="toc-text">NextJs框架目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">静态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-text">动态路由</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8A%A8%E6%80%81%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="toc-text">运行时动态获取数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E6%97%B6%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E9%A2%84%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2%EF%BC%88SSG%EF%BC%89"><span class="toc-text">构建时获取数据预生成静态页面（SSG）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B7%AF%E7%94%B1%E8%B7%B3%E8%BD%AC-amp-amp-%E6%95%B0%E6%8D%AE%E9%A2%84%E5%8F%96"><span class="toc-text">路由跳转 &amp;&amp; 数据预取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%88%B7%E8%AF%B7%E6%B1%82%E6%97%B6%E6%8C%89%E9%9C%80%E7%94%9F%E6%88%90%E9%9D%99%E6%80%81%E9%A1%B5%E9%9D%A2"><span class="toc-text">客户请求时按需生成静态页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E6%9B%B4%E6%96%B0%E5%86%85%E5%AE%B9%E9%9D%99%E6%80%81%E7%94%9F%E6%88%90%E9%A1%B5%E9%9D%A2"><span class="toc-text">增量更新内容静态生成页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93-SSR"><span class="toc-text">服务端渲染 SSR</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E5%90%8E%E7%AB%AFAPI%E6%8E%A5%E5%8F%A3"><span class="toc-text">创建后端API接口</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B5%E9%9D%A2%E5%85%A8%E5%B1%80%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E8%AE%BE%E7%BD%AE"><span class="toc-text">页面全局页面布局设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E5%88%B0%E7%AC%AC%E4%B8%89%E6%96%B9%E6%89%98%E7%AE%A1%E5%B9%B3%E5%8F%B0"><span class="toc-text">发布到第三方托管平台</span></a></li></ol></li></ol></div></div></div>
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-09-24T02:23:48.000Z">2024-09-24</time></div></div>
+
+<article class='content md post'>
+<h1 class="article-title"><span>NextJs</span></h1>
+<h1 id="B站Up：全栈码叔"><a href="#B站Up：全栈码叔" class="headerlink" title="B站Up：全栈码叔"></a>B站Up：全栈码叔</h1><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1q54y1w7k3/?spm_id_from=333.788&vd_source=f55c755ba9aae4a4382a0f9d56858d01">源教程地址</a></p>
+<h2 id="什么是NextJS"><a href="#什么是NextJS" class="headerlink" title="什么是NextJS"></a>什么是NextJS</h2><div class="tag-plugin note" ><div class="body"><p><a target="_blank" rel="noopener" href="https://nextjs.org/docs">NextJs Doc</a><br><a target="_blank" rel="noopener" href="https://www.nextjs.cn/docs/getting-started">中文文档</a></p><p>NextJs基于React，<br>reactjs框架的功能比较单一，<br>主要是将html和javascript两者结合使用，<br>NextJs在此之外引入额外的框架功能：</p><ul><li>CLI&#x2F;运行时&#x2F;文件结构</li><li>路由</li><li>静态生成器static generation</li><li>ISR</li><li>SSR</li><li>API</li><li>Style</li><li>Vercel静态托管平台</li></ul><p>还有另外2个和NextJs比较相似的框架：</p><ul><li>GatsbyJs：生成静态页面，数据从本机抓取数据整合，通过GraphQL查询服务提供数据</li><li>NestJS：更加偏向后端，继承了Controller、Service等层级，偏向MVC结构</li></ul></div></div>
+
+<h2 id="NextJs框架目录"><a href="#NextJs框架目录" class="headerlink" title="NextJs框架目录"></a>NextJs框架目录</h2><div class="tag-plugin note" color="dark"><div class="body"><p>创建项目：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx create-next-app@latest</span><br></pre></td></tr></table></figure><div class="tag-plugin note" ><div class="title"><strong>package.json脚本命令</strong></div><div class="body"><ul><li>dev 开发模式启动</li><li>build 构建生产环境应用</li><li>start 启动生产环境服务器</li><li>export 构建静态网站站点</li></ul><p>原本的next export命令用于构建静态网站站点，<br>现在需要直接在next.config.mjs中配置output：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nextConfig = &#123;</span><br><span class="line">    <span class="attr">output</span>:<span class="string">&#x27;export&#x27;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> nextConfig;</span><br></pre></td></tr></table></figure><p>这样，在运行npm run build的时候，就会自动生成out目录，下面存放的就是静态资源</p></div></div><div class="tag-plugin note" ><div class="title"><strong>.next文件</strong></div><div class="body"><p>.next文件是next项目生产环境下运行的文件，<br>在dev模式下也生成.next文件</p></div></div></div></div>
+
+<h2 id="静态路由"><a href="#静态路由" class="headerlink" title="静态路由"></a>静态路由</h2><div class="tag-plugin note" color="dark"><div class="body"><div class="tag-plugin note" ><div class="title"><strong>index路由</strong></div><div class="body"><p>在文件根目录下创建pages文件，<br>在pages文件下创建的子文件可以通过路由进行导航：</p><blockquote><ul><li>pages<ul><li>about<ul><li>index.tsx</li></ul></li></ul></li></ul></blockquote><p>访问方式：localhost:3000&#x2F;about</p></div></div><div class="tag-plugin note" ><div class="title"><strong>嵌套路由</strong></div><div class="body"><blockquote><ul><li>pages<ul><li>news<ul><li>hot.tsx</li></ul></li></ul></li></ul></blockquote><p>访问方式：localhost:3000&#x2F;news&#x2F;hot</p></div></div></div></div>
+
+<h2 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>动态路由</strong></div><div class="body"><p>动态路由使用方括号包裹参数</p><blockquote><ul><li>pages<ul><li>news<ul><li>[newId].tsx</li></ul></li></ul></li></ul></blockquote><p>在访问路径的时候加入路由：localhost:3000&#x2F;news&#x2F;1</p><p>通过useRouter路由钩子获取到路由参数：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="title function_">useRouter</span>();</span><br><span class="line"><span class="keyword">const</span> id = router.<span class="property">query</span>.<span class="property">newId</span></span><br></pre></td></tr></table></figure><div class="tag-plugin note" ><div class="title"><strong>动态父级路径</strong></div><div class="body"><p>作为路径的目录名也可以用动态参数的方式命名，<br>表示父级路径</p><blockquote><ul><li>pages<ul><li>news<ul><li>[newsId]<ul><li>index.tsx</li><li>comment.tsx（访问目标）</li></ul></li></ul></li></ul></li></ul></blockquote><p>在访问路径的时候加入路由：localhost:3000&#x2F;news&#x2F;1&#x2F;comment</p></div></div><div class="tag-plugin note" ><div class="title"><strong>动态嵌套路由</strong></div><div class="body"><p>路由中不仅仅可以嵌入1个动态参数，可以嵌入多个</p><blockquote><ul><li>pages<ul><li>news<ul><li>[newsId]<ul><li>index.tsx</li><li>comment<ul><li>index.tsx</li><li>[commentId].tsx（访问目标）</li></ul></li></ul></li></ul></li></ul></li></ul></blockquote><p>在访问路径的时候加入路由：localhost:3000&#x2F;news&#x2F;1&#x2F;comment&#x2F;1</p></div></div><div class="tag-plugin note" ><div class="title"><strong>动态params路由</strong></div><div class="body"><p>动态参数还能包含更多信息：</p><ul><li>pages<ul><li>about<ul><li>[…params].tsx</li></ul></li></ul></li></ul><p>访问路径：localhost:3000&#x2F;about&#x2F;1&#x2F;2&#x2F;3</p><p>参数获取方式（数组格式返回）：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> router = <span class="title function_">useRouter</span>();</span><br><span class="line"><span class="keyword">const</span> params = router.<span class="property">query</span>.<span class="property">params</span> <span class="comment">// [1,2,3]</span></span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="运行时动态获取数据"><a href="#运行时动态获取数据" class="headerlink" title="运行时动态获取数据"></a>运行时动态获取数据</h2><div class="tag-plugin note" color="dark"><div class="body"><p><a target="_blank" rel="noopener" href="https://dummyjson.com/">模拟后台接口获取数据</a></p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Recipe</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [data, setData] = useState&lt;<span class="built_in">any</span>[]&gt;([])</span><br><span class="line">  <span class="comment">// 抓取数据</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">fetchData</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">fetch</span>(<span class="string">&#x27;https://dummyjson.com/recipes&#x27;</span>)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function"><span class="params">res</span>=&gt;</span>res.<span class="title function_">json</span>())</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function"><span class="params">reply</span>=&gt;</span>&#123;</span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(reply)</span><br><span class="line">              <span class="title function_">setData</span>(reply.<span class="property">recipes</span>)</span><br><span class="line">            &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="title function_">fetchData</span>()</span><br><span class="line">  &#125;,[])</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">          <span class="language-xml"><span class="tag">&lt;<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">ul</span> &gt;</span></span></span><br><span class="line"><span class="language-xml">              &#123;data.map(item=&gt;<span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span>)&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="构建时获取数据预生成静态页面（SSG）"><a href="#构建时获取数据预生成静态页面（SSG）" class="headerlink" title="构建时获取数据预生成静态页面（SSG）"></a>构建时获取数据预生成静态页面（SSG）</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>页面预构建 SSG</strong></div><div class="body"><div class="tag-plugin note" ><div class="title"><strong>SSR和CSR的区别：</strong></div><div class="body"><p>html诞生之时，就是作为一种从服务器端获取的资源（SSR），<br>但是随着html对灵活性的需求变得越来越大，</p><p>越来越多的交互逻辑都被放在了浏览器端执行，于是就衍生出了CSR的模式，</p><p>类似于一家餐厅（服务器）贩卖招牌菜（网页），<br>一开始外卖员（浏览器）来领餐，厨师把菜老老实实做好交到外卖员手里（SSR）<br>后来发现外卖员的料理水平甚至比厨师还强（浏览器专门负责js的运行和渲染），<br>于是厨师干脆就只把料理的食材和食谱（js&#x2F;html&#x2F;css等其它原料）交给外卖员，叫它现场制作就行了</p></div></div><div class="tag-plugin note" ><div class="title"><strong>SSR和SSG的区别</strong></div><div class="body"><ul><li>SSR：服务器端渲染，动态生成html文件返回给用户</li><li>SSG：服务器端构建，提前生成静态html文件，用户请求时返回</li></ul></div></div><div class="tag-plugin note" ><div class="title"><strong>爬虫和SEO</strong></div><div class="body"><p>由于SSR模式下的html文件都是由服务器端生成返回的，<br>爬虫就能直接爬取到其内容中的信息，<br>在SEO优化方面也有更大的优势，<br>这是CSR应用不具有的优势，</p><p>CSR类似于美食记者（爬虫）<br>想要来这家餐厅用招牌菜（网页）取材， 却只收到食材和一张食谱，<br>完全不知道成品是什么样子</p></div></div><p>服务器端渲染页面，需要在页面中多添加2个异步方法：</p><ul><li>getStaticPaths<ul><li>用于动态路由页面中，判断哪些路由需要进行与渲染</li></ul></li><li>getStaticProps<ul><li>请求预渲染参数props</li><li>使用props渲染组件，生成html页面</li></ul></li></ul></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>getStaticProps</strong></div><div class="body"><p>页面组件接收一个采纳数props，<br>而这个参数由getStaticProps传入</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Recipe</span>(<span class="params">props:<span class="built_in">any</span></span>) &#123;</span><br><span class="line">    <span class="comment">// dev模式下，在服务端运行一遍，在客户端运行一遍</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Recipe&quot;</span>, props.<span class="property">data</span>)</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        <span class="language-xml"><span class="tag">&lt;<span class="name">main</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">ul</span> &gt;</span></span></span><br><span class="line"><span class="language-xml">                &#123;props.data.map((item:any)=&gt;</span></span><br><span class="line"><span class="language-xml">                    <span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;item.id&#125;</span>&gt;</span>&#123;item.name&#125;<span class="tag">&lt;/<span class="name">li</span>&gt;</span>)&#125;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在getStaticProps中获取动态数据，传入组件内，调用组件函数进行渲染：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticProps</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 在服务器端运行</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;static props&quot;</span>)</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://dummyjson.com/recipes&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> reply = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">    <span class="keyword">return</span> (&#123;</span><br><span class="line">        <span class="attr">props</span>:&#123;</span><br><span class="line">            <span class="attr">data</span>:reply.<span class="property">recipes</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>getStaticPaths</strong></div><div class="body"><p>对于动态路由页面，无法直接在getStaticProps函数中，通过useRouter直接获取到路由参数，<br>因此需要用getStaticPaths，定义静态页面生成的范围，<br>并将路由参信息通过context传入getStaticProps中：<br>getStaticPaths → getStaticProps → CompFunction</p><p>getStaticPaths：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticPaths</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">paths</span>:[</span><br><span class="line">            &#123;<span class="attr">params</span>:&#123;<span class="attr">recipeId</span>:<span class="string">&#x27;1&#x27;</span>&#125;&#125;,</span><br><span class="line">            &#123;<span class="attr">params</span>:&#123;<span class="attr">recipeId</span>:<span class="string">&#x27;2&#x27;</span>&#125;&#125;,</span><br><span class="line">        ],</span><br><span class="line">        <span class="attr">fallback</span>:<span class="literal">true</span>, <span class="comment">// fallback设置路由参数未匹配上之后的行为</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>getStaticProps：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// getStaticProps函数名称固定</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticProps</span>(<span class="params">context:<span class="built_in">any</span></span>)&#123;</span><br><span class="line">    <span class="comment">// 通过getStaticPaths获取到的路由参数</span></span><br><span class="line">    <span class="keyword">const</span> recipeId = context.<span class="property">params</span>.<span class="property">recipeId</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">`https://dummyjson.com/recipes/<span class="subst">$&#123;recipeId&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">const</span> reply = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(reply)</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">props</span>:&#123;</span><br><span class="line">            <span class="attr">data</span>:reply</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>构建结果</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./build_log.png" alt="next build 构建结果" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">next build 构建结果</span></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./build_folder.png" alt="构建生成文件" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">构建生成文件</span></div></div></div></div>
+
+<h2 id="路由跳转-amp-amp-数据预取"><a href="#路由跳转-amp-amp-数据预取" class="headerlink" title="路由跳转 &amp;&amp; 数据预取"></a>路由跳转 &amp;&amp; 数据预取</h2><div class="tag-plugin note" ><div class="title"><strong>路由跳转</strong></div><div class="body"><ul><li>Link</li><li>useRouter</li></ul><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">RouterButton</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> router = <span class="title function_">useRouter</span>()</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">          <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">Link</span> <span class="attr">href</span>=<span class="string">&#x27;/Home&#x27;</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">Link</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>router.back()&#125;&gt;Back<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span>=&gt;</span>router.push(&#x27;/login&#x27;)&#125;&gt;Login<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>prefetch</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./prefetch.gif" fancybox="true"/></div></div><p><a target="_blank" rel="noopener" href="https://www.nextjs.cn/docs/api-reference/next/link">Link</a></p><p>next提供的Link标签，提供prefetch标签，<br>即预获取目标页面，<br>即根据当前页面中的链接预获取数据，<br>可以根据视口滚动&#x2F;鼠标悬停触发</p></div></div>
+
+<h2 id="客户请求时按需生成静态页面"><a href="#客户请求时按需生成静态页面" class="headerlink" title="客户请求时按需生成静态页面"></a>客户请求时按需生成静态页面</h2><div class="tag-plugin note" ><div class="title"><strong>服务端按需生成 SSG</strong></div><div class="body"><p>动态路由可以进行全量构建：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticPaths</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">// 动态生成url参数</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;https://dummyjson.com/posts&quot;</span>)</span><br><span class="line">    <span class="keyword">const</span> reply = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">paths</span>:reply.<span class="property">posts</span>.<span class="title function_">map</span>(<span class="function">(<span class="params">post:<span class="built_in">any</span></span>)=&gt;</span>(&#123;</span><br><span class="line">            <span class="attr">params</span>:&#123;<span class="attr">postId</span>:post.<span class="property">id</span>.<span class="title function_">toString</span>()&#125;</span><br><span class="line">        &#125;)),</span><br><span class="line">        <span class="attr">fallback</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>也可以按需生成，配置getStaticPaths返回fallback为true：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticPaths</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">paths</span>:[],</span><br><span class="line">        <span class="attr">fallback</span>: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>fallback可以有几个值：</p><ul><li>block 访问未生成静态页面的动态路由时，返回404</li><li>true 按需生成静态页面</li></ul></div></div>
+
+<h2 id="增量更新内容静态生成页面"><a href="#增量更新内容静态生成页面" class="headerlink" title="增量更新内容静态生成页面"></a>增量更新内容静态生成页面</h2><div class="tag-plugin note" ><div class="title"><strong>revalidate</strong></div><div class="body"><p>getStaticProps返回的revalidate，<br>用于控制静态页面刷新周期，</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getStaticProps</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> dt = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toString</span>()</span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://dummyjson.com/posts&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> reply = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">props</span>:&#123;</span><br><span class="line">            <span class="attr">data</span>:reply.<span class="property">posts</span>,</span><br><span class="line">            dt</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">revalidate</span>:<span class="number">30</span> <span class="comment">// 静态页面缓存周期</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>设置revalidate之后，静态文件的html请求头中就会多出一个参数,<br>代表缓存时长控制</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cache-control: s-maxage=30, stale-while-revalidate</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="服务端渲染-SSR"><a href="#服务端渲染-SSR" class="headerlink" title="服务端渲染 SSR"></a>服务端渲染 SSR</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>SSR</strong></div><div class="body"><p>Next中在组件内使用异步方法getServerSideProps，来表示需要服务器端渲染的页面<br>和getStaticProps的不同之处在于，<br>getServerSideProps的router参数context更类似http请求头的格式，<br>包括req、res、params、query等参数，<br>并且可以对res进行自定义响应头配置：</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">getServerSideProps</span>(<span class="params">context:<span class="built_in">any</span></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;res, query, params&#125; = context</span><br><span class="line">    <span class="comment">// 对静态页面的请求头自定义配置</span></span><br><span class="line">    res.<span class="title function_">setHeader</span>(<span class="string">&#x27;Set-Cookie&#x27;</span>, <span class="string">&#x27;token=xxxxxxx&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> (&#123;</span><br><span class="line">        <span class="attr">props</span>: &#123;</span><br><span class="line">            <span class="attr">data</span>: [],</span><br><span class="line">            dt</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>路由传参</strong></div><div class="body"><p>和SSG不同，SSR支持通过路由传入任何参数，<br>传参的方式可以是通过路由传入参数，也可以是通过动态路由传参，<br>无论是哪一种，在getServerSideProps中都可以通过context获取到</p><div class="tag-plugin note" ><div class="title"><strong>路由参数传参</strong></div><div class="body"><p>路由文件： products.tsx<br>url：&#x2F;products?type&#x3D;phone&amp;&amp;brand&#x3D;vivo</p><p>获取到的参数context.query：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; type: &#x27;phone&#x27;, brand: &#x27;vivo&#x27; &#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>动态路由传参</strong></div><div class="body"><p>双方括号，表示就算不传params，也会映射到该文件中</p><p>路由文件：[[…params]].tsx<br>url：&#x2F;products&#x2F;phone&#x2F;vivo<br>获取到的参数context.query：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123; params: [ &#x27;phone&#x27;, &#x27;vivo&#x27; ] &#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="创建后端API接口"><a href="#创建后端API接口" class="headerlink" title="创建后端API接口"></a>创建后端API接口</h2><div class="tag-plugin note" ><div class="title"><strong>API</strong></div><div class="body"><p>在pages下创建api目录，下面存放路由映射接口，</p><blockquote><p>&#x2F;pages&#x2F;api</p></blockquote><p>api目录下创建接口路径：api&#x2F;products.ts</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">NextApiRequest</span>, <span class="title class_">NextApiResponse</span>&#125; <span class="keyword">from</span> <span class="string">&quot;next&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="title class_">Data</span> = &#123;</span><br><span class="line">    <span class="attr">dt</span>: <span class="built_in">string</span>,</span><br><span class="line">    <span class="attr">products</span>: <span class="built_in">any</span>[]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// handler中配置返回值</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handler</span>(<span class="params"></span></span><br><span class="line"><span class="params">    req: NextApiRequest,</span></span><br><span class="line"><span class="params">    res: NextApiResponse&lt;Data&gt;</span></span><br><span class="line"><span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> dt = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toString</span>()</span><br><span class="line">    <span class="comment">// console.log(&#123;dt, method: req.method, query: req.query&#125;)</span></span><br><span class="line">    <span class="keyword">const</span> response = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;https://dummyjson.com/products&#x27;</span>)</span><br><span class="line">    <span class="keyword">const</span> reply = <span class="keyword">await</span> response.<span class="title function_">json</span>()</span><br><span class="line">    res.<span class="title function_">status</span>(<span class="number">200</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">        dt,</span><br><span class="line">        <span class="attr">products</span>:reply.<span class="property">products</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>增删改查</strong></div><div class="body"><p>handler中，根据字段req.method对请求类型进行判断：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">handler</span>(<span class="params"></span></span><br><span class="line"><span class="params">        req: NextApiRequest,</span></span><br><span class="line"><span class="params">        res: NextApiResponse&lt;Data&gt;</span></span><br><span class="line"><span class="params"></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> dt = <span class="keyword">new</span> <span class="title class_">Date</span>().<span class="title function_">toString</span>()</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(&#123;dt, <span class="attr">method</span>: req.<span class="property">method</span>, <span class="attr">query</span>: req.<span class="property">query</span>&#125;)</span><br><span class="line">  <span class="keyword">switch</span>(req.<span class="property">method</span>)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;POST&quot;</span>:</span><br><span class="line">      productsList.<span class="title function_">push</span>(req.<span class="property">body</span>)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;PUT&quot;</span>:</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">const</span> index = productsList.<span class="title function_">findIndex</span>(<span class="function">(<span class="params">product:<span class="built_in">any</span></span>)=&gt;</span>product.<span class="property">id</span>==req.<span class="property">body</span>.<span class="property">id</span>)</span><br><span class="line">      <span class="keyword">if</span>(index&gt;=<span class="number">0</span>) productsList.<span class="title function_">splice</span>(index, <span class="number">1</span>, req.<span class="property">body</span>)</span><br><span class="line">    &#125;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;DELETE&quot;</span>:</span><br><span class="line">      <span class="keyword">const</span> index = productsList.<span class="title function_">findIndex</span>(<span class="function">(<span class="params">product:<span class="built_in">any</span></span>)=&gt;</span>product.<span class="property">id</span>==req.<span class="property">body</span>.<span class="property">id</span>)</span><br><span class="line">      <span class="keyword">if</span>(index&gt;=<span class="number">0</span>) productsList.<span class="title function_">splice</span>(index, <span class="number">1</span>)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  res.<span class="title function_">status</span>(<span class="number">200</span>).<span class="title function_">json</span>(&#123;</span><br><span class="line">    <span class="attr">total</span>: productsList.<span class="property">length</span>,</span><br><span class="line">    <span class="attr">products</span>: productsList</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="页面全局页面布局设置"><a href="#页面全局页面布局设置" class="headerlink" title="页面全局页面布局设置"></a>页面全局页面布局设置</h2><div class="tag-plugin note" ><div class="body"><p><a target="_blank" rel="noopener" href="https://nextjs.org/docs/app/building-your-application/routing/pages-and-layouts">pages &amp;&amp; layouts</a></p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./layout.png" fancybox="true"/></div></div><p>Next.js v13推出了App Router作为新的路由解决方案：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">app</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">template.tsx</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">layout.tsx</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">page.tsx</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">news</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">template.tsx</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">layout.tsx</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">page.tsx</span></span><br></pre></td></tr></table></figure><p>其中template和layout都提供了公共的布局方法，<br>不同点在于：</p><ul><li>layout，相当于多个子页面共享一个父布局</li><li>template，相当于为多个子页面创建相同的布局</li></ul></div></div>
+
+
+<div class="tag-plugin note" ><div class="title"><strong>页面辅助信息设置</strong></div><div class="body"><p>在page或者layout中设置metadata变量，作为对header头的补充或者覆盖设置，<br>常用来优化SEO搜索引擎</p><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Metadata</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;next&#x27;</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="attr">metadata</span>: <span class="title class_">Metadata</span> = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&#x27;Next.js&#x27;</span>,</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Page</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&#x27;...&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="发布到第三方托管平台"><a href="#发布到第三方托管平台" class="headerlink" title="发布到第三方托管平台"></a>发布到第三方托管平台</h2><div class="tag-plugin note" ><div class="title"><strong>部署</strong></div><div class="body"></div></div>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a>许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/09/19/frontDevEnv/">前端项目工程化配置指南</a></div></section></div>
+
+
+
+
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

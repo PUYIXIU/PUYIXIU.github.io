@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>UI：text文本效果 - E-Duck</title>
+
+  
+    <meta name="description" content="Typing Effect 打字效果搜索关键字： Typing Effect打字效果有各种各样的：仅实现打字实现打字与回退实现多行连续打字实现任意内容的打字如果仅仅要实现静态文本打字效果，只用到css就足够了：123456789101112131415161718192021222324252627282930313233&lt;head&gt;    &lt;style&gt;        .">
+<meta property="og:type" content="website">
+<meta property="og:title" content="text文本效果">
+<meta property="og:url" content="http://eletricduck.com/wiki/ui/ch02_text.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="Typing Effect 打字效果搜索关键字： Typing Effect打字效果有各种各样的：仅实现打字实现打字与回退实现多行连续打字实现任意内容的打字如果仅仅要实现静态文本打字效果，只用到css就足够了：123456789101112131415161718192021222324252627282930313233&lt;head&gt;    &lt;style&gt;        .">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/ui/img/typingEffect.gif">
+<meta property="article:published_time" content="2024-09-29T03:56:31.255Z">
+<meta property="article:modified_time" content="2024-09-29T03:56:31.255Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/ui/img/typingEffect.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/ui/index.html"><div class="main" ff="title">UI</div><div class="sub cap">Some Awasome UI</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">一般动态交互</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/ui/index.html#start"><span class="toc-text">css样式</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/ui/ch02_text.html"><span class="toc-text">text文本效果</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Typing-Effect-%E6%89%93%E5%AD%97%E6%95%88%E6%9E%9C"><span class="toc-text">Typing Effect 打字效果</span></a></li></ol></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/ui/index.html">UI</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-09-29T03:56:31.255Z">2024-09-29</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>text文本效果</span></h1>
+  <h1 id="Typing-Effect-打字效果"><a href="#Typing-Effect-打字效果" class="headerlink" title="Typing Effect 打字效果"></a>Typing Effect 打字效果</h1><div class="tag-plugin note" ><div class="body"><blockquote><p>搜索关键字： Typing Effect</p></blockquote><p>打字效果有各种各样的：</p><ul><li>仅实现打字</li><li>实现打字与回退</li><li>实现多行连续打字</li><li>实现任意内容的打字</li></ul><p>如果仅仅要实现静态文本打字效果，只用到css就足够了：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.wrapper</span>&#123;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">height</span>:<span class="number">100vh</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">display</span>: grid;</span></span><br><span class="line"><span class="language-css">            place-items:center;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="selector-class">.typing-demo</span>&#123;</span></span><br><span class="line"><span class="language-css">            <span class="comment">/* 这里宽度和动画步数都被写死了 */</span></span></span><br><span class="line"><span class="language-css">            <span class="attribute">width</span>:<span class="number">10ch</span>;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">animation</span>:</span></span><br><span class="line"><span class="language-css">                typing <span class="number">2s</span> <span class="built_in">steps</span>(<span class="number">5</span>),</span></span><br><span class="line"><span class="language-css">                blink .<span class="number">5s</span> step-end infinite alternate;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">white-space</span>: nowrap;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">border-right</span>: <span class="number">3px</span> solid;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">font-family</span>: monospace;</span></span><br><span class="line"><span class="language-css">            <span class="attribute">font-size</span>: <span class="number">2em</span>;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="keyword">@keyframes</span> typing &#123;</span></span><br><span class="line"><span class="language-css">            <span class="selector-tag">from</span> &#123;<span class="attribute">width</span>:<span class="number">0</span>;&#125;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">        <span class="keyword">@keyframes</span> blink&#123;</span></span><br><span class="line"><span class="language-css">            <span class="number">50%</span>&#123;<span class="attribute">border-color</span>:transparent;&#125;</span></span><br><span class="line"><span class="language-css">        &#125;</span></span><br><span class="line"><span class="language-css">    </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- https://codepen.io/denic/pen/GRoOxbM --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;typing-demo&quot;</span>&gt;</span>打出这行字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure><p>比较关键的是用到的字体单位是ch，<br>ch以字体中0为标准，进行相对字体大小设置，<br>因此总是能将动画卡在每一个字上，而不会有一半字露出来的情况，<br>纯css的方法一般要将字体数量写死在css里，非常不灵活</p><div class="tag-plugin note" color="dark"><div class="title"><strong>自定义内容</strong></div><div class="body"><p>通过js获取要显示的文本，<br>然后通过setTimeout控制字数一点一点增加（删除效果同理，一点一点减少），<br>很方便能实现文字输入效果：</p><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> typingSpeed = <span class="number">50</span>, erasingSpeed = <span class="number">25</span></span><br><span class="line"><span class="keyword">let</span> captionLength = <span class="number">0</span></span><br><span class="line"><span class="keyword">const</span> typingInput = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test-caption&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> typingBtn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test-typing&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> erasingBtn = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#test-erasing&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> caption = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#caption&quot;</span>)</span><br><span class="line"><span class="keyword">const</span> cursor = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;#cursor&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> captionText = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="variable language_">window</span>.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    typingBtn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, typing)</span><br><span class="line">    erasingBtn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, erasing)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打字/删除时禁用按钮</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">btnControl</span>(<span class="params">enable</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> fun = enable?<span class="string">&#x27;removeAttribute&#x27;</span>:<span class="string">&#x27;setAttribute&#x27;</span></span><br><span class="line">    typingBtn[fun](<span class="string">&#x27;disabled&#x27;</span>,<span class="literal">undefined</span>)</span><br><span class="line">    erasingBtn[fun](<span class="string">&#x27;disabled&#x27;</span>,<span class="literal">undefined</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打字</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">typing</span>(<span class="params"></span>)&#123;</span><br><span class="line">    captionText = typingInput.<span class="property">value</span></span><br><span class="line">    <span class="keyword">if</span>(captionText.<span class="property">length</span>&lt;=<span class="number">0</span> ) <span class="keyword">return</span></span><br><span class="line">    <span class="title function_">btnControl</span>(<span class="literal">false</span>)</span><br><span class="line">    caption.<span class="property">innerHTML</span> = <span class="string">&quot;&quot;</span></span><br><span class="line">    <span class="keyword">let</span> curText = <span class="string">&quot;&quot;</span></span><br><span class="line">    cursor.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;blink&#x27;</span>)</span><br><span class="line">    <span class="title class_">Array</span>.<span class="title function_">from</span>(captionText).<span class="title function_">forEach</span>(<span class="function">(<span class="params">ch,index</span>)=&gt;</span>&#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            <span class="comment">// 一个字一个字加上</span></span><br><span class="line">            curText += ch</span><br><span class="line">            caption.<span class="property">innerHTML</span> = curText</span><br><span class="line">            <span class="keyword">if</span>(index == captionText.<span class="property">length</span> - <span class="number">1</span>)&#123;</span><br><span class="line">                <span class="title function_">btnControl</span>(<span class="literal">true</span>)</span><br><span class="line">                cursor.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;blink&#x27;</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, index*typingSpeed)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 回退</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">erasing</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>( captionText.<span class="property">length</span>&lt;=<span class="number">0</span> ) <span class="keyword">return</span></span><br><span class="line">    <span class="title function_">btnControl</span>(<span class="literal">false</span>)</span><br><span class="line">    cursor.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&#x27;blink&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> i = captionText.<span class="property">length</span> -<span class="number">1</span> ; i &gt;= <span class="number">0</span>; i--)&#123;</span><br><span class="line">        <span class="comment">// 对内容一个字一个字删减</span></span><br><span class="line">        <span class="keyword">let</span> curText = captionText.<span class="title function_">slice</span>(<span class="number">0</span>, i)</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">            caption.<span class="property">innerHTML</span> = curText</span><br><span class="line">            <span class="keyword">if</span>(i == <span class="number">0</span>)&#123;</span><br><span class="line">                <span class="title function_">btnControl</span>(<span class="literal">true</span>)</span><br><span class="line">                cursor.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&#x27;blink&#x27;</span>)</span><br><span class="line">                captionText = <span class="string">&#x27;&#x27;</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,(captionText.<span class="property">length</span> - i)*erasingSpeed)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/typingEffect.gif" alt="打字效果" fancybox="true"/></div><div class="image-meta"><span class="image-caption center">打字效果</span></div></div></div></div></div></div>
+
+  
+
+
+  </article>
+  
+
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
