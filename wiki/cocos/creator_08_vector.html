@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Cocos：向量 Vector - E-Duck</title>
+
+  
+    <meta name="description" content="计算公式向量向量指具有大小和方向的量在笛卡尔坐标系中，向量可以分散为沿x轴和y轴的两个分量，假设向量V方向和x轴正方向之间的夹角角度 &#x3D; a则V沿x轴和y轴的分量分别是：12x &#x3D; |V|cos(a)y &#x3D; |V|sin(a)在js中提供了一些三角函数的方法，使用的基本都是弧度制，弧度制和角度制的公式关系如下：11° &#x3D; Pi&#x2F;1801const radian &#x3D; this.node.a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="向量 Vector">
+<meta property="og:url" content="http://eletricduck.com/wiki/cocos/creator_08_vector.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="计算公式向量向量指具有大小和方向的量在笛卡尔坐标系中，向量可以分散为沿x轴和y轴的两个分量，假设向量V方向和x轴正方向之间的夹角角度 &#x3D; a则V沿x轴和y轴的分量分别是：12x &#x3D; |V|cos(a)y &#x3D; |V|sin(a)在js中提供了一些三角函数的方法，使用的基本都是弧度制，弧度制和角度制的公式关系如下：11° &#x3D; Pi&#x2F;1801const radian &#x3D; this.node.a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-11T02:03:18.717Z">
+<meta property="article:modified_time" content="2024-11-11T02:03:18.717Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/%5Bobject%20Object%5D">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/cocos/creator_01_intro.html"><div class="main" ff="title">Cocos</div><div class="sub normal cap">cocos2D</div><div class="sub hover cap" style="opacity:0">cocos creator</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">CocosCreator学习</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_01_intro.html#start"><span class="toc-text">简介与开发工具安装</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_02_oop_cop.html"><span class="toc-text">Node的属性与操作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_03_scripts.html"><span class="toc-text">Script 脚本</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_04_interactions.html"><span class="toc-text">Event 交互事件</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_05_collision.html"><span class="toc-text">Collision 碰撞检测</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_06_resources.html"><span class="toc-text">Resources 图片与音频资源</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_07_BulletBallet.html"><span class="toc-text">Bullet Ballet 子弹芭蕾</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/cocos/creator_08_vector.html"><span class="toc-text">向量 Vector</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%85%AC%E5%BC%8F"><span class="toc-text">计算公式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_09_UI.html"><span class="toc-text">UI组件</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_10_Scene.html"><span class="toc-text">场景管理及动态加载</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_11_Physical.html"><span class="toc-text">物理系统</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_12_Animation.html"><span class="toc-text">Animation 动画系统 && Action 动作系统</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/cocos/creator_01_intro.html">Cocos</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-11-11T02:03:18.717Z">2024-11-11</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>向量 Vector</span></h1>
+  <h1 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>向量</strong></div><div class="body"><blockquote><p>向量指具有大小和方向的量</p></blockquote><p>在笛卡尔坐标系中，向量可以分散为沿x轴和y轴的两个分量，</p><p>假设向量V方向和x轴正方向之间的夹角角度 &#x3D; a<br>则V沿x轴和y轴的分量分别是：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = |V|cos(a)</span><br><span class="line">y = |V|sin(a)</span><br></pre></td></tr></table></figure><p>在js中提供了一些三角函数的方法，使用的基本都是弧度制，<br>弧度制和角度制的公式关系如下：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1° = Pi/180</span><br></pre></td></tr></table></figure><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> radian = <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">angle</span> * <span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">180</span></span><br></pre></td></tr></table></figure></div></div>
+
+<h1 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h1><video src="https://assets.e-duck.xyz/vector-bullet.mp4" autoplay controls muted style="width:100%;height:500px">
+</video>
+
+<div class="tag-plugin note" color="dark"><div class="body"><p>这里要实现的功能是：</p><ul><li>俯视角角色跟随鼠标位置旋转</li><li>鼠标右键控制子弹沿角色正前方发射出去</li></ul><div class="tag-plugin tabs"id="tab_12""><ul class="nav-tabs"><li class="tab active"><a href="#tab_12-1">子弹Bullet类</a></li><li class="tab"><a href="#tab_12-2">玩家Player类</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_12-1"><div class="tag-plugin note" ><div class="body"><p>每一帧的更新都要涉及到2个计算</p><ul><li>子弹Node的旋转角度转弧度</li><li>计算子弹移动分量<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">NewClass</span> <span class="keyword">extends</span> <span class="title class_ inherited__">cc.Component</span> &#123;</span><br><span class="line">    <span class="meta">@property</span></span><br><span class="line">    <span class="attr">speed</span>:<span class="built_in">number</span> = <span class="number">100</span></span><br><span class="line">    update (dt) &#123;</span><br><span class="line">        <span class="comment">// 角度制转弧度制</span></span><br><span class="line">        <span class="keyword">const</span> radian = (<span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">angle</span> + <span class="number">90</span>) * <span class="title class_">Math</span>.<span class="property">PI</span> / <span class="number">180</span></span><br><span class="line">        <span class="comment">// 计算分量</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">x</span> += <span class="variable language_">this</span>.<span class="property">speed</span> * dt * <span class="title class_">Math</span>.<span class="title function_">cos</span>(radian)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">y</span> += <span class="variable language_">this</span>.<span class="property">speed</span> * dt * <span class="title class_">Math</span>.<span class="title function_">sin</span>(radian)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul></div></div></div><div class="tab-pane" id="tab_12-2"><div class="tag-plugin note" ><div class="body"><p>首先实现玩家跟随鼠标旋转：</p><ul><li>监听鼠标移动事件，记录鼠标点位</li><li>每帧对玩家Node的angle进行更新</li></ul><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">Player</span> <span class="keyword">extends</span> <span class="title class_ inherited__">cc.Component</span>&#123;</span><br><span class="line">    mousePosition = []</span><br><span class="line">    <span class="title function_">start</span>(<span class="params"></span>)&#123;</span><br><span class="line">        cc.<span class="title function_">find</span>(<span class="string">&#x27;scene&#x27;</span>).<span class="title function_">on</span>(cc.<span class="property">Node</span>.<span class="property">EventType</span>.<span class="property">MOUSE_MOVE</span>, <span class="function">(<span class="params">event:cc.Event.EventMouse</span>)=&gt;</span>&#123;</span><br><span class="line">            <span class="comment">// 记录当前鼠标点位</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">mousePosition</span> = [event.<span class="title function_">getLocationX</span>(),event.<span class="title function_">getLocationY</span>()]</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">    update (dt) &#123;</span><br><span class="line">        <span class="keyword">let</span> dx = <span class="variable language_">this</span>.<span class="property">mousePosition</span>[<span class="number">0</span>] - <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">x</span></span><br><span class="line">        <span class="keyword">let</span> dy = <span class="variable language_">this</span>.<span class="property">mousePosition</span>[<span class="number">1</span>] - <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">y</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 计算旋转角度</span></span><br><span class="line">        <span class="keyword">let</span> radian = -  <span class="title class_">Math</span>.<span class="title function_">atan</span>(dx/dy)</span><br><span class="line">        <span class="keyword">let</span> angle = radian * <span class="number">180</span> / <span class="title class_">Math</span>.<span class="property">PI</span></span><br><span class="line">        <span class="keyword">if</span>((dx &lt; <span class="number">0</span> &amp;&amp; dy&lt;<span class="number">0</span>) || (dx&gt;<span class="number">0</span> &amp;&amp; dy &lt;<span class="number">0</span>)) angle += <span class="number">180</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">angle</span> = angle</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>实现子弹超前发射：</p><ul><li>监听鼠标点击事件</li><li>创建子弹节点</li><li>初始化子弹角度</li><li>界面加入子弹</li></ul><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"> cc.<span class="title function_">find</span>(<span class="string">&#x27;scene&#x27;</span>).<span class="title function_">on</span>(cc.<span class="property">Node</span>.<span class="property">EventType</span>.<span class="property">MOUSE_UP</span>, <span class="function">(<span class="params">event:cc.Event.EventMouse</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="comment">// console.log(event)</span></span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">type</span> = event.<span class="title function_">getButton</span>()</span><br><span class="line">    <span class="keyword">switch</span>(<span class="keyword">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">            <span class="comment">// 移动 </span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">targetPosition</span> = [event.<span class="title function_">getLocationX</span>(),event.<span class="title function_">getLocationY</span>()]</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            <span class="comment">// 发射子弹</span></span><br><span class="line">            <span class="comment">// load用于控制子弹间隔时间</span></span><br><span class="line">            <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">load</span>) <span class="keyword">return</span></span><br><span class="line">            <span class="comment">// 散弹：一发3枚子弹</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</span><br><span class="line">                <span class="keyword">let</span> bullet = cc.<span class="title function_">instantiate</span>(<span class="variable language_">this</span>.<span class="property">bulletPre</span>)</span><br><span class="line">                <span class="comment">// 计算子弹角度</span></span><br><span class="line">                bullet.<span class="property">angle</span> = <span class="variable language_">this</span>.<span class="property">node</span>.<span class="property">angle</span> + (<span class="number">1</span> - i) * <span class="number">10</span></span><br><span class="line">                <span class="comment">// 注意：这里的BulletPosition是Player下的一个子空节点</span></span><br><span class="line">                <span class="comment">// 表示子弹发出的位置</span></span><br><span class="line">                <span class="comment">// 将子弹坐标系放置在全局坐标系下</span></span><br><span class="line">                bullet.<span class="title function_">setPosition</span>(<span class="variable language_">this</span>.<span class="property">node</span>.<span class="title function_">getChildByName</span>(<span class="string">&quot;BulletPosition&quot;</span>).<span class="title function_">convertToWorldSpaceAR</span>(cc.<span class="property">Vec2</span>.<span class="property">ZERO</span>))</span><br><span class="line">                <span class="comment">//根组件加入子弹</span></span><br><span class="line">                bullet.<span class="title function_">setParent</span>(cc.<span class="property">director</span>.<span class="title function_">getScene</span>())</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 添加音效</span></span><br><span class="line">            cc.<span class="title function_">find</span>(<span class="string">&#x27;Canvas/Sound&#x27;</span>).<span class="title function_">getComponent</span>(cc.<span class="property">AudioSource</span>).<span class="title function_">play</span>()</span><br><span class="line">            <span class="comment">// 间隔控制</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">load</span> = <span class="literal">true</span></span><br><span class="line">            <span class="built_in">setTimeout</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">                <span class="variable language_">this</span>.<span class="property">load</span> = <span class="literal">false</span> </span><br><span class="line">            &#125;,<span class="variable language_">this</span>.<span class="property">loadTime</span> * <span class="number">1000</span>)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></div></div></div></div></div></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/cocos/creator_07_BulletBallet.html">Bullet Ballet 子弹芭蕾</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/cocos/creator_09_UI.html">UI组件</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>

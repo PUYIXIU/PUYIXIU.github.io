@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://fastly.jsdelivr.net'>
+  <link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>Cocos：物理系统 - E-Duck</title>
+
+  
+    <meta name="description" content="2D物理系统2D物理系统2D物理系统官方文档（2.4版本）2.4版本cocos中需要手动开启物理引擎（需要在onLoad方法内执行）：1cc.director.getPhysicsManager().enabled &#x3D; true想要开启一个节点的物理系统，需要给这个节点添加两个组件：RigidBody 刚体组件Collider 碰撞组件   RigidBody 刚体RigidBody参数方法col">
+<meta property="og:type" content="website">
+<meta property="og:title" content="物理系统">
+<meta property="og:url" content="http://eletricduck.com/wiki/cocos/creator_11_Physical.html">
+<meta property="og:site_name" content="E-Duck">
+<meta property="og:description" content="2D物理系统2D物理系统2D物理系统官方文档（2.4版本）2.4版本cocos中需要手动开启物理引擎（需要在onLoad方法内执行）：1cc.director.getPhysicsManager().enabled &#x3D; true想要开启一个节点的物理系统，需要给这个节点添加两个组件：RigidBody 刚体组件Collider 碰撞组件   RigidBody 刚体RigidBody参数方法col">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://eletricduck.com/wiki/cocos/img/findWay0.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/cocos/img/findWay1.gif">
+<meta property="og:image" content="http://eletricduck.com/wiki/cocos/img/findWay2.gif">
+<meta property="article:published_time" content="2024-11-16T03:32:30.332Z">
+<meta property="article:modified_time" content="2024-11-16T03:32:30.332Z">
+<meta property="article:author" content="Electric Duck">
+<meta property="article:tag" content="blog">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://eletricduck.com/wiki/cocos/img/findWay0.gif">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+    <link rel="shortcut icon" href="/%5Bobject%20Object%5D">
+  
+
+  
+
+  
+
+
+  
+</head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='wiki'>
+    
+
+  
+
+
+
+
+<div class="widgets"><div class="widget-wrap logo-wrap wiki"><div class="widget-body"><a style="filter: grayscale(100%)" class="wiki-home cap" href="/"><svg aria-hidden="true" viewBox="0 0 16 16" width="1rem" height="1rem" fill="currentColor"><path fill-rule="evenodd" d="M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z"></path></svg>所有项目</a><a class="title" href="/wiki/cocos/creator_01_intro.html"><div class="main" ff="title">Cocos</div><div class="sub normal cap">cocos2D</div><div class="sub hover cap" style="opacity:0">cocos creator</div></a></div></div>
+
+<div class="widget-wrap multi" id="toc"><div class="widget-header cap dis-select"><span class="name">CocosCreator学习</span></div><div class="widget-body fs14"><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_01_intro.html#start"><span class="toc-text">简介与开发工具安装</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_02_oop_cop.html"><span class="toc-text">Node的属性与操作</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_03_scripts.html"><span class="toc-text">Script 脚本</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_04_interactions.html"><span class="toc-text">Event 交互事件</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_05_collision.html"><span class="toc-text">Collision 碰撞检测</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_06_resources.html"><span class="toc-text">Resources 图片与音频资源</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_07_BulletBallet.html"><span class="toc-text">Bullet Ballet 子弹芭蕾</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_08_vector.html"><span class="toc-text">向量 Vector</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_09_UI.html"><span class="toc-text">UI组件</span></a></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_10_Scene.html"><span class="toc-text">场景管理及动态加载</span></a></div><div class="doc-tree active"><a class="doc-tree-link active" href="/wiki/cocos/creator_11_Physical.html"><span class="toc-text">物理系统</span></a><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2D%E7%89%A9%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="toc-text">2D物理系统</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#RigidBody-%E5%88%9A%E4%BD%93"><span class="toc-text">RigidBody 刚体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Collider-%E7%89%A9%E7%90%86%E7%A2%B0%E6%92%9E%E4%BD%93"><span class="toc-text">Collider 物理碰撞体</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%A9%E7%90%86%E6%A3%80%E6%B5%8B"><span class="toc-text">物理检测</span></a></li></ol></li></ol></div><div class="doc-tree"><a class="doc-tree-link" href="/wiki/cocos/creator_12_Animation.html"><span class="toc-text">Animation 动画系统 && Action 动作系统</span></a></div></div></div>
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+  
+  
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" id="home" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">项目</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/cocos/creator_01_intro.html">Cocos</a></div><div id="post-meta">更新于&nbsp;<time datetime="2024-11-16T03:32:30.332Z">2024-11-16</time></div></div>
+
+  <article class='content md wiki'>
+  <h1 class="article-title"><span>物理系统</span></h1>
+  <h1 id="2D物理系统"><a href="#2D物理系统" class="headerlink" title="2D物理系统"></a>2D物理系统</h1><div class="tag-plugin note" color="dark"><div class="title"><strong>2D物理系统</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://docs.cocos.com/creator/2.4/manual/zh/physics/physics/">2D物理系统官方文档（2.4版本）</a></p><p>2.4版本cocos中需要手动开启物理引擎（需要在onLoad方法内执行）：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cc.<span class="property">director</span>.<span class="title function_">getPhysicsManager</span>().<span class="property">enabled</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure><p>想要开启一个节点的物理系统，需要给这个节点添加两个组件：</p><ul><li>RigidBody 刚体组件</li><li>Collider 碰撞组件</li></ul></div></div>
+
+
+<h2 id="RigidBody-刚体"><a href="#RigidBody-刚体" class="headerlink" title="RigidBody 刚体"></a>RigidBody 刚体</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>RigidBody</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_13""><ul class="nav-tabs"><li class="tab active"><a href="#tab_13-1">物理属性</a></li><li class="tab"><a href="#tab_13-2">刚体方法</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_13-1"><div class="tag-plugin note" ><div class="body"><ul><li>Enabled Contact Listener<ul><li>开启物理碰撞检测</li></ul></li><li>Bullet<ul><li>防止高速移动的物体穿过墙面或地面等刚体</li></ul></li><li>Type<ul><li>几种刚体类型<ul><li>static 静态刚体</li><li>kinematic 不受外力</li><li>Dynamic 动态刚体</li><li>Animated 设置线速度和角速度驱动的刚体</li></ul></li></ul></li><li>Allow Sleep<ul><li>允许刚体静止不动时进入睡眠状态，降低CPU占用率</li></ul></li><li>Gravity Scale<ul><li>重力倍数，1为1倍重力</li></ul></li><li>Linear Damping<ul><li>线性速度衰减系数</li></ul></li><li>Angular Damping<ul><li>角速度衰减系数</li></ul></li><li>Linear Velocity<ul><li>线性初速度</li></ul></li><li>Angular Velocity<ul><li>角初速度</li></ul></li><li>Fixed Rotation<ul><li>禁止物体旋转</li></ul></li><li>Awake OnLoad <ul><li>是否在初始化时唤醒此刚体</li></ul></li></ul><p>将AwakeOnLoad设置为false，<br>在代码中可以通过修改刚体组件的awake为true，来开启刚体：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">this</span>.<span class="title function_">getComponent</span>(cc.<span class="property">RigidBody</span>).<span class="property">awake</span> = <span class="literal">true</span></span><br></pre></td></tr></table></figure></div></div></div><div class="tab-pane" id="tab_13-2"><div class="tag-plugin note" ><div class="body"><p><a target="_blank" rel="noopener" href="https://docs.cocos.com/creator/2.4/manual/zh/physics/physics/rigid-body.html#%E5%88%9A%E4%BD%93%E6%96%B9%E6%B3%95">刚体方法文档</a></p><ul><li><p>给刚体施加力</p><ul><li>参数1：force 在x、y轴上的大小分量</li><li>参数2：point 作用点</li><li>参数3：wake 是否唤醒刚体<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rb.<span class="title function_">applyForce</span>(<span class="attr">force</span>:cc.<span class="property">Vec2</span>, <span class="attr">point</span>:cc.<span class="property">Vec2</span>, <span class="attr">wake</span>:<span class="built_in">boolean</span>)</span><br></pre></td></tr></table></figure></li></ul></li><li><p>施加力到刚体的质心上</p><ul><li>参数1：force 在x、y轴上的大小分量</li><li>参数2：wake 是否唤醒刚体<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rb.<span class="title function_">applyForceToCenter</span>(<span class="attr">force</span>:cc.<span class="property">Vec2</span>, <span class="attr">wake</span>:<span class="built_in">boolean</span>)</span><br></pre></td></tr></table></figure></li></ul></li><li><p>施加扭力</p><ul><li>参数1：torque 扭力大小</li><li>参数2：wake 是否唤醒<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rb.<span class="title function_">applyTorque</span>(<span class="attr">torque</span>:<span class="built_in">number</span>, <span class="attr">wake</span>:<span class="built_in">boolean</span>)</span><br></pre></td></tr></table></figure></li></ul></li><li><p>施加冲量</p><ul><li>参数1：impulse 冲量在x、y轴上的大小分量</li><li>参数2：point 作用点</li><li>参数3：wake 是否唤醒<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rb.<span class="title function_">applyLinearImpulse</span>(<span class="attr">impulse</span>:cc.<span class="property">Vec2</span>, <span class="attr">point</span>:cc.<span class="property">Vec2</span>, <span class="attr">wake</span>:<span class="built_in">boolean</span>)</span><br></pre></td></tr></table></figure></li></ul></li><li><p>施加角速度冲量</p><ul><li>参数1：impulse 角速度冲量大小</li><li>参数2：wake 是否唤醒<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rb.<span class="title function_">applyAngularImpulse</span>(<span class="attr">impulse</span>:<span class="built_in">number</span>, <span class="attr">wake</span>:<span class="built_in">boolean</span>)</span><br></pre></td></tr></table></figure></li></ul></li></ul></div></div></div></div></div></div></div>
+
+<div class="tag-plugin note" ><div class="title"><strong>力与冲量</strong></div><div class="body"><video src="https://assets.e-duck.xyz/cocos_rigidBody.mp4" autoplay controls muted style="width:100%;"></video><p>cocos中主要有两种方式移动一个物体：</p><ul><li><strong>力 Force</strong><ul><li>物体本身移动的内力</li><li>力会随时间修改物体的坐标和旋转角度</li><li>添加物体内在力的API：<ul><li><em>applyForce</em></li><li><em>applyForceToCenter</em></li><li><em>applyTorque</em></li></ul></li></ul></li><li><strong>冲量 Impulse</strong><ul><li>从外界推动物体的外力</li><li>冲量会立刻改变物体的坐标或旋转角度</li><li>冲量（如线性初速度、角初速度），会根据衰减系数而逐渐减弱，直到物体的变化完全停止</li><li>添加物体外力的API：<ul><li><em>applyLinearImpulse</em></li><li><em>applyAngularImpulse</em></li></ul></li></ul></li></ul></div></div>
+
+
+<h2 id="Collider-物理碰撞体"><a href="#Collider-物理碰撞体" class="headerlink" title="Collider 物理碰撞体"></a>Collider 物理碰撞体</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>碰撞组件</strong></div><div class="body"><p>RigidBody必须在组件上存在Collider碰撞体的情况下才能生效，</p><p>Collider碰撞组件具有以下的基础属性：</p><ul><li>Density 密度</li><li>Sensor 是否是传感器类型<ul><li>设置了传感器的碰撞物本身不会产生碰撞效果，但是可以监听到碰撞事件</li><li>常用场景：某个特殊点监听到玩家的碰撞之后，触发事件（场景跳转&#x2F;交互效果）</li></ul></li><li>Friction 摩擦系数</li><li>Restitution 弹性系数</li><li>Tag<ul><li>和collider属性一样，tag用于在碰撞回调中识别碰撞体的类型</li></ul></li></ul><div class="tag-plugin note" ><div class="title"><strong>碰撞回调</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://docs.cocos.com/creator/2.4/manual/zh/physics/physics/contact-callback.html#%E5%AE%9A%E4%B9%89%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0">碰撞回调官方文档</a></p><p>想要触发碰撞体的碰撞回调，<br>需要开启碰撞体RigidBody的Enabled Contact Listener属性，</p><p>碰撞回调函数中有3个参数：</p><ul><li>contact 碰撞信息</li><li>self 碰撞物自己</li><li>other 另一个碰撞物</li></ul><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开始碰撞</span></span><br><span class="line"><span class="title function_">onBeginContact</span>(<span class="params">contact:cc.PhysicsContact, self:cc.PhysicsCollider, other:cc.PhysicsCollider</span>)&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 结束碰撞</span></span><br><span class="line"><span class="title function_">onEndContact</span>(<span class="params">contact:cc.PhysicsContact, self:cc.PhysicsCollider, other:cc.PhysicsCollider</span>)&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每次处理碰撞体接触逻辑前调用</span></span><br><span class="line"><span class="title function_">onPreSolve</span>(<span class="params">contact:cc.PhysicsContact, self:cc.PhysicsCollider, other:cc.PhysicsCollider</span>)&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 每次处理完成碰撞体接触逻辑后调用</span></span><br><span class="line"><span class="title function_">onPostSolve</span>(<span class="params">contact:cc.PhysicsContact, self:cc.PhysicsCollider, other:cc.PhysicsCollider</span>)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>关于cc.PhysicsContact类型，可以获取到以下碰撞信息：</p><div class="tag-plugin tabs"id="tab_14""><ul class="nav-tabs"><li class="tab active"><a href="#tab_14-1">参数</a></li><li class="tab"><a href="#tab_14-2">方法</a></li></ul><div class="tab-content"><div class="tab-pane active" id="tab_14-1"><div class="tag-plugin note" color="dark"><div class="body"><ul><li>colliderA 碰撞体A</li><li>colliderB 碰撞体B</li><li>disabled 禁用</li><li>disabledOnce 在当前时间步（dt）中忽略此接触信息</li></ul></div></div></div><div class="tab-pane" id="tab_14-2"><div class="tag-plugin note" color="dark"><div class="body"><ul><li>getWorldMainfold() 获取世界坐标系下的碰撞信息<ul><li>获取到的碰撞信息具有以下成员：<ul><li>points 碰撞点数组，常见有1-2个碰撞点</li><li>normal 碰撞点上的法向量，由自身碰撞体指向对方碰撞体</li></ul></li></ul></li><li>getMainfold() 获取局部坐标系下的碰撞信息</li><li>getImpulse() 获取冲量信息<ul><li>在onPostSolve回调中可以获取到，返回值包含2个参数：<ul><li>normalImpulses 向量冲量</li><li>tangentImpulse 切线冲量</li></ul></li></ul></li><li>getFriction&#x2F;setFriction&#x2F;resetFriction() 获取&#x2F;设置&#x2F;重置摩擦力系数</li><li>getRestitution&#x2F;setRestitution&#x2F;resetRestitution() 获取&#x2F;设置&#x2F;重置弹性系数</li><li>isTouching() 碰撞体是否已经解除</li></ul></div></div></div></div></div></div></div></div></div>
+
+<h2 id="物理检测"><a href="#物理检测" class="headerlink" title="物理检测"></a>物理检测</h2><div class="tag-plugin note" color="dark"><div class="title"><strong>物理系统管理器</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://docs.cocos.com/creator/2.4/manual/zh/physics/physics/physics-manager.html">物理系统官方文档</a></p><p>cocos中有3种物理检测的方法：</p><ul><li>点检测</li><li>矩形检测</li><li>射线检测</li></ul><div class="tag-plugin note" ><div class="title"><strong>点检测</strong></div><div class="body"><p>检测某个指定点位是否存在碰撞体，<br>如果存在多个碰撞体，只会返回一个随机结果，</p><p>只能用于测试dynamic刚体</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pysicsCollider = cc.<span class="property">director</span>.<span class="title function_">getPhysicsManager</span>().<span class="title function_">testPoint</span>(point)</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>矩形检测</strong></div><div class="body"><p>矩形检测需要指定一个世界坐标系下的矩形，<br>如果一个碰撞体的包围盒与矩阵存在重叠部分，会返回该碰撞体</p><p>同样只能检测dynamic类型的碰撞体：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> rect = cc.<span class="title function_">rect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">300</span>)</span><br><span class="line"><span class="keyword">let</span> colliders = cc.<span class="property">director</span>.<span class="title function_">getPhysicsManager</span>().<span class="title function_">testAABB</span>(rect)</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin note" ><div class="title"><strong>射线检测</strong></div><div class="body"><p>射线检测根据指定的线段，来判断线段穿过的碰撞体，<br>返回线段在穿过碰撞体的法向量、点位以及其它一些信息</p><p>用法：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">let</span> p1 = cc.<span class="title function_">v2</span>(<span class="number">0</span>, <span class="number">200</span>)</span><br><span class="line"><span class="keyword">let</span> p2 = cc.<span class="title function_">v2</span>(<span class="number">175</span>, <span class="number">300</span>)</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">type</span> = cc.<span class="property">RayCastType</span>.<span class="property">Closest</span></span><br><span class="line"><span class="keyword">let</span> results = cc.<span class="property">director</span>.<span class="title function_">directorgetPhysicsManager</span>().<span class="title function_">rayCast</span>(p1, p2, <span class="keyword">type</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure><p>参数说明：</p><ul><li>p1 线段起点</li><li>p2 线段终点</li><li>type 射线类型，在cc.RayCastType中定义，包括以下4种<ul><li>All：检测射线路径上的所有碰撞体，检测到的结果顺序不是固定的</li><li>AllClosest： 返回射线路径上的所有碰撞体，但是会对返回值进行筛选，只返回每个碰撞体与射线接触的第一个点</li><li>Any：<ul><li>官方解释：检测射线路径上任意，一旦检测到任何碰撞体，立即结束检测</li><li>实际使用：返回的是最远的碰撞体</li></ul></li><li>Closest：检测射线路径上最近的碰撞体，默认值</li></ul></li></ul></div></div></div></div>
+
+<div class="tag-plugin note" color="dark"><div class="title"><strong>物理检测实现自动寻路</strong></div><div class="body"><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/findWay0.gif" fancybox="true"/></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/findWay1.gif" fancybox="true"/></div></div><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="./img/findWay2.gif" fancybox="true"/></div></div><p>实现代码：</p><figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ccclass</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">class</span> <span class="title class_">AutoFindWay</span> <span class="keyword">extends</span> <span class="title class_ inherited__">cc.Component</span> &#123;</span><br><span class="line">  <span class="comment">// 物理管理器</span></span><br><span class="line">  manager = <span class="literal">null</span></span><br><span class="line">  <span class="comment">// 刚体</span></span><br><span class="line">  <span class="attr">rb</span>:cc.<span class="property">RigidBody</span> = <span class="literal">null</span></span><br><span class="line">  <span class="comment">// 方向顺序， 默认向上走</span></span><br><span class="line">  dir = [<span class="number">1</span>,<span class="number">0</span>]</span><br><span class="line">  <span class="comment">// 速度</span></span><br><span class="line">  speed = <span class="number">50000</span></span><br><span class="line">  <span class="title function_">onLoad</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">manager</span> = cc.<span class="property">director</span>.<span class="title function_">getPhysicsManager</span>()</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">manager</span>.<span class="property">enabled</span> = <span class="literal">true</span> <span class="comment">// 开启物理管理器</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  start () &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rb</span> = <span class="variable language_">this</span>.<span class="title function_">getComponent</span>(cc.<span class="property">RigidBody</span>) </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">testRaycast</span>(<span class="params">dt</span>)&#123;</span><br><span class="line">      <span class="comment">// 开始点</span></span><br><span class="line">    <span class="keyword">let</span> startPoint = <span class="variable language_">this</span>.<span class="property">node</span>.<span class="title function_">getPosition</span>()</span><br><span class="line">    <span class="comment">// 结束点</span></span><br><span class="line">    <span class="keyword">let</span> endPoint</span><br><span class="line">    <span class="comment">// 探测长度</span></span><br><span class="line">    <span class="keyword">let</span> len = <span class="number">100</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">0</span>] != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 沿x轴前进</span></span><br><span class="line">      <span class="keyword">let</span> points = <span class="variable language_">this</span>.<span class="property">manager</span>.<span class="title function_">rayCast</span>(</span><br><span class="line">          startPoint, </span><br><span class="line">              cc.<span class="title function_">v2</span>(startPoint.<span class="property">x</span> + len * <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">0</span>], startPoint.<span class="property">y</span>), </span><br><span class="line">              cc.<span class="property">RayCastType</span>.<span class="property">Closest</span>)</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// x轴移动受阻，开始检测上下方向是否可行（排除碰撞物为重点的可能性）</span></span><br><span class="line">      <span class="keyword">if</span>(points.<span class="property">length</span>&gt;<span class="number">0</span> &amp;&amp; points[<span class="number">0</span>].<span class="property">collider</span>.<span class="property">tag</span> != <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">let</span> hasChange = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">let</span> allDir = [-<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">        <span class="comment">// 随机选择先上还是先下</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span>) allDir.<span class="title function_">reverse</span>()</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> allDir)&#123;</span><br><span class="line">            <span class="keyword">let</span> points = <span class="variable language_">this</span>.<span class="property">manager</span>.<span class="title function_">rayCast</span>(</span><br><span class="line">                startPoint, </span><br><span class="line">                cc.<span class="title function_">v2</span>(startPoint.<span class="property">x</span>, startPoint.<span class="property">y</span> + len * i), </span><br><span class="line">                cc.<span class="property">RayCastType</span>.<span class="property">Closest</span>)</span><br><span class="line">          <span class="keyword">if</span>(points.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line">              <span class="variable language_">this</span>.<span class="property">dir</span> = [<span class="number">0</span>, i]</span><br><span class="line">              hasChange = <span class="literal">true</span></span><br><span class="line">              <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 当前方向不可行，上下方向也不可行，此时回头</span></span><br><span class="line">        <span class="keyword">if</span>(!hasChange)&#123; <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">0</span>] *= -<span class="number">1</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">1</span>] != <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 沿y轴前进</span></span><br><span class="line">      <span class="keyword">let</span> points = <span class="variable language_">this</span>.<span class="property">manager</span>.<span class="title function_">rayCast</span>(</span><br><span class="line">          startPoint, </span><br><span class="line">              cc.<span class="title function_">v2</span>(startPoint.<span class="property">x</span> , startPoint.<span class="property">y</span> + len * <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">1</span>]), </span><br><span class="line">              cc.<span class="property">RayCastType</span>.<span class="property">Closest</span>)</span><br><span class="line">      </span><br><span class="line">      <span class="comment">// 检测到点的存在，开始检测左右方向</span></span><br><span class="line">      <span class="keyword">if</span>(points.<span class="property">length</span>&gt;<span class="number">0</span> &amp;&amp; points[<span class="number">0</span>].<span class="property">collider</span>.<span class="property">tag</span> != <span class="number">1</span>)&#123;</span><br><span class="line">          <span class="keyword">let</span> hasChange = <span class="literal">false</span></span><br><span class="line">        <span class="keyword">let</span> allDir = [-<span class="number">1</span>,<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">if</span>(<span class="title class_">Math</span>.<span class="title function_">random</span>() &gt; <span class="number">0.5</span>) allDir.<span class="title function_">reverse</span>()</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">of</span> allDir)&#123;</span><br><span class="line">            <span class="keyword">let</span> points = <span class="variable language_">this</span>.<span class="property">manager</span>.<span class="title function_">rayCast</span>(</span><br><span class="line">                startPoint, </span><br><span class="line">                    cc.<span class="title function_">v2</span>(startPoint.<span class="property">x</span> + len * i, startPoint.<span class="property">y</span> ), </span><br><span class="line">                    cc.<span class="property">RayCastType</span>.<span class="property">Closest</span>)</span><br><span class="line">          <span class="keyword">if</span>(points.<span class="property">length</span> == <span class="number">0</span>)&#123;</span><br><span class="line">              <span class="variable language_">this</span>.<span class="property">dir</span> = [i, <span class="number">0</span>]</span><br><span class="line">            hasChange = <span class="literal">true</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 未改变</span></span><br><span class="line">        <span class="keyword">if</span>(!hasChange)&#123; <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">1</span>] *= -<span class="number">1</span>&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 添加线性速度</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rb</span>.<span class="property">linearVelocity</span> = <span class="keyword">new</span> cc.<span class="title class_">Vec2</span>(</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">speed</span> * dt * <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">0</span>],</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">speed</span> * dt * <span class="variable language_">this</span>.<span class="property">dir</span>[<span class="number">1</span>]</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  update (dt) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">testRaycast</span>(dt)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+  
+
+
+  </article>
+  
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/cocos/creator_10_Scene.html">场景管理及动态加载</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/cocos/creator_12_Animation.html">Animation 动画系统 && Action 动作系统</a></div></section></div>
+
+  
+
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a href="/">@anonymity</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.16.2';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.16.2';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://fastly.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js'
+  };
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@6/swiper-bundle.min.css","js":"https://unpkg.com/swiper@6/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://fastly.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://fastly.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://fastly.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://fastly.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti/umd/heti.min.css","js":"https://unpkg.com/heti/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+
+
+<!-- inject -->
+
+
+  </div>
+</body>
+</html>
