@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 7.3.0">
-
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -17,25 +17,30 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/orange/pace-theme-minimal.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.22.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#BBBEFA","save":"auto"},"mediumzoom":true,"lazyload":true,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"bounceInLeft","post_block":"fadeInDown","post_header":"flipInY","post_body":"fadeInDown","coll_header":"fadeInDown","sidebar":"bounceInLeft"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+    <meta name="description" content="足八桑的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="足八桑_Blog">
 <meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="Ashikachi">
+<meta property="og:site_name" content="足八桑_Blog">
+<meta property="og:description" content="足八桑的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="足八桑">
 <meta name="twitter:card" content="summary">
 
 
 <link rel="canonical" href="http://example.com/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hexo</title>
+<title>足八桑_Blog - 8条腿各有想法</title>
   
 
 
@@ -57,7 +62,10 @@
     <div class="column">
       <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
@@ -65,20 +73,25 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">足八桑_Blog</h1>
       <i class="logo-line"></i>
     </a>
-      <img class="custom-logo-image" src="/images/logo.png" alt="Hexo">
+      <p class="site-subtitle" itemprop="description">8条腿各有想法</p>
+      <img class="custom-logo-image" src="/images/logo.png" alt="足八桑_Blog">
   </div>
 
   <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
     </div>
   </div>
 </div>
 
 
 
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">1</span></a></li><li class="menu-item menu-item-wiki"><a href="/wiki/" rel="section"><i class="fa-solid fa-book fa-fw"></i>wiki</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li>
+  </ul>
+</nav>
 
 
 
@@ -91,10 +104,10 @@
     <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -106,25 +119,66 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Ashikachi</p>
-  <div class="site-description" itemprop="description"></div>
+    <img class="site-author-image" itemprop="image" alt="足八桑"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">足八桑</p>
+  <div class="site-description" itemprop="description">足八桑的博客</div>
 </div>
 <div class="site-state-wrap animated">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
           <span class="site-state-item-count">1</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">日志</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
 </div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1BVWUlYSVU=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;PUYIXIU"><i class="fab fa-github fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="bWFpbHRvOjE1OTcxNjcyNzBAcXEuY29t" title="E-Mail → mailto:1597167270@qq.com"><i class="fa fa-envelope fa-fw"></i></span>
+      </span>
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9zcGFjZS5iaWxpYmlsaS5jb20vMTIzMTc0MDQ=" title="BiliBili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;12317404"><i class="fa-brands fa-bilibili fa-fw"></i></span>
+      </span>
+  </div>
 
         </div>
       </div>
     </div>
 
     
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com">ThreeLab</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com">AShiKaChi</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://example.com/" title="https:&#x2F;&#x2F;example.com">ScrollMind</a>
+            </li>
+        </ul>
+      </div>
+    </div>
   </aside>
 
 
@@ -144,21 +198,21 @@
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Ashikachi">
+      <meta itemprop="name" content="足八桑">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="足八桑_Blog">
+      <meta itemprop="description" content="足八桑的博客">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Hexo">
+      <meta itemprop="name" content="undefined | 足八桑_Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/17/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2025/02/17/hello-world/" class="post-title-link" itemprop="url">Hexo Next 使用指南</a>
         </h2>
 
         <div class="post-meta-container">
@@ -167,19 +221,47 @@
       <span class="post-meta-item-icon">
         <i class="far fa-calendar"></i>
       </span>
-      <span class="post-meta-item-text">Posted on</span>
+      <span class="post-meta-item-text">发表于</span>
 
-      <time title="Created: 2025-02-17 09:13:57" itemprop="dateCreated datePublished" datetime="2025-02-17T09:13:57+08:00">2025-02-17</time>
+      <time title="创建时间：2025-02-17 09:13:57" itemprop="dateCreated datePublished" datetime="2025-02-17T09:13:57+08:00">2025-02-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-15 11:35:52" itemprop="dateModified" datetime="2025-02-15T11:35:52+08:00">2025-02-15</time>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-02-18 17:48:36" itemprop="dateModified" datetime="2025-02-18T17:48:36+08:00">2025-02-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/" itemprop="url" rel="index"><span itemprop="name">技术指南</span></a>
+        </span>
+          ，
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%8A%80%E6%9C%AF%E6%8C%87%E5%8D%97/Hexo%E5%8D%9A%E5%AE%A2/" itemprop="url" rel="index"><span itemprop="name">Hexo博客</span></a>
+        </span>
     </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>956</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
 </div>
 
         </div>
@@ -189,20 +271,152 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          <p>这是使用Hexo Next书写的第一篇博客，之前使用hexo的其它主题搭建过一个博客站点，断断续续维护了接近3年，也有想过要不要转战Notion搭建博客，经过一番调研后，最终还是选择了hexo-NexT主题，下面是一些使用NexT主题的指南。</p>
+<h1 id="Tag-Plugins-插件"><a href="#Tag-Plugins-插件" class="headerlink" title="Tag Plugins 插件"></a>Tag Plugins 插件</h1><h2 id="Hexo原生插件"><a href="#Hexo原生插件" class="headerlink" title="Hexo原生插件"></a>Hexo原生插件</h2><h3 id="Block-Quote-引用块"><a href="#Block-Quote-引用块" class="headerlink" title="Block Quote 引用块"></a>Block Quote 引用块</h3><blockquote><p>推石上山这场搏斗本身，就足以充实一颗人心</p>
+<footer><strong>加缪</strong><cite>《西西弗神话》</cite></footer></blockquote>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% blockquote [author[, source]] [link] [source<span class="emphasis">_link_</span>title] %&#125;</span><br><span class="line">content</span><br><span class="line">&#123;% endblockquote %&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Code-Block-代码块"><a href="#Code-Block-代码块" class="headerlink" title="Code Block 代码块"></a>Code Block 代码块</h3><figure class="highlight javascript"><figcaption><span>Hello World</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% codeblock [title] [lang:language] [url] [link text] [additional options] %&#125;</span><br><span class="line">code snippet</span><br><span class="line">&#123;% endcodeblock %&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h3 id="Backtick-Code-Block-反引号代码块"><a href="#Backtick-Code-Block-反引号代码块" class="headerlink" title="Backtick Code Block 反引号代码块"></a>Backtick Code Block 反引号代码块</h3><figure class="highlight javascript"><figcaption><span>sayHelloAgain</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sayHelloAgain</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;Hello to you too!&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">`` [language] [title] [url] [link text] code snippet `</span>`</span><br></pre></td></tr></table></figure>
+
+<h3 id="iframe-嵌入站点"><a href="#iframe-嵌入站点" class="headerlink" title="iframe 嵌入站点"></a>iframe 嵌入站点</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% iframe url [width] [height] %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="image-图片"><a href="#image-图片" class="headerlink" title="image 图片"></a>image 图片</h3><img data-src="/images/test.png" class="" title="e-duck" alt="this is a smile duck">
+
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% img [class names] /path/to/image [width] [height] &#x27;&quot;title text&quot; &quot;alt text&quot;&#x27; %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Link-链接"><a href="#Link-链接" class="headerlink" title="Link 链接"></a>Link 链接</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% link text url [external] [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Include-Code-导入代码"><a href="#Include-Code-导入代码" class="headerlink" title="Include Code 导入代码"></a>Include Code 导入代码</h3><p>代码默认从source&#x2F;downloads&#x2F;code文件下取</p>
+<figure class="highlight javascript"><figcaption><span>test.js</span><a href="/downloads/code/test.js">view raw</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// source/downloads/code/test.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">sayHello</span>(<span class="params"></span>){</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include<span class="emphasis">_code [title] [lang:language] [from:line] [to:line] path/to/file %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Include-Posts-本站文章链接"><a href="#Include-Posts-本站文章链接" class="headerlink" title="Include Posts 本站文章链接"></a>Include Posts 本站文章链接</h3><a href="/2025/02/17/hello-world/" title="Hexo Next 使用指南">hexo-next指南</a>
+
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% post<span class="emphasis">_link filename [title] [escape] %&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Raw-原生容器"><a href="#Raw-原生容器" class="headerlink" title="Raw 原生容器"></a>Raw 原生容器</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% raw %&#125;</span><br><span class="line">content</span><br><span class="line">&#123;% endraw %&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="NexT-Tag-插件"><a href="#NexT-Tag-插件" class="headerlink" title="NexT Tag 插件"></a>NexT Tag 插件</h2><h3 id="Centered-Quote-引用"><a href="#Centered-Quote-引用" class="headerlink" title="Centered Quote 引用"></a>Centered Quote 引用</h3><blockquote class="blockquote-center">
+<p>引用效果</p>
+
+</blockquote>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">书写方式1：</span><br><span class="line">&#123;% centerquote %&#125;Something&#123;% endcenterquote %&#125;</span><br><span class="line"></span><br><span class="line">书写方式2：</span><br><span class="line">&#123;% cq %&#125;Something&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Video-视频"><a href="#Video-视频" class="headerlink" title="Video 视频"></a>Video 视频</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% video url %&#125;</span><br><span class="line">&#123;% video https://example.com/sample.mp4 %&#125;</span><br><span class="line">&#123;% video /path/to/your/video.mp4 %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Button-按钮"><a href="#Button-按钮" class="headerlink" title="Button 按钮"></a>Button 按钮</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">书写方式1：</span><br><span class="line">&#123;% button url, text, icon [class], [title] %&#125;</span><br><span class="line"></span><br><span class="line">书写方式2：</span><br><span class="line">&#123;% btn url, text, icon [class], [title] %&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>url 链接</li>
+<li>text 按钮文字</li>
+<li>icon 图标</li>
+<li>class font-awesome尺寸: fa-fw | fa-lg | fa-2x | fa-3x | fa-4x | fa-5x</li>
+<li>title 鼠标移上去时显示的文字提示</li>
+</ul>
+<style>
+.text-center{
+    display: grid;
+    place-content: center;
+}
+</style>
+<div class="text-center"><div><a class="btn" href="#"><i class="fa fa-heading"></i></a><a class="btn" href="#"><i class="fab fa-edge"></i></a><a class="btn" href="#"><i class="fa fa-times"></i></a><a class="btn" href="#"><i class="fa fa-circle-notch"></i></a></div>
+<div><a class="btn" href="#"><i class="fa fa-italic"></i></a><a class="btn" href="#"><i class="fab fa-scribd"></i></a></div>
+<div><a class="btn" href="#"><i class="fab fa-google"></i></a><a class="btn" href="#"><i class="fab fa-chrome"></i></a><a class="btn" href="#"><i class="fab fa-opera"></i></a><a class="btn" href="#"><i class="fa fa-gem fa-rotate-270"></i></a></div></div>
+
+<h3 id="Caniuse-特性兼容查询"><a href="#Caniuse-特性兼容查询" class="headerlink" title="Caniuse 特性兼容查询"></a>Caniuse 特性兼容查询</h3><iframe data-feature="canvas" src="https://caniuse.bitsofco.de/embed/index.html?feat=canvas&periods=current&accessible-colours=false" frameborder="0" width="100%" height="400px"></iframe>
+
+<figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;% caniuse feature @ [periods] %&#125;</span><br><span class="line">&#123;% can feature @ [periods] %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Group-Pictures-分组图片"><a href="#Group-Pictures-分组图片" class="headerlink" title="Group Pictures 分组图片"></a>Group Pictures 分组图片</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">书写方法1：</span><br><span class="line">&#123;% grouppicture [number]-[layout] %&#125;</span><br><span class="line">&#123;% endgrouppicture %&#125;</span><br><span class="line"></span><br><span class="line">书写方法2：</span><br><span class="line">&#123;% gp [number]-[layout] %&#125;</span><br><span class="line">&#123;% endgp %&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;% grouppicture 5-4 %&#125;</span><br><span class="line">![](<span class="link">/images/test.jpg</span>)</span><br><span class="line">![](<span class="link">/images/test.jpg</span>)</span><br><span class="line">![](<span class="link">/images/test.jpg</span>)</span><br><span class="line">![](<span class="link">/images/test.jpg</span>)</span><br><span class="line">![](<span class="link">/images/test.jpg</span>)</span><br><span class="line">&#123;% endgrouppicture %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="group-picture"><div class="group-picture-row"><div class="group-picture-column"><img data-src="/images/test2.jpg"></div><div class="group-picture-column"><img data-src="/images/test2.jpg"></div><div class="group-picture-column"><img data-src="/images/test2.jpg"></div></div><div class="group-picture-row"><div class="group-picture-column"><img data-src="/images/test2.jpg"></div><div class="group-picture-column"><img data-src="/images/test2.jpg"></div></div></div>
+
+<h3 id="Label-标签"><a href="#Label-标签" class="headerlink" title="Label 标签"></a>Label 标签</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% label [class]@text %&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>class：标签的类型<ul>
+<li><mark class="label default">default</mark></li>
+<li><mark class="label primary">primary</mark></li>
+<li><mark class="label success">success</mark></li>
+<li><mark class="label info">info</mark></li>
+<li><mark class="label warning">warning</mark></li>
+<li><mark class="label danger">danger</mark></li>
+</ul>
+</li>
+<li>text：文字，需要加上@前缀</li>
+</ul>
+<h3 id="Link-Grid-链接栅格列表"><a href="#Link-Grid-链接栅格列表" class="headerlink" title="Link Grid 链接栅格列表"></a>Link Grid 链接栅格列表</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">写法1：</span><br><span class="line">&#123;% linkgrid [image] [delimiter] [comment] %&#125;</span><br><span class="line">&#123;% endlinkgrid %&#125;</span><br><span class="line"></span><br><span class="line">写法2：</span><br><span class="line">&#123;% lg [image] [delimiter] [comment] %&#125;</span><br><span class="line">&#123;% endlg %&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="link-grid"><div class="link-grid-container">
+<object class="link-grid-image" data="/images/test2.jpg"></object>
+<p>Test Link</p><p>This is a test link</p>
+<a href="#"></a>
+</div><div class="link-grid-container">
+<object class="link-grid-image" data="/images/test.png"></object>
+<p>Test Link</p><p>This is a test link</p>
+<a href="#"></a>
+</div><div class="link-grid-container">
+<object class="link-grid-image" data="/images/test2.jpg"></object>
+<p>Test Link</p><p>This is a test link</p>
+<a href="#"></a>
+</div></div>
+
+<h3 id="Mermaid-流程图"><a href="#Mermaid-流程图" class="headerlink" title="Mermaid 流程图"></a>Mermaid 流程图</h3><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21lcm1haWQtanMvbWVybWFpZA==">mermaid语法<i class="fa fa-external-link-alt"></i></span><br><span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZy9kb2NzL3RhZy1wbHVnaW5zL21lcm1haWQ=">Example<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight markdown"><figcaption><span>写法1</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid type %&#125;</span><br><span class="line">写法2：反斜杠代码，语言设置成mermaid</span><br><span class="line">&#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Note-提示"><a href="#Note-提示" class="headerlink" title="Note 提示"></a>Note 提示</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% note [class] [no-icon] [summary] %&#125;</span><br><span class="line">Any content (support inline tags too).</span><br><span class="line">&#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>class：default | primary | success | info | warning | danger</li>
+<li>no-icon 不显示icon</li>
+<li>summary 折叠提示</li>
+</ul>
+<div class="note default"><h4 id="Default-Header"><a href="#Default-Header" class="headerlink" title="Default Header"></a>Default Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<div class="note primary"><h4 id="Primary-Header"><a href="#Primary-Header" class="headerlink" title="Primary Header"></a>Primary Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<div class="note success"><h4 id="Success-Header"><a href="#Success-Header" class="headerlink" title="Success Header"></a>Success Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<div class="note info"><h4 id="Info-Header"><a href="#Info-Header" class="headerlink" title="Info Header"></a>Info Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<div class="note warning"><h4 id="Warning-Header"><a href="#Warning-Header" class="headerlink" title="Warning Header"></a>Warning Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+</div>
+
+<details class="note danger"><summary><p>This is a summary</p>
+</summary>
+<h4 id="Danger-Header"><a href="#Danger-Header" class="headerlink" title="Danger Header"></a>Danger Header</h4><p>Welcome to <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvLw==">Hexo!<i class="fa fa-external-link-alt"></i></span></p>
+
+</details>
+
+<h3 id="PDF"><a href="#PDF" class="headerlink" title="PDF"></a>PDF</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% pdf url [height] %&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tab-选项卡容器"><a href="#Tab-选项卡容器" class="headerlink" title="Tab 选项卡容器"></a>Tab 选项卡容器</h3><figure class="highlight markdown"><figcaption><span>code</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;% tabs Unique name, [index] %&#125;</span><br><span class="line">&lt;!-- tab [Tab caption] [@icon] --&gt;</span><br><span class="line">Any content (support inline tags too).</span><br><span class="line">&lt;!-- endtab --&gt;</span><br><span class="line">&#123;% endtabs %&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>unique name 独一无二的名字</li>
+<li>index 默认激活的选项，为-1时表示没有被激活状态的选项</li>
+<li>tab caption 选项卡名称</li>
+<li>@icon font-awesome的icon名称</li>
+</ul>
+<p>关于tab页的链接跳转：<a href="#tab-test-2">Tab Test two</a></p>
+<div class="tabs" id="tab-test"><ul class="nav-tabs"><li class="tab"><a href="#tab-test-1"><i class="fa fa-text-width"></i>one</a></li><li class="tab"><a href="#tab-test-2"><i class="fa fa-font"></i>two</a></li><li class="tab"><a href="#tab-test-3"><i class="fa fa-bold"></i>three</a></li></ul><div class="tab-content"><div class="tab-pane" id="tab-test-1"><p>This is tab1</p></div><div class="tab-pane" id="tab-test-2"><p>This is tab2</p></div><div class="tab-pane" id="tab-test-3"><p>This is tab3</p></div></div></div>
+
+<h1 id="Third-Party-Plugins-第三方插件"><a href="#Third-Party-Plugins-第三方插件" class="headerlink" title="Third Party Plugins 第三方插件"></a>Third Party Plugins 第三方插件</h1><h2 id="Math-Equations-数学表达式"><a href="#Math-Equations-数学表达式" class="headerlink" title="Math Equations 数学表达式"></a>Math Equations 数学表达式</h2><h2 id="External-Libraries-扩展库"><a href="#External-Libraries-扩展库" class="headerlink" title="External Libraries 扩展库"></a>External Libraries 扩展库</h2><h3 id="pjax"><a href="#pjax" class="headerlink" title="pjax"></a>pjax</h3><h3 id="Fancybox-多媒体展示器"><a href="#Fancybox-多媒体展示器" class="headerlink" title="Fancybox 多媒体展示器"></a>Fancybox 多媒体展示器</h3><h3 id="Medium-Zoom-图片幻灯片式展示"><a href="#Medium-Zoom-图片幻灯片式展示" class="headerlink" title="Medium Zoom 图片幻灯片式展示"></a>Medium Zoom 图片幻灯片式展示</h3><h3 id="Lazyload-页面资源懒加载"><a href="#Lazyload-页面资源懒加载" class="headerlink" title="Lazyload 页面资源懒加载"></a>Lazyload 页面资源懒加载</h3><h3 id="Pangu-Autospace-自动添加空格"><a href="#Pangu-Autospace-自动添加空格" class="headerlink" title="Pangu Autospace 自动添加空格"></a>Pangu Autospace 自动添加空格</h3><h3 id="Quicklink-页面预加载"><a href="#Quicklink-页面预加载" class="headerlink" title="Quicklink 页面预加载"></a>Quicklink 页面预加载</h3><h3 id="Animation-Effect-动画效果"><a href="#Animation-Effect-动画效果" class="headerlink" title="Animation Effect 动画效果"></a>Animation Effect 动画效果</h3><h3 id="Progress-Bar-进度条"><a href="#Progress-Bar-进度条" class="headerlink" title="Progress Bar 进度条"></a>Progress Bar 进度条</h3><h3 id="Canvas-Ribbon-页面背景"><a href="#Canvas-Ribbon-页面背景" class="headerlink" title="Canvas Ribbon 页面背景"></a>Canvas Ribbon 页面背景</h3><h2 id="Comment-Systems-评论系统"><a href="#Comment-Systems-评论系统" class="headerlink" title="Comment Systems 评论系统"></a>Comment Systems 评论系统</h2>
       
     </div>
 
@@ -228,15 +442,29 @@
     <div class="footer-inner">
 
   <div class="copyright">
-    &copy; 
+    &copy; 2022 – 
     <span itemprop="copyrightYear">2025</span>
     <span class="with-love">
-      <i class="fa fa-heart"></i>
+      <i class="fa-brands fa-octopus-deploy"></i>
     </span>
-    <span class="author" itemprop="copyrightHolder">Ashikachi</span>
+    <span class="author" itemprop="copyrightHolder">足八桑_Blog</span>
   </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">1k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">3 分钟</span>
+  </span>
+</div>
 
     </div>
   </footer>
@@ -248,10 +476,11 @@
     <span class="toggle-line"></span>
   </div>
   <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="Back to top">
+  <div class="back-to-top" role="button" aria-label="返回顶部">
     <i class="fa fa-arrow-up fa-lg"></i>
     <span>0%</span>
   </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
 
 <noscript>
   <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
@@ -260,20 +489,37 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/medium-zoom/1.1.0/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pangu/4.0.7/pangu.min.js" integrity="sha256-j+yj56cdEY2CwkVtGyz18fNybFGpMGJ8JxG3GSyO2+I=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script><script src="/js/bookmark.js"></script>
+
+  
+  <script class="next-config" data-name="pdf" type="application/json">{"object_url":{"url":"https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.3.0/pdfobject.min.js","integrity":"sha256-JJZNsid68vnh3/zyj0lY9BN5ynxVX/12XgOa1TlaYN0="},"url":"/lib/pdf/web/viewer.html"}</script>
+  <script src="/js/third-party/tags/pdf.js"></script>
+
+  <script class="next-config" data-name="mermaid" type="application/json">{"enable":true,"theme":{"light":"default","dark":"dark"},"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.min.js","integrity":"sha256-G8ouPAnw4zzMbnAenHnVz6h9XpKbNdOkrqTh7AadyHs="}}</script>
+  <script src="/js/third-party/tags/mermaid.js"></script>
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
 
   
 
 
 
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/quicklink/2.3.0/quicklink.umd.js" integrity="sha256-yvJQOINiH9fWemHn0vCA5lsHWJaHs6/ZmO+1Ft04SvM=" crossorigin="anonymous"></script>
+  <script class="next-config" data-name="quicklink" type="application/json">{"enable":true,"home":true,"archive":true,"delay":true,"timeout":3000,"priority":true,"url":"http://example.com/"}</script>
+  <script src="/js/third-party/quicklink.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
 
-
-  
-
-
-
-
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"PUYIXIU","repo":"gitalk-comments","client_id":"Ov23lipH4whlgPyuOeSz","client_secret":"740abde9ffc59f44501146db5b9d9692441b81e4","admin_user":"PUYIXIU","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"d1546d731a9f30cc80127d57142a482b"}</script>
+<script src="/js/third-party/comments/gitalk.js"></script>
 
 </body>
 </html>
