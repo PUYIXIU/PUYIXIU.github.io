@@ -1,0 +1,966 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>Job：面试技巧 - Ashikachi</title>
+
+  
+  <meta name="description" content="面试相关知识点整理">
+  
+  
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+    <link rel="shortcut icon" href="/images/base/favicon.png">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://puyixiu.github.io/wiki/Job/front_05_trick/","author":{"@type":"Person","name":"Ashikachi","sameAs":[]},"name":"面试技巧","description":"面试准备如何准备好前端面试，如何记忆庞大的前端面试题库？\n理解原理\n建立知识体系\n笔记整理\n实战演练\n模拟练市\n持续迭代\n归纳总结\n心理建设，更看重思路技巧\n\n自我介绍（业务&#x2F;技术面）面试官你好，我叫XXX，XX年毕业于XXX计算机专业，有3年前端开发经验，熟练掌握vue、react等主流框架，并且在PC端、移动端和桌面应用开发中积累了不少项目经验，涉及可视化、2d3d交互、数据分...","url":"https://puyixiu.github.io/wiki/Job/front_05_trick/"}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="/images/icons/toby_dog.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/Job/front_01_vue"><div class="main">Job</div><div class="sub normal cap">前端</div><div class="sub hover cap" style="opacity:0">后端|全栈|游戏|多端</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item active" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/Job/" placeholder="在 面试问题 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-header dis-select"><span class="name">前端面试</span></div><div class="widget-body fs14"><a class="link" href="/wiki/Job/front_01_vue/#start"><span class="toc-text">vue</span></a><a class="link" href="/wiki/Job/front_02_js/"><span class="toc-text">js</span></a><a class="link" href="/wiki/Job/front_03_uniapp/"><span class="toc-text">uniapp</span></a><a class="link" href="/wiki/Job/front_04_react/"><span class="toc-text">react</span></a><a class="link active" href="/wiki/Job/front_05_trick/"><span class="toc-text">面试技巧</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/Job/front_06_git/"><span class="toc-text">git</span></a></div><div class="widget-header dis-select"><span class="name">面试实战整理</span></div><div class="widget-body fs14"><a class="link" href="/wiki/Job/summary_01_DieZhi/"><span class="toc-text">前端面试实战-叠纸</span></a><a class="link" href="/wiki/Job/summary_02_XiaoXi/"><span class="toc-text">前端面试实战-小西科技实习一面</span></a></div><div class="widget-header dis-select"><span class="name">面试日志</span></div><div class="widget-body fs14"><a class="link" href="/wiki/Job/log_01_20250207_ZheGuYun/"><span class="toc-text">2025/02/07 鹧鸪云</span></a><a class="link" href="/wiki/Job/log_02_20250209_YunJian/"><span class="toc-text">2025/02/09 上海云简业财</span></a><a class="link" href="/wiki/Job/log_03_20250211_GuangSheng/"><span class="toc-text">2025/02/11 广盛房地产</span></a><a class="link" href="/wiki/Job/log_04_20250211_XiaoXi/"><span class="toc-text">2025/02/11 小西科技</span></a><a class="link" href="/wiki/Job/log_05_20250212_XinGeEr/"><span class="toc-text">2025/02/12 新格尔</span></a><a class="link" href="/wiki/Job/log_06_20250212_LingYan/"><span class="toc-text">2025/02/12 领雁</span></a><a class="link" href="/wiki/Job/log_07_20250212_RunHe/"><span class="toc-text">2025/02/12 润和科技</span></a><a class="link" href="/wiki/Job/log_08_20250212_UnKnown/"><span class="toc-text">2025/02/12 不知名公司</span></a><a class="link" href="/wiki/Job/log_09_20250213_SeChi/"><span class="toc-text">2025/02/13 徐州瑟驰</span></a></div></widget>
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/puyixiu" target="_blank" rel="external nofollow noopener noreferrer"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a><a class="social" href="https://gitee.com/ElectricDuck" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118295736" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5012" width="16" height="16"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="5013"></path></svg></a><a class="social" href="https://juejin.cn/user/587554333405684/posts" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118714280" class="icon" viewBox="0 0 1316 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5098" width="16" height="16"><path d="M643.181714 247.698286l154.916572-123.172572L643.181714 0.256 643.072 0l-154.660571 124.269714 154.660571 123.245715 0.109714 0.182857z m0 388.461714h0.109715l399.579428-315.245714-108.361143-87.04-291.218285 229.888h-0.146286l-0.109714 0.146285L351.817143 234.093714l-108.251429 87.04 399.433143 315.136 0.146286-0.146285z m-0.146285 215.552l0.146285-0.146286 534.893715-422.034285 108.397714 87.04-243.309714 192L643.145143 1024 10.422857 525.056 0 516.754286l108.251429-86.893715L643.035429 851.748571z" fill="#1E80FF" p-id="5099"></path></svg></a><a class="social" href="https://codepen.io/jnkzhatk-the-builder" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118737052" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6208" width="16" height="16"><path d="M911.7 385.3l-0.3-1.5c-0.2-1-0.3-1.9-0.6-2.9-0.2-0.6-0.4-1.1-0.5-1.7-0.3-0.8-0.5-1.7-0.9-2.5-0.2-0.6-0.5-1.1-0.8-1.7-0.4-0.8-0.8-1.5-1.2-2.3-0.3-0.5-0.6-1.1-1-1.6-0.8-1.2-1.7-2.4-2.6-3.6-0.5-0.6-1.1-1.3-1.7-1.9-0.4-0.5-0.9-0.9-1.4-1.3-0.6-0.6-1.3-1.1-1.9-1.6-0.5-0.4-1-0.8-1.6-1.2-0.2-0.1-0.4-0.3-0.6-0.4L531.1 117.8c-11.5-7.7-26.6-7.7-38.1 0L127.3 361.3c-0.2 0.1-0.4 0.3-0.6 0.4-0.5 0.4-1 0.8-1.6 1.2-0.7 0.5-1.3 1.1-1.9 1.6-0.5 0.4-0.9 0.9-1.4 1.3-0.6 0.6-1.2 1.2-1.7 1.9-1 1.1-1.8 2.3-2.6 3.6-0.3 0.5-0.7 1-1 1.6-0.4 0.7-0.8 1.5-1.2 2.3-0.3 0.5-0.5 1.1-0.8 1.7-0.3 0.8-0.6 1.7-0.9 2.5-0.2 0.6-0.4 1.1-0.5 1.7-0.2 0.9-0.4 1.9-0.6 2.9l-0.3 1.5c-0.2 1.5-0.3 3-0.3 4.5v243.5c0 1.5 0.1 3 0.3 4.5l0.3 1.5c0.2 1 0.4 1.9 0.6 2.9 0.2 0.6 0.3 1.1 0.5 1.7 0.3 0.9 0.6 1.7 0.9 2.5 0.2 0.6 0.5 1.1 0.8 1.7 0.4 0.8 0.7 1.5 1.2 2.3 0.3 0.5 0.6 1.1 1 1.6 0.5 0.7 0.9 1.4 1.5 2.1l1.2 1.5c0.5 0.6 1.1 1.3 1.7 1.9 0.4 0.5 0.9 0.9 1.4 1.3 0.6 0.6 1.3 1.1 1.9 1.6 0.5 0.4 1 0.8 1.6 1.2 0.2 0.1 0.4 0.3 0.6 0.4L493 905.7c5.6 3.8 12.3 5.8 19.1 5.8 6.6 0 13.3-1.9 19.1-5.8l365.6-243.5c0.2-0.1 0.4-0.3 0.6-0.4 0.5-0.4 1-0.8 1.6-1.2 0.7-0.5 1.3-1.1 1.9-1.6 0.5-0.4 0.9-0.9 1.4-1.3 0.6-0.6 1.2-1.2 1.7-1.9l1.2-1.5 1.5-2.1c0.3-0.5 0.7-1 1-1.6 0.4-0.8 0.8-1.5 1.2-2.3 0.3-0.5 0.5-1.1 0.8-1.7 0.3-0.8 0.6-1.7 0.9-2.5 0.2-0.5 0.4-1.1 0.5-1.7 0.3-0.9 0.4-1.9 0.6-2.9l0.3-1.5c0.2-1.5 0.3-3 0.3-4.5V389.8c-0.3-1.5-0.4-3-0.6-4.5zM546.4 210.5l269.4 179.4-120.3 80.4-149-99.6V210.5z m-68.8 0v160.2l-149 99.6-120.3-80.4 269.3-179.4zM180.7 454.1l86 57.5-86 57.5v-115z m296.9 358.5L208.3 633.2l120.3-80.4 149 99.6v160.2zM512 592.8l-121.6-81.2L512 430.3l121.6 81.2L512 592.8z m34.4 219.8V652.4l149-99.6 120.3 80.4-269.3 179.4zM843.3 569l-86-57.5 86-57.5v115z" p-id="6209"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top"><img class="lazy bg" data-src="/images/covers/java1.jpg">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Job/front_01_vue/">Job</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-08-10T11:17:40.562Z">2025-08-10</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>面试技巧</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="面试准备"><a href="#面试准备" class="headerlink" title="面试准备"></a>面试准备</h1><h2 id="如何准备好前端面试，如何记忆庞大的前端面试题库？"><a href="#如何准备好前端面试，如何记忆庞大的前端面试题库？" class="headerlink" title="如何准备好前端面试，如何记忆庞大的前端面试题库？"></a>如何准备好前端面试，如何记忆庞大的前端面试题库？</h2><ol>
+<li>理解原理</li>
+<li>建立知识体系</li>
+<li>笔记整理</li>
+<li>实战演练</li>
+<li>模拟练市</li>
+<li>持续迭代</li>
+<li>归纳总结</li>
+<li>心理建设，更看重思路技巧</li>
+</ol>
+<h2 id="自我介绍（业务-技术面）"><a href="#自我介绍（业务-技术面）" class="headerlink" title="自我介绍（业务&#x2F;技术面）"></a>自我介绍（业务&#x2F;技术面）</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><p>面试官你好，我叫XXX，XX年毕业于XXX计算机专业，<br>有3年前端开发经验，熟练掌握vue、react等主流框架，<br>并且在PC端、移动端和桌面应用开发中积累了不少项目经验，<br>涉及可视化、2d3d交互、数据分析、后台管理等领域。</p><p>在过去的工作中，我参与了多个从0到1的项目开发。</p><p>其中，有像【高轨卫星轨道监控系统】这类复杂交互可视化软件，<br>也有【徐矿集团人才中心一体化】这类比较大型的项目，<br>最近做的项目是一款社交媒体类App的开发，我主要负责后台系统和h5小游戏</p><p>个人优势是能够将数据分析和可视化相结合，为用户提供更好的交互体验<br>我平时会有维护技术博客的习惯，是我自我学习的一种方式，能让我不断地总结和分享经验，<br>非常期待能够加入贵公司，在优秀的团队中继续提升自己，谢谢</p></div></div>
+
+
+
+<h1 id="HR问题"><a href="#HR问题" class="headerlink" title="HR问题"></a>HR问题</h1><h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><div class="tag-plugin colorful note" color="dark"><div class="title"><strong><p>自我介绍公式</p>
+</strong></div><div class="body"><p><a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/463084541746454528">参考文章</a></p><ul><li>自身背景</li><li>项目与岗位的匹配度</li><li>选择公司的原因</li></ul></div></div>
+
+<div class="tag-plugin colorful note" color="dark"><div class="body"><p>面试官你好，我叫XX，XX年毕业于XXX大学计算机专业，<br>有3年前端开发经验，<br>在过去的工作中，我主要负责PC端、移动端和桌面应用的前端开发，<br>参与了多个从0到1的项目，积累了丰富的项目开发和团队协作经验。</p><p>平时有书写技术博客的习惯，是我自我学习、和团队分享经验的一种方式</p><p>我的上一份工作是参与一款社交媒体类交友App的开发，主要负责后台系统，App端3d交互、h5小游戏的开发<br>对我个人影响最深的，是在北京国遥任职webgis前端工程师的经历，</p><ul><li>在这段期间，我跟着前辈学习了一些图形学基础与3d技术，</li><li>发现了自己对web3d与可视化方面的兴趣<br>之后在广联科技主要负责公司内可视化项目的组织和开发</li></ul><p>我了解到咱们公司主要是做家具行业软件的，<br>并且产品的口碑都相当不错，在web3d软件开发方面也是国内比较成熟的，<br>所以非常希望能够加入贵公司，在优秀的团队中提升自己，我的自我介绍结束，谢谢</p></div></div>
+
+
+<h2 id="离职原因"><a href="#离职原因" class="headerlink" title="离职原因"></a>离职原因</h2><ul>
+<li>年轻外地公司：<ul>
+<li>出于个人职业规划考虑，因为当时公司节奏比较慢，觉得应该追求更具挑战的项目</li>
+<li>看到了新的机会，可以接触到更前沿的技术和业务领域</li>
+</ul>
+</li>
+<li>本地传统公司：<ul>
+<li>工作地点搬迁，由软件园搬到了xx安全谷</li>
+<li>原本在外地工作，因为家庭原因需要回到XX本地工作</li>
+</ul>
+</li>
+<li>通用：<ul>
+<li>公司团队解散</li>
+<li>需要安排长期异地出差，个人不太能接收大幅度长期的工作地点调动</li>
+</ul>
+</li>
+</ul>
+<h2 id="项目相关"><a href="#项目相关" class="headerlink" title="项目相关"></a>项目相关</h2><h3 id="可以介绍一下【高轨卫星态势】这个项目吗"><a href="#可以介绍一下【高轨卫星态势】这个项目吗" class="headerlink" title="可以介绍一下【高轨卫星态势】这个项目吗"></a>可以介绍一下【高轨卫星态势】这个项目吗</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><p>答：</p><ul><li>这个项目主要是面向航天指挥部门开发的一套军工软件</li><li>我在其中主要负责的是2d高轨卫星地图系统的开发</li><li>需要将后台实时推送的卫星轨迹，返显到2d地图上，</li><li>系统会根据这些轨迹，推算出可能发生的意外情况：比如会面卫星碰撞、卫星变轨，</li><li>并且进行预警，指挥员需要根据预警进行3d仿真，上报等一系列应急操作</li><li>这个项目使用Vue框架进行搭建、可视化地图使用ECarts渲染，3D交互使用Cesium实现，与后端和桌面端的联动使用Websocket实现</li><li>开发周期半年左右</li></ul></div></div>
+
+<h3 id="可以介绍一下【徐矿集团人才中心一体化解决方案】这个项目吗"><a href="#可以介绍一下【徐矿集团人才中心一体化解决方案】这个项目吗" class="headerlink" title="可以介绍一下【徐矿集团人才中心一体化解决方案】这个项目吗"></a>可以介绍一下【徐矿集团人才中心一体化解决方案】这个项目吗</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>这个项目主要是为徐矿集团培训安全生产人员服务的</li><li>培训类型多种多样，比如有重工业机器操作、电气操作、煤矿挖掘</li><li>主要分为多个系统<ul><li>首先有一个面向学员的门户网站（react），用于介绍课程相关信息，以及集团新闻</li><li>然后App端主要是面向学员的，支持线上教学、模拟答题、教师联系、考试报名缴费等功能</li><li>考试系统，则是考试时使用的机器，有一套考试界面，对用户进行视频监控<ul><li>通过人脸比对，确保用户不会作弊</li></ul></li><li>后台系统，面向几个主要角色：管理员、教师<ul><li>管理员负责系统数据监控、新闻发布、数据清理等基本工作</li><li>教师负责课程管理、班级管理</li><li>被赋予线上考官身份的教师，还可以通过系统监控考试情况，防止考生作弊</li></ul></li><li>最后还有展示用的可视化大屏，对教学数据进行统计展示。</li></ul></li></ul></div></div>
+
+<h4 id="实际开发中遇到了哪些技术挑战或者困难呀？"><a href="#实际开发中遇到了哪些技术挑战或者困难呀？" class="headerlink" title="实际开发中遇到了哪些技术挑战或者困难呀？"></a>实际开发中遇到了哪些技术挑战或者困难呀？</h4><div class="tag-plugin colorful note" color="dark"><div class="body"><p>在徐州广联科技公司时，我是可视化开发组的负责人，<br>当时公司里有一个监控大屏项目，在即将上线时，发现了一个比较严重的bug</p><ul><li>由于大屏页面需要同时展示8个实时监控</li><li>但是实际效果是8个监控只能显示6个</li><li>我和团队交流后，一开始以为是浏览器性能的原因</li><li>后面控制台调试过之后，通过监控network面板，发现当前8个网络请求发出之后，后面2个请求总是被置空</li><li>通过实际调试和资料收集之后，最终这是由于浏览器只允许6个异步请求并行发出，是网络协议的一种规则</li><li>监控视频是持续的数据流，会长时间的占用一个请求通道</li><li>那么要解决这个问题，就需要将http升级到http2.0，这样就没有并行通道数的限制了</li><li>找到这个解决方案后我们就立刻执行了，赶在服务上线之前解决了这个问题</li><li>之前因为公司也遇到过6路以上的监控出现bug，但当时没有从技术层面解决这个问题</li><li>从这之后，经过和技术团队的讨论，我们认为以后的项目尽量使用http2.0，提高网络性能</li></ul></div></div>
+
+<h4 id="如何对学员的信息安全和数据进行保护"><a href="#如何对学员的信息安全和数据进行保护" class="headerlink" title="如何对学员的信息安全和数据进行保护"></a>如何对学员的信息安全和数据进行保护</h4><h4 id="自动排课系统，是基于什么算法或者规则来运作的呢？"><a href="#自动排课系统，是基于什么算法或者规则来运作的呢？" class="headerlink" title="自动排课系统，是基于什么算法或者规则来运作的呢？"></a>自动排课系统，是基于什么算法或者规则来运作的呢？</h4><h2 id="开放性问题"><a href="#开放性问题" class="headerlink" title="开放性问题"></a>开放性问题</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>价值观：贴近公司文化、正直</li><li>稳定性<ul><li>技术深耕</li><li>职业规划</li></ul></li><li>潜力<ul><li>学习能力</li><li>发展潜力</li><li>专业性</li></ul></li><li>性价比<ul><li>工作热情和能力</li><li>个人价值</li></ul></li></ul><p>回答要有条理，有逻辑，忌说罗圈话</p><ul><li>用1、2、3点</li><li>首先、其次、最后</li></ul></div></div>
+
+<h3 id="你的职业规划是什么"><a href="#你的职业规划是什么" class="headerlink" title="你的职业规划是什么"></a>你的职业规划是什么</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>我的职业规划是成为资深的web3d工程师</li><li>短期内：<ul><li>首先我们的项目是基于vue层构建的，并且使用的是面向对象编程模式<ul><li>那么我就需要花半个月左右的时间去研究vue底层实现原理和面向对象编程模式</li></ul></li><li>然后我们web3d使用的技术栈主要是babylonjs<ul><li>那么我比较熟悉的3d库是threejs，这两个技术栈比较相似</li><li>我需要花1个月左右的时间去学习babylonjs</li></ul></li><li>其次web3d开发对图形学算法方面的要求很高<ul><li>这方面的学习也是最困难的，需要我花上半年的时间去上网自学、阅读这方面的相关书籍和源码</li></ul></li></ul></li><li>长期内：<ul><li>能够在3年内全面的掌握web3d开发相关的技术</li><li>能够在5年内，成为web软件性能、优化、3d交互方面的技术专家</li><li>并且在未来能实时关注3d技术的发展方向，不断地学习</li></ul></li></ul></div></div>
+
+<div class="tag-plugin colorful note" color="dark"><div class="title"><strong><p>如何回答</p>
+</strong></div><div class="body"><ul><li>使用具体的时间点，比如几年内的职业规划</li><li>技术层面深耕<ul><li>xxx时间点可以掌握xx技术到xxx层面</li><li>xx时间点可以达到xx技术水平为公司作出更大贡献</li></ul></li></ul><blockquote><ul><li>我的职业计划是成为资深的高级前端开发工程师，</li><li>短期内：<ul><li>首先我最大的兴趣点在于前端可视化领域<ul><li>（1年）为此需要继续学习webgl、canvas、svg等前端图形技术、以及一些图形学的基本算法</li></ul></li><li>然后呢为了提高用户的使用体验<ul><li>依旧需要花2个月的时间，学习js这门语言的深入原理</li><li>花半年时间深入了解计算机网络的相关原理，希望能更清晰地认识http协议</li></ul></li><li>需要半年的时间去了解人工智能相关知识<ul><li>python语言的基础我是有的</li><li>人工智能是目前计算机领域的一个趋势，我认为花时间去了解这门技术是比较有必要的</li></ul></li></ul></li><li>长期内：<ul><li>（3年内）能够独立负责一款复杂软件的前端开发</li><li>（5年内）成为web软件性能、优化、交互方面的技术专家</li></ul></li></ul></blockquote></div></div>
+
+<h3 id="你还有什么想要了解的吗？"><a href="#你还有什么想要了解的吗？" class="headerlink" title="你还有什么想要了解的吗？"></a>你还有什么想要了解的吗？</h3><ul>
+<li>可以讲讲这个岗位的机会跟挑战有哪些吗？</li>
+<li>这个岗位对员工的期待是什么呢？期待招一个什么样子的人呢？</li>
+<li>可以再详细介绍一下这个岗位的具体职责吗？</li>
+<li>可以介绍一下公司的团队组成吗</li>
+<li>就前端而言用到的技术栈是哪些呢</li>
+<li>试用期多长</li>
+<li>岗位稳定性如何</li>
+</ul>
+<h3 id="工作到现在，项目中遇到的最难的问题（挑战）是什么？如何解决？"><a href="#工作到现在，项目中遇到的最难的问题（挑战）是什么？如何解决？" class="headerlink" title="工作到现在，项目中遇到的最难的问题（挑战）是什么？如何解决？"></a>工作到现在，项目中遇到的最难的问题（挑战）是什么？如何解决？</h3><p>在参与【项目管理协同表格编辑系统】桌面软件开发的时候，<br>需要实现这样一个功能：</p>
+<ul>
+<li>需要支持excel表格导入软件，解析成统一的内部模版</li>
+<li>但是用户导入的表格无法统一格式<ul>
+<li>因为这份业务表格，不同省份有不同的标准</li>
+<li>还有可能存在表格行列合并的格式不同、表头标记不同等情况</li>
+</ul>
+</li>
+<li>所以需要对几种不同的数据标准进行解析，从中提取有效的数据，输出为统一格式的数据</li>
+<li>当时的解决方案是：<ul>
+<li>先使用sheetjs库将excel中的数据统一读入</li>
+<li>分析各个省份不同的标准，写出一份解析的算法，能够对数据进行解析，花了一周的时间，才将各种情况进行兼容</li>
+<li>当然，考虑到复杂性和政策的变化性，现在如果再实现这个功能，训练ai进行解析的可实现性应该更高一些</li>
+</ul>
+</li>
+</ul>
+<h3 id="你收获到最多的一次经历是什么？"><a href="#你收获到最多的一次经历是什么？" class="headerlink" title="你收获到最多的一次经历是什么？"></a>你收获到最多的一次经历是什么？</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><p>在北京国遥工作的时候，<br>做的第一个项目，一个知识图谱功能模块，<br>是项目中最复杂的亮点模块，在分工会议时，我自告奋勇要做这个模块，<br>拿到模块之后，非常兴奋，当时非常认真的在做这块内容，<br>也向前辈请教了很多知识，最终把这个模块开发完成，客户对此的反馈很好，<br>个人非常有成就感，对可视化技术的兴趣加深了很多</p></div></div>
+
+<h3 id="你在过去的工作中，最喜欢做什么，最不喜欢做什么？"><a href="#你在过去的工作中，最喜欢做什么，最不喜欢做什么？" class="headerlink" title="你在过去的工作中，最喜欢做什么，最不喜欢做什么？"></a>你在过去的工作中，最喜欢做什么，最不喜欢做什么？</h3><h3 id="你认为自己最擅长的技能是什么？举例说明"><a href="#你认为自己最擅长的技能是什么？举例说明" class="headerlink" title="你认为自己最擅长的技能是什么？举例说明"></a>你认为自己最擅长的技能是什么？举例说明</h3><h3 id="你是如何处理与同事之间的冲突的，青分享一次具体的经历"><a href="#你是如何处理与同事之间的冲突的，青分享一次具体的经历" class="headerlink" title="你是如何处理与同事之间的冲突的，青分享一次具体的经历"></a>你是如何处理与同事之间的冲突的，青分享一次具体的经历</h3><h3 id="你最近与团队合作完成的一个重要项目是什么？你在其中扮演了什么样的角色"><a href="#你最近与团队合作完成的一个重要项目是什么？你在其中扮演了什么样的角色" class="headerlink" title="你最近与团队合作完成的一个重要项目是什么？你在其中扮演了什么样的角色"></a>你最近与团队合作完成的一个重要项目是什么？你在其中扮演了什么样的角色</h3><h3 id="你最大的缺点是什么？优点是什么"><a href="#你最大的缺点是什么？优点是什么" class="headerlink" title="你最大的缺点是什么？优点是什么"></a>你最大的缺点是什么？优点是什么</h3><h3 id="你最近失败的一件事是什么？你有没有分析过失败的原因？有复盘过吗？"><a href="#你最近失败的一件事是什么？你有没有分析过失败的原因？有复盘过吗？" class="headerlink" title="你最近失败的一件事是什么？你有没有分析过失败的原因？有复盘过吗？"></a>你最近失败的一件事是什么？你有没有分析过失败的原因？有复盘过吗？</h3><h2 id="行为事件类-项目类问题"><a href="#行为事件类-项目类问题" class="headerlink" title="行为事件类&#x2F;项目类问题"></a>行为事件类&#x2F;项目类问题</h2><h3 id="介绍一个你觉得很成功-很失败-感受很深刻-耗时最久的项目经历"><a href="#介绍一个你觉得很成功-很失败-感受很深刻-耗时最久的项目经历" class="headerlink" title="介绍一个你觉得很成功&#x2F;很失败&#x2F;感受很深刻&#x2F;耗时最久的项目经历"></a>介绍一个你觉得很成功&#x2F;很失败&#x2F;感受很深刻&#x2F;耗时最久的项目经历</h3><div class="tag-plugin colorful note" color="dark"><div class="title"><strong><p>STAR法则</p>
+</strong></div><div class="body"><ul><li>situation 情境</li><li>task 任务</li><li>action 行动</li><li>result 结果</li></ul><blockquote><p>例子：<br>背景和任务：我在XXX期间，所负责XX项目遇到了一个XX问题<br>信息收集：在处理问题之前，首先我们需要了解是什么原因造成这种情况的发生<br>行动1：于是我做了XXX措施，与团队内人员进行交流，我负责的是XXX部分<br>结果1：调查到导致问题的原因是XXX<br>行动2：于是我们团队采取了XX措施，从XX部分做了工作<br>结果2：最终在XX期间实现了XXX目标，解决了XX问题</p></blockquote></div></div>
+
+<h1 id="JD业务问题"><a href="#JD业务问题" class="headerlink" title="JD业务问题"></a>JD业务问题</h1><h2 id="SaaS"><a href="#SaaS" class="headerlink" title="SaaS"></a>SaaS</h2><p>SaaS系统：软件即服务（Software as a Service）<br>通过互联网提供软件应用的服务平台，<br>通过订阅的方式获得对云端软件的访问权限，<br>SaaS平台提供商负责软件的部署、维护和安全性等方面的工作</p>
+<h2 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>客户关系管理系统</li><li>主要功能<ul><li>客户管理</li><li>销售过程推进</li><li>售后管理</li></ul></li></ul></div></div>
+
+
+<h2 id="BIM"><a href="#BIM" class="headerlink" title="BIM"></a>BIM</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>Building Information Modeling</li><li>建筑信息模型</li><li>通过3d数字化技术，把建筑工程中各专业、各阶段与工程相关的信息纳入数据模型之中</li><li>通过BIM软件进行建模、分析、模拟、演示、检测等</li><li>对工程的进度、成本、质量进行管控</li></ul></div></div>
+
+
+<h1 id="面试结束"><a href="#面试结束" class="headerlink" title="面试结束"></a>面试结束</h1><h2 id="追问面试结果"><a href="#追问面试结果" class="headerlink" title="追问面试结果"></a>追问面试结果</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>很高兴在上周二能参加贵公司的面试，与面试官沟通过后我对岗位有了更深的认识，我自己也是非常感兴趣的，方便问一下岗位招聘</li><li>这几天陆续收到了2家公司给我的offer，要我在这周进行答复，但我对咱们公司还是非常感兴趣的，所以一直在等您这边的回复</li></ul></div></div></article>
+<div class="article-footer">
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://puyixiu.github.io/wiki/Job/front_05_trick" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://puyixiu.github.io/wiki/Job/front_05_trick&title=面试技巧 - Ashikachi&summary=面试准备如何准备好前端面试，如何记忆庞大的前端面试题库？
+理解原理
+建立知识体系
+笔记整理
+实战演练
+模拟练市
+持续迭代
+归纳总结
+心理建设，更看重思路技巧
+
+自我介绍（业务&#x2F;技术面）面试官你好，我叫XXX，XX年毕业于XX..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=面试技巧 - Ashikachi&amp;body=https://puyixiu.github.io/wiki/Job/front_05_trick"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://puyixiu.github.io/wiki/Job/front_05_trick"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/Job/front_04_react/">react</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/Job/front_06_git/">git</a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="PUYIXIU/gitalk-comments" issue-term="pathname" theme="preferred-color-scheme" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Ashikachi</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%86%E5%A4%87%E5%A5%BD%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%EF%BC%8C%E5%A6%82%E4%BD%95%E8%AE%B0%E5%BF%86%E5%BA%9E%E5%A4%A7%E7%9A%84%E5%89%8D%E7%AB%AF%E9%9D%A2%E8%AF%95%E9%A2%98%E5%BA%93%EF%BC%9F"><span class="toc-text">如何准备好前端面试，如何记忆庞大的前端面试题库？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D%EF%BC%88%E4%B8%9A%E5%8A%A1-%E6%8A%80%E6%9C%AF%E9%9D%A2%EF%BC%89"><span class="toc-text">自我介绍（业务&#x2F;技术面）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D"><span class="toc-text">自我介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A6%BB%E8%81%8C%E5%8E%9F%E5%9B%A0"><span class="toc-text">离职原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%9B%B8%E5%85%B3"><span class="toc-text">项目相关</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E3%80%90%E9%AB%98%E8%BD%A8%E5%8D%AB%E6%98%9F%E6%80%81%E5%8A%BF%E3%80%91%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%90%97"><span class="toc-text">可以介绍一下【高轨卫星态势】这个项目吗</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B%E3%80%90%E5%BE%90%E7%9F%BF%E9%9B%86%E5%9B%A2%E4%BA%BA%E6%89%8D%E4%B8%AD%E5%BF%83%E4%B8%80%E4%BD%93%E5%8C%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E3%80%91%E8%BF%99%E4%B8%AA%E9%A1%B9%E7%9B%AE%E5%90%97"><span class="toc-text">可以介绍一下【徐矿集团人才中心一体化解决方案】这个项目吗</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BC%80%E5%8F%91%E4%B8%AD%E9%81%87%E5%88%B0%E4%BA%86%E5%93%AA%E4%BA%9B%E6%8A%80%E6%9C%AF%E6%8C%91%E6%88%98%E6%88%96%E8%80%85%E5%9B%B0%E9%9A%BE%E5%91%80%EF%BC%9F"><span class="toc-text">实际开发中遇到了哪些技术挑战或者困难呀？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AF%B9%E5%AD%A6%E5%91%98%E7%9A%84%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E5%92%8C%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E4%BF%9D%E6%8A%A4"><span class="toc-text">如何对学员的信息安全和数据进行保护</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E6%8E%92%E8%AF%BE%E7%B3%BB%E7%BB%9F%EF%BC%8C%E6%98%AF%E5%9F%BA%E4%BA%8E%E4%BB%80%E4%B9%88%E7%AE%97%E6%B3%95%E6%88%96%E8%80%85%E8%A7%84%E5%88%99%E6%9D%A5%E8%BF%90%E4%BD%9C%E7%9A%84%E5%91%A2%EF%BC%9F"><span class="toc-text">自动排课系统，是基于什么算法或者规则来运作的呢？</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98"><span class="toc-text">开放性问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E7%9A%84%E8%81%8C%E4%B8%9A%E8%A7%84%E5%88%92%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">你的职业规划是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E8%BF%98%E6%9C%89%E4%BB%80%E4%B9%88%E6%83%B3%E8%A6%81%E4%BA%86%E8%A7%A3%E7%9A%84%E5%90%97%EF%BC%9F"><span class="toc-text">你还有什么想要了解的吗？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B7%A5%E4%BD%9C%E5%88%B0%E7%8E%B0%E5%9C%A8%EF%BC%8C%E9%A1%B9%E7%9B%AE%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E6%9C%80%E9%9A%BE%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E6%8C%91%E6%88%98%EF%BC%89%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%EF%BC%9F"><span class="toc-text">工作到现在，项目中遇到的最难的问题（挑战）是什么？如何解决？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E6%94%B6%E8%8E%B7%E5%88%B0%E6%9C%80%E5%A4%9A%E7%9A%84%E4%B8%80%E6%AC%A1%E7%BB%8F%E5%8E%86%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">你收获到最多的一次经历是什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E5%9C%A8%E8%BF%87%E5%8E%BB%E7%9A%84%E5%B7%A5%E4%BD%9C%E4%B8%AD%EF%BC%8C%E6%9C%80%E5%96%9C%E6%AC%A2%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%80%E4%B8%8D%E5%96%9C%E6%AC%A2%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">你在过去的工作中，最喜欢做什么，最不喜欢做什么？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E8%AE%A4%E4%B8%BA%E8%87%AA%E5%B7%B1%E6%9C%80%E6%93%85%E9%95%BF%E7%9A%84%E6%8A%80%E8%83%BD%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">你认为自己最擅长的技能是什么？举例说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E6%98%AF%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E4%B8%8E%E5%90%8C%E4%BA%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E5%86%B2%E7%AA%81%E7%9A%84%EF%BC%8C%E9%9D%92%E5%88%86%E4%BA%AB%E4%B8%80%E6%AC%A1%E5%85%B7%E4%BD%93%E7%9A%84%E7%BB%8F%E5%8E%86"><span class="toc-text">你是如何处理与同事之间的冲突的，青分享一次具体的经历</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E6%9C%80%E8%BF%91%E4%B8%8E%E5%9B%A2%E9%98%9F%E5%90%88%E4%BD%9C%E5%AE%8C%E6%88%90%E7%9A%84%E4%B8%80%E4%B8%AA%E9%87%8D%E8%A6%81%E9%A1%B9%E7%9B%AE%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BD%A0%E5%9C%A8%E5%85%B6%E4%B8%AD%E6%89%AE%E6%BC%94%E4%BA%86%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84%E8%A7%92%E8%89%B2"><span class="toc-text">你最近与团队合作完成的一个重要项目是什么？你在其中扮演了什么样的角色</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E6%9C%80%E5%A4%A7%E7%9A%84%E7%BC%BA%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BC%98%E7%82%B9%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">你最大的缺点是什么？优点是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%A0%E6%9C%80%E8%BF%91%E5%A4%B1%E8%B4%A5%E7%9A%84%E4%B8%80%E4%BB%B6%E4%BA%8B%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F%E4%BD%A0%E6%9C%89%E6%B2%A1%E6%9C%89%E5%88%86%E6%9E%90%E8%BF%87%E5%A4%B1%E8%B4%A5%E7%9A%84%E5%8E%9F%E5%9B%A0%EF%BC%9F%E6%9C%89%E5%A4%8D%E7%9B%98%E8%BF%87%E5%90%97%EF%BC%9F"><span class="toc-text">你最近失败的一件事是什么？你有没有分析过失败的原因？有复盘过吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E4%B8%BA%E4%BA%8B%E4%BB%B6%E7%B1%BB-%E9%A1%B9%E7%9B%AE%E7%B1%BB%E9%97%AE%E9%A2%98"><span class="toc-text">行为事件类&#x2F;项目类问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%AA%E4%BD%A0%E8%A7%89%E5%BE%97%E5%BE%88%E6%88%90%E5%8A%9F-%E5%BE%88%E5%A4%B1%E8%B4%A5-%E6%84%9F%E5%8F%97%E5%BE%88%E6%B7%B1%E5%88%BB-%E8%80%97%E6%97%B6%E6%9C%80%E4%B9%85%E7%9A%84%E9%A1%B9%E7%9B%AE%E7%BB%8F%E5%8E%86"><span class="toc-text">介绍一个你觉得很成功&#x2F;很失败&#x2F;感受很深刻&#x2F;耗时最久的项目经历</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SaaS"><span class="toc-text">SaaS</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRM"><span class="toc-text">CRM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BIM"><span class="toc-text">BIM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%BD%E9%97%AE%E9%9D%A2%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="toc-text">追问面试结果</span></a></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.bootcdn.net/ajax/libs/vanilla-lazyload/19.1.3/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #beaudar');
+  util.viewportLazyload(el, load_beaudar, true);
+
+  function load_beaudar() {
+    if (!el) return;
+    try {
+      el.innerHTML = '';
+    } catch (error) {
+      console.error(error);
+    }
+    const script = document.createElement('script');
+    script.src = 'https://beaudar.lipk.org/client.js';
+    script.async = true;
+    for (const key of Object.keys(el.attributes)) {
+      const attr = el.attributes[key];
+      if (['class', 'id'].includes(attr.name) === false) {
+        script.setAttribute(attr.name, attr.value);
+      }
+    }
+    el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/flying-pages/2.1.2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script async src="https://gcore.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script><script async src="/scripts/test.js"></script>
+</div></body></html>

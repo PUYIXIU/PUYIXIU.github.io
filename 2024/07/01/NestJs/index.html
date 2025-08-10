@@ -1,0 +1,941 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>NestJs - Ashikachi</title>
+
+  
+  <meta name="description" content="官方基础课程（快速体验）快速创建nest项目全局安装nest1npm i -g nest快速创建nest项目1nest new创建出来目录结构：main.js 主入口app.module.ts 创建的控制器会被controllers集成app.service.tsapp.controller....">
+  
+  <meta name="keywords" content="Web">
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+    <link rel="shortcut icon" href="/images/base/favicon.png">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ashikachi","sameAs":[]},"dateCreated":"2024-07-01T14:56:46+08:00","dateModified":"2025-08-09T18:27:06+08:00","datePublished":"2024-07-01T14:56:46+08:00","description":"","headline":"NestJs","mainEntityOfPage":{"@type":"WebPage","@id":"https://puyixiu.github.io/2024/07/01/NestJs/"},"publisher":{"@type":"Organization","name":"Ashikachi","sameAs":[]},"url":"https://puyixiu.github.io/2024/07/01/NestJs/","keywords":"Web","thumbnailUrl":"/images/covers/java1.jpg","image":1}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="l_body content" id="start" layout="post" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/"><div class="bg" style="opacity:0;background-image:url(https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/base/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></a><a class="title" href="/"><div class="main">Ashikachi</div><div class="sub normal cap">🐙あしはち🐙</div><div class="sub hover cap" style="opacity:0"> 八条腿各有想法</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item active" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+
+<widget class="widget-wrapper recent post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/2023/11/03/PicBoo/"><span class="title">PicBoo</span></a><a class="item title" href="/2023/07/27/ReactNotes/"><span class="title">React笔记</span></a><a class="item title" href="/2023/10/12/Nginx%E5%85%A5%E9%97%A8/"><span class="title">Nginx入门</span></a><a class="item title" href="/2024/09/24/NextJs/"><span class="title">NextJs</span></a><a class="item title" href="/2024/07/01/NestJs/"><span class="title">NestJs</span></a></div></widget>
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/puyixiu" target="_blank" rel="external nofollow noopener noreferrer"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a><a class="social" href="https://gitee.com/ElectricDuck" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118295736" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5012" width="16" height="16"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="5013"></path></svg></a><a class="social" href="https://juejin.cn/user/587554333405684/posts" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118714280" class="icon" viewBox="0 0 1316 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5098" width="16" height="16"><path d="M643.181714 247.698286l154.916572-123.172572L643.181714 0.256 643.072 0l-154.660571 124.269714 154.660571 123.245715 0.109714 0.182857z m0 388.461714h0.109715l399.579428-315.245714-108.361143-87.04-291.218285 229.888h-0.146286l-0.109714 0.146285L351.817143 234.093714l-108.251429 87.04 399.433143 315.136 0.146286-0.146285z m-0.146285 215.552l0.146285-0.146286 534.893715-422.034285 108.397714 87.04-243.309714 192L643.145143 1024 10.422857 525.056 0 516.754286l108.251429-86.893715L643.035429 851.748571z" fill="#1E80FF" p-id="5099"></path></svg></a><a class="social" href="https://codepen.io/jnkzhatk-the-builder" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118737052" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6208" width="16" height="16"><path d="M911.7 385.3l-0.3-1.5c-0.2-1-0.3-1.9-0.6-2.9-0.2-0.6-0.4-1.1-0.5-1.7-0.3-0.8-0.5-1.7-0.9-2.5-0.2-0.6-0.5-1.1-0.8-1.7-0.4-0.8-0.8-1.5-1.2-2.3-0.3-0.5-0.6-1.1-1-1.6-0.8-1.2-1.7-2.4-2.6-3.6-0.5-0.6-1.1-1.3-1.7-1.9-0.4-0.5-0.9-0.9-1.4-1.3-0.6-0.6-1.3-1.1-1.9-1.6-0.5-0.4-1-0.8-1.6-1.2-0.2-0.1-0.4-0.3-0.6-0.4L531.1 117.8c-11.5-7.7-26.6-7.7-38.1 0L127.3 361.3c-0.2 0.1-0.4 0.3-0.6 0.4-0.5 0.4-1 0.8-1.6 1.2-0.7 0.5-1.3 1.1-1.9 1.6-0.5 0.4-0.9 0.9-1.4 1.3-0.6 0.6-1.2 1.2-1.7 1.9-1 1.1-1.8 2.3-2.6 3.6-0.3 0.5-0.7 1-1 1.6-0.4 0.7-0.8 1.5-1.2 2.3-0.3 0.5-0.5 1.1-0.8 1.7-0.3 0.8-0.6 1.7-0.9 2.5-0.2 0.6-0.4 1.1-0.5 1.7-0.2 0.9-0.4 1.9-0.6 2.9l-0.3 1.5c-0.2 1.5-0.3 3-0.3 4.5v243.5c0 1.5 0.1 3 0.3 4.5l0.3 1.5c0.2 1 0.4 1.9 0.6 2.9 0.2 0.6 0.3 1.1 0.5 1.7 0.3 0.9 0.6 1.7 0.9 2.5 0.2 0.6 0.5 1.1 0.8 1.7 0.4 0.8 0.7 1.5 1.2 2.3 0.3 0.5 0.6 1.1 1 1.6 0.5 0.7 0.9 1.4 1.5 2.1l1.2 1.5c0.5 0.6 1.1 1.3 1.7 1.9 0.4 0.5 0.9 0.9 1.4 1.3 0.6 0.6 1.3 1.1 1.9 1.6 0.5 0.4 1 0.8 1.6 1.2 0.2 0.1 0.4 0.3 0.6 0.4L493 905.7c5.6 3.8 12.3 5.8 19.1 5.8 6.6 0 13.3-1.9 19.1-5.8l365.6-243.5c0.2-0.1 0.4-0.3 0.6-0.4 0.5-0.4 1-0.8 1.6-1.2 0.7-0.5 1.3-1.1 1.9-1.6 0.5-0.4 0.9-0.9 1.4-1.3 0.6-0.6 1.2-1.2 1.7-1.9l1.2-1.5 1.5-2.1c0.3-0.5 0.7-1 1-1.6 0.4-0.8 0.8-1.5 1.2-2.3 0.3-0.5 0.5-1.1 0.8-1.7 0.3-0.8 0.6-1.7 0.9-2.5 0.2-0.5 0.4-1.1 0.5-1.7 0.3-0.9 0.4-1.9 0.6-2.9l0.3-1.5c0.2-1.5 0.3-3 0.3-4.5V389.8c-0.3-1.5-0.4-3-0.6-4.5zM546.4 210.5l269.4 179.4-120.3 80.4-149-99.6V210.5z m-68.8 0v160.2l-149 99.6-120.3-80.4 269.3-179.4zM180.7 454.1l86 57.5-86 57.5v-115z m296.9 358.5L208.3 633.2l120.3-80.4 149 99.6v160.2zM512 592.8l-121.6-81.2L512 430.3l121.6 81.2L512 592.8z m34.4 219.8V652.4l149-99.6 120.3 80.4-269.3 179.4zM843.3 569l-86-57.5 86-57.5v115z" p-id="6209"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top"><img class="lazy bg" data-src="/images/covers/java1.jpg">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-07-01T06:56:46.000Z">2024-07-01</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-08-09T10:27:06.008Z">2025-08-09</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>NestJs</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h1 id="官方基础课程（快速体验）"><a href="#官方基础课程（快速体验）" class="headerlink" title="官方基础课程（快速体验）"></a>官方基础课程（快速体验）</h1><h2 id="快速创建nest项目"><a href="#快速创建nest项目" class="headerlink" title="快速创建nest项目"></a>快速创建nest项目</h2><div class="tag-plugin colorful note" ><div class="body"><p>全局安装nest</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g nest</span><br></pre></td></tr></table></figure><p>快速创建nest项目</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nest new</span><br></pre></td></tr></table></figure><p>创建出来目录结构：</p><div class="tag-plugin image"><div class="image-bg"><img class="lazy" src="/images/posts/NestJs/category.png" data-src="/images/posts/NestJs/category.png"onerror="this.src=&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2rem' height='2rem' viewBox='0 0 24 24'%3E%3C!-- Icon from Solar by 480 Design - https://creativecommons.org/licenses/by/4.0/ --%3E%3Cpath fill='%23F44336' d='M22 12.698c-.002 1.47-.013 2.718-.096 3.743c-.097 1.19-.296 2.184-.74 3.009a4.2 4.2 0 0 1-.73.983c-.833.833-1.893 1.21-3.237 1.39C15.884 22 14.2 22 12.053 22h-.106c-2.148 0-3.83 0-5.144-.177c-1.343-.18-2.404-.557-3.236-1.39c-.738-.738-1.12-1.656-1.322-2.795c-.2-1.12-.236-2.512-.243-4.241Q1.999 12.737 2 12v-.054c0-2.148 0-3.83.177-5.144c.18-1.343.557-2.404 1.39-3.236s1.893-1.21 3.236-1.39c1.168-.157 2.67-.175 4.499-.177a.697.697 0 1 1 0 1.396c-1.855.002-3.234.018-4.313.163c-1.189.16-1.906.464-2.436.994S3.72 5.8 3.56 6.99C3.397 8.2 3.395 9.788 3.395 12v.784l.932-.814a2.14 2.14 0 0 1 2.922.097l3.99 3.99a1.86 1.86 0 0 0 2.385.207l.278-.195a2.79 2.79 0 0 1 3.471.209l2.633 2.37c.265-.557.423-1.288.507-2.32c.079-.972.09-2.152.091-3.63a.698.698 0 0 1 1.396 0' opacity='.5'/%3E%3Cpath fill='%23F44336' fill-rule='evenodd' d='M17.5 11c-2.121 0-3.182 0-3.841-.659S13 8.621 13 6.5s0-3.182.659-3.841S15.379 2 17.5 2s3.182 0 3.841.659S22 4.379 22 6.5s0 3.182-.659 3.841S19.621 11 17.5 11m-1.47-7.03a.75.75 0 1 0-1.06 1.06l1.47 1.47l-1.47 1.47a.75.75 0 0 0 1.06 1.06l1.47-1.47l1.47 1.47a.75.75 0 1 0 1.06-1.06L18.56 6.5l1.47-1.47a.75.75 0 0 0-1.06-1.06L17.5 5.44z' clip-rule='evenodd'/%3E%3C/svg%3E&quot;"/><div class="lazy-icon" style="background-image:url(https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd);"></div></div></div><ul><li>main.js 主入口</li><li>app.module.ts 创建的控制器会被controllers集成</li><li>app.service.ts</li><li>app.controller.ts</li></ul><p>生成controller</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nest generate controller controllerName</span><br><span class="line">nest g co controllerName</span><br></pre></td></tr></table></figure><p>nuxt开发时热更新命令：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run start:dev</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="控制器-Controller"><a href="#控制器-Controller" class="headerlink" title="控制器 Controller"></a>控制器 Controller</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Controller</p></strong></div><div class="body"><p>定义映射器类<br>&#x2F;coffee</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// 控制器的内部实现</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Get</p></strong></div><div class="body"><p>&#x2F;coffee&#x2F;flavors</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// 路径映射</span></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">&#x27;flavors&#x27;</span>)</span><br><span class="line">    <span class="title function_">findAll</span>(<span class="params"></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;You find all coffees&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Param</p></strong></div><div class="body"><p>&#x2F;coffee&#x2F;123456</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// 带参数映射</span></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="comment">// findOne(@Param() params)&#123; // 获取所有params参数</span></span><br><span class="line">    <span class="title function_">findOne</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>: <span class="built_in">string</span></span>)&#123; <span class="comment">// 获取指定paran参数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">`get #<span class="subst">$&#123;id&#125;</span> coffee`</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Post&#x2F;@Body&#x2F;@HttpCode</p></strong></div><div class="body"><p>&#x2F;coffee&#x2F;create</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// post请求</span></span><br><span class="line">    <span class="meta">@Post</span>()</span><br><span class="line">    <span class="meta">@HttpCode</span>(<span class="title class_">HttpStatus</span>.<span class="property">BAD_GATEWAY</span>)  <span class="comment">// 自定义状态码</span></span><br><span class="line">    <span class="comment">// Body参数</span></span><br><span class="line">    <span class="comment">// create(@Body() body)&#123;</span></span><br><span class="line">    <span class="comment">// 获取特定的属性</span></span><br><span class="line">    <span class="title function_">create</span>(<span class="params"><span class="meta">@Body</span>(<span class="string">&#x27;message&#x27;</span>) body</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> body;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Res</p></strong></div><div class="body"><p>&#x2F;coffee&#x2F;yummy</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// 直接调用express库方法</span></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">&#x27;candy&#x27;</span>)</span><br><span class="line">    <span class="title function_">yummy</span>(<span class="params"><span class="meta">@Res</span>() response</span>)&#123;</span><br><span class="line">        response.<span class="title function_">status</span>(<span class="number">200</span>).<span class="title function_">send</span>(<span class="string">&#x27;yummy candy&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Patch</p></strong></div><div class="body"><p>更新数据<br>&#x2F;coffee&#x2F;1234</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="comment">// patch 更新</span></span><br><span class="line">    <span class="meta">@Patch</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="title function_">update</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>: <span class="built_in">string</span>, <span class="meta">@Body</span>() body</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            <span class="attr">message</span>:<span class="string">`This action updates #<span class="subst">$&#123;id&#125;</span> coffee`</span>,</span><br><span class="line">            <span class="attr">data</span>:body</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>@Delete</p></strong></div><div class="body"><p>删除数据<br>&#x2F;coffee&#x2F;1234</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>:<span class="built_in">string</span></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">`delete #<span class="subst">$&#123;id&#125;</span>`</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h2 id="服务-Service-Provider"><a href="#服务-Service-Provider" class="headerlink" title="服务 Service|Provider"></a>服务 Service|Provider</h2><div class="tag-plugin colorful note" ><div class="title"><strong><p>创建Service</p>
+</strong></div><div class="body"><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nest generate service</span><br><span class="line">nest g s</span><br></pre></td></tr></table></figure><p>service会被创建在src对应路径下，<br>同时更新在app.modules.ts下的providers数组中</p><p>每个Service都是一个provider，</p><ul><li>provider内可以注入依赖</li><li>provider可以作为依赖被注入到controller中</li></ul><p>service负责处理数据存储、检索等工作，<br>为controller提供数据。</p></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>entity</p>
+</strong></div><div class="body"><p>创建实体，作为service控制的对象：<br>nest中将controller和service集成在同一个目录下，<br>entity实体也创建在此目录下。</p><p>&#x2F;src&#x2F;coffee&#x2F;entities&#x2F;coffee.entity.ts</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Coffee</span>&#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="built_in">number</span>;</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">brand</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="attr">flavors</span>: <span class="built_in">string</span>[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>Controller+Service实现CRUD</p>
+</strong></div><div class="body"><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Injectable</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Coffee</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./entities/coffee.entity&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// @Injectable标识表示service</span></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeService</span> &#123;</span><br><span class="line">  <span class="keyword">private</span> <span class="attr">coffees</span>: <span class="title class_">Coffee</span>[] = [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">id</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;Shipwreck Roast&#x27;</span>,</span><br><span class="line">      <span class="attr">brand</span>: <span class="string">&#x27;Buddy Brew&#x27;</span>,</span><br><span class="line">      <span class="attr">flavors</span>: [<span class="string">&#x27;chocolate&#x27;</span>, <span class="string">&#x27;vanilla&#x27;</span>],</span><br><span class="line">    &#125;,</span><br><span class="line">  ];</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 查找全部</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">findAll</span>(<span class="params"></span>)&#123;<span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffees</span>&#125;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 根据id返回指定值</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> id </span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">findOne</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">string</span></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffees</span>.<span class="title function_">find</span>(<span class="function"><span class="params">item</span>=&gt;</span>item.<span class="property">id</span> === +id)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 新建</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> createCoffeeDto </span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">create</span>(<span class="params"><span class="attr">createCoffeeDto</span>: <span class="built_in">any</span></span>)&#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">coffees</span>.<span class="title function_">push</span>(createCoffeeDto);</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffees</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 更新</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> id </span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> updateCoffeeDto </span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="title function_">update</span>(<span class="params"><span class="attr">id</span>: <span class="built_in">string</span>,<span class="attr">updateCoffeeDto</span>: <span class="built_in">any</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> existingCoffee = <span class="variable language_">this</span>.<span class="title function_">findOne</span>(id)</span><br><span class="line">    <span class="keyword">if</span>(existingCoffee)&#123;</span><br><span class="line">        <span class="comment">// update this entoty</span></span><br><span class="line">        <span class="title class_">Object</span>.<span class="title function_">assign</span>(existingCoffee, updateCoffeeDto)</span><br><span class="line">        <span class="keyword">return</span> existingCoffee</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;cant find&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> id 删除</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="title function_">remove</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">string</span></span>)&#123;</span><br><span class="line">        <span class="keyword">const</span> coffeeIndex = <span class="variable language_">this</span>.<span class="property">coffees</span>.<span class="title function_">findIndex</span>(<span class="function"><span class="params">item</span>=&gt;</span>item.<span class="property">id</span> == + id)</span><br><span class="line">        <span class="keyword">if</span>(coffeeIndex &gt;= <span class="number">0</span>)&#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">coffees</span>.<span class="title function_">splice</span>(coffeeIndex,<span class="number">1</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在controller中通过构造函数，注入service：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span> &#123;</span><br><span class="line">    <span class="comment">// service/provider注入</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="keyword">private</span> <span class="keyword">readonly</span>  coffeeService</span>) &#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 查询所有</span></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">&#x27;findAll&#x27;</span>)</span><br><span class="line">    <span class="title function_">findAll</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">findAll</span>()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 指定查询</span></span><br><span class="line">    <span class="meta">@Get</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="comment">// findOne(@Param() params)&#123; // 获取所有params参数</span></span><br><span class="line">    <span class="title function_">findOne</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">findOne</span>(id)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 新增</span></span><br><span class="line">    <span class="meta">@Post</span>()</span><br><span class="line">    <span class="title function_">create</span>(<span class="params"><span class="meta">@Body</span>() body</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">create</span>(body);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 更新</span></span><br><span class="line">    <span class="meta">@Patch</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="title function_">update</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>: <span class="built_in">string</span>, <span class="meta">@Body</span>() body</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">update</span>(id,body)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 删除</span></span><br><span class="line">    <span class="meta">@Delete</span>(<span class="string">&#x27;:id&#x27;</span>)</span><br><span class="line">    <span class="title function_">remove</span>(<span class="params"><span class="meta">@Param</span>(<span class="string">&#x27;id&#x27;</span>) <span class="attr">id</span>:<span class="built_in">string</span></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">remove</span>(id)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>&lt;a href&#x3D;<a target="_blank" rel="noopener" href="https://docs.nestjs.cn/10/exceptionfilters?id=%E5%9F%BA%E7%A1%80%E5%BC%82%E5%B8%B8%E7%B1%BB%3E%E5%BC%82%E5%B8%B8%E8%BF%87%E6%BB%A4%E5%99%A8">https://docs.nestjs.cn/10/exceptionfilters?id=%e5%9f%ba%e7%a1%80%e5%bc%82%e5%b8%b8%e7%b1%bb&gt;异常过滤器</a></a></p>
+</strong></div><div class="body"><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeService</span> &#123;</span><br><span class="line">    <span class="title function_">findOne</span>(<span class="params"><span class="attr">id</span>: <span class="built_in">string</span></span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> coffee = <span class="variable language_">this</span>.<span class="property">coffees</span>.<span class="title function_">find</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">id</span> === +id)</span><br><span class="line">        <span class="keyword">if</span> (!coffee) &#123;</span><br><span class="line">            <span class="comment">// 抛出对应网络异常</span></span><br><span class="line">            <span class="comment">// throw new HttpException(`Coffee #$&#123;id&#125; not found`, HttpStatus.NOT_FOUND)</span></span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundException</span>(<span class="string">`Coffee #<span class="subst">$&#123;id&#125;</span> not found`</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> coffee</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="模块-Module"><a href="#模块-Module" class="headerlink" title="模块 Module"></a>模块 Module</h2><div class="tag-plugin colorful note" ><div class="title"><strong><p>module</p>
+</strong></div><div class="body"><p>集成module</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nest g module moduleName</span><br></pre></td></tr></table></figure><p>在app.modules.ts横纵的imports内会自动引入新创建的Module</p><p>使用module将controllers和providers集成在一起：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Module</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CoffeeController</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./coffee.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CoffeeService</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./coffee.service&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123; <span class="attr">controllers</span>:[<span class="title class_">CoffeeController</span>], <span class="attr">providers</span>:[<span class="title class_">CoffeeService</span>] &#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeModule</span> &#123;&#125;</span><br></pre></td></tr></table></figure><p>将app.module.ts的代码清理一下，保证controller和service仅被实例化一次：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Module</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppController</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.controller&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppService</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.service&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CoffeeModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./coffee/coffee.module&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  <span class="attr">imports</span>: [<span class="title class_">CoffeeModule</span>],   </span><br><span class="line">  <span class="attr">controllers</span>: [<span class="title class_">AppController</span>],</span><br><span class="line">  <span class="attr">providers</span>: [<span class="title class_">AppService</span>],</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">AppModule</span> &#123;&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+
+<h2 id="DTO"><a href="#DTO" class="headerlink" title="DTO"></a>DTO</h2><div class="tag-plugin colorful note" ><div class="body"><p>data transfer object<br>用于封装规范接口传输的数据类型</p><p>生成DTO</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nest g class className</span><br><span class="line">nest g class coffee/dto/create-coffee.dto --no-spec</span><br></pre></td></tr></table></figure><p>dto的定义：<br>create-coffee.dto.ts</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CreateCoffeeDto</span> &#123;</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">brand</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">flavors</span>: <span class="built_in">string</span>[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>dto的使用：<br>coffee.controller.ts</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span>(<span class="string">&#x27;coffee&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CoffeeController</span>&#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"><span class="keyword">private</span> <span class="keyword">readonly</span> <span class="attr">coffeeService</span>: <span class="title class_">CoffeeService</span></span>)&#123;&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Post</span>()</span><br><span class="line">    <span class="title function_">create</span>(<span class="params"><span class="meta">@Body</span>() <span class="attr">createCoffeeDto</span>:<span class="title class_">CreateCoffeeDto</span></span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">coffeeService</span>.<span class="title function_">create</span>(createCoffeeDto)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>数据验证</p>
+</strong></div><div class="body"><p>数据验证要用到ValidationPipe</p><p>需要下载如下包：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i class-validator class-transformer @nestjs/mapped-types</span><br></pre></td></tr></table></figure><p>在main.ts中加入pipe</p><ul><li>whitelist 白名单模式</li><li>forbidNonWhitelisted 非白名单数据报错</li><li>transform 将传入数据转化为指定的数据类型</li></ul><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">NestFactory</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/core&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">AppModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;./app.module&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">ValidationPipe</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/common&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">bootstrap</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> app = <span class="keyword">await</span> <span class="title class_">NestFactory</span>.<span class="title function_">create</span>(<span class="title class_">AppModule</span>);</span><br><span class="line">  app.<span class="title function_">useGlobalPipes</span>(<span class="keyword">new</span> <span class="title class_">ValidationPipe</span>(&#123;</span><br><span class="line">      <span class="attr">whitelist</span>:<span class="literal">true</span>,</span><br><span class="line">      <span class="attr">forbidNonWhitelisted</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">transform</span>: <span class="literal">true</span>, </span><br><span class="line">  &#125;)) <span class="comment">// 配置验证管道</span></span><br><span class="line">  <span class="keyword">await</span> app.<span class="title function_">listen</span>(<span class="number">3000</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">bootstrap</span>();</span><br></pre></td></tr></table></figure><p>在DTO中加入数据验证描述符：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// create-coffee.dto.ts</span></span><br><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">IsString</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;class-validator&#x27;</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CreateCoffeeDto</span> &#123;</span><br><span class="line">    <span class="meta">@IsString</span>()</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="meta">@IsString</span>()</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">brand</span>: <span class="built_in">string</span>;</span><br><span class="line">    <span class="meta">@IsString</span>(&#123;<span class="attr">each</span>:<span class="literal">true</span>&#125;)</span><br><span class="line">    <span class="keyword">readonly</span> <span class="attr">flavors</span>: <span class="built_in">string</span>[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>使用mapped-types包，<br>实现数据验证的继承与附加属性配置：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">PartialType</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/mapped-types&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CreateCoffeeDto</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;../create-coffee.dto/create-coffee.dto&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PartialType用于给将每个属性变为可选值 @IsOptional()</span></span><br><span class="line"><span class="comment">// 同时继承装饰器类型</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">UpdateCoffeeDto</span> <span class="keyword">extends</span> <span class="title class_ inherited__">PartialType</span>(<span class="title class_">CreateCoffeeDto</span>) &#123; &#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><div class="tag-plugin colorful note" ><div class="body"><p>根目录下配置docker-compose.yml文件：</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">version:</span> <span class="string">&quot;3&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="attr">db:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">postgres</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">ports:</span> </span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;5432:5432&quot;</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="attr">POSTGRES_PASSWORD:</span> <span class="string">ashley122</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure><p>启动镜像：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/clearloe/article/details/139711335">docker拉取镜像地址</a></p><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;registry-mirrors&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;https://dockerhub.icu&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><div class="tag-plugin colorful note" ><div class="body"><p>安装orm相关包：</p><ul><li>@nestjs&#x2F;typeorm typeorm</li><li>pg postgres相关包</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i @nestjs/typeorm typeorm pg</span><br></pre></td></tr></table></figure><p>app.module.ts中引入TypeOrmModule：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">TypeOrmModule</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;@nestjs/typeorm&#x27;</span>;</span><br><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">  <span class="attr">imports</span>: [</span><br><span class="line">      <span class="title class_">CoffeeModule</span>, </span><br><span class="line">      <span class="title class_">CakeModule</span>, </span><br><span class="line">      <span class="title class_">TypeOrmModule</span>.<span class="title function_">forRoot</span>(&#123;</span><br><span class="line">          <span class="attr">type</span>: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">          <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">          <span class="attr">port</span>: <span class="number">5432</span>,</span><br><span class="line">          <span class="attr">username</span>:<span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">          <span class="attr">password</span>:<span class="string">&#x27;ashley122&#x27;</span>,</span><br><span class="line">          <span class="attr">database</span>:<span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">          <span class="attr">autoLoadEntities</span>:<span class="literal">true</span>,</span><br><span class="line">          <span class="comment">// 仅用于开发环境，生产环境中尽量关闭</span></span><br><span class="line">          <span class="attr">synchronize</span>:<span class="literal">true</span>, <span class="comment">// 实体与数据库同步</span></span><br><span class="line">        &#125;)</span><br><span class="line">  ], </span><br><span class="line">  <span class="attr">controllers</span>: [<span class="title class_">AppController</span>],</span><br><span class="line">  <span class="attr">providers</span>: [<span class="title class_">AppService</span>],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><p>将之前仅作为接口类型约束的entities下的实体定义文件，进行ORM模型化：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">Entity</span>, <span class="title class_">PrimaryGeneratedColumn</span>, <span class="title class_">Column</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;typeorm&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实体类描述符</span></span><br><span class="line"><span class="meta">@Entity</span>(<span class="string">&#x27;cake&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Cake</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 主键描述符</span></span><br><span class="line">    <span class="meta">@PrimaryGeneratedColumn</span>()</span><br><span class="line">    <span class="attr">id</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>()</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Column</span>()</span><br><span class="line">    <span class="attr">price</span>: <span class="built_in">number</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 可空描述</span></span><br><span class="line">    <span class="meta">@Column</span>(<span class="string">&#x27;json&#x27;</span>, &#123;<span class="attr">nullable</span>:<span class="literal">true</span>&#125;)</span><br><span class="line">    <span class="attr">flavors</span>: <span class="built_in">string</span>[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在cake子模块中注册内部实现的实体：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Module</span>(&#123;</span><br><span class="line">    <span class="comment">// 每个子模块为自己注册实体</span></span><br><span class="line">    <span class="attr">imports</span>:[<span class="title class_">TypeOrmModule</span>.<span class="title function_">forFeature</span>([<span class="title class_">Cake</span>])],</span><br><span class="line">    <span class="attr">controllers</span>:[<span class="title class_">CakeController</span>],</span><br><span class="line">    <span class="attr">providers</span>:[<span class="title class_">CakeService</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CakeModule</span> &#123;&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>repository</p>
+</strong></div><div class="body"><p>创建好Entity之后，ORM模型会自动映射成为数据库表，<br>在service中作为数据库进行关联：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CakeService</span> &#123;</span><br><span class="line">    <span class="comment">// 关联数据库</span></span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">        <span class="comment">// 数据库注入</span></span></span><br><span class="line"><span class="params">        <span class="meta">@InjectRepository</span>(Cake)</span></span><br><span class="line"><span class="params">        <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="attr">cakeRepository</span>: <span class="title class_">Repository</span>&lt;<span class="title class_">Cake</span>&gt;</span></span><br><span class="line"><span class="params">    </span>) &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>将之前的CURD操作对象迁移到数据库上：</p><ul><li>查询<ul><li>find 查询所有</li><li>findOne 查询指定</li></ul></li></ul><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查找全部</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title function_">findAll</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">find</span>()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查找指定蛋糕</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">findOne</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">number</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> cake = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">findOne</span>(&#123;</span><br><span class="line">        <span class="attr">where</span>:&#123;</span><br><span class="line">            <span class="attr">id</span>:id</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="comment">// let cake = this.cakes.find(item=&gt;item.id == id)</span></span><br><span class="line">    <span class="keyword">if</span>(!cake)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundException</span>(<span class="string">`Cake #<span class="subst">$&#123;id&#125;</span> is not find`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cake</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>新增<ul><li>create 创建</li><li>save 保存</li></ul></li></ul><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 新增蛋糕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cake </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">create</span>(<span class="params"><span class="attr">createCakeDto</span>: <span class="title class_">CreateCakeDto</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> cake = <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">create</span>(createCakeDto)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">save</span>(cake)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>更新<ul><li>preload</li></ul></li></ul><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改蛋糕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> id </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cake </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">update</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">number</span>, <span class="attr">updateCoffeeDto</span>:<span class="title class_">UpdateCakeDto</span></span>)&#123;</span><br><span class="line">    <span class="comment">// preload 更新 找不到指定id返回undefined</span></span><br><span class="line">    <span class="keyword">const</span> cake = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">preload</span>(&#123;</span><br><span class="line">        <span class="attr">id</span>:id,</span><br><span class="line">        ...updateCoffeeDto</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span>(!cake)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundException</span>(<span class="string">`Cake #<span class="subst">$&#123;id&#125;</span> is not exit`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">save</span>(cake)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ul><li>删除<ul><li>remove</li></ul></li></ul><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 删除蛋糕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> cake </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">delete</span>(<span class="params"><span class="attr">id</span>: <span class="built_in">number</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> cake = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">findOne</span>(id)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">remove</span>(cake) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h3 id="Relation"><a href="#Relation" class="headerlink" title="Relation"></a>Relation</h3><div class="tag-plugin colorful note" ><div class="body"><p>表间关联类型：</p><ul><li>@OneToOne()</li><li>@OneToMany()</li><li>@ManyToOne()</li><li>@ManyToMany()</li></ul><p>关联操作：</p><ul><li>创建关系</li></ul><div class="tag-plugin colorful note" color="dark"><div class="body"><p>创建一个新的Entity：Flavors，表示风味</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nest g class cake/entities/flavor.entity --no-spec   </span><br></pre></td></tr></table></figure><p>新表加入模块定义中</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">Module</span>(&#123; <span class="attr">imports</span>:[<span class="title class_">TypeOrmModule</span>.<span class="title function_">forFeature</span>([<span class="title class_">Cake</span>,<span class="title class_">Flavor</span>])] &#125;)</span><br></pre></td></tr></table></figure><p>使用描述符对cake.flavors进行关联：</p><ul><li>@JoinTable() 标识关联属性所有者</li></ul><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@<span class="title class_">JoinTable</span>()</span><br><span class="line">@<span class="title class_">ManyToMany</span>(</span><br><span class="line">    <span class="function"><span class="params">type</span> =&gt;</span> <span class="title class_">Flavor</span>, <span class="comment">// 关联表类型</span></span><br><span class="line">    <span class="function"><span class="params">flavor</span> =&gt;</span> flavor.<span class="property">cakes</span>, <span class="comment">// 反向收集</span></span><br><span class="line">    &#123; <span class="attr">cascade</span>:<span class="literal">true</span> &#125; <span class="comment">// 级联关系</span></span><br><span class="line">)</span><br><span class="line"><span class="attr">flavors</span>: <span class="title class_">Flavor</span>[];</span><br></pre></td></tr></table></figure><p>在被关联表中进行关联配置：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Entity</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Flavor</span> &#123;</span><br><span class="line">    <span class="meta">@PrimaryGeneratedColumn</span>()</span><br><span class="line">    <span class="attr">id</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Column</span>()</span><br><span class="line">    <span class="attr">name</span>: <span class="built_in">string</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@ManyToMany</span>(</span><br><span class="line">        <span class="function"><span class="params">type</span> =&gt;</span> <span class="title class_">Cake</span>,</span><br><span class="line">        <span class="function"><span class="params">cake</span> =&gt;</span> cake.<span class="property">flavors</span></span><br><span class="line">    )</span><br><span class="line">    <span class="attr">cakes</span>: <span class="title class_">Cake</span>[]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div><ul><li>关联查询：</li></ul><div class="tag-plugin colorful note" color="dark"><div class="body"><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">findAll</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">find</span>(&#123;</span><br><span class="line">        <span class="attr">relations</span>: [<span class="string">&#x27;flavors&#x27;</span>], <span class="comment">// 配置收集flavors</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="title function_">findOne</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">number</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> cake = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">findOne</span>(&#123;</span><br><span class="line">        <span class="attr">where</span>:&#123; <span class="attr">id</span>:id &#125;,</span><br><span class="line">        <span class="attr">relations</span>:[<span class="string">&#x27;flavors&#x27;</span>]</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span>(!cake)&#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundException</span>(<span class="string">`Cake #<span class="subst">$&#123;id&#125;</span> is not find`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cake</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div><ul><li>级联插入</li></ul><div class="tag-plugin colorful note" color="dark"><div class="body"><p>cake作为关系拥有表，当用新的flavor创建新的cake时，<br>新的flavor数据也会被级联创建</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 获取/新增flavor</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> name </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> </span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">async</span> <span class="title function_">preloadFlavorByName</span>(<span class="attr">name</span>: <span class="built_in">string</span>): <span class="title class_">Promise</span>&lt;<span class="title class_">Flavor</span>&gt;&#123;</span><br><span class="line">    <span class="keyword">const</span> existingFlavor = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">flavorRepository</span>.<span class="title function_">findOne</span>(&#123;</span><br><span class="line">        <span class="attr">where</span>:&#123;<span class="attr">name</span>:name&#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="keyword">if</span>(existingFlavor)&#123;</span><br><span class="line">        <span class="keyword">return</span> existingFlavor</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">flavorRepository</span>.<span class="title function_">create</span>(&#123;name&#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 新增蛋糕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> <span class="variable">cake</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">create</span>(<span class="params"><span class="attr">createCakeDto</span>: <span class="title class_">CreateCakeDto</span></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> flavors = <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(</span><br><span class="line">          createCakeDto.<span class="property">flavors</span>.<span class="title function_">map</span>(<span class="function"><span class="params">name</span>=&gt;</span><span class="variable language_">this</span>.<span class="title function_">preloadFlavorByName</span>(name))</span><br><span class="line">  )</span><br><span class="line">  <span class="keyword">const</span> cake = <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">    ...createCakeDto,</span><br><span class="line">    flavors</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">save</span>(cake)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 修改蛋糕</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> <span class="variable">id</span></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> <span class="variable">cake</span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">update</span>(<span class="params"><span class="attr">id</span>:<span class="built_in">number</span>, <span class="attr">updateCoffeeDto</span>:<span class="title class_">UpdateCakeDto</span></span>)&#123;</span><br><span class="line">  <span class="keyword">const</span> flavors = updateCoffeeDto.<span class="property">flavors</span> &amp;&amp; (<span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">all</span>(</span><br><span class="line">          updateCoffeeDto.<span class="property">flavors</span>.<span class="title function_">map</span>(<span class="function"><span class="params">name</span>=&gt;</span><span class="variable language_">this</span>.<span class="title function_">preloadFlavorByName</span>(name))</span><br><span class="line">  ))</span><br><span class="line">  <span class="comment">// preload 更新 找不到指定id返回undefined</span></span><br><span class="line">  <span class="keyword">const</span> cake = <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">preload</span>(&#123;</span><br><span class="line">    <span class="attr">id</span>:id,</span><br><span class="line">    ...updateCoffeeDto,</span><br><span class="line">    flavors</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">if</span>(!cake)&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NotFoundException</span>(<span class="string">`Cake #<span class="subst">$&#123;id&#125;</span> is not exit`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">save</span>(cake)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div></div></div>
+
+<h3 id="PaginationQueryDto"><a href="#PaginationQueryDto" class="headerlink" title="PaginationQueryDto"></a>PaginationQueryDto</h3><div class="tag-plugin colorful note" ><div class="title"><strong><p>分页查询</p>
+</strong></div><div class="body"><ol><li>为分页查询参数创建dto</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nest g class common/dto/pagination-query.dto --no-spec</span><br></pre></td></tr></table></figure><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">IsOptional</span>, <span class="title class_">IsPositive</span> &#125; <span class="keyword">from</span> <span class="string">&quot;class-validator&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123;<span class="title class_">Type</span>&#125; <span class="keyword">from</span> <span class="string">&#x27;class-transformer&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">PaginationQueryDto</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@IsOptional</span>()</span><br><span class="line">    <span class="meta">@IsPositive</span>() <span class="comment">// 正数</span></span><br><span class="line">    <span class="comment">// @Type(()=&gt;Number) // 强制转换为Number类型</span></span><br><span class="line">    <span class="attr">limit</span>: <span class="built_in">number</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@IsOptional</span>()</span><br><span class="line">    <span class="meta">@IsPositive</span>()</span><br><span class="line">    <span class="comment">// @Type(()=&gt;Number)</span></span><br><span class="line">    <span class="attr">offset</span>: <span class="built_in">number</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以在ValidationPipe中，配置强制类型转换：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">useGlobalPipes</span>(<span class="keyword">new</span> <span class="title class_">ValidationPipe</span>(&#123;</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">  <span class="attr">transformOptions</span>:&#123;</span><br><span class="line">    <span class="attr">enableImplicitConversion</span>: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)) </span><br></pre></td></tr></table></figure><ol start="2"><li>修改controller和service中查询配置</li></ol><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询所有蛋糕</span></span><br><span class="line"><span class="meta">@Get</span>(<span class="string">&#x27;getMenu&#x27;</span>)</span><br><span class="line"><span class="title function_">getMenu</span>(<span class="params"><span class="meta">@Query</span>() <span class="attr">paginationQueryDto</span>:<span class="title class_">PaginationQueryDto</span></span>)&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeService</span>.<span class="title function_">findAll</span>(paginationQueryDto)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 查找全部</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title function_">findAll</span>(<span class="params"><span class="attr">paginationQueryDto</span>: <span class="title class_">PaginationQueryDto</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> &#123;limit, offset&#125; = paginationQueryDto</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">find</span>(&#123;</span><br><span class="line">        <span class="attr">relations</span>: [<span class="string">&#x27;flavors&#x27;</span>], <span class="comment">// 配置收集flavors</span></span><br><span class="line">        <span class="attr">skip</span>: offset, <span class="comment">// 页数 </span></span><br><span class="line">        <span class="attr">take</span>: limit, <span class="comment">// 页大小</span></span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="Transaction-事务"><a href="#Transaction-事务" class="headerlink" title="Transaction 事务"></a>Transaction 事务</h2><div class="tag-plugin colorful note" ><div class="body"><p>事务：一组操作作为一个整体，要么全部执行成功，要么全部不执行</p><p>使用事务控制，在service中声明typeorm.DataSource类属性：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 关联数据库</span></span><br><span class="line"><span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">    <span class="comment">//...</span></span></span><br><span class="line"><span class="params">    <span class="keyword">private</span> <span class="keyword">readonly</span> <span class="attr">connection</span>: <span class="title class_">DataSource</span>,</span></span><br><span class="line"><span class="params"></span>)&#123;&#125;</span><br></pre></td></tr></table></figure><p>使用QueryRunner和try&#x2F;catch&#x2F;finally进行事务处理：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐蛋糕</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">recommendCake</span>(<span class="params"><span class="attr">cake</span>: <span class="title class_">Cake</span></span>)&#123;</span><br><span class="line">    <span class="keyword">const</span> queryRunner = <span class="variable language_">this</span>.<span class="property">connection</span>.<span class="title function_">createQueryRunner</span>();</span><br><span class="line">    <span class="keyword">await</span> queryRunner.<span class="title function_">connect</span>();</span><br><span class="line">    <span class="keyword">await</span> queryRunner.<span class="title function_">startTransaction</span>();</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        cake.<span class="property">recommendations</span>++</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">preload</span>(cake)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">cakeRepository</span>.<span class="title function_">save</span>(cake)</span><br><span class="line">        <span class="keyword">const</span> recommendEvent = <span class="keyword">new</span> <span class="title class_">Event</span>()</span><br><span class="line">        recommendEvent.<span class="property">name</span> = <span class="string">&#x27;recommend_cake&#x27;</span></span><br><span class="line">        recommendEvent.<span class="property">type</span> = <span class="string">&#x27;cake&#x27;</span></span><br><span class="line">        recommendEvent.<span class="property">payload</span> = &#123;<span class="attr">cakeId</span>: cake.<span class="property">id</span>&#125;</span><br><span class="line">        <span class="keyword">await</span> queryRunner.<span class="title function_">commitTransaction</span>()</span><br><span class="line">    &#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">        <span class="comment">// 回滚事务</span></span><br><span class="line">        <span class="keyword">await</span> queryRunner.<span class="title function_">rollbackTransaction</span>()</span><br><span class="line">    &#125;<span class="keyword">finally</span>&#123;</span><br><span class="line">        <span class="keyword">await</span> queryRunner.<span class="title function_">release</span>()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> cake</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div></div>
+
+<h2 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h2><div class="tag-plugin colorful note" ><div class="body"><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7387662864121020454">迁移报错解决方法</a></p><p>首先需要在根目录下创建ormconfig.ts文件：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">DataSource</span> &#125; <span class="keyword">from</span> <span class="string">&#x27;typeorm&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> connectionSource = <span class="keyword">new</span> <span class="title class_">DataSource</span>(&#123;</span><br><span class="line">    <span class="comment">// migrationsTableName: &#x27;migrations&#x27;,</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">    <span class="attr">host</span>: <span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line">    <span class="attr">port</span>: <span class="number">5432</span>,</span><br><span class="line">    <span class="attr">username</span>: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">    <span class="attr">password</span>: <span class="string">&#x27;ashley122&#x27;</span>,</span><br><span class="line">    <span class="attr">database</span>: <span class="string">&#x27;postgres&#x27;</span>,</span><br><span class="line">    <span class="attr">entities</span>: [<span class="string">&#x27;dist/**/*.entity.js&#x27;</span>],</span><br><span class="line">    <span class="attr">migrations</span>: [<span class="string">&#x27;dist/migrations/*.js&#x27;</span>],</span><br><span class="line">    <span class="attr">subscribers</span>:[<span class="string">&#x27;src/subscriber/**/*.ts&#x27;</span>]</span><br><span class="line">&#125;); </span><br></pre></td></tr></table></figure><ul><li>create 创建迁移脚本：</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typeorm migration:create ./src/migrations/CoffeeRefactor  </span><br></pre></td></tr></table></figure><ul><li>generate 生成迁移脚本</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typeorm migration:generate ./src/migrations/CoffeeRefactor -d ./dist/ormconfig.js</span><br></pre></td></tr></table></figure><ul><li>run 运行迁移脚本</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typeorm migration:run -d ./dist/ormconfig.js</span><br></pre></td></tr></table></figure><ul><li>revert 恢复</li></ul><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx typeorm migration:revert -d ./dist/ormconfig.js</span><br></pre></td></tr></table></figure><p>对要修改的表对应的ORM进行修改，<br>再在生成的迁移文件中进行表操作：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 实体类描述符</span></span><br><span class="line"><span class="meta">@Entity</span>(<span class="string">&#x27;cake&#x27;</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Cake</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="comment">// 将name表段重命名为label</span></span><br><span class="line">  <span class="meta">@Column</span>()</span><br><span class="line">  <span class="attr">label</span>: <span class="built_in">string</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MigrationInterface</span>, <span class="title class_">QueryRunner</span> &#125; <span class="keyword">from</span> <span class="string">&quot;typeorm&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">CakeRefactor1720149725474</span> <span class="keyword">implements</span> <span class="title class_">MigrationInterface</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">async</span> <span class="title function_">up</span>(<span class="attr">queryRunner</span>: <span class="title class_">QueryRunner</span>): <span class="title class_">Promise</span>&lt;<span class="built_in">void</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">await</span> queryRunner.<span class="title function_">query</span>(</span><br><span class="line">            <span class="string">`ALERT TABLE &quot;cake&quot; RENAME COLUMN &quot;name&quot; TO &quot;label&quot;`</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">async</span> <span class="title function_">down</span>(<span class="attr">queryRunner</span>: <span class="title class_">QueryRunner</span>): <span class="title class_">Promise</span>&lt;<span class="built_in">void</span>&gt; &#123;</span><br><span class="line">        <span class="keyword">await</span> queryRunner.<span class="title function_">query</span>(</span><br><span class="line">            <span class="string">`ALERT TABLE &quot;cake&quot; RENAME COLUMN &quot;label&quot; TO &quot;name&quot;`</span></span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></div></div>
+
+
+<h2 id="依赖注入-Dependency-Injection"><a href="#依赖注入-Dependency-Injection" class="headerlink" title="依赖注入 Dependency Injection"></a>依赖注入 Dependency Injection</h2><h2 id="应用配置-Application-Configuration"><a href="#应用配置-Application-Configuration" class="headerlink" title="应用配置 Application Configuration"></a>应用配置 Application Configuration</h2><h2 id="Next其它功能模块"><a href="#Next其它功能模块" class="headerlink" title="Next其它功能模块"></a>Next其它功能模块</h2><h3 id="Exception-Filters-异常过滤器"><a href="#Exception-Filters-异常过滤器" class="headerlink" title="Exception Filters 异常过滤器"></a>Exception Filters 异常过滤器</h3><div class="tag-plugin colorful note" ><div class="body"><p>Exception Filters用于处理应用中可能出现的异常</p></div></div>
+
+<h3 id="Pipes-管道"><a href="#Pipes-管道" class="headerlink" title="Pipes 管道"></a>Pipes 管道</h3><div class="tag-plugin colorful note" ><div class="body"><p>Pipes用于对输入的数据进行验证&#x2F;转换</p></div></div>
+
+<h3 id="Guards-守卫"><a href="#Guards-守卫" class="headerlink" title="Guards 守卫"></a>Guards 守卫</h3><div class="tag-plugin colorful note" ><div class="body"><p>Guards用于对访问的用户进行身份验证</p></div></div>
+
+<h3 id="Interceptors-拦截器"><a href="#Interceptors-拦截器" class="headerlink" title="Interceptors 拦截器"></a>Interceptors 拦截器</h3><div class="tag-plugin colorful note" ><div class="body"><p>Interceptors用于在接收到请求之前进行一些特殊操作</p></div></div>
+
+</article>
+<div class="article-footer">
+    <section id="references">
+      <div class="header"><span>参考资料</span></div>
+      <div class="body">
+        <ul>
+        <li class="post-title">
+          <p><a href=""></a></p>
+
+        </li>
+        </ul>
+      </div>
+    </section>
+    
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文产自🐙足八桑🐙肚子里了剩无几的墨水，转载请注明出处</p>
+</div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://puyixiu.github.io/2024/07/01/NestJs/" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://puyixiu.github.io/2024/07/01/NestJs/&title=NestJs - Ashikachi&pics=/images/covers/java1.jpg&summary=官方基础课程（快速体验）快速创建nest项目全局安装nest1npm i -g nest快速创建nest项目1nest new创建出来目录结构：main.js 主入口app.module.ts 创建的控制器会被controllers集..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=NestJs - Ashikachi&amp;body=https://puyixiu.github.io/2024/07/01/NestJs/"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://puyixiu.github.io/2024/07/01/NestJs/"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2024/09/19/FrontDevEnv/">前端项目工程化配置指南</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2024/06/28/ArkTs/">HarmonyOS ArkTS 开发体验</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>相关内容</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="\2024\04\01\BlobVideoUrl\" title="Web Video 使用问题记录"><span class="title">Web Video 使用问题记录</span><span class="excerpt">fetch + video blob url</span></a><a class="item" href="\2024\03\30\Electron\" title="Electron"><span class="title">Electron</span><span class="excerpt">electron学习记录</span></a><a class="item" href="\2024\03\28\ElectronEgg\" title="electron-egg + vue3 + vite 实现桌面应用"><span class="title">electron-egg + vue3 + vite 实现桌面应用</span><span class="excerpt">使用electron-egg跨平台打包的桌面应用</span></a><a class="item" href="\2024\09\19\FrontDevEnv\" title="前端项目工程化配置指南"><span class="title">前端项目工程化配置指南</span><span class="excerpt">包括如下配置内容（开发使用的IDE配置、git规范化配置、webpack配置、React组件库和函数库的搭建）</span></a><a class="item" href="\2024\03\25\AliECS\" title="云服务器使用和服务部署（阿里云ECS+域名注册+SSL证书）"><span class="title">云服务器使用和服务部署（阿里云ECS+域名注册+SSL证书）</span><span class="excerpt">第一次申请阿里云服务器——3个月额度的免费版，用nginx部署了几个纯前端的服务，之后又在阿里云买了个域名</span></a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="PUYIXIU/gitalk-comments" issue-term="pathname" theme="preferred-color-scheme" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Ashikachi</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%88%9B%E5%BB%BAnest%E9%A1%B9%E7%9B%AE"><span class="toc-text">快速创建nest项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8-Controller"><span class="toc-text">控制器 Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1-Service-Provider"><span class="toc-text">服务 Service|Provider</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97-Module"><span class="toc-text">模块 Module</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DTO"><span class="toc-text">DTO</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker"><span class="toc-text">Docker</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ORM"><span class="toc-text">ORM</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Relation"><span class="toc-text">Relation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PaginationQueryDto"><span class="toc-text">PaginationQueryDto</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Transaction-%E4%BA%8B%E5%8A%A1"><span class="toc-text">Transaction 事务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB"><span class="toc-text">数据库迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5-Dependency-Injection"><span class="toc-text">依赖注入 Dependency Injection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E9%85%8D%E7%BD%AE-Application-Configuration"><span class="toc-text">应用配置 Application Configuration</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Next%E5%85%B6%E5%AE%83%E5%8A%9F%E8%83%BD%E6%A8%A1%E5%9D%97"><span class="toc-text">Next其它功能模块</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Exception-Filters-%E5%BC%82%E5%B8%B8%E8%BF%87%E6%BB%A4%E5%99%A8"><span class="toc-text">Exception Filters 异常过滤器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Pipes-%E7%AE%A1%E9%81%93"><span class="toc-text">Pipes 管道</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Guards-%E5%AE%88%E5%8D%AB"><span class="toc-text">Guards 守卫</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interceptors-%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-text">Interceptors 拦截器</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.bootcdn.net/ajax/libs/vanilla-lazyload/19.1.3/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #beaudar');
+  util.viewportLazyload(el, load_beaudar, true);
+
+  function load_beaudar() {
+    if (!el) return;
+    try {
+      el.innerHTML = '';
+    } catch (error) {
+      console.error(error);
+    }
+    const script = document.createElement('script');
+    script.src = 'https://beaudar.lipk.org/client.js';
+    script.async = true;
+    for (const key of Object.keys(el.attributes)) {
+      const attr = el.attributes[key];
+      if (['class', 'id'].includes(attr.name) === false) {
+        script.setAttribute(attr.name, attr.value);
+      }
+    }
+    el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/flying-pages/2.1.2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script async src="https://gcore.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script><script async src="/scripts/test.js"></script>
+</div></body></html>

@@ -1,0 +1,1012 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1" theme-name="Stellar" theme-version="1.33.1">
+  
+  
+  <meta name="generator" content="Hexo 7.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  <title>AI：Cursor参考文档 - Ashikachi</title>
+
+  
+  <meta name="description" content="关于AI的学习笔记">
+  
+  
+
+  <!-- feed -->
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.33.1">
+
+
+  
+    <link rel="shortcut icon" href="/images/base/favicon.png">
+  
+
+  
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Website","@id":"https://puyixiu.github.io/wiki/AI/cursor-01-doc/","author":{"@type":"Person","name":"Ashikachi","sameAs":[]},"name":"Cursor参考文档","description":"核心 Core快速开始 Quickstart概念 ConceptsTab代码自动补全 &#x2F; Autocomplete with Tab操作快捷键接受建议Tab拒绝Esc逐词接受Ctrl+Arrow-Right🔍工作原理上下文窗口中的代码被加密发送到后端后端解密后读取上下文Cursor Tab模型 预测代码建议，并返回给客户端在编辑器中显示内联编辑选中内容 &#x2F; Inline...","url":"https://puyixiu.github.io/wiki/AI/cursor-01-doc/"}</script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+</head>
+<body>
+
+
+
+<div class="l_body content" id="start" layout="page" type="tech" ><aside class="l_left"><div class="sidebg"></div><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><div class="icon"><img no-lazy class="icon" src="/images/icons/ai-logo.jpg" onerror="javascript:this.classList.add('error');this.src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/image/2659360.svg';"></div><a class="title" href="/wiki/AI/ai-02-ClaudeCode"><div class="main">AI</div><div class="sub cap">AI知识库</div></a></div></header>
+
+<div class="nav-area">
+
+<nav class="menu dis-select"><a class="nav-item" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item active" title="文档" href="/wiki/" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="探索" href="/notes/" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a><a class="nav-item" title="社交" href="/friends/" style="color:#F44336"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="m13.629 20.472l-.542.916c-.483.816-1.69.816-2.174 0l-.542-.916c-.42-.71-.63-1.066-.968-1.262c-.338-.197-.763-.204-1.613-.219c-1.256-.021-2.043-.098-2.703-.372a5 5 0 0 1-2.706-2.706C2 14.995 2 13.83 2 11.5v-1c0-3.273 0-4.91.737-6.112a5 5 0 0 1 1.65-1.651C5.59 2 7.228 2 10.5 2h3c3.273 0 4.91 0 6.113.737a5 5 0 0 1 1.65 1.65C22 5.59 22 7.228 22 10.5v1c0 2.33 0 3.495-.38 4.413a5 5 0 0 1-2.707 2.706c-.66.274-1.447.35-2.703.372c-.85.015-1.275.022-1.613.219c-.338.196-.548.551-.968 1.262" opacity=".5"/><path fill="currentColor" d="M10.99 14.308c-1.327-.978-3.49-2.84-3.49-4.593c0-2.677 2.475-3.677 4.5-1.609c2.025-2.068 4.5-1.068 4.5 1.609c0 1.752-2.163 3.615-3.49 4.593c-.454.335-.681.502-1.01.502c-.329 0-.556-.167-1.01-.502"/></svg></a></nav>
+</div>
+<div class="widgets">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" data-filter="/wiki/AI/" placeholder="在 AI 中搜索..."></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<widget class="widget-wrapper doc-tree post-list"><div class="widget-header dis-select"><span class="name">AI知识库</span></div><div class="widget-body fs14"><a class="link" href="/wiki/AI/ai-02-ClaudeCode/#start"><span class="toc-text">Claud Code</span></a><a class="link" href="/wiki/AI/ai-03-Trae/"><span class="toc-text">Trae</span></a></div><div class="widget-header dis-select"><span class="name">Cursor</span></div><div class="widget-body fs14"><a class="link active" href="/wiki/AI/cursor-01-doc/"><span class="toc-text">Cursor参考文档</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="link" href="/wiki/AI/cursor-02-guides/"><span class="toc-text">Cursor使用指南</span></a></div></widget>
+
+
+</div>
+<footer class="footer dis-select"><div class="social-wrap"><a class="social" href="https://github.com/puyixiu" target="_blank" rel="external nofollow noopener noreferrer"><svg aria-hidden="true" role="img" class="color-icon-primary" viewBox="0 0 16 16" width="1em" height="1em" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg></a><a class="social" href="https://gitee.com/ElectricDuck" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118295736" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5012" width="16" height="16"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="5013"></path></svg></a><a class="social" href="https://juejin.cn/user/587554333405684/posts" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118714280" class="icon" viewBox="0 0 1316 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5098" width="16" height="16"><path d="M643.181714 247.698286l154.916572-123.172572L643.181714 0.256 643.072 0l-154.660571 124.269714 154.660571 123.245715 0.109714 0.182857z m0 388.461714h0.109715l399.579428-315.245714-108.361143-87.04-291.218285 229.888h-0.146286l-0.109714 0.146285L351.817143 234.093714l-108.251429 87.04 399.433143 315.136 0.146286-0.146285z m-0.146285 215.552l0.146285-0.146286 534.893715-422.034285 108.397714 87.04-243.309714 192L643.145143 1024 10.422857 525.056 0 516.754286l108.251429-86.893715L643.035429 851.748571z" fill="#1E80FF" p-id="5099"></path></svg></a><a class="social" href="https://codepen.io/jnkzhatk-the-builder" target="_blank" rel="external nofollow noopener noreferrer"><svg t="1740118737052" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="6208" width="16" height="16"><path d="M911.7 385.3l-0.3-1.5c-0.2-1-0.3-1.9-0.6-2.9-0.2-0.6-0.4-1.1-0.5-1.7-0.3-0.8-0.5-1.7-0.9-2.5-0.2-0.6-0.5-1.1-0.8-1.7-0.4-0.8-0.8-1.5-1.2-2.3-0.3-0.5-0.6-1.1-1-1.6-0.8-1.2-1.7-2.4-2.6-3.6-0.5-0.6-1.1-1.3-1.7-1.9-0.4-0.5-0.9-0.9-1.4-1.3-0.6-0.6-1.3-1.1-1.9-1.6-0.5-0.4-1-0.8-1.6-1.2-0.2-0.1-0.4-0.3-0.6-0.4L531.1 117.8c-11.5-7.7-26.6-7.7-38.1 0L127.3 361.3c-0.2 0.1-0.4 0.3-0.6 0.4-0.5 0.4-1 0.8-1.6 1.2-0.7 0.5-1.3 1.1-1.9 1.6-0.5 0.4-0.9 0.9-1.4 1.3-0.6 0.6-1.2 1.2-1.7 1.9-1 1.1-1.8 2.3-2.6 3.6-0.3 0.5-0.7 1-1 1.6-0.4 0.7-0.8 1.5-1.2 2.3-0.3 0.5-0.5 1.1-0.8 1.7-0.3 0.8-0.6 1.7-0.9 2.5-0.2 0.6-0.4 1.1-0.5 1.7-0.2 0.9-0.4 1.9-0.6 2.9l-0.3 1.5c-0.2 1.5-0.3 3-0.3 4.5v243.5c0 1.5 0.1 3 0.3 4.5l0.3 1.5c0.2 1 0.4 1.9 0.6 2.9 0.2 0.6 0.3 1.1 0.5 1.7 0.3 0.9 0.6 1.7 0.9 2.5 0.2 0.6 0.5 1.1 0.8 1.7 0.4 0.8 0.7 1.5 1.2 2.3 0.3 0.5 0.6 1.1 1 1.6 0.5 0.7 0.9 1.4 1.5 2.1l1.2 1.5c0.5 0.6 1.1 1.3 1.7 1.9 0.4 0.5 0.9 0.9 1.4 1.3 0.6 0.6 1.3 1.1 1.9 1.6 0.5 0.4 1 0.8 1.6 1.2 0.2 0.1 0.4 0.3 0.6 0.4L493 905.7c5.6 3.8 12.3 5.8 19.1 5.8 6.6 0 13.3-1.9 19.1-5.8l365.6-243.5c0.2-0.1 0.4-0.3 0.6-0.4 0.5-0.4 1-0.8 1.6-1.2 0.7-0.5 1.3-1.1 1.9-1.6 0.5-0.4 0.9-0.9 1.4-1.3 0.6-0.6 1.2-1.2 1.7-1.9l1.2-1.5 1.5-2.1c0.3-0.5 0.7-1 1-1.6 0.4-0.8 0.8-1.5 1.2-2.3 0.3-0.5 0.5-1.1 0.8-1.7 0.3-0.8 0.6-1.7 0.9-2.5 0.2-0.5 0.4-1.1 0.5-1.7 0.3-0.9 0.4-1.9 0.6-2.9l0.3-1.5c0.2-1.5 0.3-3 0.3-4.5V389.8c-0.3-1.5-0.4-3-0.6-4.5zM546.4 210.5l269.4 179.4-120.3 80.4-149-99.6V210.5z m-68.8 0v160.2l-149 99.6-120.3-80.4 269.3-179.4zM180.7 454.1l86 57.5-86 57.5v-115z m296.9 358.5L208.3 633.2l120.3-80.4 149 99.6v160.2zM512 592.8l-121.6-81.2L512 430.3l121.6 81.2L512 592.8z m34.4 219.8V652.4l149-99.6 120.3 80.4-269.3 179.4zM843.3 569l-86-57.5 86-57.5v115z" p-id="6209"></path></svg></a></div></footer>
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top"><img class="lazy bg" data-src="/images/covers/cursor_bg.jpg">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki/">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/AI/ai-02-ClaudeCode/">AI</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-08-09T21:19:07.283Z">2025-08-10</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Cursor参考文档</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><h2 id="核心-Core"><a href="#核心-Core" class="headerlink" title="核心 Core"></a>核心 Core</h2><div class="tag-plugin colorful note" child="tabs"><div class="body"><div class="tag-plugin tabs"id="tab_21"><div class="nav-tabs"><div class="tab active"><a href="#tab_21-1">快速开始 Quickstart</a></div><div class="tab"><a href="#tab_21-2">概念 Concepts</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_21-1"><div class="tag-plugin colorful folders" ><details class="folder" index="0"><summary><p>Tab代码自动补全 &#x2F; Autocomplete with Tab</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">操作</th><th align="left">快捷键</th></tr></thead><tbody><tr><td align="left">接受建议</td><td align="left"><kbd>Tab</kbd></td></tr><tr><td align="left">拒绝</td><td align="left"><kbd>Esc</kbd></td></tr><tr><td align="left">逐词接受</td><td align="left"><kbd>Ctrl+Arrow-Right</kbd></td></tr></tbody></table></div></div><div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p></strong></div><div class="body"><ul><li>上下文窗口中的代码被加密发送到后端</li><li>后端解密后读取上下文</li><li><mark class="tag-plugin colorful mark" color="yellow">Cursor Tab模型</mark> 预测代码建议，并返回给客户端在编辑器中显示</li></ul></div></div></div></details><details class="folder" index="1"><summary><p>内联编辑选中内容 &#x2F; Inline Edit a selection</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">操作</th><th align="left">快捷键</th></tr></thead><tbody><tr><td align="left">打开内联浮窗</td><td align="left"><kbd>Ctrl+K</kbd></td></tr><tr><td align="left">切换输入焦点</td><td align="left"><kbd>Ctrl+Shift+K</kbd></td></tr><tr><td align="left">提交</td><td align="left"><kbd>Enter</kbd></td></tr><tr><td align="left">取消</td><td align="left"><kbd>Ctrl+Shift+BackSpace</kbd></td></tr><tr><td align="left">快速提问</td><td align="left"><kbd>Alt+Enter</kbd></td></tr><tr><td align="left">发送到聊天</td><td align="left"><kbd>Ctrl+L</kbd></td></tr></tbody></table></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>内联模式</p></strong></div><div class="body"><table><thead><tr><th align="left">模式</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">Edit Selection &#x2F; 选区编辑</td><td align="left">针对选中代码修改</td></tr><tr><td align="left">Edit Full File &#x2F; 全文件编辑</td><td align="left">整个文件范围的更改</td></tr><tr><td align="left">Quick Question &#x2F; 快速问答</td><td align="left">针对选中代码提问</td></tr><tr><td align="left">Send to Chat &#x2F; 发送到聊天</td><td align="left">发送到聊天，支持更高级的Agent功能</td></tr></tbody></table></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>默认上下文</p></strong></div><div class="body"><p>内联模式也支持使用 <mark class="tag-plugin colorful mark" color="yellow">@符号</mark> ，添加默认上下文。</p><p>上下文类型可以是：</p><ul><li>相关文件 &#x2F; @Files</li><li>最近查看的代码 &#x2F; @Code</li><li>相关信息 &#x2F; @Docs&amp;Web</li><li>相关代码定义 &#x2F; @Definitions</li></ul></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>终端内联编辑</p></strong></div><div class="body"><ul><li>在 <mark class="tag-plugin colorful mark" color="green">终端</mark> 中按快捷键 <kbd>Ctrl+K</kbd></li><li>描述希望执行的操作，可以生成相应的命令</li></ul></div></div></div></details><details class="folder" index="2"><summary><p>与Agent聊天 &#x2F; Chat with Agent</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><blockquote><p>Cursor上限和下限跨度最大的功能</p></blockquote><ul><li>上到串通工作流</li><li>下到联网查问题</li><li>高到MCP上下文</li><li>低到CMD控制台</li></ul></div></div></div></details><details class="folder" index="3"><summary><p>Agent后台处理 &#x2F; Handoff word to Background Agent</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>用户和Cursor异步并行工作</li><li>可以通过编辑器或外部集成（如Slack）访问</li><li><del>目前还没有用到</del>，有需要参考<a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/background-agent">文档</a></li></ul></div></div></div></details><details class="folder" index="4"><summary><p>编写规则 &#x2F; Write a rule</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>创建  <mark class="tag-plugin colorful mark" color="yellow">mdc文件</mark> </li><li>定义一些规则，<wavy>相当于通用持久记忆</wavy></li></ul></div></div></div></details><details class="folder" index="5"><summary><p>MCP服务器 &#x2F; Set up an MCP server</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>集成外部工具的模型上下文协议</li><li>连接数据库、API和文档源</li></ul></div></div></div></details></div></div><div class="tab-pane" id="tab_21-2"><div class="tag-plugin colorful folders" ><details class="folder" index="0"><summary><p>Tab</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li><wavy>自动补全多行和代码块</wavy></li><li>在文件内和跨文件跳转到下一个自动补全建议</li></ul></div></div></div></details><details class="folder" index="1"><summary><p>Agent</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>Agent相当于一个虚拟助理，<wavy>能够根据目标、规则和环境做出决策和行动</wavy></li><li>对于Cursor Agent，环境就是能够读取到的代码和文件内容</li></ul></div></div></div></details><details class="folder" index="2"><summary><p>Background Agent</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>一边工作一边异步运行任务</li><li>可以通过编辑器或外部集成（如Slack）访问</li></ul></div></div></div></details><details class="folder" index="3"><summary><p>Inline Edit</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>精简版Agent</li><li>针对选中代码块进行编辑</li></ul></div></div></div></details><details class="folder" index="4"><summary><p>Chat</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>传统对话式智能体</p></div></div></div></details><details class="folder" index="5"><summary><p>Rules</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>定义AI行为的自定义指令。</li><li>设置编码标准、框架偏好</li></ul></div></div></div></details><details class="folder" index="6"><summary><p>Memory</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li><wavy>需要持久存储的上下文和对话</wavy></li><li>是另一种形式的rules</li></ul></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>记忆如何创建</p></strong></div><div class="body"><div class="tag-plugin grid" bg="card" style="grid-template-columns: repeat(2, 1fr);"><div class="cell" style="">    <p><strong>Sidecar观察</strong></p><ul><li><wavy>有一个独立的模型，观察对话并自动提取记忆</wavy></li><li>在后台被动进行</li><li>后台生成的记忆需要用户批准才能保存，确保对内容的信任和控制</li></ul>    </div>    <div class="cell" style="">    <p><strong>工具调用</strong></p><ul><li>当用户明确要求Agent记住某些内容</li><li>或当它注意到应该为未来的会话保留重要信息时</li><li>Agent可以直接使用工具调用创建记忆</li></ul>    </div>    </div><div class="tag-plugin colorful note" ><div class="title">管理记忆</div><div class="body"><p>Cursor Setting &gt; Rules 中管理记忆</p></div></div></div></div></div></details><details class="folder" index="7"><summary><p>Indexing</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>当打开一个项目时，Cursor开始学习该项目的代码，即“索引”</li><li>打开项目时，索引自动开始</li><li>对代码库进行语义分析，支持代码搜索、引用查找和上下文感知建议</li></ul></div></div></div></details><details class="folder" index="8"><summary><p>MCP</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>集成外部工具的模型上下文协议</li><li>连接数据库、API和文档源</li></ul></div></div></div></details><details class="folder" index="9"><summary><p>模型</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>用于代码生成不同的AI模型</li><li>每个模型具有不同的速度和能力特性</li></ul></div></div></div></details></div></div></div></div></div></div>
+
+<h3 id="核心：🤖智能体"><a href="#核心：🤖智能体" class="headerlink" title="核心：🤖智能体"></a>核心：🤖智能体</h3><div class="tag-plugin colorful note" ><div class="body"><div class="tag-plugin colorful folders" ><details class="folder" index="0"><summary><p>模式 Modes</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><div class="tag-plugin grid" bg="card" style="grid-template-columns: repeat(2, 1fr);"><div class="cell" style="">    <p><strong>Agent</strong></p><ul><li>自主探索、多文件编辑</li><li>权限：<wavy>所有工具</wavy></li></ul>    </div>    <div class="cell" style="">    <p><strong>Ask</strong></p><ul><li>只读探索、无自动更改</li><li>权限：<wavy>搜索工具</wavy></li></ul>    </div>    <div class="cell" style="">    <p><strong>Manual</strong></p><ul><li>直接文件编辑、具有明确控制</li><li>权限：<wavy>编辑工具</wavy></li><li>只编辑明确选择的文件</li><li>在确切知道要编辑什么时效果最佳，选择正确的文件并给出清晰的指令</li></ul>    </div>    <div class="cell" style="">    <p><strong>Custom</strong></p><ul><li>用户定义的功能</li><li>对特定的工具组合和指令创建自定义模式</li></ul>    </div>    </div></div></div></div></details><details class="folder" index="1"><summary><p>工具 Tools</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>在Custom模式下，智能体的这些工具可以被自由的启用&#x2F;禁用</p></div></div></div></details><details class="folder" index="2"><summary><p>应用更改 Apply Changes</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>应用、接受或拒绝聊天中的代码建议</p></div></div><div class="tag-plugin colorful note" ><div class="title"><strong><p>原理简述</p></strong></div><div class="body"><p><wavy>Apply是一个专门的Cursor模型</wavy></p><ul><li>专门接收Agent生成的代码，并集成到文件中</li><li>Apply不生成代码，只负责集成</li><li>可以处理多个文件和大型代码库的更改</li></ul></div></div></div></details><details class="folder" index="3"><summary><p>审查差异 Review Diffs</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>审查和管理由AI代理生成的代码更改</p><ul><li>逐文件审查</li><li>选择性接受</li><li>审查更改（review changes）查看更改的完整差异</li></ul></div></div></div></details><details class="folder" index="4"><summary><p>聊天标签页 Chat Tabs</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>可以同时运行多个对话</li><li><wavy>每个标签页都维护自己的上下文、历史记录和模型选择</wavy></li></ul></div></div></div></details><details class="folder" index="5"><summary><p>检查点 Checkpoints</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>自动快照跟踪Agent更改，可以进行restore恢复</p></div></div></div></details><details class="folder" index="6"><summary><p>终端集成 Terminal Integration</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>可以使用Agent执行终端命令、监控输出并处理多步骤流程</li><li>为可信工作流配置自动运行</li></ul></div></div></div></details><details class="folder" index="7"><summary><p>聊天历史 Chat History</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>回顾之前讨论、跟踪编码会话、参考早期聊天上下文</p></div></div></div></details><details class="folder" index="8"><summary><p>导出聊天 Export Chats</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>导出为  <mark class="tag-plugin colorful mark" color="yellow">markdown格式</mark> </li><li>与团队成员分享解决方案、或从编码会话中创建知识库</li></ul></div></div></div></details><details class="folder" index="9"><summary><p>规则 Rules</p></summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>可以使用rules，为Agent的行为定义自定义指令</li><li>有助于维护编码标准、强制执行模式、个性化Agent</li></ul></div></div></div></details></div></div></div>
+
+
+<div class="tag-plugin quot h4"><h4 class="content" id="智能体：💬聊天"><svg t="1754351910700" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7741" width="64" height="64"><path d="M640 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128H768c70.6944 0 128 57.3056 128 128v85.3248h85.3376a42.6624 42.6624 0 0 1 42.5984 40.3328L1024 384a42.6624 42.6624 0 0 1-42.6624 42.6624H896v128h85.3376a42.6624 42.6624 0 0 1 42.5984 40.32l0.064 2.3552A42.6624 42.6624 0 0 1 981.3376 640H896v128c0 70.6944-57.3056 128-128 128h-85.3376v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L640 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L597.3248 896H426.6624v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L384 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L341.3248 896H256c-70.6944 0-128-57.3056-128-128V640H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 597.3376a42.6624 42.6624 0 0 1 42.6624-42.6752H128v-128H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 384a42.6624 42.6624 0 0 1 42.6624-42.6624L128 341.3248V256c0-70.6944 57.3056-128 128-128h85.3248V42.6624A42.6624 42.6624 0 0 1 381.6704 0.064L384 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128h170.6624V42.6624A42.6624 42.6624 0 0 1 637.6704 0.064L640 0z m128 213.3376H256A42.6624 42.6624 0 0 0 213.3376 256v512A42.6624 42.6624 0 0 0 256 810.6624h512A42.6624 42.6624 0 0 0 810.6624 768V256A42.6624 42.6624 0 0 0 768 213.3376z m-128 128A42.6624 42.6624 0 0 1 682.6624 384v256A42.6624 42.6624 0 0 1 640 682.6624H384A42.6624 42.6624 0 0 1 341.3376 640V384A42.6624 42.6624 0 0 1 384 341.3376h256z m-42.6624 85.3248H426.6624v170.6752h170.6752V426.6624z" fill="#ffffff" p-id="7742"></path></svg><span class="text">智能体：💬聊天</span><span class="empty"></span></h4></div>
+
+<div class="tag-plugin colorful folders" ><details class="folder" index="0"><summary><p>标签页 Tabs</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li><p><strong>沙盒隔离：</strong> 每个标签页的对话历史、上下文、模型选择独立</p></li><li><p><strong>冲突：</strong> 多个标签页编辑相同的文件时，系统会提示解决冲突（和git merge相似）</p></li><li><p><strong>引用其他聊天记录：</strong> 使用 <mark class="tag-plugin colorful mark" color="yellow">Past Chats</mark> 来包含其他标签页或者之前绘画的上下文</p></li></ul></div></div><div class="tag-plugin colorful note" color="yellow"><div class="title"><strong><p>💡建议</p></strong></div><div class="body"><ul><li>每个标签页使用一个任务，提供清晰的初始描述</li><li>关闭已完成的标签页以保持工作区整洁</li></ul></div></div></div></details><details class="folder" index="1"><summary><p>检查点 Checkpoints</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li><strong>用途：</strong> 在Agent更改后保存和恢复之前的状态</li><li><strong>提示：</strong> 检查点不是版本控制，还是需要使用git来保存永久历史记录</li></ul></div></div><div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p></strong></div><div class="body"><ul><li>本地存储</li><li>仅跟踪Agent更改</li><li>自动清理（在当前会话和最近的历史记录中保存）</li></ul></div></div></div></details><details class="folder" index="2"><summary><p>导出 Export</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="title"><strong><p>导出内容（Markdown格式）</p></strong></div><div class="body"><ul><li>所有消息和响应</li><li>语法高亮代码块</li><li>文件引用和上下文</li><li>按时间顺序的对话流程</li></ul></div></div><div class="tag-plugin colorful note" color="yellow"><div class="title"><strong><p>💡注意</p></strong></div><div class="body"><p>导出时请检查敏感数据：<strong>API密钥、内部URL、专有代码、个人信息等</strong></p></div></div></div></details><details class="folder" index="3"><summary><p>复制 Duplicate</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>从对话中的任意点创建分支，选择  <mark class="tag-plugin colorful mark" color="cyan">Duplicate Chat</mark> </li><li>到该时间点的上下文会被保留，原始对话保持不变</li><li>两个聊天都维护各自独立的历史记录</li></ul></div></div></div></details><details class="folder" index="4"><summary><p>历史记录 History</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>历史聊天记录可以打开、删除、重命名</li><li>记录会存储在本机器 <mark class="tag-plugin colorful mark" color="yellow">SQLite数据库</mark> 中</li><li><strong>后台代理：</strong> 不在常规的历史记录中，而是存储在远程数据库中</li><li><strong>引用过往聊天记录：</strong> <mark class="tag-plugin colorful mark" color="cyan">@Past Chats</mark></li></ul></div></div></div></details><details class="folder" index="5"><summary><p>摘要功能 Summarization</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li>聊天中长对话的上下文管理</li><li><wavy>Cursor会自动摘要和管理上下文</wavy>，保持聊天的高效</li></ul></div></div><div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p></strong></div><div class="body"><ul><li>当对话变得越来越长时，Cursor会对比较旧的消息进行摘要（压缩）</li><li>对文件和文件夹，Cursor使用另一种处理方式：<wavy>智能压缩</wavy></li><li>Cursor会根据文件大小和可用上下文空间确定呈现它们的最佳方式</li></ul><p><strong>文件压缩的几种情况：</strong></p><div class="tag-plugin colorful note" ><div class="body"><div class="tag-plugin tabs"id="tab_22"><div class="nav-tabs"><div class="tab active"><a href="#tab_22-1">已压缩</a></div><div class="tab"><a href="#tab_22-2">显著压缩</a></div><div class="tab"><a href="#tab_22-3">未包含（警告）</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_22-1"><ul><li>压缩会向模型显示关键的结构元素，如函数签名、类、方法。</li><li>模型有需要时展开特定文件</li><li>最大化了对可用上下文窗口的有效利用</li></ul></div><div class="tab-pane" id="tab_22-2"><p>文件太大而无法完整包含，压缩也不行，模型只能获取到文件名</p></div><div class="tab-pane" id="tab_22-3"><p>项目太大无法包含在上下文窗口</p></div></div></div></div></div></div></div></div></details></div>
+
+
+<div class="tag-plugin quot h4"><h4 class="content" id="智能体：🧾规划"><svg t="1754351910700" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7741" width="64" height="64"><path d="M640 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128H768c70.6944 0 128 57.3056 128 128v85.3248h85.3376a42.6624 42.6624 0 0 1 42.5984 40.3328L1024 384a42.6624 42.6624 0 0 1-42.6624 42.6624H896v128h85.3376a42.6624 42.6624 0 0 1 42.5984 40.32l0.064 2.3552A42.6624 42.6624 0 0 1 981.3376 640H896v128c0 70.6944-57.3056 128-128 128h-85.3376v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L640 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L597.3248 896H426.6624v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L384 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L341.3248 896H256c-70.6944 0-128-57.3056-128-128V640H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 597.3376a42.6624 42.6624 0 0 1 42.6624-42.6752H128v-128H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 384a42.6624 42.6624 0 0 1 42.6624-42.6624L128 341.3248V256c0-70.6944 57.3056-128 128-128h85.3248V42.6624A42.6624 42.6624 0 0 1 381.6704 0.064L384 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128h170.6624V42.6624A42.6624 42.6624 0 0 1 637.6704 0.064L640 0z m128 213.3376H256A42.6624 42.6624 0 0 0 213.3376 256v512A42.6624 42.6624 0 0 0 256 810.6624h512A42.6624 42.6624 0 0 0 810.6624 768V256A42.6624 42.6624 0 0 0 768 213.3376z m-128 128A42.6624 42.6624 0 0 1 682.6624 384v256A42.6624 42.6624 0 0 1 640 682.6624H384A42.6624 42.6624 0 0 1 341.3376 640V384A42.6624 42.6624 0 0 1 384 341.3376h256z m-42.6624 85.3248H426.6624v170.6752h170.6752V426.6624z" fill="#ffffff" p-id="7742"></path></svg><span class="text">智能体：🧾规划</span><span class="empty"></span></h4></div>
+
+<div class="tag-plugin grid"  style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));"><div class="cell" style="">
+    <div class="tag-plugin colorful note" ><div class="title"><strong><p>Agent如何通过规划和管理复杂任务</p></strong></div><div class="body"><ul><li>提前规划</li><li>结构化的待办事项列表、消息队列</li></ul></div></div>
+    </div>
+    <div class="cell" style="">
+    <div class="tag-plugin colorful note" ><div class="title"><strong><p>🗒️Agent待办事项</p></strong></div><div class="body"><ul><li>将较长的任务分解为可管理的步骤</li><li>建立依赖关系？</li><li>结构化计划会随工作进展而更新</li></ul></div></div>
+    </div>
+    </div>
+
+
+
+<div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p>
+</strong></div><div class="body"><ul><li><wavy>自动为复杂任务创建待办事项列表</wavy></li><li>每个项目都可以依赖于其他任务</li><li>列表随工作进展实时更新</li><li>已完成的任务会自动标记为完成</li></ul></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>可见性</p>
+</strong></div><div class="body"><ul><li>方式1：显示在聊天界面中</li><li>方式2：<a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/slack">Slack集成显示？</a></li></ul></div></div>
+<div class="tag-plugin colorful note" color="yellow"><div class="title">💡注意</div><div class="body"><p>最好清楚地描述最终目标，让Agent了解完整范围，才能创建更准确的任务分解</p></div></div>
+<details class="tag-plugin colorful folding" ><summary><p>使用队列</p>
+</summary><div class="body"><ul> <li>当Agent正在工作时，输入下一个指令</li> <li>Enter将其添加到队列中</li> <li>消息按顺序显示在活动任务下方</li> <li>点击箭头可以重新排列队列消息</li> <li>Agent会在完成后按顺序处理它们</li> <li>覆盖队列：强制推送消息，会绕过队列立即执行</li> </ul> </div></details>
+
+
+
+<div class="tag-plugin quot h4"><h4 class="content" id="智能体：🔧工具"><svg t="1754351910700" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7741" width="64" height="64"><path d="M640 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128H768c70.6944 0 128 57.3056 128 128v85.3248h85.3376a42.6624 42.6624 0 0 1 42.5984 40.3328L1024 384a42.6624 42.6624 0 0 1-42.6624 42.6624H896v128h85.3376a42.6624 42.6624 0 0 1 42.5984 40.32l0.064 2.3552A42.6624 42.6624 0 0 1 981.3376 640H896v128c0 70.6944-57.3056 128-128 128h-85.3376v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L640 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L597.3248 896H426.6624v85.3376a42.6624 42.6624 0 0 1-40.32 42.5984L384 1024a42.6624 42.6624 0 0 1-42.6624-42.6624L341.3248 896H256c-70.6944 0-128-57.3056-128-128V640H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 597.3376a42.6624 42.6624 0 0 1 42.6624-42.6752H128v-128H42.6624a42.6624 42.6624 0 0 1-42.5984-40.32L0 384a42.6624 42.6624 0 0 1 42.6624-42.6624L128 341.3248V256c0-70.6944 57.3056-128 128-128h85.3248V42.6624A42.6624 42.6624 0 0 1 381.6704 0.064L384 0a42.6624 42.6624 0 0 1 42.6624 42.6624V128h170.6624V42.6624A42.6624 42.6624 0 0 1 637.6704 0.064L640 0z m128 213.3376H256A42.6624 42.6624 0 0 0 213.3376 256v512A42.6624 42.6624 0 0 0 256 810.6624h512A42.6624 42.6624 0 0 0 810.6624 768V256A42.6624 42.6624 0 0 0 768 213.3376z m-128 128A42.6624 42.6624 0 0 1 682.6624 384v256A42.6624 42.6624 0 0 1 640 682.6624H384A42.6624 42.6624 0 0 1 341.3376 640V384A42.6624 42.6624 0 0 1 384 341.3376h256z m-42.6624 85.3248H426.6624v170.6752h170.6752V426.6624z" fill="#ffffff" p-id="7742"></path></svg><span class="text">智能体：🔧工具</span><span class="empty"></span></h4></div>
+
+<div class="tag-plugin colorful folders" ><details class="folder" index="0"><summary><p>搜索 Search （搜索代码库&#x2F;网络以查找相关信息 ）</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">工具名</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">读取文件&#x2F;Read files</td><td align="left">最多250行，最大模式下为750行</td></tr><tr><td align="left">列出目录&#x2F;List directory</td><td align="left">只读取目录结构，不读取文件内容</td></tr><tr><td align="left">代码库&#x2F;Codebase</td><td align="left">在已索引代码库中执行语义搜索</td></tr><tr><td align="left">Grep</td><td align="left">在文件中搜索确切的关键词或模式</td></tr><tr><td align="left">搜索文件&#x2F;Search files</td><td align="left">使用模糊匹配按名称查找文件</td></tr><tr><td align="left">网络&#x2F;Web</td><td align="left">生成搜索查询并执行网络搜索</td></tr><tr><td align="left">获取规则&#x2F;Fetch rules</td><td align="left">根据类型和描述检索特定的规则</td></tr></tbody></table></div></div></div></details><details class="folder" index="1"><summary><p>编辑 Edit（对文件和代码库进行特定编辑）</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">工具名</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">编辑和重新应用&#x2F;Edit &amp; Reapply</td><td align="left">文件编辑并自动应用</td></tr><tr><td align="left">删除文件&#x2F;Delete file</td><td align="left">删除文件</td></tr></tbody></table></div></div></div></details><details class="folder" index="2"><summary><p>运行 Run（与终端进行交互）</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><ul><li><wavy>Cursor可以运行终端命令并监控输出</wavy></li><li>Cursor使用默认的终端配置文件<ul><li>修改中端配置文件：<mark class="tag-plugin colorful mark" color="cyan">Terminal:Select Default Profile</mark></li></ul></li></ul></div></div></div></details><details class="folder" index="3"><summary><p>MCP</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><p>可以使用配置的MCP服务器与外部服务进行交互，例如数据库或第三方API</p></div></div></div></details><details class="folder" index="4"><summary><p>高级选项</p>
+</summary><div class="body"><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">工具名</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">自动应用编辑&#x2F;Auto-apply Edits</td><td align="left">自动应用编辑无需手动确认</td></tr><tr><td align="left">自动运行&#x2F;Auto-run</td><td align="left">自动执行终端命令并接受编辑,适用于运行测试套件和验证更改</td></tr><tr><td align="left">安全防护&#x2F;Guardrails</td><td align="left">一大堆允许配置，来确保哪些工具可以自动执行</td></tr><tr><td align="left">自动修复错误&#x2F;Auto-fix Errors</td><td align="left">当Agent遇到代码检查错误和警告时自动解决</td></tr></tbody></table></div></div></div></details></div>
+
+
+<h3 id="核心：🚩规则"><a href="#核心：🚩规则" class="headerlink" title="核心：🚩规则"></a>核心：🚩规则</h3><div class="tag-plugin quot h4"><h4 class="content" id="规则介绍"><svg t="1754540464942" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9112" width="64" height="64"><path d="M971.627952 363.499438c-17.19004-36.621365-50.00739-57.060241-92.427309-57.574297-35.408193-0.328996-115.539277-0.246747-174.038876-0.185061H462.650602l4.235824-3.495582c25.558876-20.829558 38.266345-51.734618 33.989397-82.639679-4.318072-31.953735-25.78506-58.520161-58.78747-72.810923-38.759839-16.81992-78.506667-9.993253-111.899759 19.246265-49.123213 42.995663-98.698795 86.752129-146.732208 129.089799l-9.170764 8.101526a8.512771 8.512771 0 0 1-6.68273 2.83759c-16.038554-0.143936-32.303293-0.143936-48.033414-0.143935s-31.871486 0-47.91004-0.143936c-21.30249 0-23.605462 16.100241-23.605462 23.050281 0.143936 151.358715 0.143936 304.979277 0 456.625863 0 14.064578 8.389398 22.474538 22.618474 22.474539 33.208032-0.143936 66.642249 0 99.706345-0.143936a18.506024 18.506024 0 0 1 9.150201 2.056225c19.822008 10.795181 39.973012 21.590361 59.486586 32.015421l11.638233 6.168675a43.016225 43.016225 0 0 0 21.179117 5.30506h252.093172a119.363855 119.363855 0 0 0 30.391004-4.112449c54.798394-13.324337 71.638876-56.566747 69.109719-92.776868a85.251084 85.251084 0 0 0-7.566907-28.88996c27.512289-11.69992 45.524819-30.041446 54.839518-55.764819 10.281124-28.787149 6.271486-56.299438-11.412048-80.665703 31.460241-26.977671 41.350683-60.206265 29.157269-97.588434h187.116465a109.80241 109.80241 0 0 0 33.290282-4.523694c28.787149-8.636145 51.796305-28.334779 63.290602-54.037591a84.531406 84.531406 0 0 0-0.514056-71.474377z m-546.174458-118.232932c-24.798072 22.31004-50.274699 44.764016-74.908273 66.457189l-14.969317 13.159839-0.308434 0.267309c-1.850602 1.727229-3.721767 3.413333-5.777992 5.263936-2.508594 2.261847-5.284498 4.74988-8.533333 7.793092l-28.437591 26.381366h582.425703a46.203373 46.203373 0 0 1 18.341526 2.981526h0.205623c13.817831 5.448996 21.631486 15.976867 20.397751 27.491727-1.172048 11.083052-13.180402 22.515663-26.23743 24.942008a73.407229 73.407229 0 0 1-13.447711 1.028112c-64.956145 0.143936-208.192771 0.143936-273.066667-0.143935-3.516145 0-12.810281 0-19.122891 7.443534a21.775422 21.775422 0 0 0-4.420884 17.868594v1.768354c0 1.501044-0.143936 3.310522-0.308433 5.222811-0.472932 5.860241-1.069237 13.139277 1.768353 20.562249 5.099438 13.015904 17.82747 13.90008 23.255904 14.270201 0.863614 0 2.056225 0.143936 2.734779 0.246747a54.428273 54.428273 0 0 1 14.393574 8.615582 24.242892 24.242892 0 0 1 8.2249 20.562249c-0.925301 8.2249-6.292048 15.709558-14.599197 20.562249-7.566908 4.338635-16.449799 5.921928-28.602089 5.12h-0.308433c-3.207711-0.143936-12.913092-0.575743-19.47245 6.970602a21.220241 21.220241 0 0 0-4.462008 17.82747v2.488032c0 1.521606-0.143936 3.331084-0.287872 5.243374-0.431807 5.716305-0.966426 12.851406 1.562731 20.068755l0.143936 0.390683c5.30506 13.941205 18.83502 14.290763 23.934458 14.393574h2.056225l1.83004 0.925301c5.448996 2.775904 10.178313 5.181687 13.365462 8.697831 7.155663 7.690281 9.396948 15.298313 6.867791 23.21478-3.125462 9.767068-13.3449 18.752771-23.893333 20.932369-7.77253 1.665542-16.161928 1.501044-25.04482 1.336546-5.325622-0.102811-10.815743-0.205622-16.449799 0a38.49253 38.49253 0 0 1-4.338634-0.37012c-6.168675-0.719679-16.696546-1.953414-24.510201 5.94249s-6.744418 18.238715-6.024739 24.489638a35.243695 35.243695 0 0 1 0.328996 4.11245v1.871165c0 8.019277 0 14.393574 4.359197 20.315502 4.626506 6.31261 11.000803 7.95759 18.362088 9.849317l0.966426 0.246747a35.963373 35.963373 0 0 1 19.287389 10.712932c9.150201 10.692369 8.451084 17.292851 6.477109 22.515662-4.29751 11.802731-12.645783 18.83502-25.579438 21.528675a69.438715 69.438715 0 0 1-11.720482 1.089799c-79.061847 0-160.837912 0-241.215743 0.143936a9.664257 9.664257 0 0 1-5.222811-1.233735c-19.493012-11.720482-39.644016-23.831647-59.753896-35.593253 0.143936-134.189237 0.143936-270.311325 0-404.603373 38.328032-33.578153 77.252369-67.855422 114.881285-101.104579l42.0498-37.012048c13.015904-11.473735 27.676787-13.941205 44.764016-7.525783 9.993253 3.742329 16.634859 10.733494 18.218152 19.164016s-2.117912 17.868594-10.178313 25.106506zM151.235341 742.420562c-12.933655-0.205622-25.682249-0.143936-37.341044 0 0.123373-123.784739 0.123373-249.091084 0-372.711325 12.337349 0.123373 24.900884 0.123373 37.361607 0-0.123373 62.118554-0.123373 125.018474-0.123374 185.944418v54.798393c-0.082249 43.24241-0.143936 87.903614 0.102811 131.968514z" fill="#ffffff" p-id="9113"></path></svg><span class="text">规则介绍</span><span class="empty"></span></h4></div>
+
+<div class="tag-plugin colorful note" ><div class="body"><ul><li>通过可重用的作用域指令控制Agent模型的行为</li><li><wavy>可以视为项目的持久上下文、偏好设置或工作流程</wavy></li><li>**规则适用范围：**为Agent和内联编辑提供系统级指令（tab不适用）</li></ul></div></div>
+
+<div class="tag-plugin colorful note" child="tabs"><div class="title"><strong><p>规则类型</p>
+</strong></div><div class="body"><div class="tag-plugin tabs"id="tab_23"><div class="nav-tabs"><div class="tab active"><a href="#tab_23-1">项目规则</a></div><div class="tab"><a href="#tab_23-2">用户规则</a></div></div><div class="tab-content"><div class="tab-pane active" id="tab_23-1"><div class="tag-plugin colorful note" ><div class="body"><ul><li>存储在 <mark class="tag-plugin colorful mark" color="blue">.cursor&#x2F;rules</mark> 中</li><li>受版本控制作用于代码库</li><li>可以使用路径模式进行规则限定&#x2F;手动调用&#x2F;基于相关性包含</li><li>嵌套规则：<ul><li>子目录可以包含自己的 <mark class="tag-plugin colorful mark" color="blue">.cursor&#x2F;rules</mark> 目录，范围限定在该文件夹内</li><li>嵌套规则会根据项目层级自动附加</li></ul></li></ul><details class="tag-plugin colorful folding" color="yellow"><summary><p>💡可以使用Rules处理的场景</p></summary><div class="body"><ul> <li>编码关于代码库的领域特定知识</li> <li>自动化项目特定的工作流程或模版</li> <li>标准化样式或架构决策</li> </ul> </div></details></div></div></div><div class="tab-pane" id="tab_23-2"><div class="tag-plugin colorful note" ><div class="body"><ul><li>全局应用于Cursor环境</li><li>设置中定义并始终生效</li><li><wavy>比较适合设置首选的沟通风格或编码约定</wavy></li></ul></div></div></div></div></div></div></div>
+
+<div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍作用原理</p>
+</strong></div><div class="body"><ul><li>提供持久的、可重用的上下文</li><li>应用时，规则内容会包含在模型上下文的开始部分</li></ul></div></div>
+
+<div class="tag-plugin quot h4"><h4 class="content" id="创建规则"><svg t="1754540464942" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9112" width="64" height="64"><path d="M971.627952 363.499438c-17.19004-36.621365-50.00739-57.060241-92.427309-57.574297-35.408193-0.328996-115.539277-0.246747-174.038876-0.185061H462.650602l4.235824-3.495582c25.558876-20.829558 38.266345-51.734618 33.989397-82.639679-4.318072-31.953735-25.78506-58.520161-58.78747-72.810923-38.759839-16.81992-78.506667-9.993253-111.899759 19.246265-49.123213 42.995663-98.698795 86.752129-146.732208 129.089799l-9.170764 8.101526a8.512771 8.512771 0 0 1-6.68273 2.83759c-16.038554-0.143936-32.303293-0.143936-48.033414-0.143935s-31.871486 0-47.91004-0.143936c-21.30249 0-23.605462 16.100241-23.605462 23.050281 0.143936 151.358715 0.143936 304.979277 0 456.625863 0 14.064578 8.389398 22.474538 22.618474 22.474539 33.208032-0.143936 66.642249 0 99.706345-0.143936a18.506024 18.506024 0 0 1 9.150201 2.056225c19.822008 10.795181 39.973012 21.590361 59.486586 32.015421l11.638233 6.168675a43.016225 43.016225 0 0 0 21.179117 5.30506h252.093172a119.363855 119.363855 0 0 0 30.391004-4.112449c54.798394-13.324337 71.638876-56.566747 69.109719-92.776868a85.251084 85.251084 0 0 0-7.566907-28.88996c27.512289-11.69992 45.524819-30.041446 54.839518-55.764819 10.281124-28.787149 6.271486-56.299438-11.412048-80.665703 31.460241-26.977671 41.350683-60.206265 29.157269-97.588434h187.116465a109.80241 109.80241 0 0 0 33.290282-4.523694c28.787149-8.636145 51.796305-28.334779 63.290602-54.037591a84.531406 84.531406 0 0 0-0.514056-71.474377z m-546.174458-118.232932c-24.798072 22.31004-50.274699 44.764016-74.908273 66.457189l-14.969317 13.159839-0.308434 0.267309c-1.850602 1.727229-3.721767 3.413333-5.777992 5.263936-2.508594 2.261847-5.284498 4.74988-8.533333 7.793092l-28.437591 26.381366h582.425703a46.203373 46.203373 0 0 1 18.341526 2.981526h0.205623c13.817831 5.448996 21.631486 15.976867 20.397751 27.491727-1.172048 11.083052-13.180402 22.515663-26.23743 24.942008a73.407229 73.407229 0 0 1-13.447711 1.028112c-64.956145 0.143936-208.192771 0.143936-273.066667-0.143935-3.516145 0-12.810281 0-19.122891 7.443534a21.775422 21.775422 0 0 0-4.420884 17.868594v1.768354c0 1.501044-0.143936 3.310522-0.308433 5.222811-0.472932 5.860241-1.069237 13.139277 1.768353 20.562249 5.099438 13.015904 17.82747 13.90008 23.255904 14.270201 0.863614 0 2.056225 0.143936 2.734779 0.246747a54.428273 54.428273 0 0 1 14.393574 8.615582 24.242892 24.242892 0 0 1 8.2249 20.562249c-0.925301 8.2249-6.292048 15.709558-14.599197 20.562249-7.566908 4.338635-16.449799 5.921928-28.602089 5.12h-0.308433c-3.207711-0.143936-12.913092-0.575743-19.47245 6.970602a21.220241 21.220241 0 0 0-4.462008 17.82747v2.488032c0 1.521606-0.143936 3.331084-0.287872 5.243374-0.431807 5.716305-0.966426 12.851406 1.562731 20.068755l0.143936 0.390683c5.30506 13.941205 18.83502 14.290763 23.934458 14.393574h2.056225l1.83004 0.925301c5.448996 2.775904 10.178313 5.181687 13.365462 8.697831 7.155663 7.690281 9.396948 15.298313 6.867791 23.21478-3.125462 9.767068-13.3449 18.752771-23.893333 20.932369-7.77253 1.665542-16.161928 1.501044-25.04482 1.336546-5.325622-0.102811-10.815743-0.205622-16.449799 0a38.49253 38.49253 0 0 1-4.338634-0.37012c-6.168675-0.719679-16.696546-1.953414-24.510201 5.94249s-6.744418 18.238715-6.024739 24.489638a35.243695 35.243695 0 0 1 0.328996 4.11245v1.871165c0 8.019277 0 14.393574 4.359197 20.315502 4.626506 6.31261 11.000803 7.95759 18.362088 9.849317l0.966426 0.246747a35.963373 35.963373 0 0 1 19.287389 10.712932c9.150201 10.692369 8.451084 17.292851 6.477109 22.515662-4.29751 11.802731-12.645783 18.83502-25.579438 21.528675a69.438715 69.438715 0 0 1-11.720482 1.089799c-79.061847 0-160.837912 0-241.215743 0.143936a9.664257 9.664257 0 0 1-5.222811-1.233735c-19.493012-11.720482-39.644016-23.831647-59.753896-35.593253 0.143936-134.189237 0.143936-270.311325 0-404.603373 38.328032-33.578153 77.252369-67.855422 114.881285-101.104579l42.0498-37.012048c13.015904-11.473735 27.676787-13.941205 44.764016-7.525783 9.993253 3.742329 16.634859 10.733494 18.218152 19.164016s-2.117912 17.868594-10.178313 25.106506zM151.235341 742.420562c-12.933655-0.205622-25.682249-0.143936-37.341044 0 0.123373-123.784739 0.123373-249.091084 0-372.711325 12.337349 0.123373 24.900884 0.123373 37.361607 0-0.123373 62.118554-0.123373 125.018474-0.123374 185.944418v54.798393c-0.082249 43.24241-0.143936 87.903614 0.102811 131.968514z" fill="#ffffff" p-id="9113"></path></svg><span class="text">创建规则</span><span class="empty"></span></h4></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>规则结构</p>
+</strong></div><div class="body"><p><mark class="tag-plugin colorful mark" color="yellow">MDC</mark> 编写，支持元数据和内容格式</p><details class="tag-plugin colorful folding" ><summary><p>属性 Property</p></summary><div class="body"><table> <thead> <tr> <th align="center">属性</th> <th align="center">描述</th> </tr> </thead> <tbody><tr> <td align="center">description</td> <td align="center">规则描述</td> </tr> <tr> <td align="center">globs</td> <td align="center">作用域</td> </tr> <tr> <td align="center">alwaysApply</td> <td align="center">应用范围</td> </tr> </tbody></table> </div></details><details class="tag-plugin colorful folding" ><summary><p>规则作用类型 Rule Type</p></summary><div class="body"><table> <thead> <tr> <th align="center">属性</th> <th align="center">描述</th> </tr> </thead> <tbody><tr> <td align="center">Always</td> <td align="center">始终包含在模型上下文中</td> </tr> <tr> <td align="center">Auto Attached</td> <td align="center">引用匹配glob模式的文件时包含</td> </tr> <tr> <td align="center">Agent Requested</td> <td align="center">由AI决定是否包含，因此必须提供描述</td> </tr> <tr> <td align="center">Manual</td> <td align="center">仅在使用@ruleName显式提及时包含</td> </tr> </tbody></table> </div></details></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>创建规则</p>
+</strong></div><div class="body"><div class="tag-plugin timeline"><div class="timenode" index="0"><div class="header"><span>创建方式1</span></div><div class="body fs14"><p><mark class="tag-plugin colorful mark" color="cyan">Cursor Settings &gt; Rules</mark> 可以看到并管理所有规则</p></div></div><div class="timenode" index="1"><div class="header"><span>创建方式2</span></div><div class="body fs14"><p><mark class="tag-plugin colorful mark" color="green">New Cursor Rule</mark> 命令</p></div></div><div class="timenode" index="2"><div class="header"><span>创建方式3</span></div><div class="body fs14"><p><mark class="tag-plugin colorful mark" color="green">&#x2F;Generate Cursor Rules</mark> 命令，根据当前和智能体的对话，生成规则</p></div></div></div></div></div>
+
+<details class="tag-plugin colorful folding" ><summary><p>案例</p>
+</summary><div class="body"><p>这里Cursor文档里提供了几个<a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/context/rules#cursor">规则标准</a>，还挺有意思的。<br>还有更多示例可以从提供商、框架、社区贡献的在线众包集合和储存库中找到。</p> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">alwaysApply: true</span><br><span class="line">globs:</span><br><span class="line">description: 自动化开发工作流程和文档生成</span><br><span class="line">---</span><br><span class="line">此规则自动化应用分析：</span><br><span class="line">当被要求分析应用时：</span><br><span class="line">1. 使用 npm run dev 运行开发服务器</span><br><span class="line">2. 从控制台获取日志</span><br><span class="line">3. 建议性能改进</span><br><span class="line">此规则帮助生成文档：</span><br><span class="line">通过以下方式帮助起草文档：</span><br><span class="line">- 提取代码注释</span><br><span class="line">- 分析README.md</span><br><span class="line">- 生成markdown文档</span><br></pre></td></tr></table></figure> </div></details>
+
+
+<details class="tag-plugin colorful folding" color="yellow"><summary><p>💡建议</p>
+</summary><div class="body"><ul> <li><wavy>规则应该是专注的、可操作的、有明确范围的</wavy> </li> <li>保持规则在500行以内</li> <li>将大型规则拆分为多个可组合的规则</li> <li>提供具体的实例或引用文件</li> <li>避免模糊指导，编写规则时要像清晰的内部文档一样</li> <li>在聊天中重复提示时重用规则</li> </ul> </div></details>
+
+
+<h2 id="上下文-Context"><a href="#上下文-Context" class="headerlink" title="上下文 Context"></a>上下文 Context</h2><div class="tag-plugin blockquote" indent="undefined"><p>上下文不足会导致幻觉或效率低下，而过多的上下文会稀释信号。找到合适的平衡点以获得最佳效果</p></div>
+
+<details class="tag-plugin colorful folding" ><summary><p>❔什么是上下文</p>
+</summary><div class="body"><p><strong>答：上下文是指提供给模型的信息</strong></p> <p>模型随后使用这些信息来预测后续信息</p> <p>有两种类型的上下文：</p> <div class="tag-plugin grid" bg="card" style="grid-template-columns: repeat(2, 1fr);"><div class="cell" style="">     <p><strong>状态上下文 State Context</strong></p><ul><li>对当下状态的描述</li><li>描述性</li><li><em>“这是一张新的设计图纸，对现有的颜色主题做了一些调整”</em></li></ul>     </div>     <div class="cell" style="">     <p><strong>意图上下文 Intent Context</strong></p><ul><li>用户希望达到的目标</li><li>规定性</li><li><em>“我需要你按照这张图纸，修改界面的颜色样式”</em></li></ul>     </div>     </div>  <p>缺少上下文时，Agent可能做出的反映：</p> <div class="tag-plugin colorful note" ><div class="title"><strong><p>反向对应：幻觉 Hallucination</p> </strong></div><div class="body"><p>模型在缺乏足够上下文情况下，生成看似合理但事实上虚构的内容</p><blockquote><p>User：秦始皇最近缺钱吗？<br>AI：是的，他目前正在筹备修建新的长城项目，遇到资金短缺的情况非常正常…</p></blockquote></div></div>  <div class="tag-plugin colorful note" ><div class="title"><strong><p>正向对应：上下文感知</p> </strong></div><div class="body"><p>Agent尝试通过搜索代码库、读取文件和调用工具自行收集上下文。</p><p>Cursor的核心构建理念即：<strong>上下文感知</strong>，旨在最大程度减少用户的干预</p></div></div> </div></details>
+
+<details class="tag-plugin colorful folding" color="green"><summary><p>🕊️上下文使用建议</p>
+</summary><div class="body"><div class="tag-plugin timeline"><div class="timenode" index="0"><div class="header"><span>清晰表达</span></div><div class="body fs14"><p>清晰表达<strong>状态 <em>（当下情况）</em></strong> 和 <strong>意图 <em>（希望达成）</em></strong></p></div></div><div class="timenode" index="1"><div class="header"><span>精确定位</span></div><div class="body fs14"><p>使用  <mark class="tag-plugin colorful mark" color="yellow">@符号</mark>  进行精准上下文定位</p></div></div><div class="timenode" index="2"><div class="header"><span>总结经验</span></div><div class="body fs14"><p>重复使用的知识可以<strong>总结为规则</strong>，成为长期记忆</p></div></div><div class="timenode" index="3"><div class="header"><span>对外交流</span></div><div class="body fs14"><p>通过 <mark class="tag-plugin colorful mark" color="yellow">MCP</mark> 来连接外部系统</p></div></div></div></div></details>
+
+
+<h3 id="上下文：代码库索引"><a href="#上下文：代码库索引" class="headerlink" title="上下文：代码库索引"></a>上下文：代码库索引</h3><div class="tag-plugin colorful note" ><div class="body"><ul><li>通过为每个文件计算嵌入向量来索引代码库</li><li>如果已索引代码库  <wavy>6周</wavy>  不活跃后会被删除</li><li>检查索引状态： <mark class="tag-plugin colorful mark" color="cyan">Cursor Setting &gt; Indexing &amp; Docs</mark></li></ul></div></div>
+
+
+<details class="tag-plugin colorful folding" ><summary><p>配置项</p>
+</summary><div class="body"><ul> <li>忽略文件（ <mark class="tag-plugin colorful mark" color="yellow">.gitignore</mark> 、 <mark class="tag-plugin colorful mark" color="yellow">.cursorignore</mark> ）<ul> <li>提示： <wavy>忽略大型内容文件可以提高答案准确性</wavy></li> </ul> </li> <li>查看已索引文件： <mark class="tag-plugin colorful mark" color="cyan">View included files</mark></li> </ul> </div></details>
+
+
+<details class="tag-plugin colorful folding" ><summary><p>多根工作区</p>
+</summary><div class="body"><ul> <li>所有代码库都会自动建立索引</li> <li>AI可用每个代码库的上下文</li> <li><mark class="tag-plugin colorful mark" color="cyan">.cursor&#x2F;rules</mark>  在所有文件夹中都有效</li> </ul> </div></details>
+
+<details class="tag-plugin colorful folding" ><summary><p>PR搜索</p>
+</summary><div class="body"><p>通过让历史变更可搜索和通过AI访问，帮助立即代码库的演进过程</p> <div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p> </strong></div><div class="body"><ul><li>自动索引所有已合并的PR，来自仓库记录</li><li>摘要会出现在语义搜索结果中</li><li>通过智能过滤来优先显示最近的变更</li><li>Agent可以使用@获取PR、提交、问题或分支到上下文中<ul><li>@[PR 编号]</li><li>@[commit hash]</li><li>@[branch name]</li></ul></li><li>支持平台有限，目前主要是  <mark class="tag-plugin colorful mark" color="orange">github</mark>  和  <mark class="tag-plugin colorful mark" color="orange">bitbucket</mark></li></ul></div></div></div></details>
+
+<h3 id="上下文：忽略文件"><a href="#上下文：忽略文件" class="headerlink" title="上下文：忽略文件"></a>上下文：忽略文件</h3><div class="tag-plugin colorful note" ><div class="title"><strong><p>配置文件</p>
+</strong></div><div class="body"><ul><li><mark class="tag-plugin colorful mark" color="cyan">.cursorignore</mark> </li><li><mark class="tag-plugin colorful mark" color="cyan">.cursirindexingignore</mark> </li><li>仅从索引中排除文件，文件可以被AI访问，但不会出现在代码库搜索中</li></ul><details class="tag-plugin colorful folding" ><summary><p>配置方式</p></summary><div class="body"><div class="tag-plugin timeline"><div class="timenode" index="0"><div class="header"><span>全局忽略文件</span></div><div class="body fs14"><p> <mark class="tag-plugin colorful mark" color="blue">Settings &gt; Global Cursor Ignore List</mark> </p></div></div><div class="timenode" index="1"><div class="header"><span>配置.cursorignore</span></div><div class="body fs14"><p>在根目录中使用  <mark class="tag-plugin colorful mark" color="yellow">.gitignore</mark>  语法创建  <mark class="tag-plugin colorful mark" color="blue">.cursorignore</mark>  文件</p></div></div><div class="timenode" index="2"><div class="header"><span>默认忽略文件</span></div><div class="body fs14"><ul><li><mark class="tag-plugin colorful mark" color="yellow">.gitignore</mark> 中的文件</li><li>一些默认忽略列表（文档里有）</li><li>在 <mark class="tag-plugin colorful mark" color="cyan">.cursorignore</mark> 中可以使用  <mark class="tag-plugin colorful mark" color="yellow">!前缀</mark>  覆盖</li></ul></div></div><div class="timenode" index="3"><div class="header"><span>否定模式限制</span></div><div class="body fs14"><ul><li>以 <mark class="tag-plugin colorful mark" color="yellow">!</mark> 为前缀</li><li>如果父目录通过 <mark class="tag-plugin colorful mark" color="yellow">*</mark> 被排除，则无法重新包含文件  <del>（好微妙…）</del> </li><li><strong>建议：</strong> 显式排除嵌套目录</li></ul></div></div></div> </div></details></div></div>
+
+<div class="tag-plugin colorful note" ><div class="title"><strong><p>阻止范围</p>
+</strong></div><div class="body"><ul><li><mark class="tag-plugin colorful mark" color="yellow">index</mark> </li><li><mark class="tag-plugin colorful mark" color="yellow">tab</mark> 、<mark class="tag-plugin colorful mark" color="yellow">agent</mark> 、<mark class="tag-plugin colorful mark" color="yellow">inline edit</mark> </li><li><mark class="tag-plugin colorful mark" color="yellow">@</mark></li></ul><div class="tag-plugin colorful note" color="yellow"><div class="title">💡注意</div><div class="body"><p>Agent发起的工具调用（终端&#x2F;MCP）无法阻止</p></div></div></div></div>
+
+<details class="tag-plugin colorful folding" ><summary><p>为什么要忽略</p>
+</summary><div class="body"><ul> <li><strong>性能：</strong>  <wavy>排除无关部分可以实现更快的索引，和更准确的文件发现</wavy> </li> <li><strong>安全性：</strong><ul> <li>限制对API密钥、凭据、机密信息的访问</li> <li>虽然可以限制访问，但由于LLM的不可预测性，无法保证完全保护？？？</li> </ul> </li> </ul> </div></details>
+
+<h3 id="上下文：MCP"><a href="#上下文：MCP" class="headerlink" title="上下文：MCP"></a>上下文：MCP</h3><div class="tag-plugin colorful note" ><div class="title"><strong><p>MCP（Model Context Protocol）</p>
+</strong></div><div class="body"><ul><li>MCP使Cursor能够连接到外部工具和数据源</li><li>无需重复解释项目结构，直接与工具集成</li></ul></div></div>
+
+<div class="tag-plugin colorful note" color="cyan"><div class="title"><strong><p>🔍工作原理</p>
+</strong></div><div class="body"><ul><li>MCP服务器通过协议公开功能，将Cursor连接到外部工具或数据源</li><li>支持三种传输方式：<ul><li>stdio<ul><li>Cursor管理&#x2F;单用户&#x2F;shell命令&#x2F;手动</li></ul></li><li>SSE<ul><li>部署为服务器&#x2F;多用户&#x2F;SSE端点URL&#x2F;OAuth</li></ul></li><li>Streamable HTTP<ul><li>部署为服务器&#x2F;多用户&#x2F;HTTP端点URL&#x2F;OAuth</li></ul></li></ul></li></ul></div></div>
+
+
+<h3 id="上下文：-符号"><a href="#上下文：-符号" class="headerlink" title="上下文：@符号"></a>上下文：@符号</h3><div class="tag-plugin colorful note" ><div class="body"><table><thead><tr><th align="left">@</th><th align="left">描述</th></tr></thead><tbody><tr><td align="left">@Files</td><td align="left">引用特定文件</td></tr><tr><td align="left">@Folders</td><td align="left">引用整个文件夹</td></tr><tr><td align="left">@Code</td><td align="left">引用特定代码片段或符号</td></tr><tr><td align="left">@Docs</td><td align="left">访问文档和指南</td></tr><tr><td align="left">@Git</td><td align="left">访问git历史记录和更改</td></tr><tr><td align="left">@Past</td><td align="left">Chats 使用汇总的编辑器回话</td></tr><tr><td align="left">@Rules</td><td align="left">使用cursor规则</td></tr><tr><td align="left">@Terminals</td><td align="left">终端</td></tr><tr><td align="left">@Active</td><td align="left">Tabs 激活的智能体</td></tr><tr><td align="left">@Linter</td><td align="left">Errors 引用lint错误</td></tr><tr><td align="left">@Web</td><td align="left">外部网络资源和文档</td></tr><tr><td align="left">@Link</td><td align="left">粘贴URL时，Cursor会将其自动标记为@Link，支持PDF</td></tr><tr><td align="left">@Recent</td><td align="left">Changes 创建指向特定代码或文档的联机</td></tr><tr><td align="left">#Files</td><td align="left">将文件添加到上下文中而不引用</td></tr><tr><td align="left">&#x2F;Commands</td><td align="left">将打开和活动的文件添加到上下文中</td></tr></tbody></table></div></div>
+
+
+</article>
+<div class="article-footer">
+    <section id="references">
+      <div class="header"><span>参考资料</span></div>
+      <div class="body">
+        <ul>
+        <li class="post-title">
+          <p><a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/welcome">Cursor官方文档</a></p>
+
+        </li>
+        
+        <li class="post-title">
+          <p><a target="_blank" rel="noopener" href="https://forum.cursor.com/">Cursor论坛</a></p>
+
+        </li>
+        
+        <li class="post-title">
+          <p><a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/configuration/kbd">Cursor键盘快捷键</a></p>
+
+        </li>
+        
+        <li class="post-title">
+          <p><a target="_blank" rel="noopener" href="https://docs.cursor.com/zh/guides/working-with-context">上下文工作原理</a></p>
+
+        </li>
+        </ul>
+      </div>
+    </section>
+    
+
+
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://puyixiu.github.io/wiki/AI/cursor-01-doc" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://puyixiu.github.io/wiki/AI/cursor-01-doc&title=Cursor参考文档 - Ashikachi&summary=核心 Core快速开始 Quickstart概念 ConceptsTab代码自动补全 &#x2F; Autocomplete with Tab操作快捷键接受建议Tab拒绝Esc逐词接受Ctrl+Arrow-Right🔍工作原理上下文..."><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Cursor参考文档 - Ashikachi&amp;body=https://puyixiu.github.io/wiki/AI/cursor-01-doc"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img  src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://puyixiu.github.io/wiki/AI/cursor-01-doc"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">回顾上一篇</div><a href="/wiki/AI/ai-03-Trae/">Trae</a></div><div class="item" id="next"><div class="note">接下来阅读</div><a href="/wiki/AI/cursor-02-guides/">Cursor使用指南</a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="PUYIXIU/gitalk-comments" issue-term="pathname" theme="preferred-color-scheme" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="text"><p>本站由 <a href="/">Ashikachi</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.33.1">Stellar 1.33.1</a> 主题创建。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span></p>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83-Core"><span class="toc-text">核心 Core</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%EF%BC%9A%F0%9F%A4%96%E6%99%BA%E8%83%BD%E4%BD%93"><span class="toc-text">核心：🤖智能体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%9A%F0%9F%92%AC%E8%81%8A%E5%A4%A9"><span class="toc-text">智能体：💬聊天</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%9A%F0%9F%A7%BE%E8%A7%84%E5%88%92"><span class="toc-text">智能体：🧾规划</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%9A%F0%9F%94%A7%E5%B7%A5%E5%85%B7"><span class="toc-text">智能体：🔧工具</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%EF%BC%9A%F0%9F%9A%A9%E8%A7%84%E5%88%99"><span class="toc-text">核心：🚩规则</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%84%E5%88%99%E4%BB%8B%E7%BB%8D"><span class="toc-text">规则介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E5%BB%BA%E8%A7%84%E5%88%99"><span class="toc-text">创建规则</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87-Context"><span class="toc-text">上下文 Context</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A%E4%BB%A3%E7%A0%81%E5%BA%93%E7%B4%A2%E5%BC%95"><span class="toc-text">上下文：代码库索引</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A%E5%BF%BD%E7%95%A5%E6%96%87%E4%BB%B6"><span class="toc-text">上下文：忽略文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9AMCP"><span class="toc-text">上下文：MCP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%9A-%E7%AC%A6%E5%8F%B7"><span class="toc-text">上下文：@符号</span></a></li></ol></li></ol></div><div class="widget-footer"><a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+
+
+<script type="text/javascript">
+  window.canonical = {"originalHost":null,"officialHosts":["localhost"],"encoded":""};
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+    tag_plugins: {
+      chat: Object.assign({"api":"https://siteinfo.listentothewind.cn/api/v1"}),
+    }
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"skip_search":null,"codeblock":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg`,
+    cover: `https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/cover/76b86c0226ffd.svg`,
+    loading: `https://api.iconify.design/eos-icons:three-dots-loading.svg?color=%231cd0fd`,
+  };
+  const deps = {
+    jquery: `https://gcore.jsdelivr.net/npm/jquery@3.7/dist/jquery.min.js`,
+    marked: `https://gcore.jsdelivr.net/npm/marked@13.0/lib/marked.umd.min.js`,
+    lazyload: `/%5Bobject%20Object%5D`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  
+  function RunItem() {
+    this.list = []; // 存放回调函数
+    this.start = () => {
+      for (var i = 0; i < this.list.length; i++) {
+        this.list[i].run();
+      }
+    };
+    this.push = (fn, name, setRequestAnimationFrame = true) => {
+      let myfn = fn
+      if (setRequestAnimationFrame) {
+        myfn = () => {
+          utils.requestAnimationFrame(fn)
+        }
+      }
+      var f = new Item(myfn, name);
+      this.list.push(f);
+    };
+    this.remove = (name) => {
+      for (let index = 0; index < this.list.length; index++) {
+        const e = this.list[index];
+        if (e.name == name) {
+          this.list.splice(index, 1);
+        }
+      }
+    }
+    // 构造一个可以run的对象
+    function Item(fn, name) {
+      // 函数名称
+      this.name = name || fn.name;
+      // run方法
+      this.run = () => {
+        try {
+          fn()
+        } catch (error) {
+          console.log(error);
+        }
+      };
+    }
+  }
+
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')) {
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function () {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      const maxRetry = 3;
+      let retryCount = 0;
+
+      return new Promise((resolve, reject) => {
+        const load = () => {
+          utils.onLoading?.(el);
+
+          let timedOut = false;
+          const timeout = setTimeout(() => {
+            timedOut = true;
+            console.warn('[request] 超时:', url);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject('请求超时');
+            } else {
+              setTimeout(load, 1000);
+            }
+          }, 5000);
+
+          fetch(url).then(resp => {
+            if (timedOut) return;
+            clearTimeout(timeout);
+
+            if (!resp.ok) throw new Error('响应失败');
+            return resp;
+          }).then(data => {
+            if (timedOut) return;
+            utils.onLoadSuccess?.(el);
+            callback(data);
+            resolve(data);
+          }).catch(err => {
+            clearTimeout(timeout);
+            console.warn('[request] 错误:', err);
+
+            if (++retryCount >= maxRetry) {
+              utils.onLoadFailure?.(el);
+              onFailure?.();
+              reject(err);
+            } else {
+              setTimeout(load, 1000);
+            }
+          });
+        };
+
+        load();
+      });
+    },
+    requestWithoutLoading: (url, options = {}, maxRetry = 2, timeout = 5000) => {
+      return new Promise((resolve, reject) => {
+        let retryCount = 0;
+
+        const tryRequest = () => {
+          let timedOut = false;
+          const timer = setTimeout(() => {
+            timedOut = true;
+            if (++retryCount > maxRetry) reject('timeout');
+            else tryRequest();
+          }, timeout);
+
+          fetch(url, options)
+            .then(resp => {
+              clearTimeout(timer);
+              if (!resp.ok) throw new Error('bad response');
+              resolve(resp);
+            })
+            .catch(err => {
+              clearTimeout(timer);
+              if (++retryCount > maxRetry) reject(err);
+              else setTimeout(tryRequest, 500);
+            });
+        };
+
+        tryRequest();
+      });
+    },
+    /********************** requestAnimationFrame ********************************/
+    // 1、requestAnimationFrame 会把每一帧中的所有 DOM 操作集中起来，在一次重绘或回流中就完成，并且重绘或回流的时间间隔紧紧跟随浏览器的刷新频率，一般来说，这个频率为每秒60帧。
+    // 2、在隐藏或不可见的元素中，requestAnimationFrame 将不会进行重绘或回流，这当然就意味着更少的的 cpu，gpu 和内存使用量。
+    requestAnimationFrame: (fn) => {
+      if (!window.requestAnimationFrame) {
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame;
+      }
+      window.requestAnimationFrame(fn)
+    },
+    dark: {},
+  };
+
+  // utils.dark.mode 当前模式 dark or light
+  // utils.dark.toggle() 暗黑模式触发器
+  // utils.dark.push(callBack[,"callBackName"]) 传入触发器回调函数
+  utils.dark.method = {
+    toggle: new RunItem(),
+  };
+  utils.dark = Object.assign(utils.dark, {
+    push: utils.dark.method.toggle.push,
+  });
+</script>
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+<script async src="https://cdn.bootcdn.net/ajax/libs/vanilla-lazyload/19.1.3/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+    callback_loaded: (el) => {
+      el.classList.add('loaded');
+      const wrapper = el.closest('.lazy-box');
+      const icon = wrapper?.querySelector('.lazy-icon');
+      if (icon) icon.remove();
+    }
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+
+  window.wrapLazyloadImages = (container) => {
+    if (typeof container === 'string') {
+      container = document.querySelector(container);
+    }
+    if (!container) return;
+    
+    const images = container.querySelectorAll('img');
+    images.forEach((img) => {
+      if (img.classList.contains('lazy')) return;
+
+      const src = img.getAttribute('src');
+      if (!src) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'lazy-box';
+
+      const newImg = img.cloneNode();
+      newImg.removeAttribute('src');
+      newImg.setAttribute('data-src', src);
+      newImg.classList.add('lazy');
+
+      const icon = document.createElement('div');
+      icon.className = 'lazy-icon';
+      if (def.loading) {
+        icon.style.backgroundImage = `url("${def.loading}")`;
+      }
+
+      wrapper.appendChild(newImg);
+      wrapper.appendChild(icon);
+
+      img.replaceWith(wrapper);
+    });
+
+    // 通知 LazyLoad 更新
+    if (window.lazyLoadInstance?.update) {
+      window.lazyLoadInstance.update();
+    }
+  }
+  
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.33.1" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    // applyThemeToGiscus(theme)
+  }
+
+  // FIXME: 这会导致无法使用 preferred_color_scheme 以外的主题
+  const applyThemeToGiscus = (theme) => {
+    // theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+    utils.dark.mode = newTheme === 'auto' ? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light") : newTheme;
+    utils.dark.method.toggle.start();
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    } else {
+      utils.dark.mode = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    utils.dark.method.toggle.start();
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #beaudar');
+  util.viewportLazyload(el, load_beaudar, true);
+
+  function load_beaudar() {
+    if (!el) return;
+    try {
+      el.innerHTML = '';
+    } catch (error) {
+      console.error(error);
+    }
+    const script = document.createElement('script');
+    script.src = 'https://beaudar.lipk.org/client.js';
+    script.async = true;
+    for (const key of Object.keys(el.attributes)) {
+      const attr = el.attributes[key];
+      if (['class', 'id'].includes(attr.name) === false) {
+        script.setAttribute(attr.name, attr.value);
+      }
+    }
+    el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"rating":{"js":"/js/services/rating.js","api":"https://star-vote.xaox.cc/api/rating"},"vote":{"js":"/js/services/vote.js","api":"https://star-vote.xaox.cc/api/vote"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"friends_and_posts":{"js":"/js/services/friends_and_posts.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"},"voice":{"js":"/js/plugins/voice.js"},"video":{"js":"/js/plugins/video.js"},"download-file":{"js":"/js/plugins/download-file.js"},"twikoo":{"js":"/js/services/twikoo_latest_comment.js"},"waline":{"js":"/js/services/waline_latest_comment.js"},"artalk":{"js":"/js/services/artalk_latest_comment.js"},"giscus":{"js":"/js/services/giscus_latest_comment.js"},"contributors":{"edit_this_page":{"_posts/":null,"wiki/stellar/":"https://github.com/xaoxuu/hexo-theme-stellar-docs/blob/main/"},"js":"/js/services/contributors.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else if (id == 'voice') {
+        ctx.voiceAudios = document.querySelectorAll('.voice>audio');
+        if (ctx.voiceAudios?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            createVoiceDom(ctx.voiceAudios);
+          });
+        }
+      } else if (id == 'video') {
+        ctx.videos = document.querySelectorAll('.video>video');
+        if (ctx.videos?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            videoEvents(ctx.videos);
+          });
+        }
+      } else if (id == 'download-file') {
+        ctx.files = document.querySelectorAll('.file');
+        if (ctx.files?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            downloadFileEvent(ctx.files);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+
+    // chat iphone time
+    let phoneTimes = document.querySelectorAll('.chat .status-bar .time');
+
+    if (phoneTimes.length > 0) {
+      NowTime();
+      var date = new Date();
+      var sec = date.getSeconds();
+      var firstAdjustInterval = setInterval(firstAdjustTime, 1000 * (60 - sec));
+    }
+
+    function firstAdjustTime() {
+      NowTime();
+      clearInterval(firstAdjustInterval);
+      setInterval(NowTime, 1000 * 60);
+    }
+
+    function NowTime() {
+      for (let i = 0; i < phoneTimes.length; ++i) {
+        var timeSpan = phoneTimes[i];
+        var date = new Date();
+        var hour = date.getHours();
+        var min = date.getMinutes();
+        timeSpan.innerHTML = check(hour) + ":" + check(min);
+      }
+    };
+
+    function check(val) {
+      if (val < 10) {
+        return ("0" + val);
+      }
+      return (val);
+    }
+
+    // chat quote
+    const chat_quote_obverser = new IntersectionObserver((entries, observer) => {
+      entries.filter((entry) => { return entry.isIntersecting }).sort((a, b) => a.intersectionRect.y !== b.intersectionRect.y ? a.intersectionRect.y - b.intersectionRect.y : a.intersectionRect.x - b.intersectionRect.x).forEach((entry, index) => {
+          observer.unobserve(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('quote-blink');
+            setTimeout(() => {
+              entry.target.classList.remove('quote-blink');
+            }, 1000);
+          }, Math.max(100, 16) * (index + 1));
+        });
+    });
+
+    var chatQuotes = document.querySelectorAll(".chat .talk .quote");
+    chatQuotes.forEach((quote) => {
+      quote.addEventListener('click', function () {
+        var chatCellDom = document.getElementById("quote-" + quote.getAttribute("quotedCellTag"));
+        if (chatCellDom) {
+          var chatDiv = chatCellDom.parentElement;
+          var mid = chatDiv.clientHeight / 2;
+          var offsetTop = chatCellDom.offsetTop;
+          if (offsetTop > mid - chatCellDom.clientHeight / 2) {
+            chatDiv.scrollTo({
+              top: chatCellDom.offsetTop - mid + chatCellDom.clientHeight / 2,
+              behavior: "smooth"
+            });
+          } else {
+            chatDiv.scrollTo({
+              top: 0,
+              behavior: "smooth"
+            });
+          }
+          chat_quote_obverser.observe(chatCellDom);
+        }
+      });
+    });
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://cdn.bootcdn.net/ajax/libs/flying-pages/2.1.2/flying-pages.min.js"></script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css`,
+    js: `https://gcore.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js`
+  };
+  var selector = '[data-fancybox]:not(.error), .with-fancybox .atk-content img:not([atk-emoticon])';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const memos = document.getElementsByClassName('ds-memos');
+    if (memos != undefined && memos.length > 0) {
+      needFancybox = true;
+    }
+    const fancybox = document.getElementsByClassName('with-fancybox');
+    if (fancybox != undefined && fancybox.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://unpkg.com/swiper@10.3/swiper-bundle.min.css`);
+      utils.js(`https://unpkg.com/swiper@10.3/swiper-bundle.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `Copy`,
+        success_text: `Copied`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+<script async src="https://gcore.jsdelivr.net/npm/jquery@3.5/dist/jquery.min.js"></script><script async src="/scripts/test.js"></script>
+</div></body></html>
