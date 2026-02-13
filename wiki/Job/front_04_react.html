@@ -69,7 +69,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Job/front_01_vue.html">Job</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-08-12T00:55:46.150Z">2025-08-12</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-13T00:52:16.837Z">2026-02-13</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -85,12 +85,12 @@
 <li>可以进行服务器端渲染</li>
 <li>遵循单向数据流或数据绑定</li>
 </ul>
-<h2 id="受控组件和非受控组件有什么区别？"><a href="#受控组件和非受控组件有什么区别？" class="headerlink" title="受控组件和非受控组件有什么区别？"></a>受控组件和非受控组件有什么区别？</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>受控组件：只能通过React修改数据或状态的组件</li><li>非受控组件：<ul><li>如input、textarea、select等表单组件</li><li>控件自身就能控制数据和状态</li></ul></li></ul></div></div>
+<h2 id="受控组件和非受控组件有什么区别？"><a href="#受控组件和非受控组件有什么区别？" class="headerlink" title="受控组件和非受控组件有什么区别？"></a>受控组件和非受控组件有什么区别？</h2><div class="tag-plugin colorful note" ><div class="body"><ul><li>受控组件：只能通过React修改数据或状态的组件</li><li>非受控组件：<ul><li>如input、textarea、select等表单组件</li><li>控件自身就能控制数据和状态</li></ul></li></ul></div></div>
 
 <h2 id="React-组件中绑定一个事件跟直接操作-DOM-绑定一个事件有什么差别"><a href="#React-组件中绑定一个事件跟直接操作-DOM-绑定一个事件有什么差别" class="headerlink" title="React 组件中绑定一个事件跟直接操作 DOM 绑定一个事件有什么差别"></a>React 组件中绑定一个事件跟直接操作 DOM 绑定一个事件有什么差别</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7430700173537460261">参考博客</a></p>
-<div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>绑定方式不同<ul><li>React使用事件委托机制，将所有事件监听器挂载在根节点或顶层的容器上，通过事件冒泡捕获事件<ul><li>只有一个事件处理器负责监听</li><li>由React自行分发事件并调用相对应的事件处理逻辑</li></ul></li><li>Dom的事件监听器直接绑定到特定的dom元素上<ul><li>对多个元素绑定事件，系统会创建多个独立的监听器</li></ul></li></ul></li><li>性能不同<ul><li>React：减少事件监听器，更节省内存</li><li>原生dom：内存消耗较高</li></ul></li><li>事件对象<ul><li>React：合成事件对象</li><li>dom：原生事件对象</li></ul></li><li>跨平台与兼容性<ul><li>React：跨平台统一接口</li><li>dom：仅限web浏览器</li></ul></li><li>生命周期管理<ul><li>react：自动清理事件</li><li>dom：需要手动清理</li></ul></li><li>事件优先级<ul><li>react：高优先级事件可以优先处理</li><li>dom：按事件触发顺序逐一处理</li></ul></li></ul></div></div>
+<div class="tag-plugin colorful note" ><div class="body"><ul><li>绑定方式不同<ul><li>React使用事件委托机制，将所有事件监听器挂载在根节点或顶层的容器上，通过事件冒泡捕获事件<ul><li>只有一个事件处理器负责监听</li><li>由React自行分发事件并调用相对应的事件处理逻辑</li></ul></li><li>Dom的事件监听器直接绑定到特定的dom元素上<ul><li>对多个元素绑定事件，系统会创建多个独立的监听器</li></ul></li></ul></li><li>性能不同<ul><li>React：减少事件监听器，更节省内存</li><li>原生dom：内存消耗较高</li></ul></li><li>事件对象<ul><li>React：合成事件对象</li><li>dom：原生事件对象</li></ul></li><li>跨平台与兼容性<ul><li>React：跨平台统一接口</li><li>dom：仅限web浏览器</li></ul></li><li>生命周期管理<ul><li>react：自动清理事件</li><li>dom：需要手动清理</li></ul></li><li>事件优先级<ul><li>react：高优先级事件可以优先处理</li><li>dom：按事件触发顺序逐一处理</li></ul></li></ul></div></div>
 
-<h2 id="组件的生命周期方法有哪些？"><a href="#组件的生命周期方法有哪些？" class="headerlink" title="组件的生命周期方法有哪些？"></a>组件的生命周期方法有哪些？</h2><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>constructor <ul><li>初始化状态和绑定事件处理程序</li><li>在函数组件中，可以将useState钩子用于类似的目的</li></ul></li><li>render<ul><li>负责渲染jsx标记并返回要在屏幕上显示的内容</li></ul></li><li>componentDidMount<ul><li>组件在Dom中渲染后立即执行此方法</li><li>常用于初始化任务</li></ul></li><li>componentDidUpdate<ul><li>当组件的props或state改变时调用此方法</li><li>允许执行副作用</li></ul></li><li>componentWillUnmount<ul><li>组件从dom中删除之前，调用此方法</li><li>用于清除事件侦听器或者取消计时器等操作</li></ul></li></ul></div></div>
+<h2 id="组件的生命周期方法有哪些？"><a href="#组件的生命周期方法有哪些？" class="headerlink" title="组件的生命周期方法有哪些？"></a>组件的生命周期方法有哪些？</h2><div class="tag-plugin colorful note" ><div class="body"><ul><li>constructor <ul><li>初始化状态和绑定事件处理程序</li><li>在函数组件中，可以将useState钩子用于类似的目的</li></ul></li><li>render<ul><li>负责渲染jsx标记并返回要在屏幕上显示的内容</li></ul></li><li>componentDidMount<ul><li>组件在Dom中渲染后立即执行此方法</li><li>常用于初始化任务</li></ul></li><li>componentDidUpdate<ul><li>当组件的props或state改变时调用此方法</li><li>允许执行副作用</li></ul></li><li>componentWillUnmount<ul><li>组件从dom中删除之前，调用此方法</li><li>用于清除事件侦听器或者取消计时器等操作</li></ul></li></ul></div></div>
 
 <h1 id="React性能优化"><a href="#React性能优化" class="headerlink" title="React性能优化"></a>React性能优化</h1><h1 id="React源码"><a href="#React源码" class="headerlink" title="React源码"></a>React源码</h1><h1 id="React-Hook"><a href="#React-Hook" class="headerlink" title="React Hook"></a>React Hook</h1><h2 id="常用的React-Hook有哪些？"><a href="#常用的React-Hook有哪些？" class="headerlink" title="常用的React Hook有哪些？"></a>常用的React Hook有哪些？</h2><ul>
 <li>useState 管理组件状态</li>
@@ -103,11 +103,11 @@
 <li>useLayoutEffect</li>
 </ul>
 <h2 id="对useCallback、useMemo这2个hook的立即，有什么样的区别，适合在什么样的场景下使用"><a href="#对useCallback、useMemo这2个hook的立即，有什么样的区别，适合在什么样的场景下使用" class="headerlink" title="对useCallback、useMemo这2个hook的立即，有什么样的区别，适合在什么样的场景下使用"></a>对useCallback、useMemo这2个hook的立即，有什么样的区别，适合在什么样的场景下使用</h2><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7369248993106296884#heading-4">参考博客</a></p>
-<div class="tag-plugin colorful note" color="dark"><div class="title"><strong>是不是所有变量或函数都需要用到这两个hook进行包裹</strong></div><div class="body"><ul><li>不是所有变量或函数都需要使用这两个hook进行包裹，</li><li>它们的作用主要是优化性能，</li><li>主要针对那些性能损耗的计算或函数，没有损耗的变量或者函数是不需要包裹</li></ul></div></div>
+<div class="tag-plugin colorful note" ><div class="title"><strong>是不是所有变量或函数都需要用到这两个hook进行包裹</strong></div><div class="body"><ul><li>不是所有变量或函数都需要使用这两个hook进行包裹，</li><li>它们的作用主要是优化性能，</li><li>主要针对那些性能损耗的计算或函数，没有损耗的变量或者函数是不需要包裹</li></ul></div></div>
 
-<div class="tag-plugin colorful note" color="dark"><div class="title"><strong>包裹后性能一定会好吗？</strong></div><div class="body"><ul><li>不一定，取决于具体情况</li><li>useCallback用于缓存函数，避免每次渲染都创建新的函数实例<ul><li>当函数被父组件作为参数传递到子组件时，函数实例的重新创建会触发子组件重新渲染</li><li>useCallback可以确保相同的函数实例在相同的依赖项下保持不变</li></ul></li><li>useMemo用于缓存值，避免每次渲染都重新计算<ul><li>在依赖项不变的情况下，返回值的缓存结果，避免重复计算，提高了性能</li></ul></li><li>无需使用useMemo和useCallback的情况：<ul><li>依赖频繁变化</li><li>值或函数轻量且不频繁变化</li><li>组件不会频繁重渲染</li><li>计算量本身较小</li></ul></li></ul></div></div>
+<div class="tag-plugin colorful note" ><div class="title"><strong>包裹后性能一定会好吗？</strong></div><div class="body"><ul><li>不一定，取决于具体情况</li><li>useCallback用于缓存函数，避免每次渲染都创建新的函数实例<ul><li>当函数被父组件作为参数传递到子组件时，函数实例的重新创建会触发子组件重新渲染</li><li>useCallback可以确保相同的函数实例在相同的依赖项下保持不变</li></ul></li><li>useMemo用于缓存值，避免每次渲染都重新计算<ul><li>在依赖项不变的情况下，返回值的缓存结果，避免重复计算，提高了性能</li></ul></li><li>无需使用useMemo和useCallback的情况：<ul><li>依赖频繁变化</li><li>值或函数轻量且不频繁变化</li><li>组件不会频繁重渲染</li><li>计算量本身较小</li></ul></li></ul></div></div>
 
-<div class="tag-plugin colorful note" color="dark"><div class="title"><strong>有没有更底层一点的理解？</strong></div><div class="body"><ul><li>更底层的理解是，useCallback 和 useMemo 的原理都是基于 memoization（记忆化）技术。</li><li>它们在渲染过程中会根据依赖项的变化，判断是否重新计算函数或值。</li><li>当依赖项不变时，会直接返回缓存的结果，从而避免了不必要的重复计算，提高了性能。</li></ul></div></div>
+<div class="tag-plugin colorful note" ><div class="title"><strong>有没有更底层一点的理解？</strong></div><div class="body"><ul><li>更底层的理解是，useCallback 和 useMemo 的原理都是基于 memoization（记忆化）技术。</li><li>它们在渲染过程中会根据依赖项的变化，判断是否重新计算函数或值。</li><li>当依赖项不变时，会直接返回缓存的结果，从而避免了不必要的重复计算，提高了性能。</li></ul></div></div>
 
 <h1 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h1><h1 id="React-Router"><a href="#React-Router" class="headerlink" title="React-Router"></a>React-Router</h1>
 <div class="article-footer fs14">

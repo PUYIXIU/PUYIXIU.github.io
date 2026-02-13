@@ -69,7 +69,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/notes/emoji_BlobCat.html">备忘录</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-08-12T00:55:46.126Z">2025-08-12</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-13T00:52:16.773Z">2026-02-13</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -80,11 +80,11 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><h1 id="controls"><a href="#controls" class="headerlink" title="controls"></a>controls</h1><h2 id="滚轮滚动导致无法渲染"><a href="#滚轮滚动导致无法渲染" class="headerlink" title="滚轮滚动导致无法渲染"></a>滚轮滚动导致无法渲染</h2><div class="tag-plugin colorful note" color="dark"><div class="title"><strong>问题描述</strong></div><div class="body"><p>OrbitControls引入后，<br>鼠标拖动事件正常，使用滚轮进行缩放操作时，整个画面无法重绘。<br>检查了camera的剪裁面配置，也没有问题。</p></div></div>
+  </div><article class="md-text content"><h1 id="controls"><a href="#controls" class="headerlink" title="controls"></a>controls</h1><h2 id="滚轮滚动导致无法渲染"><a href="#滚轮滚动导致无法渲染" class="headerlink" title="滚轮滚动导致无法渲染"></a>滚轮滚动导致无法渲染</h2><div class="tag-plugin colorful note" ><div class="title"><strong>问题描述</strong></div><div class="body"><p>OrbitControls引入后，<br>鼠标拖动事件正常，使用滚轮进行缩放操作时，整个画面无法重绘。<br>检查了camera的剪裁面配置，也没有问题。</p></div></div>
 
 <div class="tag-plugin colorful note" ><div class="title"><strong>解决方法</strong></div><div class="body"><p>threejs版本问题，使用0.160.0版本的threejs会有这个问题，<br>改成更低版本0.133.0就解决了。</p></div></div>
 
-<h2 id="Controls没有任何反应"><a href="#Controls没有任何反应" class="headerlink" title="Controls没有任何反应"></a>Controls没有任何反应</h2><div class="tag-plugin colorful note" color="dark"><div class="title"><strong>问题描述</strong></div><div class="body"><p>配置了Orbitcontrols但没有任何反应，<br>能进controls添加的鼠标事件的断点，<br>但就是毫无反应。</p></div></div>
+<h2 id="Controls没有任何反应"><a href="#Controls没有任何反应" class="headerlink" title="Controls没有任何反应"></a>Controls没有任何反应</h2><div class="tag-plugin colorful note" ><div class="title"><strong>问题描述</strong></div><div class="body"><p>配置了Orbitcontrols但没有任何反应，<br>能进controls添加的鼠标事件的断点，<br>但就是毫无反应。</p></div></div>
 
 <div class="tag-plugin colorful note" ><div class="title"><strong>解决方法</strong></div><div class="body"><p>调试了大概一个小时，终于搞清楚了，<br>因为我把相机和OrbitControls.target都放在了原点位置：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">camera.<span class="property">position</span>.<span class="title function_">set</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">controls.<span class="property">target</span>.<span class="title function_">set</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure><p>这会导致OrbitControls的旋转矩阵计算出现问题，<br>需要移动相机或者controls.target的位置：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">camera.<span class="property">position</span>.<span class="title function_">set</span>(-<span class="number">0.001</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br></pre></td></tr></table></figure><p>这样就解决了</p></div></div>
 

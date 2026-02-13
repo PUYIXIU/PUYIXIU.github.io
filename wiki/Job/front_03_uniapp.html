@@ -69,7 +69,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/wiki">文档</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/wiki/Job/front_01_vue.html">Job</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2025-08-12T00:55:46.150Z">2025-08-12</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">更新于：<time datetime="2026-02-13T00:52:16.838Z">2026-02-13</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -80,13 +80,13 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><h2 id="uniapp"><a href="#uniapp" class="headerlink" title="uniapp"></a>uniapp</h2><h3 id="谈谈uni-app的理解"><a href="#谈谈uni-app的理解" class="headerlink" title="谈谈uni-app的理解"></a>谈谈uni-app的理解</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><p>一个使用vuejs开发的前端应用框架，<br>开发者只要编写一套代码，就可以发布到IOS、Android、Web、小程序等平台</p></div></div>
+  </div><article class="md-text content"><h2 id="uniapp"><a href="#uniapp" class="headerlink" title="uniapp"></a>uniapp</h2><h3 id="谈谈uni-app的理解"><a href="#谈谈uni-app的理解" class="headerlink" title="谈谈uni-app的理解"></a>谈谈uni-app的理解</h3><div class="tag-plugin colorful note" ><div class="body"><p>一个使用vuejs开发的前端应用框架，<br>开发者只要编写一套代码，就可以发布到IOS、Android、Web、小程序等平台</p></div></div>
 
-<h3 id="uniapp如何为不同平台设置不同代码"><a href="#uniapp如何为不同平台设置不同代码" class="headerlink" title="uniapp如何为不同平台设置不同代码"></a>uniapp如何为不同平台设置不同代码</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><p>使用条件注释：</p><ul><li>###ifdef </li><li>###ifndef</li></ul></div></div>
+<h3 id="uniapp如何为不同平台设置不同代码"><a href="#uniapp如何为不同平台设置不同代码" class="headerlink" title="uniapp如何为不同平台设置不同代码"></a>uniapp如何为不同平台设置不同代码</h3><div class="tag-plugin colorful note" ><div class="body"><p>使用条件注释：</p><ul><li>###ifdef </li><li>###ifndef</li></ul></div></div>
 
-<h3 id="uniapp中封装接口请求相较于微信小程序有什么要注意的"><a href="#uniapp中封装接口请求相较于微信小程序有什么要注意的" class="headerlink" title="uniapp中封装接口请求相较于微信小程序有什么要注意的"></a>uniapp中封装接口请求相较于微信小程序有什么要注意的</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>uniapp和微信小程序都提供了网络请求api</li><li>uniapp为了实现夸端兼容，需要注意网络请求跨域问题</li><li>微信小程序不会出现跨域问题</li><li>uniapp的跨域问题可以通过在vue.config.js中配置proxy代理解决</li></ul></div></div>
+<h3 id="uniapp中封装接口请求相较于微信小程序有什么要注意的"><a href="#uniapp中封装接口请求相较于微信小程序有什么要注意的" class="headerlink" title="uniapp中封装接口请求相较于微信小程序有什么要注意的"></a>uniapp中封装接口请求相较于微信小程序有什么要注意的</h3><div class="tag-plugin colorful note" ><div class="body"><ul><li>uniapp和微信小程序都提供了网络请求api</li><li>uniapp为了实现夸端兼容，需要注意网络请求跨域问题</li><li>微信小程序不会出现跨域问题</li><li>uniapp的跨域问题可以通过在vue.config.js中配置proxy代理解决</li></ul></div></div>
 
-<h3 id="uniapp中的生命周期"><a href="#uniapp中的生命周期" class="headerlink" title="uniapp中的生命周期"></a>uniapp中的生命周期</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>应用生命周期<ul><li>onLaunch 初始化完成时触发，只触发一次</li><li>onShow uniapp从后台进入前台时显示</li><li>onHide uniapp从前台进入后台显示</li><li>onError 报错</li><li>onExit 监听应用退出</li><li>onUNiNViewMessage 对nvue页面发送的数据进行监听</li><li>onUnhandleRejection 对未处理的Promise拒绝事件监听函数</li><li>onPageNotFound 页面未找到</li><li>onThemeChange 监听系统主题</li></ul></li><li>页面生命周期<ul><li>onInit 监听页面初始化</li><li>onLoad 监听页面加载，参数为上个页面传递的数据</li><li>onShow 监听页面显示</li><li>onReady 监听页面初次渲染</li><li>onHide 监听页面隐藏</li><li>onUnload 监听页面隐藏</li><li>onResize 监听窗口尺寸变化</li><li>onPullDownRefresh 监听用户下拉动作</li><li>onReachBottom 监听页面滚动到底部</li><li>onPageScroll 监听页面滚动</li></ul></li><li>组件生命周期<ul><li>beforeCreate</li><li>created</li><li>beforeMount</li><li>mounted</li><li>beforeUpdate</li><li>updated</li><li>beforeDestroy</li><li>destroyed</li></ul></li></ul></div></div>
+<h3 id="uniapp中的生命周期"><a href="#uniapp中的生命周期" class="headerlink" title="uniapp中的生命周期"></a>uniapp中的生命周期</h3><div class="tag-plugin colorful note" ><div class="body"><ul><li>应用生命周期<ul><li>onLaunch 初始化完成时触发，只触发一次</li><li>onShow uniapp从后台进入前台时显示</li><li>onHide uniapp从前台进入后台显示</li><li>onError 报错</li><li>onExit 监听应用退出</li><li>onUNiNViewMessage 对nvue页面发送的数据进行监听</li><li>onUnhandleRejection 对未处理的Promise拒绝事件监听函数</li><li>onPageNotFound 页面未找到</li><li>onThemeChange 监听系统主题</li></ul></li><li>页面生命周期<ul><li>onInit 监听页面初始化</li><li>onLoad 监听页面加载，参数为上个页面传递的数据</li><li>onShow 监听页面显示</li><li>onReady 监听页面初次渲染</li><li>onHide 监听页面隐藏</li><li>onUnload 监听页面隐藏</li><li>onResize 监听窗口尺寸变化</li><li>onPullDownRefresh 监听用户下拉动作</li><li>onReachBottom 监听页面滚动到底部</li><li>onPageScroll 监听页面滚动</li></ul></li><li>组件生命周期<ul><li>beforeCreate</li><li>created</li><li>beforeMount</li><li>mounted</li><li>beforeUpdate</li><li>updated</li><li>beforeDestroy</li><li>destroyed</li></ul></li></ul></div></div>
 
 <h3 id="uniapp的配置文件部分"><a href="#uniapp的配置文件部分" class="headerlink" title="uniapp的配置文件部分"></a>uniapp的配置文件部分</h3><ul>
 <li>uniCloud 云空间目录</li>
@@ -130,9 +130,9 @@
 <li>实现的具体方法是：在manifest.json文件中添加对应的插件设置</li>
 <li>并在代码中调用相关API使用内置的SDK和插</li>
 </ul>
-<h2 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h2><h3 id="小程序如何实现支付"><a href="#小程序如何实现支付" class="headerlink" title="小程序如何实现支付"></a>小程序如何实现支付</h3><div class="tag-plugin colorful note" color="dark"><div class="body"><ul><li>以公司身份注册一个小程序</li><li>绑定商户号</li><li>小程序填写合法域</li><li>wx.login()code</li><li>调用wx.requestPayment</li></ul></div></div>
+<h2 id="微信小程序"><a href="#微信小程序" class="headerlink" title="微信小程序"></a>微信小程序</h2><h3 id="小程序如何实现支付"><a href="#小程序如何实现支付" class="headerlink" title="小程序如何实现支付"></a>小程序如何实现支付</h3><div class="tag-plugin colorful note" ><div class="body"><ul><li>以公司身份注册一个小程序</li><li>绑定商户号</li><li>小程序填写合法域</li><li>wx.login()code</li><li>调用wx.requestPayment</li></ul></div></div>
 
-<div class="tag-plugin colorful note" color="dark"><div class="title"><strong>小程序调用微信接口服务</strong></div><div class="body"><ul><li>wx.login获取code</li><li>wx.request发送code</li><li>通过appid、appsecret、code校验接口</li><li>获取到返回的session_key和openId等</li><li>自定义登录态，与openid、session_key关联</li><li>返回自定义登录态</li><li>自定义登录态存入storage</li><li>wx.request发起业务请求，携带自定义登录态</li><li>通过自定义登录态查询openid和session_key</li><li>返回业务数据</li></ul></div></div>
+<div class="tag-plugin colorful note" ><div class="title"><strong>小程序调用微信接口服务</strong></div><div class="body"><ul><li>wx.login获取code</li><li>wx.request发送code</li><li>通过appid、appsecret、code校验接口</li><li>获取到返回的session_key和openId等</li><li>自定义登录态，与openid、session_key关联</li><li>返回自定义登录态</li><li>自定义登录态存入storage</li><li>wx.request发起业务请求，携带自定义登录态</li><li>通过自定义登录态查询openid和session_key</li><li>返回业务数据</li></ul></div></div>
 
 <div class="article-footer fs14">
     <section id="share">
